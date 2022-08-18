@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="ir.tamuk.reservation.activities.ui.home.HomeFragment"
+        android:name="ir.tamuk.reservation.fragments.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -16,19 +16,24 @@
     </fragment>
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="ir.tamuk.reservation.activities.ui.gallery.GalleryFragment"
+        android:id="@+id/nav_reservation"
+        android:name="ir.tamuk.reservation.fragments.ui.reservation.ReservationFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_reservation" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="ir.tamuk.reservation.activities.ui.slideshow.SlideshowFragment"
+        android:id="@+id/nav_profile"
+        android:name="ir.tamuk.reservation.fragments.ui.profile.ProfileFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/testFragment"
-        android:name="ir.tamuk.reservation.activities.ui.TestFragment"
+        android:name="ir.tamuk.reservation.fragments.ui.TestFragment"
         android:label="fragment_test"
         tools:layout="@layout/fragment_test" />
+    <fragment
+        android:id="@+id/nav_services"
+        android:name="ir.tamuk.reservation.fragments.ui.services.ServicesFragment"
+        android:label="fragment_services"
+        tools:layout="@layout/fragment_services" />
 </navigation>

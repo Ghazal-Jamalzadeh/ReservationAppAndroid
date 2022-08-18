@@ -1,4 +1,4 @@
-package ir.tamuk.reservation.activities.ui.gallery;
+package ir.tamuk.reservation.fragments.ui.reservation;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,18 +9,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import ir.tamuk.reservation.databinding.FragmentGalleryBinding;
+import ir.tamuk.reservation.databinding.FragmentReservationBinding;
 
-public class GalleryFragment extends Fragment {
+public class ReservationFragment extends Fragment {
 
-    private FragmentGalleryBinding binding;
+    private FragmentReservationBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        GalleryViewModel galleryViewModel =
-                new ViewModelProvider(this).get(GalleryViewModel.class);
+        ReservationViewModel galleryViewModel =
+                new ViewModelProvider(this).get(ReservationViewModel.class);
 
-        binding = FragmentGalleryBinding.inflate(inflater, container, false);
+        binding = FragmentReservationBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textGallery;

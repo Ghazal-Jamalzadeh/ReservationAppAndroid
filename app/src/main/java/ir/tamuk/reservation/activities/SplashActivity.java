@@ -1,8 +1,10 @@
-package ir.tamuk.reservation;
+package ir.tamuk.reservation.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import ir.tamuk.reservation.R;
 
 public class SplashActivity extends AppCompatActivity {
 

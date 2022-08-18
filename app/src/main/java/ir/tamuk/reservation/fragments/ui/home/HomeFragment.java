@@ -1,4 +1,4 @@
-package ir.tamuk.reservation.activities.ui.home;
+package ir.tamuk.reservation.fragments.ui.home;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -12,8 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.api.ApiClient;
