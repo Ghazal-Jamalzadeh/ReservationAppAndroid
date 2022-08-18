@@ -1,4 +1,4 @@
-package ir.tamuk.reservation.activities.ui;
+package ir.tamuk.reservation.fragments.ui;
 
 import android.os.Bundle;
 
