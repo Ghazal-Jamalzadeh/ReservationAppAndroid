@@ -22,7 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment{
 
     private FragmentHomeBinding binding;
     //api
@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call<MoviesList> call, Response<MoviesList> response) {
 
-                for (int i = 0; i <response.body().movies.size() ; i++) {
+                for (int i = 0; i < response.body().movies.size(); i++) {
 
                     Log.d("ghazal", "movie: " + response.body().movies.get(i).poster);
                 }
@@ -68,12 +68,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
-
-
-
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
@@ -81,11 +75,11 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.btn.setOnClickListener(view1 -> {
-
-            Navigation.findNavController(view).navigate(R.id.action_nav_home_to_testFragment);
-
-        });
+//        binding.btn.setOnClickListener(view1 -> {
+//
+//            Navigation.findNavController(view).navigate(R.id.action_nav_home_to_testFragment);
+//
+//        });
     }
 
     @Override
