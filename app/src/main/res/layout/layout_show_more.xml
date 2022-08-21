@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginVertical="15dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
             android:id="@+id/textView2"
@@ -16,7 +20,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="left|center_vertical"
-            android:text="مشاهده همه" />
+            android:text="مشاهده همه"
+            style="@style/fontForMediumEditText"/>
 
         <TextView
             android:id="@+id/textView3"

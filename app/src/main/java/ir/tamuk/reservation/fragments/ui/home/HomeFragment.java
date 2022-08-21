@@ -75,6 +75,7 @@ public class HomeFragment extends Fragment{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+//        binding.recyclerTitle1.textView2.setText();
 //        binding.btn.setOnClickListener(view1 -> {
 //
 //            Navigation.findNavController(view).navigate(R.id.action_nav_home_to_testFragment);

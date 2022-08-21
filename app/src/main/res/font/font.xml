@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <font android:font="@font/iran_sans_mob"/>
+    <font android:font="@font/iran_sans_mob_ultralight"/>
+    <font android:font="@font/iran_sans_mob_light"/>
+    <font android:font="@font/iran_sans_mob_medium"/>
+    <font android:font="@font/iran_sans_mob_bold"/>
+    <font android:font="@font/iran_sans_mob_black"/>
+    <font android:font="@font/iran_sans_mob_en"/>
+    <font android:font="@font/iran_sans_mob_en_medium"/>
+
+</font-family>

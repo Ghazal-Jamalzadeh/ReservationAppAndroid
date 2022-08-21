@@ -5,4 +5,51 @@
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="round_edge_24">@dimen/_24cdp</dimen>
+    <dimen name="round_edge_16">@dimen/_16cdp</dimen>
+    <dimen name="round_edge_12">@dimen/_12cdp</dimen>
+    <dimen name="round_edge_8">@dimen/_8cdp</dimen>
+
+    <dimen name="short_space">@dimen/_8cdp</dimen>
+    <dimen name="medium_space">@dimen/_16cdp</dimen>
+    <dimen name="long_space">@dimen/_24cdp</dimen>
+
+
+    <dimen name="page_padding">@dimen/_16cdp</dimen>
+
+
+    <dimen name="button_height">@dimen/_40cdp</dimen>
+
+    <dimen name="very_small_text_size">@dimen/_8cdp</dimen>
+    <dimen name="small_text_size_2">@dimen/_10cdp</dimen>
+    <dimen name="small_text_size">@dimen/_10cdp</dimen>
+    <dimen name="medium_text_size">@dimen/_12cdp</dimen>
+    <dimen name="bml_text_size">@dimen/_14cdp</dimen>
+    <dimen name="large_text_size">@dimen/_16cdp</dimen>
+    <dimen name="verylarge_text_size">@dimen/_20cdp</dimen>
+
+
+    <dimen name="small_icon">@dimen/_24cdp</dimen>
+    <dimen name="medium_icon">@dimen/_32cdp</dimen>
+    <!--<dimen name="large_icon">@dimen/_16cdp</dimen>-->
+
+    <dimen name="small_badge">@dimen/_12cdp</dimen>
+    <dimen name="medium_badge">@dimen/_16cdp</dimen>
+
+    <dimen name="necessary_field_circle_size">@dimen/_6cdp</dimen>
+
+    <dimen name="bottom_navigation_height">@dimen/_64cdp</dimen>
+
+    <dimen name="toolbar_height">@dimen/_60cdp</dimen>
+    <dimen name="toolbar_overlap">@dimen/_25cdp</dimen>
+    <dimen name="toolbar_overlap_minus">@dimen/_30cdp</dimen>
+
+    <dimen name="supply_demand_tag_width">@dimen/_40cdp</dimen>
+    <dimen name="supply_demand_tag_height">@dimen/_20cdp</dimen>
+
+    <dimen name="fields_padding_top_bottom">@dimen/_8cdp</dimen>
+
+    <dimen name="divider_margin_1">@dimen/_16cdp</dimen>
+    <dimen name="divider_margin_2">@dimen/_8cdp</dimen>
 </resources>
