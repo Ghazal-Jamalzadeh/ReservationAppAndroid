@@ -1,23 +1,302 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".fragments.ui.reservation.ReservationFragment"
-    android:background="@android:color/holo_blue_light">
 
-    <TextView
-        android:id="@+id/text_gallery"
+
+    >
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50cdp"
+            android:layout_marginRight="@dimen/_15cdp"
+            android:layout_marginTop="@dimen/_10cdp"
+            android:layout_marginLeft="@dimen/_15cdp"
+            app:cardCornerRadius="@dimen/_16cdp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/iraniansans"
+                        android:text="25"
+                        android:textColor="@color/main"
+                        android:textSize="@dimen/_16cdp" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_arrow_back_ios_fill0_wght400_grad0_opsz48__left_" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:fontFamily="@font/iraniansans"
+                        android:gravity="center"
+                        android:text="اردیبهشت"
+                        android:textSize="@dimen/_14cdp" />
+
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_arrow_back_ios_fill0_wght400_grad0_opsz48__right_" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:gravity="center"
+                        android:fontFamily="@font/iraniansans"
+                        android:textSize="@dimen/_14cdp"
+                        android:text="یکشنبه" />
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="340dp"
+            android:background="@color/main"
+            android:layout_marginRight="@dimen/_15cdp"
+            android:layout_marginTop="@dimen/_10cdp"
+            android:layout_marginLeft="@dimen/_15cdp"
+            >
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_25cdp"
+            android:layout_marginTop="@dimen/_10cdp"
+            android:layout_marginLeft="@dimen/_25cdp"
+            android:layout_marginRight="@dimen/_25cdp"
+            android:orientation="horizontal"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="دارای ظرفیت"
+                    android:fontFamily="@font/iraniansans"
+                    android:textSize="@dimen/_16cdp"
+                    android:layout_gravity="center"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_group_13"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/_5cdp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/_5cdp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ساعت های آزاد"
+                    android:fontFamily="@font/iraniansans"
+                    android:textSize="@dimen/_16cdp"
+                    android:layout_gravity="center"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_ellipse_34"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/_5cdp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/_5cdp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="پر شده"
+                    android:fontFamily="@font/iraniansans"
+                    android:textSize="@dimen/_16cdp"
+                    android:layout_gravity="center"
+                    />
+                <ImageView
+                    android:layout_width="@dimen/_20cdp"
+                    android:layout_height="@dimen/_20cdp"
+                    android:src="@drawable/ic_group_11"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/_5cdp"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="نوبت صبح"
+            android:fontFamily="@font/iraniansans"
+            android:textSize="@dimen/_16cdp"
+            android:textStyle="bold"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/_15cdp"
+            android:layout_marginTop="@dimen/_25cdp"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5cdp"
+            android:layout_marginRight="@dimen/_15cdp"
+            android:layout_marginLeft="@dimen/_15cdp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="نوبت بعدازظهر"
+            android:fontFamily="@font/iraniansans"
+            android:textSize="@dimen/_16cdp"
+            android:textStyle="bold"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/_15cdp"
+            android:layout_marginTop="@dimen/_25cdp"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5cdp"
+            android:layout_marginRight="@dimen/_15cdp"
+            android:layout_marginLeft="@dimen/_15cdp"
+            />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50cdp"
+            android:layout_marginRight="@dimen/_15cdp"
+            android:layout_marginTop="@dimen/_10cdp"
+            android:layout_marginLeft="@dimen/_15cdp"
+            app:cardCornerRadius="@dimen/_16cdp"
+            >
+
+            <Spinner
+                android:id="@+id/spinner_services"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="start"
+                />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_60cdp"
+            android:text="رزرو نوبت"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_18cdp"
+            android:textStyle="bold"
+            android:fontFamily="@font/iraniansans"
+            android:layout_marginLeft="@dimen/_15cdp"
+            android:layout_marginRight="@dimen/_15cdp"
+            android:layout_marginTop="@dimen/_10cdp"
+            android:background="@drawable/reserve_button"
+            android:layout_marginBottom="@dimen/_15cdp"
+            />
+
+
+    </LinearLayout>
+
+
+
+
+
+
+</androidx.core.widget.NestedScrollView>
