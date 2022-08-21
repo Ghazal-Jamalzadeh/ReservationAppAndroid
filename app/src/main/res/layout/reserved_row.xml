@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    android:id="@+id/relative_layout_click"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/_60cdp"
+    android:layout_height="@dimen/_60cdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginRight="@dimen/_16cdp"
+    android:background="@drawable/row_transparent_reserve"
+    >
+
+
+    <TextView
+        android:id="@+id/time_reserve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/iraniansans"
+        android:text="14:00"
+        android:textSize="@dimen/_16cdp" />
+
+</RelativeLayout>
