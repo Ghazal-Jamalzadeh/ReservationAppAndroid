@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="fontForSmallEditTextHint">
-        <item name="android:textStyle">normal</item>
-        <item name="android:fontFamily">@font/iran_sans_mob</item>
-        <item name="android:textColor">@color/tamuk_g3</item>
-        <item name="android:textSize">@dimen/small_text_size</item>
-        <item name="android:padding">@dimen/_2cdp</item>
-    </style>
-    <style name="fontForSmallEditText">
-        <item name="android:textStyle">normal</item>
-        <item name="android:fontFamily">@font/iran_sans_mob</item>
-        <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:textSize">@dimen/small_text_size</item>
-        <item name="android:padding">@dimen/_2cdp</item>
-    </style>
+<!--    <style name="fontForSmallEditTextHint">-->
+<!--        <item name="android:textStyle">normal</item>-->
+<!--        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
+<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
+<!--        <item name="android:textSize">@dimen/small_text_size</item>-->
+<!--        <item name="android:padding">@dimen/_2cdp</item>-->
+<!--    </style>-->
+<!--    <style name="fontForSmallEditText">-->
+<!--        <item name="android:textStyle">normal</item>-->
+<!--        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
+<!--        <item name="android:textColor">@color/colorBlack</item>-->
+<!--        <item name="android:textSize">@dimen/small_text_size</item>-->
+<!--        <item name="android:padding">@dimen/_2cdp</item>-->
+<!--    </style>-->
     <style name="fontForMediumEditTextHint">
         <item name="android:textStyle">normal</item>
         <item name="android:fontFamily">@font/iran_sans_mob</item>
@@ -26,97 +26,97 @@
         <item name="android:textColor">@color/show_more_text</item>
         <item name="android:textSize">@dimen/medium_text_size</item>
     </style>
-    <style name="fontForLargeEditTextHint">
-        <item name="android:textStyle">normal</item>
-        <item name="android:fontFamily">@font/iran_sans_mob</item>
-        <item name="android:textColor">@color/tamuk_g3</item>
-        <item name="android:textSize">@dimen/large_text_size</item>
-        <item name="android:padding">@dimen/_2cdp</item>
-    </style>
-    <style name="fontForLargeEditText">
-        <item name="android:textStyle">normal</item>
-        <item name="android:fontFamily">@font/iran_sans_mob</item>
-        <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:textSize">@dimen/large_text_size</item>
-        <item name="android:padding">@dimen/_2cdp</item>
-    </style>
-    <style name="fontForVerySmallText">
-        <item name="android:textStyle">normal</item>
-        <item name="android:fontFamily">@font/iran_sans_mob_light</item>
-        <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:textSize">@dimen/very_small_text_size</item>
-    </style>
-    <style name="fontForVerySmallText_bold">
-        <item name="android:textStyle">normal</item>
-        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>
-        <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:textSize">@dimen/very_small_text_size</item>
-    </style>
-    <style name="fontForVerySmallText_medium">
-        <item name="android:textStyle">normal</item>
-        <item name="android:fontFamily">@font/iran_sans_mob_medium</item>
-        <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:textSize">@dimen/very_small_text_size</item>
-    </style>
-    <style name="fontForSmallText">
-        <item name="android:textStyle">normal</item>
-        <item name="android:fontFamily">@font/iran_sans_mob</item>
-        <item name="android:textColor">@color/tamuk_g3</item>
-        <item name="android:textSize">@dimen/small_text_size</item>
-    </style>
-    <style name="fontForSmallText_medium">
-        <item name="android:textStyle">normal</item>
-        <item name="android:fontFamily">@font/iran_sans_mob_medium</item>
-        <item name="android:textColor">@color/tamuk_g3</item>
-        <item name="android:textSize">@dimen/small_text_size</item>
-        <item name="android:padding">@dimen/_1cdp</item>
-    </style>
-    <style name="fontForSmallText_bold">
-        <item name="android:textStyle">normal</item>
-        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>
-        <item name="android:textColor">@color/tamuk_g3</item>
-        <item name="android:textSize">@dimen/small_text_size</item>
-    </style>
-    <style name="fontForMediumText">
-        <item name="android:textStyle">normal</item>
-        <item name="android:fontFamily">@font/iran_sans_mob</item>
-        <item name="android:textColor">@color/tamuk_g3</item>
-        <item name="android:textSize">@dimen/medium_text_size</item>
-    </style>
-    <style name="fontForMediumBoldText">
-        <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>
-        <item name="android:textColor">@color/tamuk_g3</item>
-        <item name="android:textSize">@dimen/medium_text_size</item>
-    </style>
-    <style name="fontForBMLText">
-        <item name="android:textStyle">normal</item>
-        <item name="android:fontFamily">@font/iran_sans_mob</item>
-        <item name="android:textColor">@color/tamuk_g3</item>
-        <item name="android:textSize">@dimen/bml_text_size</item>
-    </style>
-    <style name="fontForBMLBoldText">
-        <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>
-        <item name="android:textColor">@color/tamuk_g3</item>
-        <item name="android:textSize">@dimen/bml_text_size</item>
-    </style>
-    <style name="fontForBLLBoldText">
-        <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>
-        <item name="android:textColor">@color/tamuk_g3</item>
-        <item name="android:textSize">@dimen/verylarge_text_size</item>
-    </style>
-    <style name="fontForLargeText">
-        <item name="android:textStyle">normal</item>
-        <item name="android:fontFamily">@font/iran_sans_mob</item>
-        <item name="android:textColor">@color/tamuk_g3</item>
-        <item name="android:textSize">@dimen/large_text_size</item>
-    </style>
-    <style name="fontForLargeBoldText">
-        <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>
-        <item name="android:textColor">@color/tamuk_g3</item>
-        <item name="android:textSize">@dimen/bml_text_size</item>
-    </style>
+<!--    <style name="fontForLargeEditTextHint">-->
+<!--        <item name="android:textStyle">normal</item>-->
+<!--        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
+<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
+<!--        <item name="android:textSize">@dimen/large_text_size</item>-->
+<!--        <item name="android:padding">@dimen/_2cdp</item>-->
+<!--    </style>-->
+<!--    <style name="fontForLargeEditText">-->
+<!--        <item name="android:textStyle">normal</item>-->
+<!--        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
+<!--        <item name="android:textColor">@color/colorBlack</item>-->
+<!--        <item name="android:textSize">@dimen/large_text_size</item>-->
+<!--        <item name="android:padding">@dimen/_2cdp</item>-->
+<!--    </style>-->
+<!--    <style name="fontForVerySmallText">-->
+<!--        <item name="android:textStyle">normal</item>-->
+<!--        <item name="android:fontFamily">@font/iran_sans_mob_light</item>-->
+<!--        <item name="android:textColor">@color/colorBlack</item>-->
+<!--        <item name="android:textSize">@dimen/very_small_text_size</item>-->
+<!--    </style>-->
+<!--    <style name="fontForVerySmallText_bold">-->
+<!--        <item name="android:textStyle">normal</item>-->
+<!--        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>-->
+<!--        <item name="android:textColor">@color/colorBlack</item>-->
+<!--        <item name="android:textSize">@dimen/very_small_text_size</item>-->
+<!--    </style>-->
+<!--    <style name="fontForVerySmallText_medium">-->
+<!--        <item name="android:textStyle">normal</item>-->
+<!--        <item name="android:fontFamily">@font/iran_sans_mob_medium</item>-->
+<!--        <item name="android:textColor">@color/colorBlack</item>-->
+<!--        <item name="android:textSize">@dimen/very_small_text_size</item>-->
+<!--    </style>-->
+<!--    <style name="fontForSmallText">-->
+<!--        <item name="android:textStyle">normal</item>-->
+<!--        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
+<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
+<!--        <item name="android:textSize">@dimen/small_text_size</item>-->
+<!--    </style>-->
+<!--    <style name="fontForSmallText_medium">-->
+<!--        <item name="android:textStyle">normal</item>-->
+<!--        <item name="android:fontFamily">@font/iran_sans_mob_medium</item>-->
+<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
+<!--        <item name="android:textSize">@dimen/small_text_size</item>-->
+<!--        <item name="android:padding">@dimen/_1cdp</item>-->
+<!--    </style>-->
+<!--    <style name="fontForSmallText_bold">-->
+<!--        <item name="android:textStyle">normal</item>-->
+<!--        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>-->
+<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
+<!--        <item name="android:textSize">@dimen/small_text_size</item>-->
+<!--    </style>-->
+<!--    <style name="fontForMediumText">-->
+<!--        <item name="android:textStyle">normal</item>-->
+<!--        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
+<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
+<!--        <item name="android:textSize">@dimen/medium_text_size</item>-->
+<!--    </style>-->
+<!--    <style name="fontForMediumBoldText">-->
+<!--        <item name="android:textStyle">bold</item>-->
+<!--        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>-->
+<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
+<!--        <item name="android:textSize">@dimen/medium_text_size</item>-->
+<!--    </style>-->
+<!--    <style name="fontForBMLText">-->
+<!--        <item name="android:textStyle">normal</item>-->
+<!--        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
+<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
+<!--        <item name="android:textSize">@dimen/bml_text_size</item>-->
+<!--    </style>-->
+<!--    <style name="fontForBMLBoldText">-->
+<!--        <item name="android:textStyle">bold</item>-->
+<!--        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>-->
+<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
+<!--        <item name="android:textSize">@dimen/bml_text_size</item>-->
+<!--    </style>-->
+<!--    <style name="fontForBLLBoldText">-->
+<!--        <item name="android:textStyle">bold</item>-->
+<!--        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>-->
+<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
+<!--        <item name="android:textSize">@dimen/verylarge_text_size</item>-->
+<!--    </style>-->
+<!--    <style name="fontForLargeText">-->
+<!--        <item name="android:textStyle">normal</item>-->
+<!--        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
+<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
+<!--        <item name="android:textSize">@dimen/large_text_size</item>-->
+<!--    </style>-->
+<!--    <style name="fontForLargeBoldText">-->
+<!--        <item name="android:textStyle">bold</item>-->
+<!--        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>-->
+<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
+<!--        <item name="android:textSize">@dimen/bml_text_size</item>-->
+<!--    </style>-->
 </resources>
