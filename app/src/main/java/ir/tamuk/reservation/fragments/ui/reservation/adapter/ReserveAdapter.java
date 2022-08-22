@@ -25,7 +25,7 @@ public class ReserveAdapter extends RecyclerView.Adapter<ReserveAdapter.MyView>{
 
     ArrayList<ReserveModel> rs;
     Context context;
-    boolean flag = true;
+//    boolean flag = true;
 
 
     public ReserveAdapter(ArrayList<ReserveModel> rs){
@@ -57,26 +57,29 @@ public class ReserveAdapter extends RecyclerView.Adapter<ReserveAdapter.MyView>{
             holder.layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (flag){
+//                    if (flag){
                         if (sqlDatabaseReserve.getDataId().isEmpty()){
                             sqlDatabaseReserve.Insert(rs.get(position).id);
                             holder.layout.setBackgroundResource(R.drawable.row_maincolor_reserve);
 
                         }else {
-                            Toast.makeText(context, "انتخاب کرده اید", Toast.LENGTH_SHORT).show();
+                            sqlDatabaseReserve.deleteId(rs.get(position).id);
+                            holder.layout.setBackgroundResource(R.drawable.row_transparent_reserve);
+                            if (!sqlDatabaseReserve.getDataId().isEmpty()) {
+                                Toast.makeText(context, "بیشتر از یک رزرو نمیتوانید انتخاب کنید!!", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                        flag=false;
-                    }else {
-                        sqlDatabaseReserve.deleteId(rs.get(position).id);
-                        holder.layout.setBackgroundResource(R.drawable.row_transparent_reserve);
+//                        flag=false;
+//                    }else {
+
 //                        if (position % 2 == 0){
 //                            holder.layout.setBackgroundResource(R.drawable.spinner2);
 //                        }else {
 //                            holder.layout.setBackgroundResource(R.drawable.spinner_radious);
 //                        }
-                        flag=true;
+//                        flag=true;
 
-                    }
+//                    }
                 }
             });
 //            if (sqlDatabaseReserve.getByIdO(rs.get(position).id)){
