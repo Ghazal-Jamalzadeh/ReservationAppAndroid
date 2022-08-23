@@ -39,6 +39,7 @@
                     >
 
                     <TextView
+                        android:id="@+id/days_card_reservation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -50,20 +51,22 @@
 
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    >
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    >-->
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/ic_arrow_back_ios_fill0_wght400_grad0_opsz48__left_" />
+<!--                    <ImageView-->
+<!--                        android:visibility="invisible"-->
+<!--                        android:id="@+id/forward_calender_button"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_centerInParent="true"-->
+<!--                        android:src="@drawable/ic_arrow_back_ios_fill0_wght400_grad0_opsz48__left_" />-->
 
 
-                </RelativeLayout>
+<!--                </RelativeLayout>-->
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -72,6 +75,7 @@
                     >
 
                     <TextView
+                        android:id="@+id/month_card_reservation"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
@@ -84,20 +88,22 @@
 
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    >
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    >-->
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/ic_arrow_back_ios_fill0_wght400_grad0_opsz48__right_" />
+<!--                    <ImageView-->
+<!--                        android:visibility="invisible"-->
+<!--                        android:id="@+id/backward_calender_button"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_centerInParent="true"-->
+<!--                        android:src="@drawable/ic_arrow_back_ios_fill0_wght400_grad0_opsz48__right_" />-->
 
 
-                </RelativeLayout>
+<!--                </RelativeLayout>-->
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -106,13 +112,14 @@
                     >
 
                     <TextView
+                        android:id="@+id/week_card_reservation"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="3"
-                        android:gravity="center"
                         android:fontFamily="@font/iraniansans"
-                        android:textSize="@dimen/_14cdp"
-                        android:text="یکشنبه" />
+                        android:gravity="center"
+                        android:text="یکشنبه"
+                        android:textSize="@dimen/_14cdp" />
 
 
                 </RelativeLayout>
@@ -121,17 +128,28 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <RelativeLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="340dp"
-            android:background="@color/main"
+            android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/_15cdp"
             android:layout_marginTop="@dimen/_10cdp"
             android:layout_marginLeft="@dimen/_15cdp"
+            app:cardCornerRadius="@dimen/_16cdp"
+
             >
 
+            <FrameLayout
+                android:id="@+id/persianCaldroid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="@dimen/_10cdp"
 
-        </RelativeLayout>
+                />
+
+
+        </androidx.cardview.widget.CardView>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -231,20 +249,42 @@
             android:layout_marginTop="@dimen/_25cdp"
             />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5cdp"
             android:layout_marginRight="@dimen/_15cdp"
             android:layout_marginLeft="@dimen/_15cdp"
-            />
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_morning_reserve"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                />
+
+            <TextView
+
+                android:id="@+id/empty_text_reservation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="رزروی موجود نیست"
+                android:fontFamily="@font/iraniansans"
+                android:textSize="@dimen/_20cdp"
+                android:textColor="@color/main"
+                />
+
+        </RelativeLayout>
+
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="نوبت بعدازظهر"
-            android:fontFamily="@font/iraniansans"
-            android:textSize="@dimen/_16cdp"
+            style="@style/fontForMediumEditText"
             android:textStyle="bold"
             android:layout_gravity="right"
             android:layout_marginRight="@dimen/_15cdp"
@@ -257,6 +297,7 @@
             android:layout_marginTop="@dimen/_5cdp"
             android:layout_marginRight="@dimen/_15cdp"
             android:layout_marginLeft="@dimen/_15cdp"
+            android:id="@+id/recyclerView_evening_reserve"
             />
 
         <androidx.cardview.widget.CardView
