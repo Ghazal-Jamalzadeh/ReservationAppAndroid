@@ -68,6 +68,7 @@ dependencies {
 //    implementation 'com.amitshekhar.android:android-networking:1.0.2'
 
     implementation 'com.github.maks1990:CDP:1.0.1'
+    implementation 'com.squareup.picasso:picasso:2.8'
 
 
 }

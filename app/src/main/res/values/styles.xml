@@ -23,8 +23,8 @@
     <style name="fontForMediumEditText">
         <item name="android:textStyle">normal</item>
         <item name="android:fontFamily">@font/iran_sans_mob</item>
-        <item name="android:textColor">@color/show_more_text</item>
-        <item name="android:textSize">@dimen/medium_text_size</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textSize">@dimen/large_text_size</item>
     </style>
 <!--    <style name="fontForLargeEditTextHint">-->
 <!--        <item name="android:textStyle">normal</item>-->
@@ -107,16 +107,16 @@
 <!--        <item name="android:textColor">@color/tamuk_g3</item>-->
 <!--        <item name="android:textSize">@dimen/verylarge_text_size</item>-->
 <!--    </style>-->
-<!--    <style name="fontForLargeText">-->
-<!--        <item name="android:textStyle">normal</item>-->
-<!--        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
-<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
-<!--        <item name="android:textSize">@dimen/large_text_size</item>-->
-<!--    </style>-->
-<!--    <style name="fontForLargeBoldText">-->
-<!--        <item name="android:textStyle">bold</item>-->
-<!--        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>-->
-<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
-<!--        <item name="android:textSize">@dimen/bml_text_size</item>-->
-<!--    </style>-->
+    <style name="fontForLargeText">
+        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">@font/iran_sans_mob</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/large_text_size</item>
+    </style>
+   <style name="fontForLargeBoldText">-->
+       <item name="android:textStyle">bold</item>-->
+        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>-->
+       <item name="android:textColor">@color/white</item>-->
+        <item name="android:textSize">@dimen/bml_text_size</item>-->
+   </style>-->
 </resources>

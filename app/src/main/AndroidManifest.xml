@@ -15,16 +15,16 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.Reservation"
         tools:targetApi="31">
+
         <activity
             android:name=".activities.MainActivity"
-            android:label="@string/title_activity_main"
             android:exported="true"
-            android:theme="@style/Theme.Reservation.NoActionBar" >
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.Reservation.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".activities.SplashActivity"
