@@ -61,6 +61,7 @@
         app:layout_constraintTop_toBottomOf="@id/imageView4"
         app:layout_constraintBottom_toTopOf="@id/bottomNav"
         app:navGraph="@navigation/mobile_navigation"
+
         />
 
     <androidx.constraintlayout.widget.Guideline
@@ -79,6 +80,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:menu="@menu/activity_main_drawer" />
+        app:menu="@menu/activity_main_drawer"
+        android:theme="@style/fontForMediumEditText"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

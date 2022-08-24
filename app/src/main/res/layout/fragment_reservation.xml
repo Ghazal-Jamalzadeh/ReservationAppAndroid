@@ -7,8 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".fragments.ui.reservation.ReservationFragment"
-
-
+    android:background="@color/background"
     >
 
     <LinearLayout
@@ -24,6 +23,7 @@
             android:layout_marginTop="@dimen/_10cdp"
             android:layout_marginLeft="@dimen/_15cdp"
             app:cardCornerRadius="@dimen/_16cdp"
+            android:elevation="8dp"
             >
 
             <LinearLayout
@@ -43,10 +43,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:fontFamily="@font/iraniansans"
+                        style="@style/fontForMediumEditText"
                         android:text="25"
-                        android:textColor="@color/main"
-                        android:textSize="@dimen/_16cdp" />
+                        />
 
 
                 </RelativeLayout>
@@ -76,13 +75,12 @@
 
                     <TextView
                         android:id="@+id/month_card_reservation"
+                        style="@style/fontForMediumEditText"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
-                        android:fontFamily="@font/iraniansans"
                         android:gravity="center"
-                        android:text="اردیبهشت"
-                        android:textSize="@dimen/_14cdp" />
+                        android:text="اردیبهشت" />
 
 
 
@@ -113,13 +111,12 @@
 
                     <TextView
                         android:id="@+id/week_card_reservation"
+                        style="@style/fontForMediumEditText"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="3"
-                        android:fontFamily="@font/iraniansans"
                         android:gravity="center"
-                        android:text="یکشنبه"
-                        android:textSize="@dimen/_14cdp" />
+                        android:text="یکشنبه" />
 
 
                 </RelativeLayout>
@@ -128,6 +125,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <!--calender-->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -135,6 +133,7 @@
             android:layout_marginTop="@dimen/_10cdp"
             android:layout_marginLeft="@dimen/_15cdp"
             app:cardCornerRadius="@dimen/_16cdp"
+            android:elevation="6dp"
 
             >
 
@@ -153,97 +152,104 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_25cdp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10cdp"
             android:layout_marginLeft="@dimen/_25cdp"
             android:layout_marginRight="@dimen/_25cdp"
             android:orientation="horizontal"
             >
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
+                android:layout_weight="1"
                 >
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="دارای ظرفیت"
-                    android:fontFamily="@font/iraniansans"
-                    android:textSize="@dimen/_16cdp"
-                    android:layout_gravity="center"
-                    />
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_group_13"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/_5cdp"
-                    />
+                    style="@style/fontForSmallText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:drawableRight="@drawable/ic_group_13"
+                    android:drawablePadding="@dimen/_8cdp"
+                    android:text="دارای ظرفیت" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_marginLeft="@dimen/_5cdp"
+                android:layout_weight="1"
                 >
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ساعت های آزاد"
-                    android:fontFamily="@font/iraniansans"
-                    android:textSize="@dimen/_16cdp"
-                    android:layout_gravity="center"
-                    />
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_ellipse_34"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/_5cdp"
-                    />
+                    style="@style/fontForSmallText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true"
+                    android:drawableRight="@drawable/ic_ellipse_34"
+                    android:drawablePadding="@dimen/_8cdp"
+                    android:text="ساعت های آزاد" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_marginLeft="@dimen/_5cdp"
+                android:layout_weight="1"
                 >
 
                 <TextView
+                    style="@style/fontForSmallText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="پر شده"
-                    android:fontFamily="@font/iraniansans"
-                    android:textSize="@dimen/_16cdp"
-                    android:layout_gravity="center"
-                    />
-                <ImageView
-                    android:layout_width="@dimen/_20cdp"
-                    android:layout_height="@dimen/_20cdp"
-                    android:src="@drawable/ic_group_11"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/_5cdp"
-                    />
+                    android:layout_centerInParent="true"
+                    android:drawableRight="@drawable/ic_group_11"
+                    android:drawablePadding="@dimen/_8cdp"
+                    android:text="پر شده" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
 
         </LinearLayout>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_spinner_reservation"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50cdp"
+            android:layout_marginLeft="@dimen/_20cdp"
+            android:layout_marginTop="@dimen/_15cdp"
+            android:layout_marginRight="@dimen/_20cdp"
+            app:cardCornerRadius="@dimen/_18cdp"
+            >
+
+
+            <Spinner
+                android:id="@+id/spinner_services"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/fontForMediumEditText"
+                />
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="نوبت صبح"
-            android:fontFamily="@font/iraniansans"
-            android:textSize="@dimen/_16cdp"
-            android:textStyle="bold"
+            style="@style/fontForMediumBoldText"
             android:layout_gravity="right"
             android:layout_marginRight="@dimen/_15cdp"
             android:layout_marginTop="@dimen/_25cdp"
@@ -270,9 +276,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                style="@style/fontForMediumEditText"
                 android:text="رزروی موجود نیست"
-                android:fontFamily="@font/iraniansans"
-                android:textSize="@dimen/_20cdp"
                 android:textColor="@color/main"
                 />
 
@@ -300,35 +305,19 @@
             android:id="@+id/recyclerView_evening_reserve"
             />
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_50cdp"
-            android:layout_marginRight="@dimen/_15cdp"
-            android:layout_marginTop="@dimen/_10cdp"
-            android:layout_marginLeft="@dimen/_15cdp"
-            app:cardCornerRadius="@dimen/_16cdp"
-            >
 
-            <Spinner
-                android:id="@+id/spinner_services"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="start"
-                />
-        </androidx.cardview.widget.CardView>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/signing_button_reservation"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_60cdp"
             android:text="رزرو نوبت"
             android:textColor="@color/white"
-            android:textSize="@dimen/_18cdp"
+            style="@style/fontForMediumEditText"
             android:textStyle="bold"
-            android:fontFamily="@font/iraniansans"
             android:layout_marginLeft="@dimen/_15cdp"
             android:layout_marginRight="@dimen/_15cdp"
             android:layout_marginTop="@dimen/_10cdp"
-            android:background="@drawable/reserve_button"
             android:layout_marginBottom="@dimen/_15cdp"
             />
 

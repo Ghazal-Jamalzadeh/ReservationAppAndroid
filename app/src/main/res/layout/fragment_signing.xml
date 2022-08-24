@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/backgroundSigning"
+    tools:context=".SigningFragment">
+
+    <ImageView
+        android:id="@+id/cancel_button_signing_"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_24cdp"
+        android:layout_marginTop="@dimen/_24cdp"
+        android:src="@drawable/ic_close_fill0_wght400_grad0_opsz48" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/_32cdp"
+        android:layout_marginTop="@dimen/_150cdp"
+        android:layout_marginRight="@dimen/_32cdp"
+        android:layout_marginBottom="@dimen/_60cdp">
+
+        <TextView
+            android:id="@+id/a"
+            style="@style/fontForLargeBoldOrangeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="ایجاد / ورود حساب کاربری" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/a"
+            android:layout_centerInParent="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_62cdp"
+                android:orientation="vertical">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_32cdp"
+                    android:layout_marginRight="@dimen/_32cdp"
+                    android:textColorHint="@color/white"
+                    app:boxStrokeColor="@color/show_more_text"
+                    app:boxStrokeErrorColor="#D50000"
+                    app:endIconCheckable="true"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="@color/white"
+                    app:hintTextColor="@color/show_more_text"
+
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/mobile_editText_signing"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#0081A7"
+                        android:drawableRight="@drawable/ic_path_39933"
+                        android:hint="  شماره تلفن همراه"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:singleLine="true" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/accept_button_signing"
+                style="@style/fontForMediumEditText"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_60cdp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/_15cdp"
+                android:layout_marginRight="@dimen/_15cdp"
+                android:backgroundTint="@color/white"
+                android:text="تایید"
+                android:textColor="@color/backgroundSigning"
+                android:textStyle="bold"
+                app:cornerRadius="@dimen/_8cdp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

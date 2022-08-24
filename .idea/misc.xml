@@ -3,38 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Reservation/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.255" />
-        <entry key="..\:/Reservation/app/src/main/res/drawable/ic_arrow_back_ios_fill0_wght400_grad0_opsz48__left_.xml" value="0.255" />
-        <entry key="..\:/Reservation/app/src/main/res/drawable/ic_arrow_back_ios_fill0_wght400_grad0_opsz48__right_.xml" value="0.255" />
-        <entry key="..\:/Reservation/app/src/main/res/drawable/ic_ellipse_34.xml" value="0.255" />
-        <entry key="..\:/Reservation/app/src/main/res/drawable/ic_group_13.xml" value="0.255" />
-        <entry key="..\:/Reservation/app/src/main/res/drawable/ic_launcher_background.xml" value="0.255" />
-        <entry key="..\:/Reservation/app/src/main/res/drawable/ic_logo.xml" value="0.255" />
-        <entry key="..\:/Reservation/app/src/main/res/drawable/ic_menu_appbar.xml" value="0.255" />
-        <entry key="..\:/Reservation/app/src/main/res/drawable/ic_menu_camera.xml" value="0.255" />
-        <entry key="..\:/Reservation/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.255" />
-        <entry key="..\:/Reservation/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.255" />
-        <entry key="..\:/Reservation/app/src/main/res/drawable/ic_nav_account.xml" value="0.255" />
-        <entry key="..\:/Reservation/app/src/main/res/drawable/ic_nav_calendar.xml" value="0.255" />
-        <entry key="..\:/Reservation/app/src/main/res/drawable/ic_nav_home.xml" value="0.255" />
-        <entry key="..\:/Reservation/app/src/main/res/drawable/ic_nav_services.xml" value="0.255" />
-        <entry key="..\:/Reservation/app/src/main/res/drawable/ic_notifications.xml" value="0.255" />
-        <entry key="..\:/Reservation/app/src/main/res/drawable/ic_search.xml" value="0.255" />
-        <entry key="..\:/Reservation/app/src/main/res/drawable/reserve_button.xml" value="0.255" />
-        <entry key="..\:/Reservation/app/src/main/res/drawable/side_nav_bar.xml" value="0.255" />
         <entry key="..\:/Reservation/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
-        <entry key="..\:/Reservation/app/src/main/res/layout/activity_services.xml" value="0.25" />
-        <entry key="..\:/Reservation/app/src/main/res/layout/activity_splash.xml" value="0.25" />
-        <entry key="..\:/Reservation/app/src/main/res/layout/app_bar_main.xml" value="0.25" />
-        <entry key="..\:/Reservation/app/src/main/res/layout/content_main.xml" value="0.25" />
-        <entry key="..\:/Reservation/app/src/main/res/layout/fragment_home.xml" value="0.25" />
-        <entry key="..\:/Reservation/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
-        <entry key="..\:/Reservation/app/src/main/res/layout/fragment_reservation.xml" value="0.25" />
-        <entry key="..\:/Reservation/app/src/main/res/layout/fragment_services.xml" value="0.176" />
-        <entry key="..\:/Reservation/app/src/main/res/layout/fragment_test.xml" value="0.25" />
-        <entry key="..\:/Reservation/app/src/main/res/layout/nav_header_main.xml" value="0.25" />
-        <entry key="..\:/Reservation/app/src/main/res/layout/row_services.xml" value="0.20512820512820512" />
-        <entry key="..\:/Reservation/app/src/main/res/layout/text_home_fragment.xml" value="0.25" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/activity_main.xml" value="0.19814814814814816" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/app_bar_main.xml" value="0.2" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/content_main.xml" value="0.3104166666666667" />
@@ -48,6 +17,26 @@
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/menu/activity_main_drawer.xml" value="0.225" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/menu/main.xml" value="0.225" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation/app/src/main/res/layout/activity_main.xml" value="0.3104166666666667" />
+        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/reserve_button.xml" value="0.164" />
+        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/row_main.xml" value="0.164" />
+        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/row_maincolor_reserve.xml" value="0.164" />
+        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/row_reserved.xml" value="0.164" />
+        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/row_transparent_reserve.xml" value="0.164" />
+        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/side_nav_bar.xml" value="0.164" />
+        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/spinner_background.xml" value="0.152" />
+        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/activity_splash.xml" value="0.1" />
+        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/app_bar_main.xml" value="0.2151268115942029" />
+        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/content_main.xml" value="0.12771739130434784" />
+        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/font_spinner.xml" value="0.2151268115942029" />
+        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/fragment_factor.xml" value="0.2151268115942029" />
+        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/fragment_home.xml" value="0.2151268115942029" />
+        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/fragment_reservation.xml" value="0.264" />
+        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/fragment_signing.xml" value="0.2151268115942029" />
+        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/layout_show_more.xml" value="0.2151268115942029" />
+        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/reserved_row.xml" value="0.2151268115942029" />
+        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/test.xml" value="0.16614583333333333" />
+        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/menu/activity_main_drawer.xml" value="0.23177083333333334" />
         <entry key="..\:/Work/reservd/app/src/main/res/layout/activity_main.xml" value="0.12771739130434784" />
         <entry key="..\:/reservation-android/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.1" />
         <entry key="..\:/reservation-android/app/src/main/res/drawable/ic_nav_calendar.xml" value="0.1" />

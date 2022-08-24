@@ -124,6 +124,15 @@ public class SqlDatabaseReserve extends SQLiteOpenHelper {
 
     }
 
+    public void deleteIdAll() {
+        SQLiteDatabase database = this.getReadableDatabase();
+        database.delete(TABLE_NAME_2, null, null );
+        database.execSQL("delete from "+ TABLE_NAME_2);
+        database.close();
+
+    }
+
+
     //INSERT
     public void Insert(String ida, String time, int reserved, String service) {
 

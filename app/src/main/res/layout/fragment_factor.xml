@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background"
+    tools:context=".FactorFragment">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_15cdp"
+        android:layout_marginTop="@dimen/_10cdp"
+        android:layout_marginRight="@dimen/_15cdp"
+        android:layout_marginBottom="@dimen/_32cdp"
+        app:cardCornerRadius="@dimen/_16cdp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_20cdp"
+                >
+
+                <TextView
+                    style="@style/fontForLargeBoldOrangeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+
+                    android:text="اطلاعات رزرو نوبت" />
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/_32cdp"
+                android:paddingTop="@dimen/_24cdp"
+                android:layout_marginRight="@dimen/_32cdp"
+                android:layout_marginLeft="@dimen/_32cdp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+
+                    >
+
+                    <TextView
+                        android:id="@+id/date_text_form"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/fontForMediumFactorResponse"
+                        android:text="سه شنبه 29 مرداد"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/fontForMediumFactorTitle"
+                        android:text="تاریخ:"
+                        android:layout_weight="1"
+                        />
+
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+
+                    android:background="@color/text"
+                    android:layout_marginTop="@dimen/_4cdp"
+                    android:layout_marginBottom="@dimen/_4cdp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+
+                    >
+
+                    <TextView
+                        android:id="@+id/time_text_form"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/fontForMediumFactorResponse"
+                        android:text="14:30"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/fontForMediumFactorTitle"
+                        android:text="ساعت حضور:"
+                        android:layout_weight="1"
+                        />
+
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:background="@color/text"
+                    android:layout_marginTop="@dimen/_4cdp"
+                    android:layout_marginBottom="@dimen/_4cdp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+
+                    >
+
+                    <TextView
+                        android:id="@+id/service_text_form"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/fontForMediumFactorResponse"
+                        android:text="لیزر صورت"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/fontForMediumFactorTitle"
+                        android:text="نوع خدمات:"
+                        android:layout_weight="1"
+                        />
+
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:background="@color/text"
+                    android:layout_marginTop="@dimen/_4cdp"
+                    android:layout_marginBottom="@dimen/_4cdp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:id="@+id/duration_text_form"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/fontForMediumFactorResponse"
+                        android:text="15 دقیقه"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/fontForMediumFactorTitle"
+                        android:text="زمان تقریبی:"
+                        android:layout_weight="1"
+                        />
+
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+
+                    android:background="@color/text"
+                    android:layout_marginTop="@dimen/_4cdp"
+                    android:layout_marginBottom="@dimen/_4cdp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+
+                    >
+
+                    <TextView
+                        android:id="@+id/name_text_form"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/fontForMediumFactorResponse"
+                        android:text="پتروس فداکار"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/fontForMediumFactorTitle"
+                        android:text="نام و نام خانوادگی:"
+                        android:layout_weight="1"
+                        />
+
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:background="@color/text"
+                    android:layout_marginTop="@dimen/_4cdp"
+                    android:layout_marginBottom="@dimen/_4cdp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+
+                    >
+
+                    <TextView
+                        android:id="@+id/phone_text_form"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/fontForMediumFactorResponse"
+                        android:text="099051246987"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/fontForMediumFactorTitle"
+                        android:text="شماره همراه:"
+                        android:layout_weight="1"
+                        />
+
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginRight="@dimen/_24cdp"
+                android:layout_marginLeft="@dimen/_24cdp"
+                android:paddingTop="@dimen/_32cdp"
+                android:paddingBottom="@dimen/_32cdp"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    >
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/edit_button_form"
+                        style="@style/fontForMediumEditText"
+                        android:layout_width="@dimen/_120cdp"
+                        android:layout_height="@dimen/_48cdp"
+                        android:layout_centerInParent="true"
+                        android:backgroundTint="@color/show_more_text"
+                        android:text="تغییر نوبت"
+                        android:textColor="@color/white"
+                        app:cornerRadius="@dimen/_8cdp" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/cancel_button_form"
+                        style="@style/fontForMediumEditText"
+                        android:layout_width="@dimen/_120cdp"
+                        android:layout_height="@dimen/_48cdp"
+                        android:layout_centerInParent="true"
+                        android:backgroundTint="#0081A7"
+                        android:text="لغو"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        app:cornerRadius="@dimen/_8cdp" />
+
+
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/pay_button_form"
+        style="@style/fontForMediumEditText"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60cdp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/_15cdp"
+        android:layout_marginTop="@dimen/_10cdp"
+        android:layout_marginRight="@dimen/_15cdp"
+        android:layout_marginBottom="@dimen/_15cdp"
+        android:text="پرداخت"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+
+
+</RelativeLayout>

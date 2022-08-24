@@ -9,28 +9,34 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dariushm2.PersianCaldroid.caldroidfragment.PersianCaldroidFragment;
 
+import org.angmarch.views.NiceSpinner;
+import org.angmarch.views.OnSpinnerItemSelectedListener;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Objects;
+import java.util.LinkedList;
+import java.util.List;
 
 import calendar.PersianDate;
 import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.FragmentReservationBinding;
 import ir.tamuk.reservation.fragments.ui.reservation.adapter.ReserveAdapter;
 import ir.tamuk.reservation.fragments.ui.reservation.adapter.ReserveModel;
+import ir.tamuk.reservation.fragments.ui.reservation.adapter.RtlGridLayoutManager;
 import ir.tamuk.reservation.fragments.ui.reservation.database.SqlDatabaseReserve;
 
 public class ReservationFragment extends Fragment {
@@ -60,6 +66,9 @@ public class ReservationFragment extends Fragment {
         date_show = String.valueOf(persianDate.getYear())+"-"+String.valueOf(persianDate.getMonth())+"-"
                 +String.valueOf(persianDate.getDayOfMonth());
 
+        binding.signingButtonReservation.setOnClickListener(view -> {
+                Navigation.findNavController(view).navigate(R.id.action_nav_reservation_to_signingFragment);
+        });
 
         //recycler
         Recycler();
@@ -82,6 +91,32 @@ public class ReservationFragment extends Fragment {
 
     public  void Spinnerr(){
 
+//        List<String> dataset = new LinkedList<>(Arrays.asList("همه موارد"  , "دست", "پا", "بدن" ));
+//        binding.spinnerServices.attachDataSource(dataset);
+//
+//            binding.spinnerServices.setOnSpinnerItemSelectedListener(new OnSpinnerItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(NiceSpinner parent, View view, int position, long id) {
+//                // This example uses String, but your type can be any
+//
+//
+//                switch (position) {
+//                    case 0:
+//                        Recycler();
+//                        break;
+//                    case 1:
+//                        Recycler();
+//                        break;
+//                    case 2:
+//                        Recycler();
+//                        break;
+//                    case 3:
+//                        Recycler();
+//                        break;
+//                }
+//
+//            }
+//        });
         String[] items = new String[]
                 {"همه موارد"  , "دست", "پا", "بدن" };
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(),R.layout.font_spinner, items);
@@ -119,6 +154,7 @@ public class ReservationFragment extends Fragment {
         // Set font
         Typeface typeface = ResourcesCompat.getFont(getContext(), R.font.iraniansans);
         persianCaldroidFragment.setTypeface(typeface);
+
         persianCaldroidFragment.setOnDateClickListener(new PersianCaldroidFragment.OnDateClickListener() {
             @Override
             public void onDateClick(PersianDate persianDate) {
@@ -134,7 +170,7 @@ public class ReservationFragment extends Fragment {
                 //get Date
                 date_show = String.valueOf(persianDate.getYear())+"-"+String.valueOf(persianDate.getMonth())+"-"
                         +String.valueOf(persianDate.getDayOfMonth());
-                Log.d("CALENDER DATE", "Calender: "+date_show);
+                Log.d("CALENDER DATE", "Calender1: "+date_show);
                 //Recycler
                 Recycler();
 
@@ -202,15 +238,20 @@ public class ReservationFragment extends Fragment {
             }else if (reserveModels.get(i).id.contains(String.valueOf(date_show))
                     && reserveModels.get(i).service.equals(binding.spinnerServices.getSelectedItem())) {
                 result.add(reserveModels.get(i));
+
             }
         }
         reserveModels.clear();
         reserveModels.addAll(result);
 
         //horizontal Morning recycler
-        LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(getContext(),
-                RecyclerView.HORIZONTAL, false);
-        binding.recyclerViewMorningReserve.setLayoutManager(verticalLayoutManager);
+//        LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(getContext(),
+//                RecyclerView.HORIZONTAL, false);
+//        verticalLayoutManager.setReverseLayout(true);
+        int numberOfColumns = 4;
+        GridLayoutManager gridLayoutManager = new RtlGridLayoutManager(getContext(), numberOfColumns);
+        binding.recyclerViewMorningReserve.setLayoutManager(gridLayoutManager);
+//        binding.recyclerViewMorningReserve.setLayoutManager(verticalLayoutManager);
         adapter = new ReserveAdapter( reserveModels);
         binding.recyclerViewMorningReserve.setAdapter(adapter);
         if (result.isEmpty()){
@@ -220,8 +261,8 @@ public class ReservationFragment extends Fragment {
         }
         //refresh
         adapter.notifyDataSetChanged();
-
-
     }
+
+
 
 }

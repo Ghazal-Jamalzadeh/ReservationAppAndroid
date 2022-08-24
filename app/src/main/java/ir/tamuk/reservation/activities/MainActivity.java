@@ -1,14 +1,18 @@
 package ir.tamuk.reservation.activities;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.app.ActionBar;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.View;
 
@@ -33,6 +37,28 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.bottomNav);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupWithNavController(binding.bottomNav, navController);
+
+        //navController Hide When OpenSigning Fragment
+        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+            @Override
+            public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
+                Handler h = new Handler();
+                Runnable r = new Runnable() {
+                    @Override
+                    public void run() {
+
+                        if (navDestination.getId() == R.id.signingFragment) {
+                            binding.bottomNav.setVisibility(View.GONE);
+                        } else {
+                            binding.bottomNav.setVisibility(View.VISIBLE);
+                        }
+
+                    }
+                };
+                h.postDelayed(r, 100);
+
+            }
+        });
         ////////////////////////////////////////////////////////
 
 

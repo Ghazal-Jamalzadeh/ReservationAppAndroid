@@ -22,4 +22,9 @@
     <style name="Theme.Reservation.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Reservation.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="buttonOrg">
+    <item name="color">@color/show_more_text</item>
+    </style>
+
 </resources>

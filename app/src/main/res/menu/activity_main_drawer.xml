@@ -7,22 +7,28 @@
         <item
             android:id="@+id/nav_reservation"
             android:icon="@drawable/ic_nav_calendar"
-            android:title="Reservation" />
+            android:title="رزرو ها"
+            
+            />
         <item
             android:id="@+id/nav_services"
             android:icon="@drawable/ic_nav_services"
-            android:title="Services" />
+            android:title="سرویس ها"
+
+            />
 
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_nav_home"
-            android:title="Home"
+            android:title="خانه"
             />
 
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_nav_account"
-            android:title="Profile" />
+            android:title="پروفایل"
+
+            />
 
 
     </group>
