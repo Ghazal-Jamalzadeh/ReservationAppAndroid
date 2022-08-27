@@ -22,11 +22,7 @@
         tools:layout="@layout/fragment_reservation" >
         <action
             android:id="@+id/action_nav_reservation_to_signingFragment"
-            app:destination="@id/signingFragment"
-            app:enterAnim="@anim/slide_up"
-            app:popEnterAnim="@anim/wait"
-            app:popExitAnim="@anim/slide_down"
-            />
+            app:destination="@id/signingFragment" />
     </fragment>
 
     <fragment
@@ -45,19 +41,21 @@
         android:label="fragment_services"
         tools:layout="@layout/fragment_services" />
     <fragment
-        android:id="@+id/factorFragment"
-        android:name="ir.tamuk.reservation.FactorFragment"
-        android:label="fragment_factor"
-        tools:layout="@layout/fragment_factor" />
-    <fragment
         android:id="@+id/signingFragment"
         android:name="ir.tamuk.reservation.SigningFragment"
         android:label="fragment_signing"
         tools:layout="@layout/fragment_signing" >
         <action
-            android:id="@+id/action_signingFragment_to_nav_reservation3"
-            app:destination="@id/nav_reservation"
-            app:launchSingleTop="false"
-            app:popUpToInclusive="false" />
+            android:id="@+id/action_signingFragment_to_signInValiddationcodeFragment"
+            app:destination="@id/signInValiddationcodeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signInValiddationcodeFragment"
+        android:name="ir.tamuk.reservation.SignInValiddationcodeFragment"
+        android:label="fragment_sign_in_validdationcode"
+        tools:layout="@layout/fragment_sign_in_validdationcode" >
+        <action
+            android:id="@+id/action_signInValiddationcodeFragment_to_signingFragment2"
+            app:destination="@id/signingFragment" />
     </fragment>
 </navigation>
