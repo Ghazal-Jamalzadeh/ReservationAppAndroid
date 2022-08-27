@@ -15,5 +15,7 @@
 
 
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/show_more_text</color>
-
+    <color name="blue">#21669E</color>
+    <color name="login_blue">#0081A7</color>
+    <color name="red">#F07167</color>
 </resources>

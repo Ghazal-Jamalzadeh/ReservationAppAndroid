@@ -130,12 +130,14 @@
         <item name="android:textColor">@color/text</item>
         <item name="android:textSize">@dimen/medium_text_size</item>
     </style>
-<!--    <style name="fontForBMLText">-->
-<!--        <item name="android:textStyle">normal</item>-->
-<!--        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
-<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
-<!--        <item name="android:textSize">@dimen/bml_text_size</item>-->
-<!--    </style>-->
+   <style name="fontForBMLText">-->
+       <item name="android:textStyle">normal</item>-->
+        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
+        <item name="android:textColor">@color/white</item>-->
+      <item name="android:textSize">@dimen/bml_text_size</item>-->
+   </style>
+
+    <style name="fontForLargeBoldText"></style>-->
 <!--    <style name="fontForBMLBoldText">-->
 <!--        <item name="android:textStyle">bold</item>-->
 <!--        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>-->

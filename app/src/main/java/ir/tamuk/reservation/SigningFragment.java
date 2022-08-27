@@ -39,6 +39,14 @@ public class SigningFragment extends Fragment {
             Navigation.findNavController(view).popBackStack();
         });
 
+        binding.acceptButtonSigning.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    findNavController(view).navigate(R.id.action_signingFragment_to_signInValiddationcodeFragment);
+
+            }
+        });
+
         return root;
     }
 }
