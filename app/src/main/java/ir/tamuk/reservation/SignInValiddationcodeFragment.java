@@ -127,6 +127,8 @@ public class SignInValiddationcodeFragment extends Fragment {
             public void onClick(View view) {
                 Animation a= AnimationUtils.loadAnimation(getContext(), R.anim.rotation);
                 binding.image.startAnimation(a);
+                binding.textTimer.setText("120");
+
             }
         });
 
