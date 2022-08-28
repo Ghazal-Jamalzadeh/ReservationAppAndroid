@@ -1,0 +1,1235 @@
+Index: app/src/main/res/drawable/ic_baseline_cancel_24.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/ic_baseline_cancel_24.xml b/app/src/main/res/drawable/ic_baseline_cancel_24.xml
+new file mode 100644
+--- /dev/null	(date 1661339270100)
++++ b/app/src/main/res/drawable/ic_baseline_cancel_24.xml	(date 1661339270100)
+@@ -0,0 +1,5 @@
++<vector android:height="24dp" android:tint="#000000"
++    android:viewportHeight="24" android:viewportWidth="24"
++    android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
++    <path android:fillColor="@android:color/white" android:pathData="M12,2C6.47,2 2,6.47 2,12s4.47,10 10,10 10,-4.47 10,-10S17.53,2 12,2zM17,15.59L15.59,17 12,13.41 8.41,17 7,15.59 10.59,12 7,8.41 8.41,7 12,10.59 15.59,7 17,8.41 13.41,12 17,15.59z"/>
++</vector>
+Index: app/src/main/res/navigation/mobile_navigation.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<navigation xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/mobile_navigation\"\r\n    app:startDestination=\"@+id/nav_home\">\r\n\r\n    <fragment\r\n        android:id=\"@+id/nav_home\"\r\n        android:name=\"ir.tamuk.reservation.fragments.ui.home.HomeFragment\"\r\n        android:label=\"@string/menu_home\"\r\n        tools:layout=\"@layout/fragment_home\" >\r\n        <action\r\n            android:id=\"@+id/action_nav_home_to_testFragment\"\r\n            app:destination=\"@id/testFragment\" />\r\n    </fragment>\r\n\r\n    <fragment\r\n        android:id=\"@+id/nav_reservation\"\r\n        android:name=\"ir.tamuk.reservation.fragments.ui.reservation.ReservationFragment\"\r\n        android:label=\"@string/menu_gallery\"\r\n        tools:layout=\"@layout/fragment_reservation\" >\r\n        <action\r\n            android:id=\"@+id/action_nav_reservation_to_signingFragment\"\r\n            app:destination=\"@id/signingFragment\"\r\n            app:enterAnim=\"@anim/slide_up\"\r\n            app:popEnterAnim=\"@anim/wait\"\r\n            app:popExitAnim=\"@anim/slide_down\"\r\n            />\r\n    </fragment>\r\n\r\n    <fragment\r\n        android:id=\"@+id/nav_profile\"\r\n        android:name=\"ir.tamuk.reservation.fragments.ui.profile.ProfileFragment\"\r\n        android:label=\"@string/menu_slideshow\"\r\n        tools:layout=\"@layout/fragment_profile\" />\r\n    <fragment\r\n        android:id=\"@+id/testFragment\"\r\n        android:name=\"ir.tamuk.reservation.fragments.ui.TestFragment\"\r\n        android:label=\"fragment_test\"\r\n        tools:layout=\"@layout/fragment_test\" />\r\n    <fragment\r\n        android:id=\"@+id/nav_services\"\r\n        android:name=\"ir.tamuk.reservation.fragments.ui.services.ServicesFragment\"\r\n        android:label=\"fragment_services\"\r\n        tools:layout=\"@layout/fragment_services\" />\r\n    <fragment\r\n        android:id=\"@+id/factorFragment\"\r\n        android:name=\"ir.tamuk.reservation.FactorFragment\"\r\n        android:label=\"fragment_factor\"\r\n        tools:layout=\"@layout/fragment_factor\" />\r\n    <fragment\r\n        android:id=\"@+id/signingFragment\"\r\n        android:name=\"ir.tamuk.reservation.SigningFragment\"\r\n        android:label=\"fragment_signing\"\r\n        tools:layout=\"@layout/fragment_signing\" >\r\n        <action\r\n            android:id=\"@+id/action_signingFragment_to_nav_reservation3\"\r\n            app:destination=\"@id/nav_reservation\"\r\n            app:launchSingleTop=\"false\"\r\n            app:popUpToInclusive=\"false\" />\r\n    </fragment>\r\n</navigation>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/navigation/mobile_navigation.xml b/app/src/main/res/navigation/mobile_navigation.xml
+--- a/app/src/main/res/navigation/mobile_navigation.xml	(revision b3eef3de25a2d585489a3abf75b9176d07e207f1)
++++ b/app/src/main/res/navigation/mobile_navigation.xml	(date 1661582978104)
+@@ -53,11 +53,5 @@
+         android:id="@+id/signingFragment"
+         android:name="ir.tamuk.reservation.SigningFragment"
+         android:label="fragment_signing"
+-        tools:layout="@layout/fragment_signing" >
+-        <action
+-            android:id="@+id/action_signingFragment_to_nav_reservation3"
+-            app:destination="@id/nav_reservation"
+-            app:launchSingleTop="false"
+-            app:popUpToInclusive="false" />
+-    </fragment>
++        tools:layout="@layout/fragment_signing" />
+ </navigation>
+\ No newline at end of file
+Index: app/src/main/res/anim/slide_down.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<set xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:shareInterpolator=\"false\"\r\n    android:duration=\"700\"\r\n\r\n    >\r\n    <translate\r\n        android:fromXDelta=\"0%\"\r\n        android:fromYDelta=\"0%\"\r\n        android:toXDelta=\"0%\"\r\n        android:toYDelta=\"100%\" />\r\n</set>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/anim/slide_down.xml b/app/src/main/res/anim/slide_down.xml
+--- a/app/src/main/res/anim/slide_down.xml	(revision b3eef3de25a2d585489a3abf75b9176d07e207f1)
++++ b/app/src/main/res/anim/slide_down.xml	(date 1661583002220)
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <set xmlns:android="http://schemas.android.com/apk/res/android"
+     android:shareInterpolator="false"
+-    android:duration="700"
++    android:duration="500"
+ 
+     >
+     <translate
+Index: app/src/main/res/layout/fragment_signing.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<RelativeLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    android:background=\"@color/backgroundSigning\"\r\n    tools:context=\".SigningFragment\">\r\n\r\n    <ImageView\r\n        android:id=\"@+id/cancel_button_signing_\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginLeft=\"@dimen/_24cdp\"\r\n        android:layout_marginTop=\"@dimen/_24cdp\"\r\n        android:src=\"@drawable/ic_close_fill0_wght400_grad0_opsz48\" />\r\n\r\n    <RelativeLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:layout_marginLeft=\"@dimen/_32cdp\"\r\n        android:layout_marginTop=\"@dimen/_150cdp\"\r\n        android:layout_marginRight=\"@dimen/_32cdp\"\r\n        android:layout_marginBottom=\"@dimen/_60cdp\">\r\n\r\n        <TextView\r\n            android:id=\"@+id/a\"\r\n            style=\"@style/fontForLargeBoldOrangeText\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_centerHorizontal=\"true\"\r\n            android:text=\"ایجاد / ورود حساب کاربری\" />\r\n\r\n        <RelativeLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_below=\"@id/a\"\r\n            android:layout_centerInParent=\"true\">\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"@dimen/_62cdp\"\r\n                android:orientation=\"vertical\">\r\n\r\n\r\n                <com.google.android.material.textfield.TextInputLayout\r\n                    android:id=\"@+id/textField\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginLeft=\"@dimen/_32cdp\"\r\n                    android:layout_marginRight=\"@dimen/_32cdp\"\r\n                    android:textColorHint=\"@color/white\"\r\n                    app:boxStrokeColor=\"@color/show_more_text\"\r\n                    app:boxStrokeErrorColor=\"#D50000\"\r\n                    app:endIconCheckable=\"true\"\r\n                    app:endIconMode=\"clear_text\"\r\n                    app:endIconTint=\"@color/white\"\r\n                    app:hintTextColor=\"@color/show_more_text\"\r\n\r\n                    >\r\n\r\n                    <com.google.android.material.textfield.TextInputEditText\r\n                        android:id=\"@+id/mobile_editText_signing\"\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:backgroundTint=\"#0081A7\"\r\n                        android:drawableRight=\"@drawable/ic_path_39933\"\r\n                        android:hint=\"  شماره تلفن همراه\"\r\n                        android:inputType=\"number\"\r\n                        android:maxLines=\"1\"\r\n                        android:singleLine=\"true\" />\r\n\r\n                </com.google.android.material.textfield.TextInputLayout>\r\n\r\n\r\n            </LinearLayout>\r\n\r\n            <com.google.android.material.button.MaterialButton\r\n                android:id=\"@+id/accept_button_signing\"\r\n                style=\"@style/fontForMediumEditText\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"@dimen/_60cdp\"\r\n                android:layout_alignParentBottom=\"true\"\r\n                android:layout_marginLeft=\"@dimen/_15cdp\"\r\n                android:layout_marginRight=\"@dimen/_15cdp\"\r\n                android:backgroundTint=\"@color/white\"\r\n                android:text=\"تایید\"\r\n                android:textColor=\"@color/backgroundSigning\"\r\n                android:textStyle=\"bold\"\r\n                app:cornerRadius=\"@dimen/_8cdp\" />\r\n\r\n        </RelativeLayout>\r\n\r\n    </RelativeLayout>\r\n\r\n\r\n</RelativeLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_signing.xml b/app/src/main/res/layout/fragment_signing.xml
+--- a/app/src/main/res/layout/fragment_signing.xml	(revision b3eef3de25a2d585489a3abf75b9176d07e207f1)
++++ b/app/src/main/res/layout/fragment_signing.xml	(date 1661341437462)
+@@ -57,6 +57,7 @@
+                     app:endIconMode="clear_text"
+                     app:endIconTint="@color/white"
+                     app:hintTextColor="@color/show_more_text"
++                    app:errorTextColor="#D50000"
+ 
+                     >
+ 
+@@ -65,11 +66,14 @@
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:backgroundTint="#0081A7"
+-                        android:drawableRight="@drawable/ic_path_39933"
+-                        android:hint="  شماره تلفن همراه"
++                        android:hint="شماره تلفن همراه"
+                         android:inputType="number"
+                         android:maxLines="1"
+-                        android:singleLine="true" />
++                        android:singleLine="true"
++                        android:textColor="@color/white"
++                        android:drawablePadding="@dimen/_10cdp"
++                        android:drawableStart="@drawable/ic_path_39933"
++                        />
+ 
+                 </com.google.android.material.textfield.TextInputLayout>
+ 
+Index: app/src/main/res/drawable/circle_today.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/circle_today.xml b/app/src/main/res/drawable/circle_today.xml
+new file mode 100644
+--- /dev/null	(date 1661589862220)
++++ b/app/src/main/res/drawable/circle_today.xml	(date 1661589862220)
+@@ -0,0 +1,17 @@
++<?xml version="1.0" encoding="utf-8"?>
++<selector xmlns:android="http://schemas.android.com/apk/res/android">
++    <item>
++        <shape
++            android:shape="oval"
++            >
++
++            <corners
++                android:radius="360dp"
++                />
++            <stroke
++                android:color="@color/main"
++                android:width="@dimen/_1cdp"
++                />
++        </shape>
++    </item>
++</selector>
+\ No newline at end of file
+Index: app/src/main/java/ir/tamuk/reservation/SigningFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ir.tamuk.reservation;\r\n\r\nimport static androidx.navigation.Navigation.findNavController;\r\n\r\nimport android.os.Bundle;\r\n\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.lifecycle.ViewModelProvider;\r\nimport androidx.navigation.NavController;\r\nimport androidx.navigation.Navigation;\r\n\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\n\r\nimport ir.tamuk.reservation.databinding.FragmentReservationBinding;\r\nimport ir.tamuk.reservation.databinding.FragmentSigningBinding;\r\nimport ir.tamuk.reservation.fragments.ui.reservation.ReservationViewModel;\r\n\r\npublic class SigningFragment extends Fragment {\r\n\r\n    private FragmentSigningBinding binding;\r\n\r\n\r\n    @Override\r\n    public void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n    }\r\n\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container,\r\n                             Bundle savedInstanceState) {\r\n        ReservationViewModel galleryViewModel =\r\n                new ViewModelProvider(this).get(ReservationViewModel.class);\r\n        binding = FragmentSigningBinding.inflate(inflater, container, false);\r\n        View root = binding.getRoot();\r\n\r\n        binding.cancelButtonSigning.setOnClickListener(view -> {\r\n            Navigation.findNavController(view).popBackStack();\r\n        });\r\n\r\n        return root;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/ir/tamuk/reservation/SigningFragment.java b/app/src/main/java/ir/tamuk/reservation/SigningFragment.java
+--- a/app/src/main/java/ir/tamuk/reservation/SigningFragment.java	(revision b3eef3de25a2d585489a3abf75b9176d07e207f1)
++++ b/app/src/main/java/ir/tamuk/reservation/SigningFragment.java	(date 1661343445822)
+@@ -2,16 +2,26 @@
+ 
+ import static androidx.navigation.Navigation.findNavController;
+ 
++import android.content.res.ColorStateList;
++import android.graphics.Color;
++import android.graphics.drawable.Drawable;
++import android.graphics.drawable.Icon;
+ import android.os.Bundle;
+ 
++import androidx.annotation.NonNull;
+ import androidx.fragment.app.Fragment;
+ import androidx.lifecycle.ViewModelProvider;
+ import androidx.navigation.NavController;
+ import androidx.navigation.Navigation;
+ 
++import android.text.Editable;
++import android.text.TextWatcher;
+ import android.view.LayoutInflater;
+ import android.view.View;
+ import android.view.ViewGroup;
++import android.widget.Toast;
++
++import com.google.android.material.textfield.TextInputLayout;
+ 
+ import ir.tamuk.reservation.databinding.FragmentReservationBinding;
+ import ir.tamuk.reservation.databinding.FragmentSigningBinding;
+@@ -35,10 +45,66 @@
+         binding = FragmentSigningBinding.inflate(inflater, container, false);
+         View root = binding.getRoot();
+ 
++
++
++
++
+         binding.cancelButtonSigning.setOnClickListener(view -> {
+             Navigation.findNavController(view).popBackStack();
+         });
+ 
++
++
++
++
++        //editText mobile
++        binding.mobileEditTextSigning.setOnClickListener(view -> {
++            //input Mobile number Pattern
++            if (binding.mobileEditTextSigning.getText().length() == 11){
++                Toast.makeText(getContext(), "hi", Toast.LENGTH_SHORT).show();
++                binding.mobileEditTextSigning.setTextColor(Color.WHITE);
++
++
++            }else{
++                //EditText Field error enable
++                binding.textField.setErrorEnabled(true);
++                binding.textField.setBoxStrokeErrorColor(ColorStateList.valueOf(Color.RED));
++                binding.textField.setErrorIconDrawable(R.drawable.ic_baseline_cancel_24);
++                binding.mobileEditTextSigning.setTextColor(Color.RED);
++                binding.textField.setError("شماره اشتباه است");
++                //delete error icon
++                binding.textField.setErrorIconOnClickListener(view1 -> {
++                    binding.mobileEditTextSigning.getText().clear();
++                    binding.textField.setErrorEnabled(false);
++                    binding.mobileEditTextSigning.setTextColor(Color.WHITE);
++
++
++                });
++                //if changed number error false
++                binding.mobileEditTextSigning.addTextChangedListener(new TextWatcher() {
++                    @Override
++                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
++
++                    }
++
++                    @Override
++                    public void onTextChanged(CharSequence s, int start, int before, int count) {
++
++                    }
++
++                    @Override
++                    public void afterTextChanged(Editable s) {
++                        if (binding.mobileEditTextSigning.getText().toString().trim().length() > 0) {
++                            binding.textField.setErrorEnabled(false);
++                            binding.mobileEditTextSigning.setTextColor(Color.WHITE);
++
++                        }
++                    }
++                });
++
++            }
++        });
++
+         return root;
+     }
+ }
+\ No newline at end of file
+Index: app/src/main/res/drawable/circle_selected_day.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/circle_selected_day.xml b/app/src/main/res/drawable/circle_selected_day.xml
+new file mode 100644
+--- /dev/null	(date 1661589599735)
++++ b/app/src/main/res/drawable/circle_selected_day.xml	(date 1661589599735)
+@@ -0,0 +1,17 @@
++<?xml version="1.0" encoding="utf-8"?>
++<selector xmlns:android="http://schemas.android.com/apk/res/android">
++    <item>
++        <shape
++            android:shape="oval"
++            >
++
++            <corners
++                android:radius="360dp"
++                />
++            <solid
++                android:color="@color/main"
++                />
++        </shape>
++    </item>
++
++</selector>
+\ No newline at end of file
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    id 'com.android.application'\r\n}\r\n\r\nandroid {\r\n    compileSdk 32\r\n\r\n    defaultConfig {\r\n        applicationId \"ir.tamuk.reservation\"\r\n        minSdk 21\r\n        targetSdk 32\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_1_8\r\n        targetCompatibility JavaVersion.VERSION_1_8\r\n    }\r\n\r\n    buildFeatures {\r\n        viewBinding true\r\n    }\r\n}\r\n\r\ndependencies {\r\n\r\n    implementation 'androidx.appcompat:appcompat:1.5.0'\r\n    implementation 'com.google.android.material:material:1.6.1'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'\r\n    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'\r\n    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'\r\n    implementation 'androidx.navigation:navigation-fragment:2.5.1'\r\n    implementation 'androidx.navigation:navigation-ui:2.5.1'\r\n    testImplementation 'junit:junit:4.13.2'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.3'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'\r\n    //Picasso\r\n    implementation 'com.squareup.picasso:picasso:2.71828'\r\n    //Retrofit\r\n    /*\r\n    این رتروفیت اصلی است\r\n    */\r\n    implementation 'com.squareup.retrofit2:retrofit:2.9.0'\r\n    /*\r\n    برای قابل فهم کردن جیسون برای اندروید Gson به کار میرود.\r\n    * */\r\n    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'\r\n    //Client\r\n    /*\r\n    اعمال تنظیمات بیشتر برای رتروفیت مثلا زمان انتظار و...\r\n    * */\r\n    implementation 'com.squareup.okhttp3:okhttp:4.9.1'\r\n    //Gson\r\n    implementation 'com.google.code.gson:gson:2.9.0'\r\n\r\n\r\n\r\n    //FastNetworking Lib for MultipartRequest\r\n//    implementation 'com.amitshekhar.android:android-networking:1.0.2'\r\n\r\n    implementation 'com.github.maks1990:CDP:1.0.1'\r\n    implementation 'com.squareup.picasso:picasso:2.8'\r\n\r\n    implementation 'com.github.dariushm2:PersianCaldroid:1.0.1'\r\n\r\n    implementation 'com.github.arcadefire:nice-spinner:1.4.4'\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle b/app/build.gradle
+--- a/app/build.gradle	(revision b3eef3de25a2d585489a3abf75b9176d07e207f1)
++++ b/app/build.gradle	(date 1661589123001)
+@@ -70,8 +70,9 @@
+     implementation 'com.github.maks1990:CDP:1.0.1'
+     implementation 'com.squareup.picasso:picasso:2.8'
+ 
+-    implementation 'com.github.dariushm2:PersianCaldroid:1.0.1'
+ 
+     implementation 'com.github.arcadefire:nice-spinner:1.4.4'
+ 
++    implementation 'com.github.roojin:persian-calendar-view:1.2.2'
++
+ }
+\ No newline at end of file
+Index: app/src/main/res/layout/fragment_reservation.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.core.widget.NestedScrollView\r\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    tools:context=\".fragments.ui.reservation.ReservationFragment\"\r\n    android:background=\"@color/background\"\r\n    >\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:orientation=\"vertical\"\r\n        >\r\n\r\n        <androidx.cardview.widget.CardView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"@dimen/_50cdp\"\r\n            android:layout_marginRight=\"@dimen/_15cdp\"\r\n            android:layout_marginTop=\"@dimen/_10cdp\"\r\n            android:layout_marginLeft=\"@dimen/_15cdp\"\r\n            app:cardCornerRadius=\"@dimen/_16cdp\"\r\n            android:elevation=\"8dp\"\r\n            >\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\"\r\n                >\r\n\r\n                <RelativeLayout\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"match_parent\"\r\n                    android:layout_weight=\"1\"\r\n                    >\r\n\r\n                    <TextView\r\n                        android:id=\"@+id/days_card_reservation\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:layout_centerInParent=\"true\"\r\n                        style=\"@style/fontForMediumEditText\"\r\n                        android:text=\"25\"\r\n                        />\r\n\r\n\r\n                </RelativeLayout>\r\n\r\n<!--                <RelativeLayout-->\r\n<!--                    android:layout_width=\"match_parent\"-->\r\n<!--                    android:layout_height=\"match_parent\"-->\r\n<!--                    android:layout_weight=\"1\"-->\r\n<!--                    >-->\r\n\r\n<!--                    <ImageView-->\r\n<!--                        android:visibility=\"invisible\"-->\r\n<!--                        android:id=\"@+id/forward_calender_button\"-->\r\n<!--                        android:layout_width=\"wrap_content\"-->\r\n<!--                        android:layout_height=\"wrap_content\"-->\r\n<!--                        android:layout_centerInParent=\"true\"-->\r\n<!--                        android:src=\"@drawable/ic_arrow_back_ios_fill0_wght400_grad0_opsz48__left_\" />-->\r\n\r\n\r\n<!--                </RelativeLayout>-->\r\n\r\n                <RelativeLayout\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"match_parent\"\r\n                    android:layout_weight=\"1\"\r\n                    >\r\n\r\n                    <TextView\r\n                        android:id=\"@+id/month_card_reservation\"\r\n                        style=\"@style/fontForMediumEditText\"\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"match_parent\"\r\n                        android:layout_weight=\"2\"\r\n                        android:gravity=\"center\"\r\n                        android:text=\"اردیبهشت\" />\r\n\r\n\r\n\r\n                </RelativeLayout>\r\n\r\n<!--                <RelativeLayout-->\r\n<!--                    android:layout_width=\"match_parent\"-->\r\n<!--                    android:layout_height=\"match_parent\"-->\r\n<!--                    android:layout_weight=\"1\"-->\r\n<!--                    >-->\r\n\r\n<!--                    <ImageView-->\r\n<!--                        android:visibility=\"invisible\"-->\r\n<!--                        android:id=\"@+id/backward_calender_button\"-->\r\n<!--                        android:layout_width=\"wrap_content\"-->\r\n<!--                        android:layout_height=\"wrap_content\"-->\r\n<!--                        android:layout_centerInParent=\"true\"-->\r\n<!--                        android:src=\"@drawable/ic_arrow_back_ios_fill0_wght400_grad0_opsz48__right_\" />-->\r\n\r\n\r\n<!--                </RelativeLayout>-->\r\n\r\n                <RelativeLayout\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"match_parent\"\r\n                    android:layout_weight=\"1\"\r\n                    >\r\n\r\n                    <TextView\r\n                        android:id=\"@+id/week_card_reservation\"\r\n                        style=\"@style/fontForMediumEditText\"\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"match_parent\"\r\n                        android:layout_weight=\"3\"\r\n                        android:gravity=\"center\"\r\n                        android:text=\"یکشنبه\" />\r\n\r\n\r\n                </RelativeLayout>\r\n\r\n\r\n            </LinearLayout>\r\n        </androidx.cardview.widget.CardView>\r\n\r\n        <!--calender-->\r\n        <androidx.cardview.widget.CardView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginRight=\"@dimen/_15cdp\"\r\n            android:layout_marginTop=\"@dimen/_10cdp\"\r\n            android:layout_marginLeft=\"@dimen/_15cdp\"\r\n            app:cardCornerRadius=\"@dimen/_16cdp\"\r\n            android:elevation=\"6dp\"\r\n\r\n            >\r\n\r\n            <FrameLayout\r\n                android:id=\"@+id/persianCaldroid\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_gravity=\"center_vertical\"\r\n                android:layout_marginTop=\"@dimen/_10cdp\"\r\n\r\n                />\r\n\r\n\r\n        </androidx.cardview.widget.CardView>\r\n\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"@dimen/_10cdp\"\r\n            android:layout_marginLeft=\"@dimen/_25cdp\"\r\n            android:layout_marginRight=\"@dimen/_25cdp\"\r\n            android:orientation=\"horizontal\"\r\n            >\r\n\r\n            <RelativeLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\"\r\n                android:layout_weight=\"1\"\r\n                >\r\n\r\n                <TextView\r\n                    style=\"@style/fontForSmallText\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"match_parent\"\r\n                    android:layout_centerInParent=\"true\"\r\n                    android:drawableRight=\"@drawable/ic_group_13\"\r\n                    android:drawablePadding=\"@dimen/_8cdp\"\r\n                    android:text=\"دارای ظرفیت\" />\r\n\r\n            </RelativeLayout>\r\n\r\n            <RelativeLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\"\r\n                android:layout_marginLeft=\"@dimen/_5cdp\"\r\n                android:layout_weight=\"1\"\r\n                >\r\n\r\n                <TextView\r\n                    style=\"@style/fontForSmallText\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"match_parent\"\r\n                    android:layout_centerInParent=\"true\"\r\n                    android:layout_centerHorizontal=\"true\"\r\n                    android:drawableRight=\"@drawable/ic_ellipse_34\"\r\n                    android:drawablePadding=\"@dimen/_8cdp\"\r\n                    android:text=\"ساعت های آزاد\" />\r\n\r\n            </RelativeLayout>\r\n\r\n            <RelativeLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\"\r\n                android:layout_marginLeft=\"@dimen/_5cdp\"\r\n                android:layout_weight=\"1\"\r\n                >\r\n\r\n                <TextView\r\n                    style=\"@style/fontForSmallText\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_centerInParent=\"true\"\r\n                    android:drawableRight=\"@drawable/ic_group_11\"\r\n                    android:drawablePadding=\"@dimen/_8cdp\"\r\n                    android:text=\"پر شده\" />\r\n\r\n            </RelativeLayout>\r\n\r\n\r\n        </LinearLayout>\r\n\r\n\r\n\r\n        <androidx.cardview.widget.CardView\r\n            android:id=\"@+id/card_spinner_reservation\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"@dimen/_50cdp\"\r\n            android:layout_marginLeft=\"@dimen/_20cdp\"\r\n            android:layout_marginTop=\"@dimen/_15cdp\"\r\n            android:layout_marginRight=\"@dimen/_20cdp\"\r\n            app:cardCornerRadius=\"@dimen/_18cdp\"\r\n            >\r\n\r\n\r\n            <Spinner\r\n                android:id=\"@+id/spinner_services\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:theme=\"@style/fontForMediumEditText\"\r\n                />\r\n\r\n\r\n        </androidx.cardview.widget.CardView>\r\n\r\n\r\n\r\n\r\n        <TextView\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"نوبت صبح\"\r\n            style=\"@style/fontForMediumBoldText\"\r\n            android:layout_gravity=\"right\"\r\n            android:layout_marginRight=\"@dimen/_15cdp\"\r\n            android:layout_marginTop=\"@dimen/_25cdp\"\r\n            />\r\n\r\n        <RelativeLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"@dimen/_5cdp\"\r\n            android:layout_marginRight=\"@dimen/_15cdp\"\r\n            android:layout_marginLeft=\"@dimen/_15cdp\"\r\n            >\r\n\r\n            <androidx.recyclerview.widget.RecyclerView\r\n                android:id=\"@+id/recyclerView_morning_reserve\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n\r\n                />\r\n\r\n            <TextView\r\n\r\n                android:id=\"@+id/empty_text_reservation\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_centerInParent=\"true\"\r\n                style=\"@style/fontForMediumEditText\"\r\n                android:text=\"رزروی موجود نیست\"\r\n                android:textColor=\"@color/main\"\r\n                />\r\n\r\n        </RelativeLayout>\r\n\r\n\r\n\r\n        <TextView\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"نوبت بعدازظهر\"\r\n            style=\"@style/fontForMediumEditText\"\r\n            android:textStyle=\"bold\"\r\n            android:layout_gravity=\"right\"\r\n            android:layout_marginRight=\"@dimen/_15cdp\"\r\n            android:layout_marginTop=\"@dimen/_25cdp\"\r\n            />\r\n\r\n        <androidx.recyclerview.widget.RecyclerView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"@dimen/_5cdp\"\r\n            android:layout_marginRight=\"@dimen/_15cdp\"\r\n            android:layout_marginLeft=\"@dimen/_15cdp\"\r\n            android:id=\"@+id/recyclerView_evening_reserve\"\r\n            />\r\n\r\n\r\n\r\n        <com.google.android.material.button.MaterialButton\r\n            android:id=\"@+id/signing_button_reservation\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"@dimen/_60cdp\"\r\n            android:text=\"رزرو نوبت\"\r\n            android:textColor=\"@color/white\"\r\n            style=\"@style/fontForMediumEditText\"\r\n            android:textStyle=\"bold\"\r\n            android:layout_marginLeft=\"@dimen/_15cdp\"\r\n            android:layout_marginRight=\"@dimen/_15cdp\"\r\n            android:layout_marginTop=\"@dimen/_10cdp\"\r\n            android:layout_marginBottom=\"@dimen/_15cdp\"\r\n            />\r\n\r\n\r\n    </LinearLayout>\r\n\r\n\r\n\r\n\r\n\r\n\r\n</androidx.core.widget.NestedScrollView>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_reservation.xml b/app/src/main/res/layout/fragment_reservation.xml
+--- a/app/src/main/res/layout/fragment_reservation.xml	(revision b3eef3de25a2d585489a3abf75b9176d07e207f1)
++++ b/app/src/main/res/layout/fragment_reservation.xml	(date 1661595200336)
+@@ -40,12 +40,11 @@
+ 
+                     <TextView
+                         android:id="@+id/days_card_reservation"
++                        style="@style/fontForMediumEditText"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_centerInParent="true"
+-                        style="@style/fontForMediumEditText"
+-                        android:text="25"
+-                        />
++                        android:text="25" />
+ 
+ 
+                 </RelativeLayout>
+@@ -128,7 +127,7 @@
+         <!--calender-->
+         <androidx.cardview.widget.CardView
+             android:layout_width="match_parent"
+-            android:layout_height="wrap_content"
++            android:layout_height="@dimen/_300cdp"
+             android:layout_marginRight="@dimen/_15cdp"
+             android:layout_marginTop="@dimen/_10cdp"
+             android:layout_marginLeft="@dimen/_15cdp"
+@@ -137,89 +136,120 @@
+ 
+             >
+ 
+-            <FrameLayout
+-                android:id="@+id/persianCaldroid"
+-                android:layout_width="wrap_content"
+-                android:layout_height="wrap_content"
+-                android:layout_gravity="center_vertical"
+-                android:layout_marginTop="@dimen/_10cdp"
++<!--            <FrameLayout-->
++<!--                android:id="@+id/persianCaldroid"-->
++<!--                android:layout_width="wrap_content"-->
++<!--                android:layout_height="wrap_content"-->
++<!--                android:layout_gravity="center_vertical"-->
++<!--                android:layout_marginTop="@dimen/_10cdp"-->
+ 
+-                />
++<!--                />-->
+ 
++            <RelativeLayout
++                android:layout_width="match_parent"
++                android:layout_height="match_parent"
++                >
+ 
+-        </androidx.cardview.widget.CardView>
++                <ir.mirrajabi.persiancalendar.PersianCalendarView
++                    android:id="@+id/persian_calendar"
++                    android:layout_width="match_parent"
++                    android:layout_height="match_parent"
++                    android:layout_marginLeft="@dimen/_12cdp"
++                    android:layout_marginTop="@dimen/_8cdp"
++                    android:layout_marginRight="@dimen/_12cdp"
++                    android:layout_marginBottom="@dimen/_8cdp"
++                    app:pcv_colorBackground="@color/white"
++                    app:pcv_colorDayName="#bab6b6"
++                    app:pcv_colorHoliday="#D50000"
++                    app:pcv_colorHolidaySelected="#D50000"
++                    app:pcv_colorNormalDay="@color/black"
++                    app:pcv_colorNormalDaySelected="@color/white"
++                    app:pcv_eventUnderlineColor="#0002F0F0"
++                    app:pcv_fontSize="@dimen/_16cdp"
++                    app:pcv_headersFontSize="@dimen/_16cdp"
++                    app:pcv_selectedDayBackground="@drawable/circle_selected_day"
++                    app:pcv_todayBackground="@drawable/circle_today" />
+ 
+ 
+-        <LinearLayout
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"
+-            android:layout_marginTop="@dimen/_10cdp"
+-            android:layout_marginLeft="@dimen/_25cdp"
+-            android:layout_marginRight="@dimen/_25cdp"
+-            android:orientation="horizontal"
+-            >
++                <LinearLayout
++                    android:layout_alignParentBottom="true"
++                    android:layout_width="match_parent"
++                    android:layout_height="wrap_content"
++                    android:layout_marginLeft="@dimen/_25cdp"
++                    android:layout_marginRight="@dimen/_25cdp"
++                    android:layout_marginBottom="@dimen/_16cdp"
++                    android:orientation="horizontal"
++                    >
+ 
+-            <RelativeLayout
+-                android:layout_width="match_parent"
+-                android:layout_height="match_parent"
+-                android:orientation="horizontal"
+-                android:layout_weight="1"
+-                >
++                    <RelativeLayout
++                        android:layout_width="match_parent"
++                        android:layout_height="wrap_content"
++                        android:orientation="horizontal"
++                        android:layout_weight="1"
++                        >
+ 
+-                <TextView
+-                    style="@style/fontForSmallText"
+-                    android:layout_width="match_parent"
+-                    android:layout_height="match_parent"
+-                    android:layout_centerInParent="true"
+-                    android:drawableRight="@drawable/ic_group_13"
+-                    android:drawablePadding="@dimen/_8cdp"
+-                    android:text="دارای ظرفیت" />
++                        <TextView
++                            style="@style/fontForSmallText"
++                            android:layout_width="match_parent"
++                            android:layout_height="wrap_content"
++                            android:layout_centerInParent="true"
++                            android:drawableRight="@drawable/ic_group_13"
++                            android:drawablePadding="@dimen/_8cdp"
++                            android:text="دارای ظرفیت" />
+ 
+-            </RelativeLayout>
++                    </RelativeLayout>
+ 
+-            <RelativeLayout
+-                android:layout_width="match_parent"
+-                android:layout_height="match_parent"
+-                android:orientation="horizontal"
+-                android:layout_marginLeft="@dimen/_5cdp"
+-                android:layout_weight="1"
+-                >
++                    <RelativeLayout
++                        android:layout_width="match_parent"
++                        android:layout_height="wrap_content"
++                        android:orientation="horizontal"
++                        android:layout_marginLeft="@dimen/_5cdp"
++                        android:layout_weight="1"
++                        >
+ 
+-                <TextView
+-                    style="@style/fontForSmallText"
+-                    android:layout_width="match_parent"
+-                    android:layout_height="match_parent"
+-                    android:layout_centerInParent="true"
+-                    android:layout_centerHorizontal="true"
+-                    android:drawableRight="@drawable/ic_ellipse_34"
+-                    android:drawablePadding="@dimen/_8cdp"
+-                    android:text="ساعت های آزاد" />
++                        <TextView
++                            style="@style/fontForSmallText"
++                            android:layout_width="match_parent"
++                            android:layout_height="wrap_content"
++                            android:layout_centerInParent="true"
++                            android:layout_centerHorizontal="true"
++                            android:drawableRight="@drawable/ic_ellipse_34"
++                            android:drawablePadding="@dimen/_8cdp"
++                            android:text="ساعت های آزاد" />
+ 
+-            </RelativeLayout>
++                    </RelativeLayout>
+ 
+-            <RelativeLayout
+-                android:layout_width="match_parent"
+-                android:layout_height="match_parent"
+-                android:orientation="horizontal"
+-                android:layout_marginLeft="@dimen/_5cdp"
+-                android:layout_weight="1"
+-                >
++                    <RelativeLayout
++                        android:layout_width="match_parent"
++                        android:layout_height="wrap_content"
++                        android:orientation="horizontal"
++                        android:layout_marginLeft="@dimen/_5cdp"
++                        android:layout_weight="1"
++                        >
+ 
+-                <TextView
+-                    style="@style/fontForSmallText"
+-                    android:layout_width="wrap_content"
+-                    android:layout_height="wrap_content"
+-                    android:layout_centerInParent="true"
+-                    android:drawableRight="@drawable/ic_group_11"
+-                    android:drawablePadding="@dimen/_8cdp"
+-                    android:text="پر شده" />
++                        <TextView
++                            style="@style/fontForSmallText"
++                            android:layout_width="wrap_content"
++                            android:layout_height="wrap_content"
++                            android:layout_centerInParent="true"
++                            android:drawableRight="@drawable/ic_group_11"
++                            android:drawablePadding="@dimen/_8cdp"
++                            android:text="پر شده" />
+ 
+-            </RelativeLayout>
++                    </RelativeLayout>
+ 
+ 
+-        </LinearLayout>
++                </LinearLayout>
+ 
+ 
++            </RelativeLayout>
++
++
++        </androidx.cardview.widget.CardView>
++
++
++
++
+ 
+         <androidx.cardview.widget.CardView
+             android:id="@+id/card_spinner_reservation"
+@@ -232,12 +262,19 @@
+             >
+ 
+ 
+-            <Spinner
+-                android:id="@+id/spinner_services"
+-                android:layout_width="match_parent"
+-                android:layout_height="wrap_content"
+-                android:theme="@style/fontForMediumEditText"
+-                />
++                <androidx.appcompat.widget.AppCompatSpinner
++                    android:id="@+id/spinner_services"
++                    android:layout_width="match_parent"
++                    android:layout_height="wrap_content"
++                    android:overlapAnchor="false"
++                    android:dropDownVerticalOffset="0dp"
++                    android:elevation="0dp"
++                    style="@style/SpinnerTheme"
++
++                    />
++
++
++
+ 
+ 
+         </androidx.cardview.widget.CardView>
+Index: app/src/main/res/values/styles.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<resources>\r\n<!--    <style name=\"fontForSmallEditTextHint\">-->\r\n<!--        <item name=\"android:textStyle\">normal</item>-->\r\n<!--        <item name=\"android:fontFamily\">@font/iran_sans_mob</item>-->\r\n<!--        <item name=\"android:textColor\">@color/tamuk_g3</item>-->\r\n<!--        <item name=\"android:textSize\">@dimen/small_text_size</item>-->\r\n<!--        <item name=\"android:padding\">@dimen/_2cdp</item>-->\r\n<!--    </style>-->\r\n<!--    <style name=\"fontForSmallEditText\">-->\r\n<!--        <item name=\"android:textStyle\">normal</item>-->\r\n<!--        <item name=\"android:fontFamily\">@font/iran_sans_mob</item>-->\r\n<!--        <item name=\"android:textColor\">@color/colorBlack</item>-->\r\n<!--        <item name=\"android:textSize\">@dimen/small_text_size</item>-->\r\n<!--        <item name=\"android:padding\">@dimen/_2cdp</item>-->\r\n<!--    </style>-->\r\n    <style name=\"fontForMediumEditTextHint\">\r\n        <item name=\"android:textStyle\">normal</item>\r\n        <item name=\"android:fontFamily\">@font/iran_sans_mob</item>\r\n        <item name=\"android:textColor\">@color/show_more_text</item>\r\n        <item name=\"android:textSize\">@dimen/bml_text_size</item>\r\n    </style>\r\n    <style name=\"fontForMediumEditText\">\r\n        <item name=\"android:textStyle\">normal</item>\r\n        <item name=\"android:fontFamily\">@font/iran_sans_mob</item>\r\n        <item name=\"android:textColor\">@color/text</item>\r\n        <item name=\"android:textSize\">@dimen/medium_text_size</item>\r\n    </style>\r\n\r\n    <style name=\"fontForMediumFactorTitle\">\r\n        <item name=\"android:textStyle\">normal</item>\r\n        <item name=\"android:fontFamily\">@font/iran_sans_mob</item>\r\n        <item name=\"android:textColor\">@color/black</item>\r\n        <item name=\"android:textSize\">@dimen/medium_text_size</item>\r\n    </style>\r\n\r\n    <style name=\"fontForMediumFactorResponse\">\r\n        <item name=\"android:textStyle\">normal</item>\r\n        <item name=\"android:fontFamily\">@font/iran_sans_mob</item>\r\n        <item name=\"android:textColor\">@color/main</item>\r\n        <item name=\"android:textSize\">@dimen/medium_text_size</item>\r\n    </style>\r\n\r\n\r\n\r\n    <style name=\"font_spinner\">\r\n        <item name=\"android:textStyle\">normal</item>\r\n        <item name=\"android:fontFamily\">@font/iran_sans_mob</item>\r\n        <item name=\"android:textColor\">@color/black</item>\r\n        <item name=\"android:textSize\">@dimen/very_small_text_size</item>\r\n        <item name=\"android:gravity\">right</item>\r\n    </style>\r\n\r\n    <style name=\"fontForLargeBoldOrangeText\">\r\n        <item name=\"android:textStyle\">bold</item>\r\n        <item name=\"android:fontFamily\">@font/iran_sans_mob</item>\r\n        <item name=\"android:textColor\">@color/show_more_text</item>\r\n        <item name=\"android:textSize\">@dimen/large_text_size</item>\r\n        <item name=\"android:padding\">@dimen/_2cdp</item>\r\n    </style>\r\n\r\n    <style name=\"LoginTextInputLayoutStyle\" parent=\"Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense\">\r\n        <item name=\"boxStrokeColor\">@color/show_more_text</item>\r\n        <item name=\"boxStrokeWidth\">2dp</item>\r\n    </style>\r\n\r\n\r\n\r\n    <!--        <style name=\"fontForLargeEditTextHint\">-->\r\n<!--        <item name=\"android:textStyle\">normal</item>-->\r\n<!--        <item name=\"android:fontFamily\">@font/iran_sans_mob</item>-->\r\n<!--        <item name=\"android:textColor\">@color/show_more_text</item>-->\r\n<!--        <item name=\"android:textSize\">@dimen/large_text_size</item>-->\r\n<!--        <item name=\"android:padding\">@dimen/_2cdp</item>-->\r\n<!--    </style>-->\r\n\r\n<!--    <style name=\"fontForLargeEditText\">-->\r\n<!--        <item name=\"android:textStyle\">normal</item>-->\r\n<!--        <item name=\"android:fontFamily\">@font/iran_sans_mob</item>-->\r\n<!--        <item name=\"android:textColor\">@color/colorBlack</item>-->\r\n<!--        <item name=\"android:textSize\">@dimen/large_text_size</item>-->\r\n<!--        <item name=\"android:padding\">@dimen/_2cdp</item>-->\r\n<!--    </style>-->\r\n<!--    <style name=\"fontForVerySmallText\">-->\r\n<!--        <item name=\"android:textStyle\">normal</item>-->\r\n<!--        <item name=\"android:fontFamily\">@font/iran_sans_mob_light</item>-->\r\n<!--        <item name=\"android:textColor\">@color/colorBlack</item>-->\r\n<!--        <item name=\"android:textSize\">@dimen/very_small_text_size</item>-->\r\n<!--    </style>-->\r\n<!--    <style name=\"fontForVerySmallText_bold\">-->\r\n<!--        <item name=\"android:textStyle\">normal</item>-->\r\n<!--        <item name=\"android:fontFamily\">@font/iran_sans_mob_bold</item>-->\r\n<!--        <item name=\"android:textColor\">@color/colorBlack</item>-->\r\n<!--        <item name=\"android:textSize\">@dimen/very_small_text_size</item>-->\r\n<!--    </style>-->\r\n<!--    <style name=\"fontForVerySmallText_medium\">-->\r\n<!--        <item name=\"android:textStyle\">normal</item>-->\r\n<!--        <item name=\"android:fontFamily\">@font/iran_sans_mob_medium</item>-->\r\n<!--        <item name=\"android:textColor\">@color/colorBlack</item>-->\r\n<!--        <item name=\"android:textSize\">@dimen/very_small_text_size</item>-->\r\n<!--    </style>-->\r\n    <style name=\"fontForSmallText\">\r\n        <item name=\"android:textStyle\">normal</item>\r\n        <item name=\"android:fontFamily\">@font/iran_sans_mob</item>\r\n        <item name=\"android:textColor\">@color/text</item>\r\n        <item name=\"android:textSize\">@dimen/small_text_size</item>\r\n    </style>\r\n<!--    <style name=\"fontForSmallText_medium\">-->\r\n<!--        <item name=\"android:textStyle\">normal</item>-->\r\n<!--        <item name=\"android:fontFamily\">@font/iran_sans_mob_medium</item>-->\r\n<!--        <item name=\"android:textColor\">@color/tamuk_g3</item>-->\r\n<!--        <item name=\"android:textSize\">@dimen/small_text_size</item>-->\r\n<!--        <item name=\"android:padding\">@dimen/_1cdp</item>-->\r\n<!--    </style>-->\r\n<!--    <style name=\"fontForSmallText_bold\">-->\r\n<!--        <item name=\"android:textStyle\">normal</item>-->\r\n<!--        <item name=\"android:fontFamily\">@font/iran_sans_mob_bold</item>-->\r\n<!--        <item name=\"android:textColor\">@color/tamuk_g3</item>-->\r\n<!--        <item name=\"android:textSize\">@dimen/small_text_size</item>-->\r\n<!--    </style>-->\r\n<!--    <style name=\"fontForMediumText\">-->\r\n<!--        <item name=\"android:textStyle\">normal</item>-->\r\n<!--        <item name=\"android:fontFamily\">@font/iran_sans_mob</item>-->\r\n<!--        <item name=\"android:textColor\">@color/tamuk_g3</item>-->\r\n<!--        <item name=\"android:textSize\">@dimen/medium_text_size</item>-->\r\n<!--    </style>-->\r\n    <style name=\"fontForMediumBoldText\">\r\n        <item name=\"android:textStyle\">bold</item>\r\n        <item name=\"android:fontFamily\">@font/iran_sans_mob_bold</item>\r\n        <item name=\"android:textColor\">@color/text</item>\r\n        <item name=\"android:textSize\">@dimen/medium_text_size</item>\r\n    </style>\r\n<!--    <style name=\"fontForBMLText\">-->\r\n<!--        <item name=\"android:textStyle\">normal</item>-->\r\n<!--        <item name=\"android:fontFamily\">@font/iran_sans_mob</item>-->\r\n<!--        <item name=\"android:textColor\">@color/tamuk_g3</item>-->\r\n<!--        <item name=\"android:textSize\">@dimen/bml_text_size</item>-->\r\n<!--    </style>-->\r\n<!--    <style name=\"fontForBMLBoldText\">-->\r\n<!--        <item name=\"android:textStyle\">bold</item>-->\r\n<!--        <item name=\"android:fontFamily\">@font/iran_sans_mob_bold</item>-->\r\n<!--        <item name=\"android:textColor\">@color/tamuk_g3</item>-->\r\n<!--        <item name=\"android:textSize\">@dimen/bml_text_size</item>-->\r\n<!--    </style>-->\r\n<!--    <style name=\"fontForBLLBoldText\">-->\r\n<!--        <item name=\"android:textStyle\">bold</item>-->\r\n<!--        <item name=\"android:fontFamily\">@font/iran_sans_mob_bold</item>-->\r\n<!--        <item name=\"android:textColor\">@color/tamuk_g3</item>-->\r\n<!--        <item name=\"android:textSize\">@dimen/verylarge_text_size</item>-->\r\n<!--    </style>-->\r\n<!--    <style name=\"fontForLargeText\">-->\r\n<!--        <item name=\"android:textStyle\">normal</item>-->\r\n<!--        <item name=\"android:fontFamily\">@font/iran_sans_mob</item>-->\r\n<!--        <item name=\"android:textColor\">@color/tamuk_g3</item>-->\r\n<!--        <item name=\"android:textSize\">@dimen/large_text_size</item>-->\r\n<!--    </style>-->\r\n<!--    <style name=\"fontForLargeBoldText\">-->\r\n<!--        <item name=\"android:textStyle\">bold</item>-->\r\n<!--        <item name=\"android:fontFamily\">@font/iran_sans_mob_bold</item>-->\r\n<!--        <item name=\"android:textColor\">@color/tamuk_g3</item>-->\r\n<!--        <item name=\"android:textSize\">@dimen/bml_text_size</item>-->\r\n<!--    </style>-->\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/styles.xml b/app/src/main/res/values/styles.xml
+--- a/app/src/main/res/values/styles.xml	(revision b3eef3de25a2d585489a3abf75b9176d07e207f1)
++++ b/app/src/main/res/values/styles.xml	(date 1661582736110)
+@@ -64,100 +64,124 @@
+         <item name="boxStrokeWidth">2dp</item>
+     </style>
+ 
++    <style name="fontForSmallText">
++        <item name="android:textStyle">normal</item>
++        <item name="android:fontFamily">@font/iran_sans_mob</item>
++        <item name="android:textColor">@color/text</item>
++        <item name="android:textSize">@dimen/small_text_size</item>
++    </style>
++
++    <style name="fontForMediumBoldText">
++        <item name="android:textStyle">bold</item>
++        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>
++        <item name="android:textColor">@color/text</item>
++        <item name="android:textSize">@dimen/medium_text_size</item>
++    </style>
++
++    <style name="fontForLargeBoldText">
++        <item name="android:textStyle">bold</item>
++        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>
++        <item name="android:textColor">@color/white</item>
++        <item name="android:textSize">@dimen/bml_text_size</item>
++    </style>
++
++    <style name="SpinnerTheme" parent="android:Widget.Material.Spinner.Underlined">
++        <item name="android:background">@drawable/soinner_draw
++        </item>
++        <item name="android:popupBackground">@color/white</item>
++        <item name="android:padding">1px</item>
++        <item name="android:paddingBottom">4dp</item>
++        <item name="elevation">@dimen/_8cdp</item>
++        <item name="android:popupElevation">1dp</item>
++        <item name="android:layout_marginBottom">@dimen/_12cdp</item>
++        <item name="android:textAlignment">textStart</item>
++    </style>
+ 
++<!--    <style name="SpinnerTheme" parent="android:Widget.DeviceDefault.Spinner">-->
++<!--        <item name="android:background">@drawable/soinner_draw</item>-->
++<!--        <item name="android:padding">8dp</item>-->
++<!--        <item name="android:paddingTop">0dp</item>-->
++<!--        <item name="android:textSize">18sp</item>-->
++<!--        <item name="android:textColor">@android:color/white</item>-->
++<!--        <item name="android:paddingBottom">5dp</item>-->
++<!--        <item name="android:paddingRight">15dp</item>-->
++<!--    </style>-->
+ 
++
++    <!--    </style>-->
+     <!--        <style name="fontForLargeEditTextHint">-->
+-<!--        <item name="android:textStyle">normal</item>-->
+-<!--        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
+-<!--        <item name="android:textColor">@color/show_more_text</item>-->
+-<!--        <item name="android:textSize">@dimen/large_text_size</item>-->
+-<!--        <item name="android:padding">@dimen/_2cdp</item>-->
+-<!--    </style>-->
++    <!--        <item name="android:textStyle">normal</item>-->
++    <!--        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
++    <!--        <item name="android:textColor">@color/show_more_text</item>-->
++    <!--        <item name="android:textSize">@dimen/large_text_size</item>-->
++    <!--        <item name="android:padding">@dimen/_2cdp</item>-->
++    <!--    </style>-->
+ 
+-<!--    <style name="fontForLargeEditText">-->
+-<!--        <item name="android:textStyle">normal</item>-->
+-<!--        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
+-<!--        <item name="android:textColor">@color/colorBlack</item>-->
+-<!--        <item name="android:textSize">@dimen/large_text_size</item>-->
+-<!--        <item name="android:padding">@dimen/_2cdp</item>-->
+-<!--    </style>-->
+-<!--    <style name="fontForVerySmallText">-->
+-<!--        <item name="android:textStyle">normal</item>-->
+-<!--        <item name="android:fontFamily">@font/iran_sans_mob_light</item>-->
+-<!--        <item name="android:textColor">@color/colorBlack</item>-->
+-<!--        <item name="android:textSize">@dimen/very_small_text_size</item>-->
+-<!--    </style>-->
+-<!--    <style name="fontForVerySmallText_bold">-->
+-<!--        <item name="android:textStyle">normal</item>-->
+-<!--        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>-->
+-<!--        <item name="android:textColor">@color/colorBlack</item>-->
+-<!--        <item name="android:textSize">@dimen/very_small_text_size</item>-->
+-<!--    </style>-->
+-<!--    <style name="fontForVerySmallText_medium">-->
+-<!--        <item name="android:textStyle">normal</item>-->
+-<!--        <item name="android:fontFamily">@font/iran_sans_mob_medium</item>-->
+-<!--        <item name="android:textColor">@color/colorBlack</item>-->
+-<!--        <item name="android:textSize">@dimen/very_small_text_size</item>-->
+-<!--    </style>-->
+-    <style name="fontForSmallText">
+-        <item name="android:textStyle">normal</item>
+-        <item name="android:fontFamily">@font/iran_sans_mob</item>
+-        <item name="android:textColor">@color/text</item>
+-        <item name="android:textSize">@dimen/small_text_size</item>
+-    </style>
+-<!--    <style name="fontForSmallText_medium">-->
+-<!--        <item name="android:textStyle">normal</item>-->
+-<!--        <item name="android:fontFamily">@font/iran_sans_mob_medium</item>-->
+-<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
+-<!--        <item name="android:textSize">@dimen/small_text_size</item>-->
+-<!--        <item name="android:padding">@dimen/_1cdp</item>-->
+-<!--    </style>-->
+-<!--    <style name="fontForSmallText_bold">-->
+-<!--        <item name="android:textStyle">normal</item>-->
+-<!--        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>-->
+-<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
+-<!--        <item name="android:textSize">@dimen/small_text_size</item>-->
+-<!--    </style>-->
+-<!--    <style name="fontForMediumText">-->
+-<!--        <item name="android:textStyle">normal</item>-->
+-<!--        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
+-<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
+-<!--        <item name="android:textSize">@dimen/medium_text_size</item>-->
+-<!--    </style>-->
+-    <style name="fontForMediumBoldText">
+-        <item name="android:textStyle">bold</item>
+-        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>
+-        <item name="android:textColor">@color/text</item>
+-        <item name="android:textSize">@dimen/medium_text_size</item>
+-    </style>
+-<!--    <style name="fontForBMLText">-->
+-<!--        <item name="android:textStyle">normal</item>-->
+-<!--        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
+-<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
+-<!--        <item name="android:textSize">@dimen/bml_text_size</item>-->
+-<!--    </style>-->
+-<!--    <style name="fontForBMLBoldText">-->
+-<!--        <item name="android:textStyle">bold</item>-->
+-<!--        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>-->
+-<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
+-<!--        <item name="android:textSize">@dimen/bml_text_size</item>-->
+-<!--    </style>-->
+-<!--    <style name="fontForBLLBoldText">-->
+-<!--        <item name="android:textStyle">bold</item>-->
+-<!--        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>-->
+-<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
+-<!--        <item name="android:textSize">@dimen/verylarge_text_size</item>-->
+-<!--    </style>-->
+-<!--    <style name="fontForLargeText">-->
+-<!--        <item name="android:textStyle">normal</item>-->
+-<!--        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
+-<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
+-<!--        <item name="android:textSize">@dimen/large_text_size</item>-->
+-<!--    </style>-->
+-<!--    <style name="fontForLargeBoldText">-->
+-<!--        <item name="android:textStyle">bold</item>-->
+-<!--        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>-->
+-<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
+-<!--        <item name="android:textSize">@dimen/bml_text_size</item>-->
+-<!--    </style>-->
++    <!--    <style name="fontForLargeEditText">-->
++    <!--        <item name="android:textStyle">normal</item>-->
++    <!--        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
++    <!--        <item name="android:textColor">@color/colorBlack</item>-->
++    <!--        <item name="android:textSize">@dimen/large_text_size</item>-->
++    <!--        <item name="android:padding">@dimen/_2cdp</item>-->
++    <!--    </style>-->
++    <!--    <style name="fontForVerySmallText">-->
++    <!--        <item name="android:textStyle">normal</item>-->
++    <!--        <item name="android:fontFamily">@font/iran_sans_mob_light</item>-->
++    <!--        <item name="android:textColor">@color/colorBlack</item>-->
++    <!--        <item name="android:textSize">@dimen/very_small_text_size</item>-->
++    <!--    </style>-->
++    <!--    <style name="fontForVerySmallText_bold">-->
++    <!--        <item name="android:textStyle">normal</item>-->
++    <!--        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>-->
++    <!--        <item name="android:textColor">@color/colorBlack</item>-->
++    <!--        <item name="android:textSize">@dimen/very_small_text_size</item>-->
++    <!--    </style>-->
++    <!--    <style name="fontForVerySmallText_medium">-->
++    <!--        <item name="android:textStyle">normal</item>-->
++    <!--        <item name="android:fontFamily">@font/iran_sans_mob_medium</item>-->
++    <!--        <item name="android:textColor">@color/colorBlack</item>-->
++    <!--        <item name="android:textSize">@dimen/very_small_text_size</item>-->
++    <!--    </style>-->
++    <!--    <style name="fontForSmallText_medium">-->
++    <!--        <item name="android:textStyle">normal</item>-->
++    <!--        <item name="android:fontFamily">@font/iran_sans_mob_medium</item>-->
++    <!--        <item name="android:textColor">@color/tamuk_g3</item>-->
++    <!--        <item name="android:textSize">@dimen/small_text_size</item>-->
++    <!--        <item name="android:padding">@dimen/_1cdp</item>-->
++    <!--    </style>-->
++    <!--    <style name="fontForSmallText_bold">-->
++    <!--        <item name="android:textStyle">normal</item>-->
++    <!--        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>-->
++    <!--        <item name="android:textColor">@color/tamuk_g3</item>-->
++    <!--        <item name="android:textSize">@dimen/small_text_size</item>-->
++    <!--    </style>-->
++    <!--    <style name="fontForMediumText">-->
++    <!--        <item name="android:textStyle">normal</item>-->
++    <!--        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
++    <!--        <item name="android:textColor">@color/tamuk_g3</item>-->
++    <!--        <item name="android:textSize">@dimen/medium_text_size</item>-->
++    <!--    <style name="fontForBMLText">-->
++    <!--        <item name="android:textStyle">normal</item>-->
++    <!--        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
++    <!--        <item name="android:textColor">@color/tamuk_g3</item>-->
++    <!--        <item name="android:textSize">@dimen/bml_text_size</item>-->
++    <!--    </style>-->
++    <!--    <style name="fontForBMLBoldText">-->
++    <!--        <item name="android:textStyle">bold</item>-->
++    <!--        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>-->
++    <!--        <item name="android:textColor">@color/tamuk_g3</item>-->
++    <!--        <item name="android:textSize">@dimen/bml_text_size</item>-->
++    <!--    </style>-->
++    <!--    <style name="fontForBLLBoldText">-->
++    <!--        <item name="android:textStyle">bold</item>-->
++    <!--        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>-->
++    <!--        <item name="android:textColor">@color/tamuk_g3</item>-->
++    <!--        <item name="android:textSize">@dimen/verylarge_text_size</item>-->
++    <!--    </style>-->
++    <!--    <style name="fontForLargeText">-->
++    <!--        <item name="android:textStyle">normal</item>-->
++    <!--        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
++    <!--        <item name="android:textColor">@color/tamuk_g3</item>-->
++    <!--        <item name="android:textSize">@dimen/large_text_size</item>-->
++    <!--    </style>-->
+ </resources>
+\ No newline at end of file
+Index: app/src/main/res/drawable/ic_baseline_arrow_drop_up_24.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/ic_baseline_arrow_drop_up_24.xml b/app/src/main/res/drawable/ic_baseline_arrow_drop_up_24.xml
+new file mode 100644
+--- /dev/null	(date 1661582188832)
++++ b/app/src/main/res/drawable/ic_baseline_arrow_drop_up_24.xml	(date 1661582188832)
+@@ -0,0 +1,5 @@
++<vector android:height="24dp" android:tint="#000000"
++    android:viewportHeight="24" android:viewportWidth="24"
++    android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
++    <path android:fillColor="@android:color/white" android:pathData="M7,14l5,-5 5,5z"/>
++</vector>
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    package=\"ir.tamuk.reservation\">\r\n\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"false\"\r\n        android:theme=\"@style/Theme.Reservation\"\r\n        tools:targetApi=\"31\">\r\n\r\n        <activity\r\n            android:name=\".activities.MainActivity\"\r\n            android:exported=\"true\"\r\n            android:label=\"@string/title_activity_main\"\r\n            android:theme=\"@style/Theme.Reservation.NoActionBar\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <activity\r\n            android:name=\".activities.SplashActivity\"\r\n            android:exported=\"true\"></activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision b3eef3de25a2d585489a3abf75b9176d07e207f1)
++++ b/app/src/main/AndroidManifest.xml	(date 1661584427582)
+@@ -12,7 +12,7 @@
+         android:icon="@mipmap/ic_launcher"
+         android:label="@string/app_name"
+         android:roundIcon="@mipmap/ic_launcher_round"
+-        android:supportsRtl="false"
++        android:supportsRtl="true"
+         android:theme="@style/Theme.Reservation"
+         tools:targetApi="31">
+ 
+Index: app/src/main/res/drawable/spinner_draw_revers.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/spinner_draw_revers.xml b/app/src/main/res/drawable/spinner_draw_revers.xml
+new file mode 100644
+--- /dev/null	(date 1661582193353)
++++ b/app/src/main/res/drawable/spinner_draw_revers.xml	(date 1661582193353)
+@@ -0,0 +1,28 @@
++<?xml version="1.0" encoding="utf-8"?>
++<selector xmlns:android="http://schemas.android.com/apk/res/android">
++
++    <item>
++
++        <layer-list>
++
++            <item>
++                <shape>
++                    <gradient android:angle="90" android:endColor="#ffffff" android:startColor="#ffffff" android:type="linear" />
++
++                    <corners android:radius="0dp" />
++
++                    <padding android:bottom="3dp" android:left="3dp" android:right="3dp" android:top="3dp" />
++                </shape>
++            </item>
++
++            <item android:left="5dp">
++
++                <bitmap android:gravity="center_vertical|left" android:src="@drawable/ic_baseline_arrow_drop_up_24" />
++
++            </item>
++
++        </layer-list>
++
++    </item>
++
++</selector>
+\ No newline at end of file
+Index: app/src/main/java/ir/tamuk/reservation/fragments/ui/reservation/ReservationFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ir.tamuk.reservation.fragments.ui.reservation;\r\n\r\nimport android.content.Context;\r\nimport android.graphics.Typeface;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.AdapterView;\r\nimport android.widget.ArrayAdapter;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.core.content.res.ResourcesCompat;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.lifecycle.ViewModelProvider;\r\nimport androidx.navigation.Navigation;\r\nimport androidx.recyclerview.widget.GridLayoutManager;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.dariushm2.PersianCaldroid.caldroidfragment.PersianCaldroidFragment;\r\n\r\nimport org.angmarch.views.NiceSpinner;\r\nimport org.angmarch.views.OnSpinnerItemSelectedListener;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.Arrays;\r\nimport java.util.HashMap;\r\nimport java.util.LinkedList;\r\nimport java.util.List;\r\n\r\nimport calendar.PersianDate;\r\nimport ir.tamuk.reservation.R;\r\nimport ir.tamuk.reservation.databinding.FragmentReservationBinding;\r\nimport ir.tamuk.reservation.fragments.ui.reservation.adapter.ReserveAdapter;\r\nimport ir.tamuk.reservation.fragments.ui.reservation.adapter.ReserveModel;\r\nimport ir.tamuk.reservation.fragments.ui.reservation.adapter.RtlGridLayoutManager;\r\nimport ir.tamuk.reservation.fragments.ui.reservation.database.SqlDatabaseReserve;\r\n\r\npublic class ReservationFragment extends Fragment {\r\n    //binding\r\n    private FragmentReservationBinding binding;\r\n    //adapter\r\n    public ReserveAdapter adapter;\r\n    //selected Date\r\n    public String date_show = \"\";\r\n    //context\r\n    public Context context = getContext();\r\n    //week of Calender\r\n    public String[] week = {\r\n            \"\",\r\n            \"شنبه\", \"یکشنبه\", \"دوشنبه\", \"سه شنبه\", \"چهارشنبه\", \"پنجشنبه\", \"جمعه\"\r\n    };\r\n\r\n\r\n    public View onCreateView(@NonNull LayoutInflater inflater,\r\n                             ViewGroup container, Bundle savedInstanceState) {\r\n        ReservationViewModel galleryViewModel =\r\n                new ViewModelProvider(this).get(ReservationViewModel.class);\r\n        binding = FragmentReservationBinding.inflate(inflater, container, false);\r\n        View root = binding.getRoot();\r\n        //today Date\r\n        PersianDate persianDate = new PersianDate();\r\n        date_show = String.valueOf(persianDate.getYear())+\"-\"+String.valueOf(persianDate.getMonth())+\"-\"\r\n                +String.valueOf(persianDate.getDayOfMonth());\r\n\r\n        binding.signingButtonReservation.setOnClickListener(view -> {\r\n                Navigation.findNavController(view).navigate(R.id.action_nav_reservation_to_signingFragment);\r\n        });\r\n\r\n        //recycler\r\n        Recycler();\r\n        //database Samples\r\n        Tabale();\r\n        //Calender\r\n        Calender();\r\n        //Spinner\r\n        Spinnerr();\r\n\r\n\r\n        return root;\r\n    }\r\n\r\n    @Override\r\n    public void onDestroyView() {\r\n        super.onDestroyView();\r\n        binding = null;\r\n    }\r\n\r\n    public  void Spinnerr(){\r\n\r\n//        List<String> dataset = new LinkedList<>(Arrays.asList(\"همه موارد\"  , \"دست\", \"پا\", \"بدن\" ));\r\n//        binding.spinnerServices.attachDataSource(dataset);\r\n//\r\n//            binding.spinnerServices.setOnSpinnerItemSelectedListener(new OnSpinnerItemSelectedListener() {\r\n//            @Override\r\n//            public void onItemSelected(NiceSpinner parent, View view, int position, long id) {\r\n//                // This example uses String, but your type can be any\r\n//\r\n//\r\n//                switch (position) {\r\n//                    case 0:\r\n//                        Recycler();\r\n//                        break;\r\n//                    case 1:\r\n//                        Recycler();\r\n//                        break;\r\n//                    case 2:\r\n//                        Recycler();\r\n//                        break;\r\n//                    case 3:\r\n//                        Recycler();\r\n//                        break;\r\n//                }\r\n//\r\n//            }\r\n//        });\r\n        String[] items = new String[]\r\n                {\"همه موارد\"  , \"دست\", \"پا\", \"بدن\" };\r\n        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(),R.layout.font_spinner, items);\r\n        binding.spinnerServices.setAdapter(arrayAdapter);\r\n        binding.spinnerServices.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {\r\n            @Override\r\n            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {\r\n                switch (position) {\r\n                    case 0:\r\n                        Recycler();\r\n                        break;\r\n                    case 1:\r\n                        Recycler();\r\n                        break;\r\n                    case 2:\r\n                        Recycler();\r\n                        break;\r\n                    case 3:\r\n                        Recycler();\r\n                        break;\r\n                }\r\n            }\r\n\r\n            @Override\r\n            public void onNothingSelected(AdapterView<?> adapterView) {\r\n                Toast.makeText(context, \"لطفا یکی از خدمات رو انتخاب کنید\", Toast.LENGTH_SHORT).show();\r\n            }\r\n        });\r\n\r\n\r\n    }\r\n\r\n    public void Calender(){\r\n        PersianCaldroidFragment persianCaldroidFragment = new PersianCaldroidFragment();\r\n        // Set font\r\n        Typeface typeface = ResourcesCompat.getFont(getContext(), R.font.iraniansans);\r\n        persianCaldroidFragment.setTypeface(typeface);\r\n\r\n        persianCaldroidFragment.setOnDateClickListener(new PersianCaldroidFragment.OnDateClickListener() {\r\n            @Override\r\n            public void onDateClick(PersianDate persianDate) {\r\n\r\n                // Do something when a date is clicked\r\n                //month Name\r\n                binding.monthCardReservation.setText(persianDate.getMonthName());\r\n                //day Number\r\n                binding.daysCardReservation.setText(String.valueOf(persianDate.getDayOfMonth()));\r\n                //week Name\r\n                int i = persianDate.getDayOfWeek();\r\n                binding.weekCardReservation.setText(week[i]);\r\n                //get Date\r\n                date_show = String.valueOf(persianDate.getYear())+\"-\"+String.valueOf(persianDate.getMonth())+\"-\"\r\n                        +String.valueOf(persianDate.getDayOfMonth());\r\n                Log.d(\"CALENDER DATE\", \"Calender1: \"+date_show);\r\n                //Recycler\r\n                Recycler();\r\n\r\n\r\n            }\r\n        });\r\n\r\n        persianCaldroidFragment.setOnChangeMonthListener(new PersianCaldroidFragment.OnChangeMonthListener() {\r\n            @Override\r\n            public void onChangeMonth() {\r\n\r\n                // Do something when user switches to previous or next month\r\n            }\r\n        });\r\n\r\n        /* Add dates with a specified colors, you want to be circled on calendar */\r\n        //calender customize\r\n        HashMap<PersianDate, Integer> backgroundForDatesMap = new HashMap<>();\r\n        backgroundForDatesMap.put(new PersianDate(), R.color.main);\r\n        persianCaldroidFragment.setBackgroundResourceForDates(backgroundForDatesMap);\r\n        PersianDate persianDate = new PersianDate();\r\n        binding.daysCardReservation.setText(String.valueOf(persianDate.getDayOfMonth()));\r\n        binding.monthCardReservation.setText(persianDate.getMonthName());\r\n        int i = persianDate.getDayOfWeek();\r\n        binding.weekCardReservation.setText(week[i]);\r\n\r\n        //calender Show\r\n        requireActivity().getSupportFragmentManager().beginTransaction().replace(\r\n                R.id.persianCaldroid,\r\n                persianCaldroidFragment,\r\n                PersianCaldroidFragment.class.getName()).commit();\r\n    }\r\n\r\n    public void Tabale() {\r\n        SqlDatabaseReserve sqlDatabase = new SqlDatabaseReserve(getContext());\r\n\r\n        sqlDatabase.Insert(\"1401-5-25T09:00:00.000z\", \"09:00\", 1, \"پا\");\r\n        sqlDatabase.Insert(\"1401-5-25T11:00:00.000z\", \"11:00\", 1, \"بدن\");\r\n        sqlDatabase.Insert(\"1401-5-25T12:30:00.000z\", \"12:30\", 1, \"پا\");\r\n        sqlDatabase.Insert(\"1401-5-25T13:00:00.000z\", \"14:00\", 1, \"پا\");\r\n        sqlDatabase.Insert(\"1401-5-25T14:00:00.000z\", \"15:00\", 1, \"بدن\");\r\n        sqlDatabase.Insert(\"1401-5-25T15:00:00.000z\", \"16:00\", 1, \"پا\");\r\n        sqlDatabase.Insert(\"1401-5-25T16:00:00.000z\", \"21:00\", 1, \"دست\");\r\n\r\n        sqlDatabase.Insert(\"1401-5-26T11:00:00.000z\", \"11:00\", 0, \"بدن\");\r\n        sqlDatabase.Insert(\"1401-5-26T12:30:00.000z\", \"13:30\", 0, \"بدن\");\r\n        sqlDatabase.Insert(\"1401-5-26T14:00:00.000z\", \"16:00\", 0, \"پا\");\r\n        sqlDatabase.Insert(\"1401-5-26T17:00:00.000z\", \"17:00\", 0 , \"دست\");\r\n        sqlDatabase.Insert(\"1401-5-26T19:00:00.000z\", \"20:00\", 0, \"بدن\");\r\n    }\r\n\r\n    public void Recycler() {\r\n        //sql Database\r\n        SqlDatabaseReserve sqlDatabaseReserve = new SqlDatabaseReserve(getContext());\r\n        //arrays\r\n        ArrayList<ReserveModel> reserveModels = sqlDatabaseReserve.getData();\r\n        ArrayList<ReserveModel> result = new ArrayList<>();\r\n        //for loop for filters\r\n        for ( int i = 0; i<reserveModels.size(); i++) {\r\n            if (binding.spinnerServices.getSelectedItemPosition() == 0) {\r\n                if (reserveModels.get(i).id.contains(date_show)) {\r\n                    Log.d(\"DATEA\", \"Recycler: \"+ date_show);\r\n                    result.add(reserveModels.get(i));\r\n                }\r\n            }else if (reserveModels.get(i).id.contains(String.valueOf(date_show))\r\n                    && reserveModels.get(i).service.equals(binding.spinnerServices.getSelectedItem())) {\r\n                result.add(reserveModels.get(i));\r\n\r\n            }\r\n        }\r\n        reserveModels.clear();\r\n        reserveModels.addAll(result);\r\n\r\n        //horizontal Morning recycler\r\n//        LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(getContext(),\r\n//                RecyclerView.HORIZONTAL, false);\r\n//        verticalLayoutManager.setReverseLayout(true);\r\n        int numberOfColumns = 4;\r\n        GridLayoutManager gridLayoutManager = new RtlGridLayoutManager(getContext(), numberOfColumns);\r\n        binding.recyclerViewMorningReserve.setLayoutManager(gridLayoutManager);\r\n//        binding.recyclerViewMorningReserve.setLayoutManager(verticalLayoutManager);\r\n        adapter = new ReserveAdapter( reserveModels);\r\n        binding.recyclerViewMorningReserve.setAdapter(adapter);\r\n        if (result.isEmpty()){\r\n            binding.emptyTextReservation.setVisibility(View.VISIBLE);\r\n        }else {\r\n            binding.emptyTextReservation.setVisibility(View.INVISIBLE);\r\n        }\r\n        //refresh\r\n        adapter.notifyDataSetChanged();\r\n    }\r\n\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/ir/tamuk/reservation/fragments/ui/reservation/ReservationFragment.java b/app/src/main/java/ir/tamuk/reservation/fragments/ui/reservation/ReservationFragment.java
+--- a/app/src/main/java/ir/tamuk/reservation/fragments/ui/reservation/ReservationFragment.java	(revision b3eef3de25a2d585489a3abf75b9176d07e207f1)
++++ b/app/src/main/java/ir/tamuk/reservation/fragments/ui/reservation/ReservationFragment.java	(date 1661595749665)
+@@ -1,7 +1,6 @@
+ package ir.tamuk.reservation.fragments.ui.reservation;
+ 
+ import android.content.Context;
+-import android.graphics.Typeface;
+ import android.os.Bundle;
+ import android.util.Log;
+ import android.view.LayoutInflater;
+@@ -12,26 +11,17 @@
+ import android.widget.Toast;
+ 
+ import androidx.annotation.NonNull;
+-import androidx.core.content.res.ResourcesCompat;
+ import androidx.fragment.app.Fragment;
+ import androidx.lifecycle.ViewModelProvider;
+ import androidx.navigation.Navigation;
+ import androidx.recyclerview.widget.GridLayoutManager;
+-import androidx.recyclerview.widget.LinearLayoutManager;
+-import androidx.recyclerview.widget.RecyclerView;
+-
+-import com.dariushm2.PersianCaldroid.caldroidfragment.PersianCaldroidFragment;
+-
+-import org.angmarch.views.NiceSpinner;
+-import org.angmarch.views.OnSpinnerItemSelectedListener;
+ 
+ import java.util.ArrayList;
+-import java.util.Arrays;
+-import java.util.HashMap;
+-import java.util.LinkedList;
+-import java.util.List;
+ 
+-import calendar.PersianDate;
++import ir.mirrajabi.persiancalendar.PersianCalendarView;
++import ir.mirrajabi.persiancalendar.core.PersianCalendarHandler;
++import ir.mirrajabi.persiancalendar.core.models.CalendarEvent;
++import ir.mirrajabi.persiancalendar.core.models.PersianDate;
+ import ir.tamuk.reservation.R;
+ import ir.tamuk.reservation.databinding.FragmentReservationBinding;
+ import ir.tamuk.reservation.fragments.ui.reservation.adapter.ReserveAdapter;
+@@ -54,6 +44,14 @@
+             "شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنجشنبه", "جمعه"
+     };
+ 
++    public String[] mounth = {
++            "",
++            "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد",
++            "شهریور ", "مهر", "آبان", " آذر", "دی", "بهمن", "اسفند"
++    };
++
++    SqlDatabaseReserve sqlDatabase;
++
+ 
+     public View onCreateView(@NonNull LayoutInflater inflater,
+                              ViewGroup container, Bundle savedInstanceState) {
+@@ -61,15 +59,24 @@
+                 new ViewModelProvider(this).get(ReservationViewModel.class);
+         binding = FragmentReservationBinding.inflate(inflater, container, false);
+         View root = binding.getRoot();
+-        //today Date
+-        PersianDate persianDate = new PersianDate();
+-        date_show = String.valueOf(persianDate.getYear())+"-"+String.valueOf(persianDate.getMonth())+"-"
++
++        //calender Today
++        PersianCalendarHandler handler = binding.persianCalendar.getCalendar();
++        PersianDate persianDate = handler.getToday();
++        binding.daysCardReservation.setText(String.valueOf(persianDate.getDayOfMonth()));
++        int i = persianDate.getDayOfWeek();
++        int x = persianDate.getMonth();
++        binding.weekCardReservation.setText(week[i]);
++        binding.monthCardReservation.setText(mounth[x]);
++
++        date_show = String.valueOf(persianDate.getYear()) +"-"+String.valueOf(persianDate.getMonth())+"-"
+                 +String.valueOf(persianDate.getDayOfMonth());
+ 
+         binding.signingButtonReservation.setOnClickListener(view -> {
+                 Navigation.findNavController(view).navigate(R.id.action_nav_reservation_to_signingFragment);
+         });
+ 
++
+         //recycler
+         Recycler();
+         //database Samples
+@@ -90,33 +97,6 @@
+     }
+ 
+     public  void Spinnerr(){
+-
+-//        List<String> dataset = new LinkedList<>(Arrays.asList("همه موارد"  , "دست", "پا", "بدن" ));
+-//        binding.spinnerServices.attachDataSource(dataset);
+-//
+-//            binding.spinnerServices.setOnSpinnerItemSelectedListener(new OnSpinnerItemSelectedListener() {
+-//            @Override
+-//            public void onItemSelected(NiceSpinner parent, View view, int position, long id) {
+-//                // This example uses String, but your type can be any
+-//
+-//
+-//                switch (position) {
+-//                    case 0:
+-//                        Recycler();
+-//                        break;
+-//                    case 1:
+-//                        Recycler();
+-//                        break;
+-//                    case 2:
+-//                        Recycler();
+-//                        break;
+-//                    case 3:
+-//                        Recycler();
+-//                        break;
+-//                }
+-//
+-//            }
+-//        });
+         String[] items = new String[]
+                 {"همه موارد"  , "دست", "پا", "بدن" };
+         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(),R.layout.font_spinner, items);
+@@ -133,9 +113,11 @@
+                         break;
+                     case 2:
+                         Recycler();
++
+                         break;
+                     case 3:
+                         Recycler();
++
+                         break;
+                 }
+             }
+@@ -143,6 +125,7 @@
+             @Override
+             public void onNothingSelected(AdapterView<?> adapterView) {
+                 Toast.makeText(context, "لطفا یکی از خدمات رو انتخاب کنید", Toast.LENGTH_SHORT).show();
++
+             }
+         });
+ 
+@@ -150,76 +133,60 @@
+     }
+ 
+     public void Calender(){
+-        PersianCaldroidFragment persianCaldroidFragment = new PersianCaldroidFragment();
+-        // Set font
+-        Typeface typeface = ResourcesCompat.getFont(getContext(), R.font.iraniansans);
+-        persianCaldroidFragment.setTypeface(typeface);
++
++
++        PersianCalendarView calendarView  = binding.persianCalendar;
++        PersianCalendarHandler calendarHandler = calendarView.getCalendar();
++        ir.mirrajabi.persiancalendar.core.models.PersianDate today = calendarHandler.getToday();
++
++        // Add an event called "Custom event" to this day
++        calendarHandler.addLocalEvent(new CalendarEvent(today, "Custom event", false));
++// Add an event called "Custom event 2" to 12 days later
++        calendarHandler.addLocalEvent(new CalendarEvent(today.clone().rollDay(12,true), "Custom event 2", true));
++// Add an event called "Custom event 3" to 1399/1/10 later
++        calendarHandler.addLocalEvent(new CalendarEvent(new PersianDate(1401,6,15), "Custom event 2", true));
+ 
+-        persianCaldroidFragment.setOnDateClickListener(new PersianCaldroidFragment.OnDateClickListener() {
+-            @Override
+-            public void onDateClick(PersianDate persianDate) {
++        calendarHandler.getAllEventsForDay(today);
++        calendarHandler.getLocalEvents();
++        calendarHandler.getLocalEventsForDay(today);
++        calendarHandler.getOfficialEventsForDay(today);
+ 
+-                // Do something when a date is clicked
+-                //month Name
+-                binding.monthCardReservation.setText(persianDate.getMonthName());
+-                //day Number
+-                binding.daysCardReservation.setText(String.valueOf(persianDate.getDayOfMonth()));
+-                //week Name
+-                int i = persianDate.getDayOfWeek();
+-                binding.weekCardReservation.setText(week[i]);
+-                //get Date
+-                date_show = String.valueOf(persianDate.getYear())+"-"+String.valueOf(persianDate.getMonth())+"-"
+-                        +String.valueOf(persianDate.getDayOfMonth());
+-                Log.d("CALENDER DATE", "Calender1: "+date_show);
+-                //Recycler
+-                Recycler();
+-
+-
+-            }
++        calendarView.setOnDayClickedListener(persianDate -> {
++
++            binding.daysCardReservation.setText(String.valueOf(persianDate.getDayOfMonth()));
++            int i = persianDate.getDayOfWeek();
++            int x = persianDate.getMonth();
++            binding.weekCardReservation.setText(week[i]);
++            binding.monthCardReservation.setText(mounth[x]);
++            date_show = String.valueOf(persianDate.getYear()) +"-"+String.valueOf(persianDate.getMonth())+"-"
++                    +String.valueOf(persianDate.getDayOfMonth());
++            Log.d("KIANOOSH", "Calender: "+ date_show);
++            Recycler();
++            sqlDatabase.deleteIdAll();
+         });
++        calendarView.setOnMonthChangedListener(persianDate -> {
+ 
+-        persianCaldroidFragment.setOnChangeMonthListener(new PersianCaldroidFragment.OnChangeMonthListener() {
+-            @Override
+-            public void onChangeMonth() {
++        });
+ 
+-                // Do something when user switches to previous or next month
+-            }
+-        });
++    }
+ 
+-        /* Add dates with a specified colors, you want to be circled on calendar */
+-        //calender customize
+-        HashMap<PersianDate, Integer> backgroundForDatesMap = new HashMap<>();
+-        backgroundForDatesMap.put(new PersianDate(), R.color.main);
+-        persianCaldroidFragment.setBackgroundResourceForDates(backgroundForDatesMap);
+-        PersianDate persianDate = new PersianDate();
+-        binding.daysCardReservation.setText(String.valueOf(persianDate.getDayOfMonth()));
+-        binding.monthCardReservation.setText(persianDate.getMonthName());
+-        int i = persianDate.getDayOfWeek();
+-        binding.weekCardReservation.setText(week[i]);
+-
+-        //calender Show
+-        requireActivity().getSupportFragmentManager().beginTransaction().replace(
+-                R.id.persianCaldroid,
+-                persianCaldroidFragment,
+-                PersianCaldroidFragment.class.getName()).commit();
+-    }
+ 
+     public void Tabale() {
+-        SqlDatabaseReserve sqlDatabase = new SqlDatabaseReserve(getContext());
++        sqlDatabase = new SqlDatabaseReserve(getContext());
+ 
+-        sqlDatabase.Insert("1401-5-25T09:00:00.000z", "09:00", 1, "پا");
+-        sqlDatabase.Insert("1401-5-25T11:00:00.000z", "11:00", 1, "بدن");
+-        sqlDatabase.Insert("1401-5-25T12:30:00.000z", "12:30", 1, "پا");
+-        sqlDatabase.Insert("1401-5-25T13:00:00.000z", "14:00", 1, "پا");
+-        sqlDatabase.Insert("1401-5-25T14:00:00.000z", "15:00", 1, "بدن");
+-        sqlDatabase.Insert("1401-5-25T15:00:00.000z", "16:00", 1, "پا");
+-        sqlDatabase.Insert("1401-5-25T16:00:00.000z", "21:00", 1, "دست");
++        sqlDatabase.Insert("1401-6-5T09:00:00.000z", "09:00", 0, "پا");
++        sqlDatabase.Insert("1401-6-5T11:00:00.000z", "11:00", 0, "بدن");
++        sqlDatabase.Insert("1401-6-5T12:30:00.000z", "12:30", 0, "پا");
++        sqlDatabase.Insert("1401-6-5T13:00:00.000z", "14:00", 0, "پا");
++        sqlDatabase.Insert("1401-6-5T14:00:00.000z", "15:00", 0, "بدن");
++        sqlDatabase.Insert("1401-6-5T15:00:00.000z", "16:00", 0, "پا");
++        sqlDatabase.Insert("1401-6-5T16:00:00.000z", "21:00", 0, "دست");
+ 
+-        sqlDatabase.Insert("1401-5-26T11:00:00.000z", "11:00", 0, "بدن");
+-        sqlDatabase.Insert("1401-5-26T12:30:00.000z", "13:30", 0, "بدن");
+-        sqlDatabase.Insert("1401-5-26T14:00:00.000z", "16:00", 0, "پا");
+-        sqlDatabase.Insert("1401-5-26T17:00:00.000z", "17:00", 0 , "دست");
+-        sqlDatabase.Insert("1401-5-26T19:00:00.000z", "20:00", 0, "بدن");
++        sqlDatabase.Insert("1401-6-6T11:00:00.000z", "11:00", 0, "بدن");
++        sqlDatabase.Insert("1401-6-6T12:30:00.000z", "13:30", 0, "بدن");
++        sqlDatabase.Insert("1401-6-6T14:00:00.000z", "16:00", 0, "پا");
++        sqlDatabase.Insert("1401-6-6T17:00:00.000z", "17:00", 0, "دست");
++        sqlDatabase.Insert("1401-6-6T19:00:00.000z", "20:00", 0, "بدن");
+     }
+ 
+     public void Recycler() {
+Index: app/src/main/res/drawable/soinner_draw.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/soinner_draw.xml b/app/src/main/res/drawable/soinner_draw.xml
+new file mode 100644
+--- /dev/null	(date 1661582094314)
++++ b/app/src/main/res/drawable/soinner_draw.xml	(date 1661582094314)
+@@ -0,0 +1,28 @@
++<?xml version="1.0" encoding="utf-8"?>
++<selector xmlns:android="http://schemas.android.com/apk/res/android">
++
++    <item>
++
++        <layer-list>
++
++            <item>
++                <shape>
++                    <gradient android:angle="90" android:endColor="#ffffff" android:startColor="#ffffff" android:type="linear" />
++
++                    <corners android:radius="0dp" />
++
++                    <padding android:bottom="3dp" android:left="3dp" android:right="3dp" android:top="3dp" />
++                </shape>
++            </item>
++
++            <item android:left="5dp">
++
++                <bitmap android:gravity="center_vertical|left" android:src="@drawable/ic_arrow_drop_down_black_24dp" />
++
++            </item>
++
++        </layer-list>
++
++    </item>
++
++</selector>
+\ No newline at end of file
+Index: app/src/main/res/values/colors.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<resources xmlns:tools=\"http://schemas.android.com/tools\">\r\n    <color name=\"purple_200\">#FFBB86FC</color>\r\n    <color name=\"purple_500\">#FF6200EE</color>\r\n    <color name=\"purple_700\">#FF3700B3</color>\r\n    <color name=\"teal_200\">#FF03DAC5</color>\r\n    <color name=\"teal_700\">#FF018786</color>\r\n    <color name=\"black\">#FF000000</color>\r\n    <color name=\"white\">#FFFFFFFF</color>\r\n    <color name=\"main\">#00AFB9</color>\r\n    <color name=\"text\">#747474</color>\r\n    <color name=\"show_more_text\">#F07167</color>\r\n    <color name=\"background\">#FBFBFB</color>\r\n    <color name=\"backgroundSigning\">#0081A7</color>\r\n\r\n\r\n    <color name=\"mtrl_textinput_default_box_stroke_color\" tools:override=\"true\">@color/show_more_text</color>\r\n\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/colors.xml b/app/src/main/res/values/colors.xml
+--- a/app/src/main/res/values/colors.xml	(revision b3eef3de25a2d585489a3abf75b9176d07e207f1)
++++ b/app/src/main/res/values/colors.xml	(date 1661340513537)
+@@ -12,6 +12,8 @@
+     <color name="show_more_text">#F07167</color>
+     <color name="background">#FBFBFB</color>
+     <color name="backgroundSigning">#0081A7</color>
++    <color name="nothing">#00FF0000</color>
++    <color name="error">#D50000</color>
+ 
+ 
+     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/show_more_text</color>
+Index: app/src/main/res/drawable/ic_baseline_arrow_drop_down_24.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/ic_baseline_arrow_drop_down_24.xml b/app/src/main/res/drawable/ic_baseline_arrow_drop_down_24.xml
+new file mode 100644
+--- /dev/null	(date 1661343926647)
++++ b/app/src/main/res/drawable/ic_baseline_arrow_drop_down_24.xml	(date 1661343926647)
+@@ -0,0 +1,5 @@
++<vector android:height="24dp" android:tint="#000000"
++    android:viewportHeight="24" android:viewportWidth="24"
++    android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
++    <path android:fillColor="@android:color/white" android:pathData="M7,10l5,5 5,-5z"/>
++</vector>
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"DesignSurface\">\r\n    <option name=\"filePathToZoomLevelMap\">\r\n      <map>\r\n        <entry key=\"..\\:/Reservation/app/src/main/res/layout/activity_main.xml\" value=\"0.22826086956521738\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/activity_main.xml\" value=\"0.19814814814814816\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/app_bar_main.xml\" value=\"0.2\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/content_main.xml\" value=\"0.3104166666666667\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_gallery.xml\" value=\"0.290625\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_home.xml\" value=\"0.290625\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_reservation.xml\" value=\"0.225\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_services.xml\" value=\"0.290625\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_slideshow.xml\" value=\"0.290625\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_test.xml\" value=\"0.225\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/nav_header_main.xml\" value=\"0.290625\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/menu/activity_main_drawer.xml\" value=\"0.225\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/menu/main.xml\" value=\"0.225\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation/app/src/main/res/layout/activity_main.xml\" value=\"0.3104166666666667\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/reserve_button.xml\" value=\"0.164\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/row_main.xml\" value=\"0.164\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/row_maincolor_reserve.xml\" value=\"0.164\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/row_reserved.xml\" value=\"0.164\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/row_transparent_reserve.xml\" value=\"0.164\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/side_nav_bar.xml\" value=\"0.164\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/spinner_background.xml\" value=\"0.152\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/activity_main.xml\" value=\"0.264\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/activity_splash.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/app_bar_main.xml\" value=\"0.2151268115942029\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/content_main.xml\" value=\"0.12771739130434784\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/font_spinner.xml\" value=\"0.2151268115942029\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/fragment_factor.xml\" value=\"0.2151268115942029\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/fragment_home.xml\" value=\"0.2151268115942029\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/fragment_reservation.xml\" value=\"0.264\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/fragment_signing.xml\" value=\"0.2151268115942029\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/layout_show_more.xml\" value=\"0.2151268115942029\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/reserved_row.xml\" value=\"0.2151268115942029\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/test.xml\" value=\"0.16614583333333333\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/menu/activity_main_drawer.xml\" value=\"0.23177083333333334\" />\r\n        <entry key=\"..\\:/Work/reservd/app/src/main/res/layout/activity_main.xml\" value=\"0.12771739130434784\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/drawable/ic_menu_slideshow.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/drawable/ic_nav_calendar.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/drawable/ic_nav_home.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/drawable/side_nav_bar.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/activity_main.xml\" value=\"0.1539855072463768\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/activity_splash.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/app_bar_main.xml\" value=\"0.1539855072463768\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/content_main.xml\" value=\"0.2\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/fragment_home.xml\" value=\"0.22\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/fragment_reservation.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/nav_header_main.xml\" value=\"0.1539855072463768\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/text_home_fragment.xml\" value=\"0.22\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/menu/activity_main_drawer.xml\" value=\"0.17222222222222222\" />\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_11\" default=\"true\" project-jdk-name=\"Android Studio default JDK\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision b3eef3de25a2d585489a3abf75b9176d07e207f1)
++++ b/.idea/misc.xml	(date 1661589762002)
+@@ -3,6 +3,8 @@
+   <component name="DesignSurface">
+     <option name="filePathToZoomLevelMap">
+       <map>
++        <entry key="..\:/Androidsdk/caches/transforms-3/60ab693206c8db86de1e54fc4496042b/transformed/jetified-PersianCaldroid-1.0.1/res/drawable/ic_keyboard_arrow_left.xml" value="0.1225" />
++        <entry key="..\:/Androidsdk/caches/transforms-3/60ab693206c8db86de1e54fc4496042b/transformed/jetified-PersianCaldroid-1.0.1/res/layout/fragment_calendar.xml" value="0.2151268115942029" />
+         <entry key="..\:/Reservation/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
+         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/activity_main.xml" value="0.19814814814814816" />
+         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/app_bar_main.xml" value="0.2" />
+@@ -17,13 +19,23 @@
+         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/menu/activity_main_drawer.xml" value="0.225" />
+         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/menu/main.xml" value="0.225" />
+         <entry key="..\:/Users/Ghazal/Desktop/Reservation/app/src/main/res/layout/activity_main.xml" value="0.3104166666666667" />
++        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/background_spinner.xml" value="0.1225" />
++        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/circle_selected_day.xml" value="0.1225" />
++        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/circle_today.xml" value="0.1225" />
++        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/ic_baseline_arrow_drop_down_24.xml" value="0.1225" />
++        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/ic_baseline_cancel_24.xml" value="0.1225" />
++        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/ic_close_fill0_wght400_grad0_opsz48.xml" value="0.1225" />
+         <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/reserve_button.xml" value="0.164" />
+         <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/row_main.xml" value="0.164" />
+         <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/row_maincolor_reserve.xml" value="0.164" />
+         <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/row_reserved.xml" value="0.164" />
+         <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/row_transparent_reserve.xml" value="0.164" />
+         <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/side_nav_bar.xml" value="0.164" />
++        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/soinner_draw.xml" value="0.1225" />
+         <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/spinner_background.xml" value="0.152" />
++        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/spinner_draw_revers.xml" value="0.1225" />
++        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/font/font.xml" value="0.22685185185185186" />
++        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/font/iransens.xml" value="0.21139240506329113" />
+         <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/activity_main.xml" value="0.264" />
+         <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/activity_splash.xml" value="0.1" />
+         <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/app_bar_main.xml" value="0.2151268115942029" />
+@@ -31,10 +43,12 @@
+         <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/font_spinner.xml" value="0.2151268115942029" />
+         <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/fragment_factor.xml" value="0.2151268115942029" />
+         <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/fragment_home.xml" value="0.2151268115942029" />
+-        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/fragment_reservation.xml" value="0.264" />
+-        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/fragment_signing.xml" value="0.2151268115942029" />
++        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/fragment_reservation.xml" value="0.2" />
++        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/fragment_services.xml" value="0.1" />
++        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/fragment_signing.xml" value="0.264" />
+         <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/layout_show_more.xml" value="0.2151268115942029" />
+         <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/reserved_row.xml" value="0.2151268115942029" />
++        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/row_services.xml" value="0.1" />
+         <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/test.xml" value="0.16614583333333333" />
+         <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/menu/activity_main_drawer.xml" value="0.23177083333333334" />
+         <entry key="..\:/Work/reservd/app/src/main/res/layout/activity_main.xml" value="0.12771739130434784" />
+@@ -60,4 +74,11 @@
+   <component name="ProjectType">
+     <option name="id" value="Android" />
+   </component>
++  <component name="VisualizationToolProject">
++    <option name="state">
++      <ProjectState>
++        <option name="scale" value="0.264" />
++      </ProjectState>
++    </option>
++  </component>
+ </project>
+\ No newline at end of file
