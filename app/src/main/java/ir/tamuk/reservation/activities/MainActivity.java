@@ -21,12 +21,17 @@ import android.view.View;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.Timer;
+
 import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private AppBarConfiguration mAppBarConfiguration;
+    NavController navController;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         ///navigatin bar
         BottomNavigationView navView = findViewById(R.id.bottomNav);
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupWithNavController(binding.bottomNav, navController);
 
 
@@ -70,7 +75,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
 
-                        if (navDestination.getId() == R.id.signingFragment) {
+                        if (navDestination.getId() == R.id.signingFragment ||
+                                navDestination.getId() == R.id.signInValiddationcodeFragment) {
                             binding.bottomNav.setVisibility(View.GONE);
                         } else {
                             binding.bottomNav.setVisibility(View.VISIBLE);
@@ -80,34 +86,40 @@ public class MainActivity extends AppCompatActivity {
                 };
                 h.postDelayed(r, 100);
 
+
             }
         });
         ////////////////////////////////////////////////////////
 
 
-
-
     }
 
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        View decorView = getWindow().getDecorView();
-// Hide the status bar.
-        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
-        decorView.setSystemUiVisibility(uiOptions);
-    }
+
 
     @Override
     protected void onResume() {
         super.onResume();
 
 
-    } 
+    }
 
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return super.onSupportNavigateUp();
     }
+
+//    @Override
+//    public void onBackPressed() {
+//        navController.addOnDestinationChangedListener((navController, navDestination, bundle) -> {
+//
+//                    if (navDestination.getId() == R.id.signInValiddationcodeFragment) {
+//
+//                    } else {
+//                        super.onBackPressed();
+//                    }
+//        });
+//
+//
+//    }
 }
