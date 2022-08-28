@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1033761601747",
+    "project_id": "reservation-4348d",
+    "storage_bucket": "reservation-4348d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1033761601747:android:e04ab84ee606716fd8fc26",
+        "android_client_info": {
+          "package_name": "ir.tamuk.reservation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1033761601747-4ncog0le20gcknaucklmcgb140qdfjb9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxXQW0vvr950yzh9rVSaaCL7AkNfES4nY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1033761601747-4ncog0le20gcknaucklmcgb140qdfjb9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
