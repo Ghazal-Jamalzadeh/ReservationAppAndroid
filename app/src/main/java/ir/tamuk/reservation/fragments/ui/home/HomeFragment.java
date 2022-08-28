@@ -1,30 +1,36 @@
 package ir.tamuk.reservation.fragments.ui.home;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
+
+import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
 
 import ir.tamuk.reservation.R;
-import ir.tamuk.reservation.api.ApiClient;
 import ir.tamuk.reservation.api.ApiServices;
 import ir.tamuk.reservation.databinding.FragmentHomeBinding;
-import ir.tamuk.reservation.models.MoviesList;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import ir.tamuk.reservation.fragments.ui.home.Adapter.OptionAdapter;
+import ir.tamuk.reservation.fragments.ui.home.Model.OptionList;
 
 public class HomeFragment extends Fragment{
 
     private FragmentHomeBinding binding;
+    //adapter
+    private OptionAdapter optionAdapter ;
     //api
     private ApiServices apiServices ;
 
@@ -36,44 +42,105 @@ public class HomeFragment extends Fragment{
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        //client
-        apiServices = ApiClient.getClient().create(ApiServices.class);
+//        //client
+//        apiServices = ApiClient.getClient().create(ApiServices.class);
+//
+//        //call api
+//        Call<MoviesList> call1 = apiServices.getMovies(1);
+//
+//        //response
+//        call1.enqueue(new Callback<MoviesList>() {
+//            @Override
+//            public void onResponse(Call<MoviesList> call, Response<MoviesList> response) {
+//
+//                for (int i = 0; i < response.body().movies.size(); i++) {
+//
+//                    Log.d("ghazal", "movie: " + response.body().movies.get(i).poster);
+//                }
+//
+//
+////                moviesAdapter = new MoviesAdapter(getContext() , response.body());
+////                LinearLayoutManager layoutManager = new LinearLayoutManager(context, RecyclerView.VERTICAL, false);
+////                binding.recyclerView.setAdapter(moviesAdapter);
+////                binding.recyclerView.setLayoutManager(layoutManager);
+////                binding.recyclerView.setHasFixedSize(true);
+//
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<MoviesList> call, Throwable t) {
+//
+//            }
+//        });
+        binding.imageView2.setImageResource(R.drawable.test);
 
-        //call api
-        Call<MoviesList> call1 = apiServices.getMovies(1);
+        ArrayList<OptionList.Option> options = new ArrayList<>();
+        OptionList optionList = new OptionList();
 
-        //response
-        call1.enqueue(new Callback<MoviesList>() {
-            @Override
-            public void onResponse(Call<MoviesList> call, Response<MoviesList> response) {
+        OptionList.Option option = optionList.new Option();
+        option.setId(R.drawable.test2);
+        option.setTitle("خط ریش آقایان");
+        options.add(option);
 
-                for (int i = 0; i < response.body().movies.size(); i++) {
+        OptionList.Option option1 = optionList.new Option();
+        option1.setId(R.drawable.test2);
+        option1.setTitle("فول بادی ویژه");
+        options.add(option1);
 
-                    Log.d("ghazal", "movie: " + response.body().movies.get(i).poster);
-                }
+        OptionList.Option option2 = optionList.new Option();
+        option2.setId(R.drawable.test2);
+        option2.setTitle("لیزر مو های زائد");
+        options.add(option2);
 
+        optionAdapter = new OptionAdapter(getContext() , options);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+        binding.optionRecycler.setLayoutManager(layoutManager);
+        binding.optionRecycler.setAdapter(optionAdapter);
+        binding.optionRecycler.setHasFixedSize(true);
 
-//                moviesAdapter = new MoviesAdapter(getContext() , response.body());
-//                LinearLayoutManager layoutManager = new LinearLayoutManager(context, RecyclerView.VERTICAL, false);
-//                binding.recyclerView.setAdapter(moviesAdapter);
-//                binding.recyclerView.setLayoutManager(layoutManager);
-//                binding.recyclerView.setHasFixedSize(true);
-
-
-            }
-
-            @Override
-            public void onFailure(Call<MoviesList> call, Throwable t) {
-
-            }
-        });
-
+        // on below line we are creating a new variable for
+        // our snap helper class and initializing it for our Linear Snap Helper.
+        SnapHelper snapHelper = new LinearSnapHelper();
+        // on below line we are attaching this snap helper to our recycler view.
+        snapHelper.attachToRecyclerView(binding.optionRecycler);
         return root;
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+///////////////////////////tablayout///////
+
+        binding.tabLayout.removeAllTabs();
+
+        TabLayout.Tab tab4 = binding.tabLayout.newTab();
+        tab4.setText("فول بادی کاربردی");
+        binding.tabLayout.addTab(tab4,0);
+
+        TabLayout.Tab tab3 = binding.tabLayout.newTab();
+        tab3.setText("لیزر صورت");
+        binding.tabLayout.addTab(tab3,1);
+
+        TabLayout.Tab tab2 = binding.tabLayout.newTab();
+        tab2.setText("جوانسازی پوست");
+        binding.tabLayout.addTab(tab2,2);
+
+        TabLayout.Tab tab1 = binding.tabLayout.newTab();
+        tab1.setText("فول بادی");
+        binding.tabLayout.addTab(tab1,3);
+
+        new Handler().postDelayed(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        binding.tabLayout.getTabAt(3).select();
+                    }
+                }, 500);
+
+////////////////////////////////////////////
 
 //        binding.recyclerTitle1.textView2.setText();
 //        binding.btn.setOnClickListener(view1 -> {

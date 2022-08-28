@@ -9,7 +9,7 @@
         android:id="@+id/nav_home"
         android:name="ir.tamuk.reservation.fragments.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment" >
         <action
             android:id="@+id/action_nav_home_to_testFragment"
             app:destination="@id/testFragment" />

@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginVertical="15dp"
+        android:layout_marginVertical="@dimen/_8cdp"
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -19,8 +19,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="left|center_vertical"
+            android:gravity="left|bottom"
             android:text="مشاهده همه"
+            android:textColor="@color/show_more_text"
             style="@style/fontForMediumEditText"/>
 
         <TextView
@@ -28,7 +29,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="right|center_vertical"
+            android:gravity="right|top"
+            style="@style/fontForLargeText"
+            android:textStyle="bold"
+            android:textColor="@color/backgroundSigning"
+            android:textSize="@dimen/_19cdp"
             android:text="لیزر صورت" />
 
     </LinearLayout>

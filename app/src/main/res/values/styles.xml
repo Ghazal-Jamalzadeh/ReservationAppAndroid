@@ -156,16 +156,16 @@
 <!--        <item name="android:textColor">@color/tamuk_g3</item>-->
 <!--        <item name="android:textSize">@dimen/verylarge_text_size</item>-->
 <!--    </style>-->
-<!--    <style name="fontForLargeText">-->
-<!--        <item name="android:textStyle">normal</item>-->
-<!--        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
-<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
-<!--        <item name="android:textSize">@dimen/large_text_size</item>-->
-<!--    </style>-->
-<!--    <style name="fontForLargeBoldText">-->
-<!--        <item name="android:textStyle">bold</item>-->
-<!--        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>-->
-<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
-<!--        <item name="android:textSize">@dimen/bml_text_size</item>-->
-<!--    </style>-->
+    <style name="fontForLargeText">
+        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">@font/iran_sans_mob</item>
+        <item name="android:textColor">@color/backgroundSigning</item>
+        <item name="android:textSize">@dimen/large_text_size</item>
+    </style>
+    <style name="fontForLargeBoldText">
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textSize">@dimen/bml_text_size</item>
+    </style>
 </resources>
