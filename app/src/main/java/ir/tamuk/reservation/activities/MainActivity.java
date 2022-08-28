@@ -2,6 +2,7 @@ package ir.tamuk.reservation.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
@@ -11,6 +12,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.app.ActionBar;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
@@ -37,6 +39,27 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.bottomNav);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupWithNavController(binding.bottomNav, navController);
+
+
+        ///////drawer////////
+
+        binding.drawerButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onClick(View view) {
+                binding.drawerLayout.openDrawer(binding.drawerMenu);
+                binding.drawerMenu.setOnClickListener(null);
+            }
+        });
+
+        binding.closeButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onClick(View view) {
+                binding.drawerLayout.closeDrawer(binding.drawerMenu);
+            }
+        });
+        //////////////////////
 
         //navController Hide When OpenSigning Fragment
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {

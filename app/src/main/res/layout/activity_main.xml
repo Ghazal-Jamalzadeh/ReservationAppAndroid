@@ -149,6 +149,7 @@
                 <TextView
                     android:id="@+id/textView4"
                     style="@style/fontForLargeText"
+                    android:textColor="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/_20cdp"
@@ -165,6 +166,7 @@
                     android:id="@+id/textView5"
                     style="@style/fontForLargeText"
                     android:layout_width="match_parent"
+                    android:textColor="@color/white"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/_20cdp"
 
@@ -181,6 +183,7 @@
                     android:id="@+id/textView6"
                     style="@style/fontForLargeText"
                     android:layout_width="match_parent"
+                    android:textColor="@color/white"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/_20cdp"
                     android:text="خدمات" />
@@ -196,6 +199,7 @@
                     android:id="@+id/textView7"
                     style="@style/fontForLargeText"
                     android:layout_width="match_parent"
+                    android:textColor="@color/white"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/_40cdp"
                     android:text="خدمات" />
