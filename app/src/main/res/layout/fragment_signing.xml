@@ -56,6 +56,7 @@
                     app:endIconCheckable="true"
                     app:endIconMode="clear_text"
                     app:endIconTint="@color/white"
+                    app:errorTextColor="#D50000"
                     app:hintTextColor="@color/show_more_text"
 
                     >
@@ -65,11 +66,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="#0081A7"
-                        android:drawableRight="@drawable/ic_path_39933"
-                        android:hint="  شماره تلفن همراه"
+                        android:drawableStart="@drawable/ic_path_39933"
+                        android:drawablePadding="@dimen/_10cdp"
+                        android:hint="شماره تلفن همراه"
                         android:inputType="number"
                         android:maxLines="1"
-                        android:singleLine="true" />
+                        android:singleLine="true"
+                        android:textColor="@color/white" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 

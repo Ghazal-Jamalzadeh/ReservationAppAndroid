@@ -40,12 +40,11 @@
 
                     <TextView
                         android:id="@+id/days_card_reservation"
+                        style="@style/fontForMediumEditText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        style="@style/fontForMediumEditText"
-                        android:text="25"
-                        />
+                        android:text="25" />
 
 
                 </RelativeLayout>
@@ -128,7 +127,7 @@
         <!--calender-->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_300cdp"
             android:layout_marginRight="@dimen/_15cdp"
             android:layout_marginTop="@dimen/_10cdp"
             android:layout_marginLeft="@dimen/_15cdp"
@@ -137,87 +136,118 @@
 
             >
 
-            <FrameLayout
-                android:id="@+id/persianCaldroid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="@dimen/_10cdp"
+<!--            <FrameLayout-->
+<!--                android:id="@+id/persianCaldroid"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center_vertical"-->
+<!--                android:layout_marginTop="@dimen/_10cdp"-->
 
-                />
+<!--                />-->
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <ir.mirrajabi.persiancalendar.PersianCalendarView
+                    android:id="@+id/persian_calendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/_12cdp"
+                    android:layout_marginTop="@dimen/_8cdp"
+                    android:layout_marginRight="@dimen/_12cdp"
+                    android:layout_marginBottom="@dimen/_8cdp"
+                    app:pcv_colorBackground="@color/white"
+                    app:pcv_colorDayName="#bab6b6"
+                    app:pcv_colorHoliday="#D50000"
+                    app:pcv_colorHolidaySelected="#D50000"
+                    app:pcv_colorNormalDay="@color/black"
+                    app:pcv_colorNormalDaySelected="@color/white"
+                    app:pcv_eventUnderlineColor="#0002F0F0"
+                    app:pcv_fontSize="@dimen/_16cdp"
+                    app:pcv_headersFontSize="@dimen/_16cdp"
+                    app:pcv_selectedDayBackground="@drawable/circle_selected_day"
+                    app:pcv_todayBackground="@drawable/circle_today" />
+
+
+                <LinearLayout
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_25cdp"
+                    android:layout_marginRight="@dimen/_25cdp"
+                    android:layout_marginBottom="@dimen/_16cdp"
+                    android:orientation="horizontal"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        >
+
+                        <TextView
+                            style="@style/fontForSmallText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:drawableRight="@drawable/ic_group_13"
+                            android:drawablePadding="@dimen/_8cdp"
+                            android:text="دارای ظرفیت" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="@dimen/_5cdp"
+                        android:layout_weight="1"
+                        >
+
+                        <TextView
+                            style="@style/fontForSmallText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_centerHorizontal="true"
+                            android:drawableRight="@drawable/ic_ellipse_34"
+                            android:drawablePadding="@dimen/_8cdp"
+                            android:text="ساعت های آزاد" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="@dimen/_5cdp"
+                        android:layout_weight="1"
+                        >
+
+                        <TextView
+                            style="@style/fontForSmallText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:drawableRight="@drawable/ic_group_11"
+                            android:drawablePadding="@dimen/_8cdp"
+                            android:text="پر شده" />
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
 
 
         </androidx.cardview.widget.CardView>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10cdp"
-            android:layout_marginLeft="@dimen/_25cdp"
-            android:layout_marginRight="@dimen/_25cdp"
-            android:orientation="horizontal"
-            >
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1"
-                >
-
-                <TextView
-                    style="@style/fontForSmallText"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:drawableRight="@drawable/ic_group_13"
-                    android:drawablePadding="@dimen/_8cdp"
-                    android:text="دارای ظرفیت" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginLeft="@dimen/_5cdp"
-                android:layout_weight="1"
-                >
-
-                <TextView
-                    style="@style/fontForSmallText"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:layout_centerHorizontal="true"
-                    android:drawableRight="@drawable/ic_ellipse_34"
-                    android:drawablePadding="@dimen/_8cdp"
-                    android:text="ساعت های آزاد" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginLeft="@dimen/_5cdp"
-                android:layout_weight="1"
-                >
-
-                <TextView
-                    style="@style/fontForSmallText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:drawableRight="@drawable/ic_group_11"
-                    android:drawablePadding="@dimen/_8cdp"
-                    android:text="پر شده" />
-
-            </RelativeLayout>
-
-
-        </LinearLayout>
 
 
 
@@ -232,12 +262,19 @@
             >
 
 
-            <Spinner
-                android:id="@+id/spinner_services"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/fontForMediumEditText"
-                />
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinner_services"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overlapAnchor="false"
+                    android:dropDownVerticalOffset="0dp"
+                    android:elevation="0dp"
+                    style="@style/SpinnerTheme"
+
+                    />
+
+
+
 
 
         </androidx.cardview.widget.CardView>

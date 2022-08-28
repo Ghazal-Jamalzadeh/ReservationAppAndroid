@@ -64,15 +64,58 @@
         <item name="boxStrokeWidth">2dp</item>
     </style>
 
+    <style name="fontForSmallText">
+        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">@font/iran_sans_mob</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textSize">@dimen/small_text_size</item>
+    </style>
 
+    <style name="fontForMediumBoldText">
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textSize">@dimen/medium_text_size</item>
+    </style>
 
-    <!--        <style name="fontForLargeEditTextHint">-->
-<!--        <item name="android:textStyle">normal</item>-->
-<!--        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
-<!--        <item name="android:textColor">@color/show_more_text</item>-->
-<!--        <item name="android:textSize">@dimen/large_text_size</item>-->
-<!--        <item name="android:padding">@dimen/_2cdp</item>-->
+    <style name="fontForLargeBoldText">
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/bml_text_size</item>
+    </style>
+
+    <style name="SpinnerTheme" parent="android:Widget.Material.Spinner.Underlined">
+        <item name="android:background">@drawable/soinner_draw
+        </item>
+        <item name="android:popupBackground">@color/white</item>
+        <item name="android:padding">1px</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="elevation">@dimen/_8cdp</item>
+        <item name="android:popupElevation">1dp</item>
+        <item name="android:layout_marginBottom">@dimen/_12cdp</item>
+        <item name="android:textAlignment">textStart</item>
+    </style>
+
+<!--    <style name="SpinnerTheme" parent="android:Widget.DeviceDefault.Spinner">-->
+<!--        <item name="android:background">@drawable/soinner_draw</item>-->
+<!--        <item name="android:padding">8dp</item>-->
+<!--        <item name="android:paddingTop">0dp</item>-->
+<!--        <item name="android:textSize">18sp</item>-->
+<!--        <item name="android:textColor">@android:color/white</item>-->
+<!--        <item name="android:paddingBottom">5dp</item>-->
+<!--        <item name="android:paddingRight">15dp</item>-->
 <!--    </style>-->
+
+
+    <!--    </style>-->
+    <!--        <style name="fontForLargeEditTextHint">-->
+    <!--        <item name="android:textStyle">normal</item>-->
+    <!--        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
+    <!--        <item name="android:textColor">@color/show_more_text</item>-->
+    <!--        <item name="android:textSize">@dimen/large_text_size</item>-->
+    <!--        <item name="android:padding">@dimen/_2cdp</item>-->
+    <!--    </style>-->
 
 <!--    <style name="fontForLargeEditText">-->
 <!--        <item name="android:textStyle">normal</item>-->
@@ -99,12 +142,6 @@
 <!--        <item name="android:textColor">@color/colorBlack</item>-->
 <!--        <item name="android:textSize">@dimen/very_small_text_size</item>-->
 <!--    </style>-->
-    <style name="fontForSmallText">
-        <item name="android:textStyle">normal</item>
-        <item name="android:fontFamily">@font/iran_sans_mob</item>
-        <item name="android:textColor">@color/text</item>
-        <item name="android:textSize">@dimen/small_text_size</item>
-    </style>
 <!--    <style name="fontForSmallText_medium">-->
 <!--        <item name="android:textStyle">normal</item>-->
 <!--        <item name="android:fontFamily">@font/iran_sans_mob_medium</item>-->
@@ -124,18 +161,13 @@
 <!--        <item name="android:textColor">@color/tamuk_g3</item>-->
 <!--        <item name="android:textSize">@dimen/medium_text_size</item>-->
 <!--    </style>-->
-    <style name="fontForMediumBoldText">
-        <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>
-        <item name="android:textColor">@color/text</item>
-        <item name="android:textSize">@dimen/medium_text_size</item>
-    </style>
-<!--    <style name="fontForBMLText">-->
-<!--        <item name="android:textStyle">normal</item>-->
-<!--        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
-<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
-<!--        <item name="android:textSize">@dimen/bml_text_size</item>-->
-<!--    </style>-->
+   <style name="fontForBMLText">-->
+       <item name="android:textStyle">normal</item>-->
+        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
+        <item name="android:textColor">@color/white</item>-->
+      <item name="android:textSize">@dimen/bml_text_size</item>-->
+   </style>
+
 <!--    <style name="fontForBMLBoldText">-->
 <!--        <item name="android:textStyle">bold</item>-->
 <!--        <item name="android:fontFamily">@font/iran_sans_mob_bold</item>-->
@@ -154,7 +186,7 @@
         <item name="android:textColor">@color/backgroundSigning</item>
         <item name="android:textSize">@dimen/large_text_size</item>
     </style>
-    <style name="fontForLargeBoldText">
+    <style name="fontForLargeBoldText2">
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">@font/iran_sans_mob_bold</item>
         <item name="android:textColor">@color/text</item>

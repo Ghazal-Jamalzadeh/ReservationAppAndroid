@@ -12,8 +12,12 @@
     <color name="show_more_text">#F07167</color>
     <color name="background">#FBFBFB</color>
     <color name="backgroundSigning">#0081A7</color>
+    <color name="nothing">#00FF0000</color>
+    <color name="error">#D50000</color>
 
 
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/show_more_text</color>
-
+    <color name="blue">#21669E</color>
+    <color name="login_blue">#0081A7</color>
+    <color name="red">#F07167</color>
 </resources>

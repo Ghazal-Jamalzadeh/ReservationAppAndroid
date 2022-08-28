@@ -1,7 +1,6 @@
 package ir.tamuk.reservation.fragments.ui.reservation;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,26 +11,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.dariushm2.PersianCaldroid.caldroidfragment.PersianCaldroidFragment;
-
-import org.angmarch.views.NiceSpinner;
-import org.angmarch.views.OnSpinnerItemSelectedListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 
-import calendar.PersianDate;
+import ir.mirrajabi.persiancalendar.PersianCalendarView;
+import ir.mirrajabi.persiancalendar.core.PersianCalendarHandler;
+import ir.mirrajabi.persiancalendar.core.models.CalendarEvent;
+import ir.mirrajabi.persiancalendar.core.models.PersianDate;
 import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.FragmentReservationBinding;
 import ir.tamuk.reservation.fragments.ui.reservation.adapter.ReserveAdapter;
@@ -54,6 +44,14 @@ public class ReservationFragment extends Fragment {
             "شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنجشنبه", "جمعه"
     };
 
+    public String[] mounth = {
+            "",
+            "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد",
+            "شهریور ", "مهر", "آبان", " آذر", "دی", "بهمن", "اسفند"
+    };
+
+    SqlDatabaseReserve sqlDatabase;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -61,14 +59,23 @@ public class ReservationFragment extends Fragment {
                 new ViewModelProvider(this).get(ReservationViewModel.class);
         binding = FragmentReservationBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        //today Date
-        PersianDate persianDate = new PersianDate();
-        date_show = String.valueOf(persianDate.getYear())+"-"+String.valueOf(persianDate.getMonth())+"-"
+
+        //calender Today
+        PersianCalendarHandler handler = binding.persianCalendar.getCalendar();
+        PersianDate persianDate = handler.getToday();
+        binding.daysCardReservation.setText(String.valueOf(persianDate.getDayOfMonth()));
+        int i = persianDate.getDayOfWeek();
+        int x = persianDate.getMonth();
+        binding.weekCardReservation.setText(week[i]);
+        binding.monthCardReservation.setText(mounth[x]);
+
+        date_show = String.valueOf(persianDate.getYear()) +"-"+String.valueOf(persianDate.getMonth())+"-"
                 +String.valueOf(persianDate.getDayOfMonth());
 
         binding.signingButtonReservation.setOnClickListener(view -> {
                 Navigation.findNavController(view).navigate(R.id.action_nav_reservation_to_signingFragment);
         });
+
 
         //recycler
         Recycler();
@@ -90,33 +97,6 @@ public class ReservationFragment extends Fragment {
     }
 
     public  void Spinnerr(){
-
-//        List<String> dataset = new LinkedList<>(Arrays.asList("همه موارد"  , "دست", "پا", "بدن" ));
-//        binding.spinnerServices.attachDataSource(dataset);
-//
-//            binding.spinnerServices.setOnSpinnerItemSelectedListener(new OnSpinnerItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(NiceSpinner parent, View view, int position, long id) {
-//                // This example uses String, but your type can be any
-//
-//
-//                switch (position) {
-//                    case 0:
-//                        Recycler();
-//                        break;
-//                    case 1:
-//                        Recycler();
-//                        break;
-//                    case 2:
-//                        Recycler();
-//                        break;
-//                    case 3:
-//                        Recycler();
-//                        break;
-//                }
-//
-//            }
-//        });
         String[] items = new String[]
                 {"همه موارد"  , "دست", "پا", "بدن" };
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(),R.layout.font_spinner, items);
@@ -133,9 +113,11 @@ public class ReservationFragment extends Fragment {
                         break;
                     case 2:
                         Recycler();
+
                         break;
                     case 3:
                         Recycler();
+
                         break;
                 }
             }
@@ -143,6 +125,7 @@ public class ReservationFragment extends Fragment {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 Toast.makeText(context, "لطفا یکی از خدمات رو انتخاب کنید", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -150,76 +133,61 @@ public class ReservationFragment extends Fragment {
     }
 
     public void Calender(){
-        PersianCaldroidFragment persianCaldroidFragment = new PersianCaldroidFragment();
-        // Set font
-        Typeface typeface = ResourcesCompat.getFont(getContext(), R.font.iraniansans);
-        persianCaldroidFragment.setTypeface(typeface);
-
-        persianCaldroidFragment.setOnDateClickListener(new PersianCaldroidFragment.OnDateClickListener() {
-            @Override
-            public void onDateClick(PersianDate persianDate) {
-
-                // Do something when a date is clicked
-                //month Name
-                binding.monthCardReservation.setText(persianDate.getMonthName());
-                //day Number
-                binding.daysCardReservation.setText(String.valueOf(persianDate.getDayOfMonth()));
-                //week Name
-                int i = persianDate.getDayOfWeek();
-                binding.weekCardReservation.setText(week[i]);
-                //get Date
-                date_show = String.valueOf(persianDate.getYear())+"-"+String.valueOf(persianDate.getMonth())+"-"
-                        +String.valueOf(persianDate.getDayOfMonth());
-                Log.d("CALENDER DATE", "Calender1: "+date_show);
-                //Recycler
-                Recycler();
 
 
-            }
+        PersianCalendarView calendarView  = binding.persianCalendar;
+        PersianCalendarHandler calendarHandler = calendarView.getCalendar();
+        ir.mirrajabi.persiancalendar.core.models.PersianDate today = calendarHandler.getToday();
+
+        // Add an event called "Custom event" to this day
+        calendarHandler.addLocalEvent(new CalendarEvent(today, "Custom event", false));
+// Add an event called "Custom event 2" to 12 days later
+        calendarHandler.addLocalEvent(new CalendarEvent(today.clone().rollDay(12,true), "Custom event 2", true));
+// Add an event called "Custom event 3" to 1399/1/10 later
+        calendarHandler.addLocalEvent(new CalendarEvent(new PersianDate(1401,6,15), "Custom event 2", true));
+
+        calendarHandler.getAllEventsForDay(today);
+        calendarHandler.getLocalEvents();
+        calendarHandler.getLocalEventsForDay(today);
+        calendarHandler.getOfficialEventsForDay(today);
+
+        calendarView.setOnDayClickedListener(persianDate -> {
+
+            binding.daysCardReservation.setText(String.valueOf(persianDate.getDayOfMonth()));
+            int i = persianDate.getDayOfWeek();
+            int x = persianDate.getMonth();
+            binding.weekCardReservation.setText(week[i]);
+            binding.monthCardReservation.setText(mounth[x]);
+            date_show = String.valueOf(persianDate.getYear()) +"-"+String.valueOf(persianDate.getMonth())+"-"
+                    +String.valueOf(persianDate.getDayOfMonth());
+            Log.d("KIANOOSH", "Calender: "+ date_show);
+            Recycler();
+            sqlDatabase.deleteIdAll();
+        });
+        calendarView.setOnMonthChangedListener(persianDate -> {
+
         });
 
-        persianCaldroidFragment.setOnChangeMonthListener(new PersianCaldroidFragment.OnChangeMonthListener() {
-            @Override
-            public void onChangeMonth() {
-
-                // Do something when user switches to previous or next month
-            }
-        });
-
-        /* Add dates with a specified colors, you want to be circled on calendar */
-        //calender customize
-        HashMap<PersianDate, Integer> backgroundForDatesMap = new HashMap<>();
-        backgroundForDatesMap.put(new PersianDate(), R.color.main);
-        persianCaldroidFragment.setBackgroundResourceForDates(backgroundForDatesMap);
-        PersianDate persianDate = new PersianDate();
-        binding.daysCardReservation.setText(String.valueOf(persianDate.getDayOfMonth()));
-        binding.monthCardReservation.setText(persianDate.getMonthName());
-        int i = persianDate.getDayOfWeek();
-        binding.weekCardReservation.setText(week[i]);
-
-        //calender Show
-        requireActivity().getSupportFragmentManager().beginTransaction().replace(
-                R.id.persianCaldroid,
-                persianCaldroidFragment,
-                PersianCaldroidFragment.class.getName()).commit();
     }
 
+
     public void Tabale() {
-        SqlDatabaseReserve sqlDatabase = new SqlDatabaseReserve(getContext());
+        sqlDatabase = new SqlDatabaseReserve(getContext());
+        if (sqlDatabase.getDataId().isEmpty()) {
 
-        sqlDatabase.Insert("1401-5-25T09:00:00.000z", "09:00", 1, "پا");
-        sqlDatabase.Insert("1401-5-25T11:00:00.000z", "11:00", 1, "بدن");
-        sqlDatabase.Insert("1401-5-25T12:30:00.000z", "12:30", 1, "پا");
-        sqlDatabase.Insert("1401-5-25T13:00:00.000z", "14:00", 1, "پا");
-        sqlDatabase.Insert("1401-5-25T14:00:00.000z", "15:00", 1, "بدن");
-        sqlDatabase.Insert("1401-5-25T15:00:00.000z", "16:00", 1, "پا");
-        sqlDatabase.Insert("1401-5-25T16:00:00.000z", "21:00", 1, "دست");
+            sqlDatabase.Insert("1401-6-5T09:00:00.000z", "09:00", 0, "پا");
+            sqlDatabase.Insert("1401-6-5T11:00:00.000z", "11:00", 0, "بدن");
+            sqlDatabase.Insert("1401-6-5T12:30:00.000z", "12:30", 0, "پا");
+            sqlDatabase.Insert("1401-6-5T13:00:00.000z", "14:00", 0, "پا");
+            sqlDatabase.Insert("1401-6-5T14:00:00.000z", "15:00", 0, "بدن");
+            sqlDatabase.Insert("1401-6-5T15:00:00.000z", "16:00", 0, "پا");
+            sqlDatabase.Insert("1401-6-5T16:00:00.000z", "21:00", 0, "دست");
 
-        sqlDatabase.Insert("1401-5-26T11:00:00.000z", "11:00", 0, "بدن");
-        sqlDatabase.Insert("1401-5-26T12:30:00.000z", "13:30", 0, "بدن");
-        sqlDatabase.Insert("1401-5-26T14:00:00.000z", "16:00", 0, "پا");
-        sqlDatabase.Insert("1401-5-26T17:00:00.000z", "17:00", 0 , "دست");
-        sqlDatabase.Insert("1401-5-26T19:00:00.000z", "20:00", 0, "بدن");
+            sqlDatabase.Insert("1401-6-6T11:00:00.000z", "11:00", 0, "بدن");
+            sqlDatabase.Insert("1401-6-6T12:30:00.000z", "13:30", 0, "بدن");
+            sqlDatabase.Insert("1401-6-6T14:00:00.000z", "16:00", 0, "پا");
+            sqlDatabase.Insert("1401-6-6T17:00:00.000z", "17:00", 0, "دست");
+        }
     }
 
     public void Recycler() {

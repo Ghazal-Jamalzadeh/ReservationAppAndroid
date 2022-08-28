@@ -70,8 +70,8 @@ dependencies {
     implementation 'com.github.maks1990:CDP:1.0.1'
     implementation 'com.squareup.picasso:picasso:2.8'
 
-    implementation 'com.github.dariushm2:PersianCaldroid:1.0.1'
 
+    implementation 'com.github.roojin:persian-calendar-view:1.2.2'
     implementation 'com.github.arcadefire:nice-spinner:1.4.4'
 
 }
