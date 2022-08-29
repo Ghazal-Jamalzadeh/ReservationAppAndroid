@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,224 +7,250 @@
     tools:context=".SignInValiddationcodeFragment"
     android:background="@color/login_blue">
 
-    <!-- TODO: Update blank fragment layout -->
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:orientation="vertical"
-      android:paddingTop="@dimen/_100cdp"
-      >
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:orientation="vertical"
-          >
-          <androidx.cardview.widget.CardView
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="@color/white"
-              app:cardCornerRadius="@dimen/_5cdp"
-              android:layout_marginRight="@dimen/_100cdp"
-              android:layout_marginLeft="@dimen/_100cdp">
-              <LinearLayout
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:orientation="vertical">
-                  <TextView
-                      android:id="@+id/text"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:text="0913"
-                      android:fontFamily="@font/iran_sans_mob"
-                      android:gravity="center"
-                      android:textSize="@dimen/_20cdp"
-                      android:textColor="@color/login_blue"
-                      style="@style/fontForLargeBoldText"/>
-                  <LinearLayout
-                      android:id="@+id/editing"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:orientation="horizontal"
-                      android:gravity="center">
-
-                      <TextView
-                          android:layout_width="wrap_content"
-                          android:layout_height="@dimen/_25cdp"
-                          android:text="ویرایش شماره"
-                          android:fontFamily="@font/iran_sans_mob"
-                          style="@style/fontForLargeBoldText"
-                          android:gravity="center"
-                          android:textColor="@color/red"/>
-                      <ImageView
-                          android:layout_width="wrap_content"
-                          android:layout_height="@dimen/_25cdp"
-                          android:src="@drawable/pen"/>
-                  </LinearLayout>
-
-              </LinearLayout>
+    <ImageView
+        android:id="@+id/cancel_button_signing_"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_24cdp"
+        android:layout_marginTop="@dimen/_24cdp"
+        android:src="@drawable/ic_close_fill0_wght400_grad0_opsz48" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/_32cdp"
+        android:layout_marginTop="@dimen/_150cdp"
+        android:layout_marginRight="@dimen/_32cdp"
+        android:layout_marginBottom="@dimen/_60cdp">
 
 
-          </androidx.cardview.widget.CardView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
 
-      </LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_48cdp"
+                android:layout_marginTop="@dimen/_12cdp"
+                android:layout_marginRight="@dimen/_48cdp"
+                android:layout_marginBottom="@dimen/_8cdp"
+                android:background="@color/white"
+                app:cardCornerRadius="@dimen/_5cdp">
 
-      <LinearLayout
-          android:id="@+id/edit"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_weight="5"
-          android:orientation="vertical"
-          android:layout_marginLeft="@dimen/_5cdp"
-          android:layout_marginRight="@dimen/_5cdp"
-          >
-          <TextView
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_weight="1"
-              android:text="کد تایید را وارد نمایید"
-              style="@style/fontForLargeBoldText"
-              android:fontFamily="@font/iran_sans_mob"
-              android:gravity="center"
-              android:textColor="@color/white"
-              />
-          <RelativeLayout
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-              <EditText
-                  android:id="@+id/code_edit"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:background="#00000000"
-                  android:maxLength="4"
-                  android:gravity="center"
-                  android:layout_alignLeft="@id/code_linear"
-                  android:layout_alignRight="@id/code_linear"
-                  android:singleLine="true"
-                  android:textColor="@color/white"
-                  android:fontFamily="@font/iran_sans_mob"/>
+                    <TextView
+                        android:id="@+id/text"
+                        style="@style/fontForLargeBoldText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iran_sans_mob"
+                        android:gravity="center"
+                        android:text="0913"
+                        android:textColor="@color/login_blue"
+                        android:textSize="@dimen/_20cdp" />
 
+                    <TextView
+                        android:id="@+id/editing"
+                        style="@style/fontForMediumEditTextHint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:drawableRight="@drawable/pen"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:text="ویرایش شماره تلفن"
+                        android:layout_marginLeft="@dimen/_24cdp"
+                        android:layout_marginRight="@dimen/_24cdp"
+                        android:layout_marginTop="@dimen/_8cdp"
+                        android:layout_marginBottom="@dimen/_8cdp"
+                        />
 
-              <LinearLayout
-                  android:id="@+id/code_linear"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_marginLeft="@dimen/_100cdp"
-                  android:layout_marginRight="@dimen/_100cdp"
-                  android:background="@color/login_blue"
-                  android:gravity="center"
-                  android:orientation="horizontal"
-                  android:padding="@dimen/_10cdp">
-
-                  <TextView
-                      android:id="@+id/edit1"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:fontFamily="@font/iran_sans_mob"
-                      android:gravity="center"
-                      android:maxLength="1"
-                      android:singleLine="true"
-                      android:text="__"
-                      android:textColor="@color/white" />
-
-                  <TextView
-                      android:id="@+id/edit2"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:fontFamily="@font/iran_sans_mob"
-                      android:gravity="center"
-                      android:maxLength="1"
-                      android:singleLine="true"
-                      android:text="__"
-                      android:textColor="@color/white" />
-
-                  <TextView
-                      android:id="@+id/edit3"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:fontFamily="@font/iran_sans_mob"
-                      android:gravity="center"
-                      android:maxLength="1"
-                      android:singleLine="true"
-                      android:text="__"
-                      android:textColor="@color/white" />
-
-                  <TextView
-                      android:id="@+id/edit4"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:fontFamily="@font/iran_sans_mob"
-                      android:gravity="center"
-                      android:maxLength="1"
-                      android:singleLine="true"
-                      android:text="__"
-                      android:textColor="@color/white" />
+                </LinearLayout>
 
 
-              </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
 
-          </RelativeLayout>
-          <TextView
-              android:id="@+id/text_Timer"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_weight="1"
-              android:text="120"
-              android:layout_gravity="center"
-              android:layout_marginRight="@dimen/_50cdp"
-              android:textColor="@color/white"/>
+            <TextView
+                android:id="@+id/rej"
+                style="@style/fontForLargeBoldText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/card"
+                android:layout_marginTop="@dimen/_32cdp"
+                android:fontFamily="@font/iran_sans_mob"
+                android:gravity="center"
+                android:text="کد تایید را وارد نمایید"
+                android:textColor="@color/white" />
+
+            <LinearLayout
+                android:id="@+id/ver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rej"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/_24cdp"
+                android:layout_marginTop="@dimen/_12cdp"
+                android:layout_marginRight="@dimen/_24cdp"
+                android:orientation="horizontal">
 
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/one"
+                    android:theme="@style/Theme.verfi.code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_4cdp"
+                    android:layout_marginRight="@dimen/_4cdp"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
 
 
-      </LinearLayout>
-      <LinearLayout
-          android:id="@+id/flashe"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="vertical"
-          android:layout_weight="6">
-          <ImageView
-              android:id="@+id/image"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_weight="1"
-              android:src="@drawable/fletcher"
-              android:layout_gravity="center"/>
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_weight="1"
-              android:text="ارسال مجدد"
-              style="@style/fontForMediumEditText"
-              android:textColor="@color/red"
-              android:layout_gravity="center"/>
+                    />
 
-      </LinearLayout>
-
-          <com.google.android.material.button.MaterialButton
-              android:id="@+id/accept_button_signing"
-              style="@style/fontForMediumEditText"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_weight="1"
-              android:layout_marginLeft="@dimen/_47cdp"
-              android:layout_marginRight="@dimen/_47cdp"
-              android:layout_marginBottom="@dimen/_85cdp"
-              android:backgroundTint="@color/white"
-              android:text="تایید"
-              android:textColor="@color/backgroundSigning"
-              android:textStyle="bold"
-              app:cornerRadius="@dimen/_8cdp" />
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="0dp" />
 
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/two"
+                    android:theme="@style/Theme.verfi.code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_4cdp"
+                    android:layout_marginRight="@dimen/_4cdp"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
 
-  </LinearLayout>
 
-</FrameLayout>
+                    />
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="0dp"
+
+                    />
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/three"
+                    android:theme="@style/Theme.verfi.code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_4cdp"
+                    android:layout_marginRight="@dimen/_4cdp"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+
+                    />
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="0dp"
+
+                    />
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/four"
+                    android:theme="@style/Theme.verfi.code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_4cdp"
+                    android:layout_marginRight="@dimen/_4cdp"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+
+                    />
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="0dp" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/text_Timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/aa"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_4cdp"
+                android:text="120"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/aa"
+                style="@style/fontForMediumEditTextHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ver"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_28cdp"
+                android:text="زمان باقی مانده:" />
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_Timer"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_32cdp"
+                android:src="@drawable/fletcher" />
+
+            <TextView
+                style="@style/fontForMediumEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_12cdp"
+                android:text="ارسال مجدد"
+                android:textColor="@color/red" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/accept_button_signing"
+                style="@style/fontForMediumEditText"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_60cdp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/_15cdp"
+                android:layout_marginRight="@dimen/_15cdp"
+                android:backgroundTint="@color/white"
+                android:text="تایید"
+                android:textColor="@color/backgroundSigning"
+                android:textStyle="bold"
+                app:cornerRadius="@dimen/_8cdp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
