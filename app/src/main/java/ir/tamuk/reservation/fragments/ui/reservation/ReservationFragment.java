@@ -1,6 +1,8 @@
 package ir.tamuk.reservation.fragments.ui.reservation;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,13 +10,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -73,7 +80,11 @@ public class ReservationFragment extends Fragment {
                 +String.valueOf(persianDate.getDayOfMonth());
 
         binding.signingButtonReservation.setOnClickListener(view -> {
+            if (sqlDatabase.getDataId().isEmpty()){
+                snackBarIconError();
+            }else {
                 Navigation.findNavController(view).navigate(R.id.action_nav_reservation_to_signingFragment);
+            }
         });
 
 
@@ -150,6 +161,8 @@ public class ReservationFragment extends Fragment {
         calendarHandler.getLocalEvents();
         calendarHandler.getLocalEventsForDay(today);
         calendarHandler.getOfficialEventsForDay(today);
+        Typeface typeface = ResourcesCompat.getFont(getContext(), R.font.iraniansans);
+        calendarHandler.setTypeface(typeface);
 
         calendarView.setOnDayClickedListener(persianDate -> {
 
@@ -230,6 +243,23 @@ public class ReservationFragment extends Fragment {
         //refresh
         adapter.notifyDataSetChanged();
     }
+
+    private void snackBarIconError() {
+        final Snackbar snackbar = Snackbar.make(getView(), "", Snackbar.LENGTH_SHORT);
+        //inflate view
+        View custom_view = getLayoutInflater().inflate(R.layout.snackbar_layout, null);
+
+        snackbar.getView().setBackgroundColor(Color.TRANSPARENT);
+        Snackbar.SnackbarLayout snackBarView = (Snackbar.SnackbarLayout) snackbar.getView();
+        snackBarView.setPadding(0, 0, 0, 0);
+
+        ((TextView) custom_view.findViewById(R.id.message)).setText("باید یک رزرو انتخاب کنید");
+        ((ImageView) custom_view.findViewById(R.id.icon)).setImageResource(R.drawable.ic_baseline_perm_device_information_24);
+        (custom_view.findViewById(R.id.parent_view)).setBackgroundColor(getResources().getColor(R.color.red));
+        snackBarView.addView(custom_view, 0);
+        snackbar.show();
+    }
+
 
 
 

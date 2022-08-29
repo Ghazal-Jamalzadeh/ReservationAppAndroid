@@ -56,7 +56,11 @@
         tools:layout="@layout/fragment_signing" >
         <action
             android:id="@+id/action_signingFragment_to_signInValiddationcodeFragment"
-            app:destination="@id/signInValiddationcodeFragment" />
+            app:destination="@id/signInValiddationcodeFragment"
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait"
+            app:popEnterAnim="@anim/wait"
+            app:popExitAnim="@anim/slide_right" />
     </fragment>
     <fragment
         android:id="@+id/signInValiddationcodeFragment"
@@ -65,7 +69,11 @@
         tools:layout="@layout/fragment_sign_in_validdationcode" >
         <action
             android:id="@+id/action_signInValiddationcodeFragment_to_factorFragment"
-            app:destination="@id/factorFragment" />
+            app:destination="@id/factorFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/wait"
+            app:popEnterAnim="@anim/wait"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
         tools:layout="@layout/fragment_signing" />
 </navigation>
