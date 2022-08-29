@@ -1,6 +1,8 @@
 package ir.tamuk.reservation.fragments.ui.home.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -15,11 +17,11 @@ import ir.tamuk.reservation.fragments.ui.home.Model.OptionList;
 public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.ViewHolder> {
 
     private ArrayList<OptionList.Option> optionArrayList ;
-    private Context context ;
+    private Activity activity;
 
-    public OptionAdapter(Context context , ArrayList<OptionList.Option> optionArrayList) {
+    public OptionAdapter(Activity activity, ArrayList<OptionList.Option> optionArrayList) {
 
-        this.context = context ;
+        this.activity=activity ;
         this.optionArrayList = optionArrayList ;
 
     }
@@ -29,6 +31,14 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.ViewHolder
     public OptionAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         HomeRowBinding v = HomeRowBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+
+        //Make width of horizontal recycler view items 85% of screen width
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int width = (int)(displayMetrics.widthPixels * 0.85);
+        v.getRoot().getLayoutParams().width = width ;
+
+
         return new OptionAdapter.ViewHolder(v);
 
     }

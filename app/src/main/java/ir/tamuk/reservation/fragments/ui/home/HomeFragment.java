@@ -3,6 +3,7 @@ package ir.tamuk.reservation.fragments.ui.home;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,14 +26,15 @@ import ir.tamuk.reservation.api.ApiServices;
 import ir.tamuk.reservation.databinding.FragmentHomeBinding;
 import ir.tamuk.reservation.fragments.ui.home.Adapter.OptionAdapter;
 import ir.tamuk.reservation.fragments.ui.home.Model.OptionList;
+import ir.tamuk.reservation.utils.Tools;
 
-public class HomeFragment extends Fragment{
+public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
     //adapter
-    private OptionAdapter optionAdapter ;
+    private OptionAdapter optionAdapter;
     //api
-    private ApiServices apiServices ;
+    private ApiServices apiServices;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -93,17 +95,25 @@ public class HomeFragment extends Fragment{
         option2.setTitle("لیزر مو های زائد");
         options.add(option2);
 
-        optionAdapter = new OptionAdapter(getContext() , options);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+        optionAdapter = new OptionAdapter(getActivity(), options);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, true);
         binding.optionRecycler.setLayoutManager(layoutManager);
         binding.optionRecycler.setAdapter(optionAdapter);
         binding.optionRecycler.setHasFixedSize(true);
+
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, true);
+        binding.optionRecycler2.setLayoutManager(layoutManager2);
+        binding.optionRecycler2.setAdapter(optionAdapter);
+        binding.optionRecycler2.setHasFixedSize(true);
 
         // on below line we are creating a new variable for
         // our snap helper class and initializing it for our Linear Snap Helper.
         SnapHelper snapHelper = new LinearSnapHelper();
         // on below line we are attaching this snap helper to our recycler view.
         snapHelper.attachToRecyclerView(binding.optionRecycler);
+
+        SnapHelper snapHelper1 = new LinearSnapHelper();
+        snapHelper1.attachToRecyclerView(binding.optionRecycler2);
         return root;
     }
 
@@ -118,19 +128,36 @@ public class HomeFragment extends Fragment{
 
         TabLayout.Tab tab4 = binding.tabLayout.newTab();
         tab4.setText("فول بادی کاربردی");
-        binding.tabLayout.addTab(tab4,0);
+        binding.tabLayout.addTab(tab4, 0);
 
         TabLayout.Tab tab3 = binding.tabLayout.newTab();
         tab3.setText("لیزر صورت");
-        binding.tabLayout.addTab(tab3,1);
+        binding.tabLayout.addTab(tab3, 1);
 
         TabLayout.Tab tab2 = binding.tabLayout.newTab();
         tab2.setText("جوانسازی پوست");
-        binding.tabLayout.addTab(tab2,2);
+        binding.tabLayout.addTab(tab2, 2);
 
         TabLayout.Tab tab1 = binding.tabLayout.newTab();
         tab1.setText("فول بادی");
-        binding.tabLayout.addTab(tab1,3);
+        binding.tabLayout.addTab(tab1, 3);
+
+        binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                selectTab(binding.tabLayout.getSelectedTabPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                selectTab(binding.tabLayout.getSelectedTabPosition());
+            }
+        });
 
         new Handler().postDelayed(
                 new Runnable() {
@@ -138,7 +165,8 @@ public class HomeFragment extends Fragment{
                     public void run() {
                         binding.tabLayout.getTabAt(3).select();
                     }
-                }, 500);
+                }, 0);
+
 
 ////////////////////////////////////////////
 
@@ -154,5 +182,23 @@ public class HomeFragment extends Fragment{
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void selectTab(int position) {
+        switch (position) {
+            case 0:
+                Tools.scrollToPosition(binding.scrollView, binding.recyclerTitle1.getRoot());
+                break;
+            case 1:
+                Tools.scrollToPosition(binding.scrollView, binding.recyclerTitle2.getRoot());
+                break;
+            case 2:
+                Tools.scrollToPosition(binding.scrollView, binding.recyclerTitle1.getRoot());
+                break;
+            case 3:
+                Tools.scrollToPosition(binding.scrollView, binding.recyclerTitle1.getRoot());
+                break;
+
+        }
     }
 }
