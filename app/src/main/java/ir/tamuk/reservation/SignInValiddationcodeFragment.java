@@ -23,12 +23,13 @@ import java.util.TimerTask;
 import ir.tamuk.reservation.databinding.FragmentSignInValiddationcodeBinding;
 
 public class SignInValiddationcodeFragment extends Fragment {
-    private FragmentSignInValiddationcodeBinding  binding;
+    private FragmentSignInValiddationcodeBinding binding;
 
     NotificationManager NM;
 
     Timer t;
 
+    TimerTask timerTask;
 
 
     @Override
@@ -45,8 +46,6 @@ public class SignInValiddationcodeFragment extends Fragment {
         View root = binding.getRoot();
 
 
-
-
         binding.acceptButtonSigning.setOnClickListener(view -> {
             t.cancel();
             Navigation.findNavController(view).navigate(R.id.action_signInValiddationcodeFragment_to_factorFragment);
@@ -60,21 +59,21 @@ public class SignInValiddationcodeFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                switch (charSequence.length()){
+                switch (charSequence.length()) {
                     case 0:
-                        binding.edit1.setText("");
+                        binding.edit1.setText("__");
                         break;
                     case 1:
                         binding.edit1.setText(String.valueOf(charSequence.charAt(0)));
-                        binding.edit2.setText("");
+                        binding.edit2.setText("__");
                         break;
                     case 2:
                         binding.edit2.setText(String.valueOf(charSequence.charAt(1)));
-                        binding.edit3.setText("");
+                        binding.edit3.setText("__");
                         break;
                     case 3:
                         binding.edit3.setText(String.valueOf(charSequence.charAt(2)));
-                        binding.edit4.setText("");
+                        binding.edit4.setText("__");
                         break;
                     case 4:
                         binding.edit4.setText(String.valueOf(charSequence.charAt(3)));
@@ -84,47 +83,68 @@ public class SignInValiddationcodeFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                t.cancel();
 
 
             }
         });
+
         binding.flashe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Animation a= AnimationUtils.loadAnimation(getContext(), R.anim.rotation);
-                binding.image.startAnimation(a);
-                binding.textTimer.setText("120");
+                if(binding.textTimer.getText().equals("1")){
+                    Animation a = AnimationUtils.loadAnimation(getContext(), R.anim.rotation);
+                    binding.image.startAnimation(a);
+                    binding.textTimer.setText("120");
+                    binding.textTimer.getText().toString();
+                    t = new Timer();
+                    timerTask = new TimerTask() {
+                        @Override
+                        public void run() {
+                            try {
+                                getActivity().runOnUiThread(() -> {
+                                    binding.textTimer.setText(String.valueOf(Integer.parseInt(binding.textTimer.getText().toString()) - 1));
+                                    if (Integer.parseInt(binding.textTimer.getText().toString()) - 1 == 0) {
+                                        t.cancel();
+                                    }
+                                });
+                            } catch (Exception e) {
+                                t.cancel();
+                            }
+
+                        }
+                    };
+                    t.schedule(timerTask,1000,1000);
+
+                }
+
 
             }
         });
 
-        t = new Timer();
-        t.schedule(new TimerTask() {
+        timerTask = new TimerTask() {
             @Override
             public void run() {
                 try {
                     getActivity().runOnUiThread(() -> {
-                        binding.textTimer.setText(String.valueOf(Integer.parseInt(binding.textTimer.getText().toString())-1));
-                        if(Integer.parseInt(binding.textTimer.getText().toString())-1 == 0){
+                        binding.textTimer.setText(String.valueOf(Integer.parseInt(binding.textTimer.getText().toString()) - 1));
+                        if (Integer.parseInt(binding.textTimer.getText().toString()) - 1 == 0) {
                             t.cancel();
                         }
                     });
-                }catch (Exception e){
+                } catch (Exception e) {
                     t.cancel();
                 }
 
             }
-        },1000,1000);
+        };
+
+        t = new Timer();
+        t.schedule(timerTask, 1000, 1000);
 
 
-
-
-        binding.editing.setOnClickListener(new View.OnClickListener()
-
-        {
+        binding.editing.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View view){
+            public void onClick(View view) {
                 t.cancel();
                 findNavController(view).popBackStack();
 
@@ -134,15 +154,11 @@ public class SignInValiddationcodeFragment extends Fragment {
     }
 
 
-
     @Override
     public void onResume() {
         super.onResume();
 
     }
-
-
-
 
 
 }

@@ -8,223 +8,245 @@
     android:background="@color/login_blue">
 
     <!-- TODO: Update blank fragment layout -->
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:orientation="vertical"
-      android:paddingTop="@dimen/_100cdp"
-      >
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:orientation="vertical"
-          >
-          <androidx.cardview.widget.CardView
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="@color/white"
-              app:cardCornerRadius="@dimen/_5cdp"
-              android:layout_marginRight="@dimen/_100cdp"
-              android:layout_marginLeft="@dimen/_100cdp">
-              <LinearLayout
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:orientation="vertical">
-                  <TextView
-                      android:id="@+id/text"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:text="0913"
-                      android:fontFamily="@font/iran_sans_mob"
-                      android:gravity="center"
-                      android:textSize="@dimen/_20cdp"
-                      android:textColor="@color/login_blue"
-                      style="@style/fontForLargeBoldText"/>
-                  <LinearLayout
-                      android:id="@+id/editing"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:orientation="horizontal"
-                      android:gravity="center">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/_100cdp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:cardCornerRadius="@dimen/_5cdp"
+                android:layout_marginRight="@dimen/_100cdp"
+                android:layout_marginLeft="@dimen/_100cdp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/_15cdp">
+                    <TextView
+                        android:id="@+id/text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="0913"
+                        android:fontFamily="@font/iran_sans_mob"
+                        android:gravity="center"
+                        android:textSize="@dimen/_20cdp"
+                        android:textColor="@color/login_blue"
+                        style="@style/fontForLargeBoldText"/>
+                    <LinearLayout
+                        android:id="@+id/editing"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_marginBottom="@dimen/_15cdp">
 
-                      <TextView
-                          android:layout_width="wrap_content"
-                          android:layout_height="@dimen/_25cdp"
-                          android:text="ویرایش شماره"
-                          android:fontFamily="@font/iran_sans_mob"
-                          style="@style/fontForLargeBoldText"
-                          android:gravity="center"
-                          android:textColor="@color/red"/>
-                      <ImageView
-                          android:layout_width="wrap_content"
-                          android:layout_height="@dimen/_25cdp"
-                          android:src="@drawable/pen"/>
-                  </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_25cdp"
+                            android:text="ویرایش شماره"
+                            android:fontFamily="@font/iran_sans_mob"
+                            style="@style/fontForLargeBoldText"
+                            android:gravity="center"
+                            android:textColor="@color/red"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_25cdp"
+                            android:src="@drawable/pen"/>
+                    </LinearLayout>
 
-              </LinearLayout>
-
-
-          </androidx.cardview.widget.CardView>
-
-      </LinearLayout>
-
-      <LinearLayout
-          android:id="@+id/edit"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_weight="5"
-          android:orientation="vertical"
-          android:layout_marginLeft="@dimen/_5cdp"
-          android:layout_marginRight="@dimen/_5cdp"
-          >
-          <TextView
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_weight="1"
-              android:text="کد تایید را وارد نمایید"
-              style="@style/fontForLargeBoldText"
-              android:fontFamily="@font/iran_sans_mob"
-              android:gravity="center"
-              android:textColor="@color/white"
-              />
-          <RelativeLayout
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
-
-              <EditText
-                  android:id="@+id/code_edit"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:background="#00000000"
-                  android:maxLength="4"
-                  android:gravity="center"
-                  android:layout_alignLeft="@id/code_linear"
-                  android:layout_alignRight="@id/code_linear"
-                  android:singleLine="true"
-                  android:textColor="@color/white"
-                  android:fontFamily="@font/iran_sans_mob"/>
+                </LinearLayout>
 
 
-              <LinearLayout
-                  android:id="@+id/code_linear"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_marginLeft="@dimen/_100cdp"
-                  android:layout_marginRight="@dimen/_100cdp"
-                  android:background="@color/login_blue"
-                  android:gravity="center"
-                  android:orientation="horizontal"
-                  android:padding="@dimen/_10cdp">
+            </androidx.cardview.widget.CardView>
 
-                  <TextView
-                      android:id="@+id/edit1"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:fontFamily="@font/iran_sans_mob"
-                      android:gravity="center"
-                      android:maxLength="1"
-                      android:singleLine="true"
-                      android:text="__"
-                      android:textColor="@color/white" />
+        </LinearLayout>
 
-                  <TextView
-                      android:id="@+id/edit2"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:fontFamily="@font/iran_sans_mob"
-                      android:gravity="center"
-                      android:maxLength="1"
-                      android:singleLine="true"
-                      android:text="__"
-                      android:textColor="@color/white" />
+        <LinearLayout
+            android:id="@+id/edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/_5cdp"
+            android:layout_marginRight="@dimen/_5cdp"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="کد تایید را وارد نمایید"
+                style="@style/fontForLargeBoldText"
+                android:fontFamily="@font/iran_sans_mob"
+                android:gravity="center"
+                android:textColor="@color/white"
+                />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                  <TextView
-                      android:id="@+id/edit3"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:fontFamily="@font/iran_sans_mob"
-                      android:gravity="center"
-                      android:maxLength="1"
-                      android:singleLine="true"
-                      android:text="__"
-                      android:textColor="@color/white" />
-
-                  <TextView
-                      android:id="@+id/edit4"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:fontFamily="@font/iran_sans_mob"
-                      android:gravity="center"
-                      android:maxLength="1"
-                      android:singleLine="true"
-                      android:text="__"
-                      android:textColor="@color/white" />
+                <EditText
+                    android:id="@+id/code_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#00000000"
+                    android:maxLength="4"
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:layout_alignLeft="@id/code_linear"
+                    android:layout_alignRight="@id/code_linear"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/iran_sans_mob"/>
 
 
-              </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/code_linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_100cdp"
+                    android:layout_marginRight="@dimen/_100cdp"
+                    android:background="@color/login_blue"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_10cdp">
+
+                    <TextView
+                        android:id="@+id/edit1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/iran_sans_mob"
+                        android:gravity="center"
+                        android:maxLength="1"
+                        android:singleLine="true"
+                        android:text="__"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/edit2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/iran_sans_mob"
+                        android:gravity="center"
+                        android:maxLength="1"
+                        android:singleLine="true"
+                        android:text="__"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/edit3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/iran_sans_mob"
+                        android:gravity="center"
+                        android:maxLength="1"
+                        android:singleLine="true"
+                        android:text="__"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/edit4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/iran_sans_mob"
+                        android:gravity="center"
+                        android:maxLength="1"
+                        android:singleLine="true"
+                        android:text="___"
+                        android:textColor="@color/white" />
 
 
-          </RelativeLayout>
-          <TextView
-              android:id="@+id/text_Timer"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_weight="1"
-              android:text="120"
-              android:layout_gravity="center"
-              android:layout_marginRight="@dimen/_50cdp"
-              android:textColor="@color/white"/>
+                </LinearLayout>
 
 
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/text_Timer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="120"
+                    android:gravity="right"
+                    android:layout_marginRight="@dimen/_50cdp"
+                    android:textColor="@color/white"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="زمان باقی مانده:"
+                    android:textSize="@dimen/_15cdp"
+                    android:textColor="@color/red"
+                    android:gravity="left"
+                    android:fontFamily="@font/iran_sans_mob"
+                    style="@style/fontForMediumEditText"
+                    android:layout_weight="1"/>
 
 
-      </LinearLayout>
-      <LinearLayout
-          android:id="@+id/flashe"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="vertical"
-          android:layout_weight="6">
-          <ImageView
-              android:id="@+id/image"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_weight="1"
-              android:src="@drawable/fletcher"
-              android:layout_gravity="center"/>
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_weight="1"
-              android:text="ارسال مجدد"
-              style="@style/fontForMediumEditText"
-              android:textColor="@color/red"
-              android:layout_gravity="center"/>
-
-      </LinearLayout>
-
-          <com.google.android.material.button.MaterialButton
-              android:id="@+id/accept_button_signing"
-              style="@style/fontForMediumEditText"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_weight="1"
-              android:layout_marginLeft="@dimen/_47cdp"
-              android:layout_marginRight="@dimen/_47cdp"
-              android:layout_marginBottom="@dimen/_85cdp"
-              android:backgroundTint="@color/white"
-              android:text="تایید"
-              android:textColor="@color/backgroundSigning"
-              android:textStyle="bold"
-              app:cornerRadius="@dimen/_8cdp" />
+            </LinearLayout>
 
 
 
-  </LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/flashe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="6">
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/fletcher"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="ارسال مجدد"
+                style="@style/fontForMediumEditText"
+                android:textColor="@color/red"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/accept_button_signing"
+            style="@style/fontForMediumEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/_47cdp"
+            android:layout_marginRight="@dimen/_47cdp"
+            android:layout_marginBottom="@dimen/_85cdp"
+            android:backgroundTint="@color/white"
+            android:text="تایید"
+            android:textColor="@color/backgroundSigning"
+            android:textStyle="bold"
+            app:cornerRadius="@dimen/_8cdp" />
+
+
+
+    </LinearLayout>
 
 </FrameLayout>
