@@ -4,32 +4,34 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import android.app.ActionBar;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Menu;
+import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
-
-import java.util.Timer;
 
 import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.ActivityMainBinding;
+import ir.tamuk.reservation.fragments.ui.home.HomeFragment;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private AppBarConfiguration mAppBarConfiguration;
     NavController navController;
+    private boolean isDubblePress= false;
+
 
 
 
@@ -110,17 +112,32 @@ public class MainActivity extends AppCompatActivity {
         return super.onSupportNavigateUp();
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        navController.addOnDestinationChangedListener((navController, navDestination, bundle) -> {
-//
-//                    if (navDestination.getId() == R.id.signInValiddationcodeFragment) {
-//
-//                    } else {
-//                        super.onBackPressed();
-//                    }
-//        });
-//
-//
-//    }
+    //when in honme Fragment backPress dont work else doublePress
+    @Override
+    public void onBackPressed() {
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+
+            if (navController.getCurrentDestination().getId() == R.id.nav_home) {
+                if (isDubblePress) {
+
+                    Log.d("isDubblePress", "onBackPressed: ");
+                    finish();
+
+                } else {
+                    this.isDubblePress = true;
+                    Toast.makeText(this, "یبار دیگ بزن;)", Toast.LENGTH_SHORT).show();
+                    Handler h = new Handler();
+                    Runnable r = () -> {
+                        isDubblePress = false;
+                    };
+                    h.postDelayed(r, 4000);
+                }
+            } else {
+                super.onBackPressed();
+            }
+
+
+    }
+
+
 }

@@ -1,5 +1,7 @@
 package ir.tamuk.reservation.fragments.ui.reservation;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -35,6 +37,8 @@ import ir.tamuk.reservation.fragments.ui.reservation.adapter.ReserveAdapter;
 import ir.tamuk.reservation.fragments.ui.reservation.adapter.ReserveModel;
 import ir.tamuk.reservation.fragments.ui.reservation.adapter.RtlGridLayoutManager;
 import ir.tamuk.reservation.fragments.ui.reservation.database.SqlDatabaseReserve;
+import ir.tamuk.reservation.fragments.ui.reservation.notification.Constants;
+import ir.tamuk.reservation.fragments.ui.reservation.notification.MyNotificationManager;
 
 public class ReservationFragment extends Fragment {
     //binding
@@ -259,6 +263,7 @@ public class ReservationFragment extends Fragment {
         snackBarView.addView(custom_view, 0);
         snackbar.show();
     }
+
 
 
 
