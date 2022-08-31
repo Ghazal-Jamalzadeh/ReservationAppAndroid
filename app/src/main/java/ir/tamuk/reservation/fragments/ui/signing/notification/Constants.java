@@ -1,4 +1,4 @@
-package ir.tamuk.reservation.fragments.ui.reservation.notification;
+package ir.tamuk.reservation.fragments.ui.signing.notification;
 
 public class Constants {
     public static final String CHANNEL_ID = "my_channel_01";

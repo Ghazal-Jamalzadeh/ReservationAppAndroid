@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/backgroundSigning"
-    tools:context=".SigningFragment">
+    tools:context=".fragments.ui.signing.SigningFragment">
 
     <ImageView
         android:id="@+id/cancel_button_signing_"

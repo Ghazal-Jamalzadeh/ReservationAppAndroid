@@ -1,9 +1,8 @@
-package ir.tamuk.reservation.fragments.ui.reservation.notification;
+package ir.tamuk.reservation.fragments.ui.signing.notification;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 

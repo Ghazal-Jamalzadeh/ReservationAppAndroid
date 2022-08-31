@@ -1,0 +1,1245 @@
+Index: app/src/main/java/ir/tamuk/reservation/SignInValiddationcodeFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ir.tamuk.reservation;\r\n\r\nimport static androidx.navigation.Navigation.findNavController;\r\n\r\nimport android.app.Notification;\r\nimport android.app.NotificationManager;\r\nimport android.os.Bundle;\r\nimport android.text.Editable;\r\nimport android.text.TextWatcher;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.view.animation.Animation;\r\nimport android.view.animation.AnimationUtils;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.navigation.Navigation;\r\n\r\nimport java.util.Timer;\r\nimport java.util.TimerTask;\r\n\r\nimport ir.tamuk.reservation.databinding.FragmentSignInValiddationcodeBinding;\r\n\r\npublic class SignInValiddationcodeFragment extends Fragment {\r\n    private FragmentSignInValiddationcodeBinding  binding;\r\n\r\n    NotificationManager NM;\r\n\r\n    Timer t;\r\n\r\n\r\n\r\n    @Override\r\n    public void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n\r\n    }\r\n\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container,\r\n                             Bundle savedInstanceState) {\r\n        // Inflate the layout for this fragment\r\n        binding = FragmentSignInValiddationcodeBinding.inflate(inflater, container, false);\r\n        View root = binding.getRoot();\r\n\r\n\r\n\r\n\r\n        binding.acceptButtonSigning.setOnClickListener(view -> {\r\n            t.cancel();\r\n            Navigation.findNavController(view).navigate(R.id.action_signInValiddationcodeFragment_to_factorFragment);\r\n        });\r\n\r\n        binding.codeEdit.addTextChangedListener(new TextWatcher() {\r\n            @Override\r\n            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {\r\n\r\n            }\r\n\r\n            @Override\r\n            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {\r\n                switch (charSequence.length()){\r\n                    case 0:\r\n                        binding.edit1.setText(\"\");\r\n                        break;\r\n                    case 1:\r\n                        binding.edit1.setText(String.valueOf(charSequence.charAt(0)));\r\n                        binding.edit2.setText(\"\");\r\n                        break;\r\n                    case 2:\r\n                        binding.edit2.setText(String.valueOf(charSequence.charAt(1)));\r\n                        binding.edit3.setText(\"\");\r\n                        break;\r\n                    case 3:\r\n                        binding.edit3.setText(String.valueOf(charSequence.charAt(2)));\r\n                        binding.edit4.setText(\"\");\r\n                        break;\r\n                    case 4:\r\n                        binding.edit4.setText(String.valueOf(charSequence.charAt(3)));\r\n                        break;\r\n                }\r\n            }\r\n\r\n            @Override\r\n            public void afterTextChanged(Editable editable) {\r\n                t.cancel();\r\n\r\n\r\n            }\r\n        });\r\n        binding.flashe.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Animation a= AnimationUtils.loadAnimation(getContext(), R.anim.rotation);\r\n                binding.image.startAnimation(a);\r\n                binding.textTimer.setText(\"120\");\r\n\r\n            }\r\n        });\r\n\r\n        t = new Timer();\r\n        t.schedule(new TimerTask() {\r\n            @Override\r\n            public void run() {\r\n                try {\r\n                    getActivity().runOnUiThread(() -> {\r\n                        binding.textTimer.setText(String.valueOf(Integer.parseInt(binding.textTimer.getText().toString())-1));\r\n                        if(Integer.parseInt(binding.textTimer.getText().toString())-1 == 0){\r\n                            t.cancel();\r\n                        }\r\n                    });\r\n                }catch (Exception e){\r\n                    t.cancel();\r\n                }\r\n\r\n            }\r\n        },1000,1000);\r\n\r\n\r\n\r\n\r\n        binding.editing.setOnClickListener(new View.OnClickListener()\r\n\r\n        {\r\n            @Override\r\n            public void onClick (View view){\r\n                t.cancel();\r\n                findNavController(view).popBackStack();\r\n\r\n            }\r\n        });\r\n        return root;\r\n    }\r\n\r\n\r\n\r\n    @Override\r\n    public void onResume() {\r\n        super.onResume();\r\n\r\n    }\r\n\r\n\r\n\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/ir/tamuk/reservation/SignInValiddationcodeFragment.java b/app/src/main/java/ir/tamuk/reservation/SignInValiddationcodeFragment.java
+--- a/app/src/main/java/ir/tamuk/reservation/SignInValiddationcodeFragment.java	(revision 8a12203577eaa46d89fc7780d72a23842482c74c)
++++ b/app/src/main/java/ir/tamuk/reservation/SignInValiddationcodeFragment.java	(date 1661755449933)
+@@ -23,12 +23,13 @@
+ import ir.tamuk.reservation.databinding.FragmentSignInValiddationcodeBinding;
+ 
+ public class SignInValiddationcodeFragment extends Fragment {
+-    private FragmentSignInValiddationcodeBinding  binding;
++    private FragmentSignInValiddationcodeBinding binding;
+ 
+     NotificationManager NM;
+ 
+     Timer t;
+ 
++    TimerTask timerTask;
+ 
+ 
+     @Override
+@@ -45,8 +46,6 @@
+         View root = binding.getRoot();
+ 
+ 
+-
+-
+         binding.acceptButtonSigning.setOnClickListener(view -> {
+             t.cancel();
+             Navigation.findNavController(view).navigate(R.id.action_signInValiddationcodeFragment_to_factorFragment);
+@@ -60,21 +59,21 @@
+ 
+             @Override
+             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+-                switch (charSequence.length()){
++                switch (charSequence.length()) {
+                     case 0:
+-                        binding.edit1.setText("");
++                        binding.edit1.setText("__");
+                         break;
+                     case 1:
+                         binding.edit1.setText(String.valueOf(charSequence.charAt(0)));
+-                        binding.edit2.setText("");
++                        binding.edit2.setText("__");
+                         break;
+                     case 2:
+                         binding.edit2.setText(String.valueOf(charSequence.charAt(1)));
+-                        binding.edit3.setText("");
++                        binding.edit3.setText("__");
+                         break;
+                     case 3:
+                         binding.edit3.setText(String.valueOf(charSequence.charAt(2)));
+-                        binding.edit4.setText("");
++                        binding.edit4.setText("__");
+                         break;
+                     case 4:
+                         binding.edit4.setText(String.valueOf(charSequence.charAt(3)));
+@@ -84,47 +83,68 @@
+ 
+             @Override
+             public void afterTextChanged(Editable editable) {
+-                t.cancel();
+ 
+ 
+             }
+         });
++
+         binding.flashe.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+-                Animation a= AnimationUtils.loadAnimation(getContext(), R.anim.rotation);
+-                binding.image.startAnimation(a);
+-                binding.textTimer.setText("120");
+-
+-            }
+-        });
+-
+-        t = new Timer();
+-        t.schedule(new TimerTask() {
+-            @Override
+-            public void run() {
+-                try {
+-                    getActivity().runOnUiThread(() -> {
+-                        binding.textTimer.setText(String.valueOf(Integer.parseInt(binding.textTimer.getText().toString())-1));
+-                        if(Integer.parseInt(binding.textTimer.getText().toString())-1 == 0){
+-                            t.cancel();
+-                        }
+-                    });
+-                }catch (Exception e){
+-                    t.cancel();
+-                }
++                if(binding.textTimer.getText().equals("1")){
++                    Animation a = AnimationUtils.loadAnimation(getContext(), R.anim.rotation);
++                    binding.image.startAnimation(a);
++                    binding.textTimer.setText("120");
++                    binding.textTimer.getText().toString();
++                    t = new Timer();
++                    timerTask = new TimerTask() {
++                        @Override
++                        public void run() {
++                            try {
++                                getActivity().runOnUiThread(() -> {
++                                    binding.textTimer.setText(String.valueOf(Integer.parseInt(binding.textTimer.getText().toString()) - 1));
++                                    if (Integer.parseInt(binding.textTimer.getText().toString()) - 1 == 0) {
++                                        t.cancel();
++                                    }
++                                });
++                            } catch (Exception e) {
++                                t.cancel();
++                            }
+ 
+-            }
+-        },1000,1000);
++                        }
++                    };
++                    t.schedule(timerTask,1000,1000);
++
++                }
+ 
+ 
++            }
++        });
+ 
++        timerTask = new TimerTask() {
++            @Override
++            public void run() {
++                try {
++                    getActivity().runOnUiThread(() -> {
++                        binding.textTimer.setText(String.valueOf(Integer.parseInt(binding.textTimer.getText().toString()) - 1));
++                        if (Integer.parseInt(binding.textTimer.getText().toString()) - 1 == 0) {
++                            t.cancel();
++                        }
++                    });
++                } catch (Exception e) {
++                    t.cancel();
++                }
+ 
+-        binding.editing.setOnClickListener(new View.OnClickListener()
++            }
++        };
+ 
+-        {
++        t = new Timer();
++        t.schedule(timerTask, 1000, 1000);
++
++
++        binding.editing.setOnClickListener(new View.OnClickListener() {
+             @Override
+-            public void onClick (View view){
++            public void onClick(View view) {
+                 t.cancel();
+                 findNavController(view).popBackStack();
+ 
+@@ -134,7 +154,6 @@
+     }
+ 
+ 
+-
+     @Override
+     public void onResume() {
+         super.onResume();
+@@ -142,7 +161,4 @@
+     }
+ 
+ 
+-
+-
+-
+ }
+\ No newline at end of file
+Index: app/src/main/res/layout/fragment_sign_in_validdationcode.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FrameLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    tools:context=\".SignInValiddationcodeFragment\"\r\n    android:background=\"@color/login_blue\">\r\n\r\n    <!-- TODO: Update blank fragment layout -->\r\n  <LinearLayout\r\n      android:layout_width=\"match_parent\"\r\n      android:layout_height=\"match_parent\"\r\n      android:orientation=\"vertical\"\r\n      android:paddingTop=\"@dimen/_100cdp\"\r\n      >\r\n      <LinearLayout\r\n          android:layout_width=\"match_parent\"\r\n          android:layout_height=\"wrap_content\"\r\n          android:layout_weight=\"1\"\r\n          android:orientation=\"vertical\"\r\n          >\r\n          <androidx.cardview.widget.CardView\r\n              android:layout_width=\"match_parent\"\r\n              android:layout_height=\"wrap_content\"\r\n              android:background=\"@color/white\"\r\n              app:cardCornerRadius=\"@dimen/_5cdp\"\r\n              android:layout_marginRight=\"@dimen/_100cdp\"\r\n              android:layout_marginLeft=\"@dimen/_100cdp\">\r\n              <LinearLayout\r\n                  android:layout_width=\"match_parent\"\r\n                  android:layout_height=\"match_parent\"\r\n                  android:orientation=\"vertical\">\r\n                  <TextView\r\n                      android:id=\"@+id/text\"\r\n                      android:layout_width=\"match_parent\"\r\n                      android:layout_height=\"wrap_content\"\r\n                      android:text=\"0913\"\r\n                      android:fontFamily=\"@font/iran_sans_mob\"\r\n                      android:gravity=\"center\"\r\n                      android:textSize=\"@dimen/_20cdp\"\r\n                      android:textColor=\"@color/login_blue\"\r\n                      style=\"@style/fontForLargeBoldText\"/>\r\n                  <LinearLayout\r\n                      android:id=\"@+id/editing\"\r\n                      android:layout_width=\"match_parent\"\r\n                      android:layout_height=\"wrap_content\"\r\n                      android:orientation=\"horizontal\"\r\n                      android:gravity=\"center\">\r\n\r\n                      <TextView\r\n                          android:layout_width=\"wrap_content\"\r\n                          android:layout_height=\"@dimen/_25cdp\"\r\n                          android:text=\"ویرایش شماره\"\r\n                          android:fontFamily=\"@font/iran_sans_mob\"\r\n                          style=\"@style/fontForLargeBoldText\"\r\n                          android:gravity=\"center\"\r\n                          android:textColor=\"@color/red\"/>\r\n                      <ImageView\r\n                          android:layout_width=\"wrap_content\"\r\n                          android:layout_height=\"@dimen/_25cdp\"\r\n                          android:src=\"@drawable/pen\"/>\r\n                  </LinearLayout>\r\n\r\n              </LinearLayout>\r\n\r\n\r\n          </androidx.cardview.widget.CardView>\r\n\r\n      </LinearLayout>\r\n\r\n      <LinearLayout\r\n          android:id=\"@+id/edit\"\r\n          android:layout_width=\"match_parent\"\r\n          android:layout_height=\"wrap_content\"\r\n          android:layout_weight=\"5\"\r\n          android:orientation=\"vertical\"\r\n          android:layout_marginLeft=\"@dimen/_5cdp\"\r\n          android:layout_marginRight=\"@dimen/_5cdp\"\r\n          >\r\n          <TextView\r\n              android:layout_width=\"match_parent\"\r\n              android:layout_height=\"wrap_content\"\r\n              android:layout_weight=\"1\"\r\n              android:text=\"کد تایید را وارد نمایید\"\r\n              style=\"@style/fontForLargeBoldText\"\r\n              android:fontFamily=\"@font/iran_sans_mob\"\r\n              android:gravity=\"center\"\r\n              android:textColor=\"@color/white\"\r\n              />\r\n          <RelativeLayout\r\n              android:layout_width=\"match_parent\"\r\n              android:layout_height=\"wrap_content\">\r\n\r\n              <EditText\r\n                  android:id=\"@+id/code_edit\"\r\n                  android:layout_width=\"match_parent\"\r\n                  android:layout_height=\"wrap_content\"\r\n                  android:background=\"#00000000\"\r\n                  android:maxLength=\"4\"\r\n                  android:gravity=\"center\"\r\n                  android:layout_alignLeft=\"@id/code_linear\"\r\n                  android:layout_alignRight=\"@id/code_linear\"\r\n                  android:singleLine=\"true\"\r\n                  android:textColor=\"@color/white\"\r\n                  android:fontFamily=\"@font/iran_sans_mob\"/>\r\n\r\n\r\n              <LinearLayout\r\n                  android:id=\"@+id/code_linear\"\r\n                  android:layout_width=\"match_parent\"\r\n                  android:layout_height=\"wrap_content\"\r\n                  android:layout_marginLeft=\"@dimen/_100cdp\"\r\n                  android:layout_marginRight=\"@dimen/_100cdp\"\r\n                  android:background=\"@color/login_blue\"\r\n                  android:gravity=\"center\"\r\n                  android:orientation=\"horizontal\"\r\n                  android:padding=\"@dimen/_10cdp\">\r\n\r\n                  <TextView\r\n                      android:id=\"@+id/edit1\"\r\n                      android:layout_width=\"wrap_content\"\r\n                      android:layout_height=\"wrap_content\"\r\n                      android:layout_weight=\"1\"\r\n                      android:fontFamily=\"@font/iran_sans_mob\"\r\n                      android:gravity=\"center\"\r\n                      android:maxLength=\"1\"\r\n                      android:singleLine=\"true\"\r\n                      android:text=\"__\"\r\n                      android:textColor=\"@color/white\" />\r\n\r\n                  <TextView\r\n                      android:id=\"@+id/edit2\"\r\n                      android:layout_width=\"wrap_content\"\r\n                      android:layout_height=\"wrap_content\"\r\n                      android:layout_weight=\"1\"\r\n                      android:fontFamily=\"@font/iran_sans_mob\"\r\n                      android:gravity=\"center\"\r\n                      android:maxLength=\"1\"\r\n                      android:singleLine=\"true\"\r\n                      android:text=\"__\"\r\n                      android:textColor=\"@color/white\" />\r\n\r\n                  <TextView\r\n                      android:id=\"@+id/edit3\"\r\n                      android:layout_width=\"wrap_content\"\r\n                      android:layout_height=\"wrap_content\"\r\n                      android:layout_weight=\"1\"\r\n                      android:fontFamily=\"@font/iran_sans_mob\"\r\n                      android:gravity=\"center\"\r\n                      android:maxLength=\"1\"\r\n                      android:singleLine=\"true\"\r\n                      android:text=\"__\"\r\n                      android:textColor=\"@color/white\" />\r\n\r\n                  <TextView\r\n                      android:id=\"@+id/edit4\"\r\n                      android:layout_width=\"wrap_content\"\r\n                      android:layout_height=\"wrap_content\"\r\n                      android:layout_weight=\"1\"\r\n                      android:fontFamily=\"@font/iran_sans_mob\"\r\n                      android:gravity=\"center\"\r\n                      android:maxLength=\"1\"\r\n                      android:singleLine=\"true\"\r\n                      android:text=\"__\"\r\n                      android:textColor=\"@color/white\" />\r\n\r\n\r\n              </LinearLayout>\r\n\r\n\r\n          </RelativeLayout>\r\n          <TextView\r\n              android:id=\"@+id/text_Timer\"\r\n              android:layout_width=\"wrap_content\"\r\n              android:layout_height=\"wrap_content\"\r\n              android:layout_weight=\"1\"\r\n              android:text=\"120\"\r\n              android:layout_gravity=\"center\"\r\n              android:layout_marginRight=\"@dimen/_50cdp\"\r\n              android:textColor=\"@color/white\"/>\r\n\r\n\r\n\r\n\r\n      </LinearLayout>\r\n      <LinearLayout\r\n          android:id=\"@+id/flashe\"\r\n          android:layout_width=\"match_parent\"\r\n          android:layout_height=\"wrap_content\"\r\n          android:orientation=\"vertical\"\r\n          android:layout_weight=\"6\">\r\n          <ImageView\r\n              android:id=\"@+id/image\"\r\n              android:layout_width=\"wrap_content\"\r\n              android:layout_height=\"wrap_content\"\r\n              android:layout_weight=\"1\"\r\n              android:src=\"@drawable/fletcher\"\r\n              android:layout_gravity=\"center\"/>\r\n          <TextView\r\n              android:layout_width=\"wrap_content\"\r\n              android:layout_height=\"wrap_content\"\r\n              android:layout_weight=\"1\"\r\n              android:text=\"ارسال مجدد\"\r\n              style=\"@style/fontForMediumEditText\"\r\n              android:textColor=\"@color/red\"\r\n              android:layout_gravity=\"center\"/>\r\n\r\n      </LinearLayout>\r\n\r\n          <com.google.android.material.button.MaterialButton\r\n              android:id=\"@+id/accept_button_signing\"\r\n              style=\"@style/fontForMediumEditText\"\r\n              android:layout_width=\"match_parent\"\r\n              android:layout_height=\"wrap_content\"\r\n              android:layout_weight=\"1\"\r\n              android:layout_marginLeft=\"@dimen/_47cdp\"\r\n              android:layout_marginRight=\"@dimen/_47cdp\"\r\n              android:layout_marginBottom=\"@dimen/_85cdp\"\r\n              android:backgroundTint=\"@color/white\"\r\n              android:text=\"تایید\"\r\n              android:textColor=\"@color/backgroundSigning\"\r\n              android:textStyle=\"bold\"\r\n              app:cornerRadius=\"@dimen/_8cdp\" />\r\n\r\n\r\n\r\n  </LinearLayout>\r\n\r\n</FrameLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_sign_in_validdationcode.xml b/app/src/main/res/layout/fragment_sign_in_validdationcode.xml
+--- a/app/src/main/res/layout/fragment_sign_in_validdationcode.xml	(revision 8a12203577eaa46d89fc7780d72a23842482c74c)
++++ b/app/src/main/res/layout/fragment_sign_in_validdationcode.xml	(date 1661755449922)
+@@ -30,7 +30,8 @@
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+-                  android:orientation="vertical">
++                  android:orientation="vertical"
++                  android:layout_marginTop="@dimen/_15cdp">
+                   <TextView
+                       android:id="@+id/text"
+                       android:layout_width="match_parent"
+@@ -46,7 +47,8 @@
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal"
+-                      android:gravity="center">
++                      android:gravity="center"
++                      android:layout_marginBottom="@dimen/_15cdp">
+ 
+                       <TextView
+                           android:layout_width="wrap_content"
+@@ -98,6 +100,7 @@
+                   android:layout_height="wrap_content"
+                   android:background="#00000000"
+                   android:maxLength="4"
++                  android:inputType="number"
+                   android:gravity="center"
+                   android:layout_alignLeft="@id/code_linear"
+                   android:layout_alignRight="@id/code_linear"
+@@ -162,7 +165,7 @@
+                       android:gravity="center"
+                       android:maxLength="1"
+                       android:singleLine="true"
+-                      android:text="__"
++                      android:text="___"
+                       android:textColor="@color/white" />
+ 
+ 
+@@ -170,15 +173,34 @@
+ 
+ 
+           </RelativeLayout>
+-          <TextView
+-              android:id="@+id/text_Timer"
+-              android:layout_width="wrap_content"
+-              android:layout_height="wrap_content"
+-              android:layout_weight="1"
+-              android:text="120"
+-              android:layout_gravity="center"
+-              android:layout_marginRight="@dimen/_50cdp"
+-              android:textColor="@color/white"/>
++          <LinearLayout
++              android:layout_width="match_parent"
++              android:layout_height="wrap_content"
++              android:layout_weight=".5"
++              android:orientation="horizontal">
++              <TextView
++                  android:id="@+id/text_Timer"
++                  android:layout_width="wrap_content"
++                  android:layout_height="wrap_content"
++                  android:layout_weight="1"
++                  android:text="120"
++                  android:gravity="right"
++                  android:layout_marginRight="@dimen/_50cdp"
++                  android:textColor="@color/white"/>
++              <TextView
++                  android:layout_width="wrap_content"
++                  android:layout_height="wrap_content"
++                  android:text="زمان باقی مانده:"
++                  android:textSize="@dimen/_15cdp"
++                  android:textColor="@color/red"
++                  android:gravity="left"
++                  android:fontFamily="@font/iran_sans_mob"
++                  style="@style/fontForMediumEditText"
++                  android:layout_weight="1"/>
++
++
++          </LinearLayout>
++
+ 
+ 
+ 
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_8_21_2022_2_40_PM__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_8_21_2022_2_40_PM__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_8_21_2022_2_40_PM__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_8_21_2022_2_40_PM__Changes_.xml	(revision 8a12203577eaa46d89fc7780d72a23842482c74c)
++++ /dev/null	(revision 8a12203577eaa46d89fc7780d72a23842482c74c)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_8_21_2022_2_40_PM_[Changes]" date="1661076623754" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_8_21_2022_2_40_PM_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 8/21/2022 2:40 PM [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_8_21_2022_2_40_PM_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_8_21_2022_2_40_PM_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_8_21_2022_2_40_PM_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_8_21_2022_2_40_PM_[Changes]/shelved.patch	(revision 8a12203577eaa46d89fc7780d72a23842482c74c)
++++ /dev/null	(revision 8a12203577eaa46d89fc7780d72a23842482c74c)
+@@ -1,900 +0,0 @@
+-Index: app/src/main/java/ir/tamuk/reservation/fragments/ui/reservation/ReservationFragment.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package ir.tamuk.reservation.fragments.ui.reservation;\r\n\r\nimport android.content.Context;\r\nimport android.os.Bundle;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.AdapterView;\r\nimport android.widget.ArrayAdapter;\r\nimport android.widget.Spinner;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.lifecycle.ViewModelProvider;\r\n\r\nimport ir.tamuk.reservation.R;\r\nimport ir.tamuk.reservation.databinding.FragmentReservationBinding;\r\n\r\npublic class ReservationFragment extends Fragment {\r\n\r\n    private FragmentReservationBinding binding;\r\n\r\n    public Context context = getContext();\r\n\r\n\r\n    public View onCreateView(@NonNull LayoutInflater inflater,\r\n                             ViewGroup container, Bundle savedInstanceState) {\r\n        ReservationViewModel galleryViewModel =\r\n                new ViewModelProvider(this).get(ReservationViewModel.class);\r\n\r\n        binding = FragmentReservationBinding.inflate(inflater, container, false);\r\n        View root = binding.getRoot();\r\n\r\n        Spinnerr();\r\n        return root;\r\n    }\r\n\r\n    @Override\r\n    public void onDestroyView() {\r\n        super.onDestroyView();\r\n        binding = null;\r\n    }\r\n\r\n    public  void Spinnerr(){\r\n\r\n        String[] items = new String[]\r\n                {\"همه موارد\"  , \"دست\", \"پا\", \"بدن\" };\r\n        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(),R.layout.font_spinner, items);\r\n        binding.spinnerServices.setAdapter(arrayAdapter);\r\n        binding.spinnerServices.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {\r\n            @Override\r\n            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {\r\n                switch (position) {\r\n                    case 0:\r\n\r\n                        break;\r\n                    case 1:\r\n\r\n                        break;\r\n                    case 2:\r\n\r\n                        break;\r\n                    case 3:\r\n\r\n                        break;\r\n                }\r\n            }\r\n\r\n            @Override\r\n            public void onNothingSelected(AdapterView<?> adapterView) {\r\n                Toast.makeText(context, \"لطفا یکی از خدمات رو انتخاب کنید\", Toast.LENGTH_SHORT).show();\r\n            }\r\n        });\r\n\r\n    }\r\n}
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/java/ir/tamuk/reservation/fragments/ui/reservation/ReservationFragment.java b/app/src/main/java/ir/tamuk/reservation/fragments/ui/reservation/ReservationFragment.java
+---- a/app/src/main/java/ir/tamuk/reservation/fragments/ui/reservation/ReservationFragment.java	(revision 235e836196a941c7ea89a5d5cd2e0c32e4d5c801)
+-+++ b/app/src/main/java/ir/tamuk/reservation/fragments/ui/reservation/ReservationFragment.java	(date 1661076536171)
+-@@ -1,7 +1,9 @@
+- package ir.tamuk.reservation.fragments.ui.reservation;
+- 
+- import android.content.Context;
+-+import android.graphics.Typeface;
+- import android.os.Bundle;
+-+import android.util.Log;
+- import android.view.LayoutInflater;
+- import android.view.View;
+- import android.view.ViewGroup;
+-@@ -12,18 +14,41 @@
+- import android.widget.Toast;
+- 
+- import androidx.annotation.NonNull;
+-+import androidx.core.content.res.ResourcesCompat;
+- import androidx.fragment.app.Fragment;
+- import androidx.lifecycle.ViewModelProvider;
+-+import androidx.recyclerview.widget.LinearLayoutManager;
+-+import androidx.recyclerview.widget.RecyclerView;
+-+
+-+import com.dariushm2.PersianCaldroid.caldroidfragment.PersianCaldroidFragment;
+- 
+-+import java.util.ArrayList;
+-+import java.util.HashMap;
+-+import java.util.Objects;
+-+
+-+import calendar.PersianDate;
+- import ir.tamuk.reservation.R;
+- import ir.tamuk.reservation.databinding.FragmentReservationBinding;
+-+import ir.tamuk.reservation.fragments.ui.reservation.adapter.ReserveAdapter;
+-+import ir.tamuk.reservation.fragments.ui.reservation.adapter.ReserveModel;
+-+import ir.tamuk.reservation.fragments.ui.reservation.database.SqlDatabaseReserve;
+- 
+- public class ReservationFragment extends Fragment {
+- 
+-     private FragmentReservationBinding binding;
+- 
+-+    public ReserveAdapter adapter;
+-+
+-+
+-     public Context context = getContext();
+- 
+-+    public String date_show;
+-+
+-+    public String[] week = {
+-+            "",
+-+            "شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنجشنبه", "جمعه"
+-+    };
+-+
+- 
+-     public View onCreateView(@NonNull LayoutInflater inflater,
+-                              ViewGroup container, Bundle savedInstanceState) {
+-@@ -33,6 +58,13 @@
+-         binding = FragmentReservationBinding.inflate(inflater, container, false);
+-         View root = binding.getRoot();
+- 
+-+
+-+
+-+
+-+
+-+        Recycler();
+-+        Tabale();
+-+        Calender();
+-         Spinnerr();
+-         return root;
+-     }
+-@@ -74,5 +106,109 @@
+-             }
+-         });
+- 
+-+
+-     }
+-+
+-+    public void Calender(){
+-+        PersianCaldroidFragment persianCaldroidFragment = new PersianCaldroidFragment();
+-+        // Set font
+-+//        Typeface typeface = getResources().getFont(R.font.iraniansans);
+-+        Typeface typeface = ResourcesCompat.getFont(getContext(), R.font.iraniansans);
+-+        persianCaldroidFragment.setTypeface(typeface);
+-+        persianCaldroidFragment.setOnDateClickListener(new PersianCaldroidFragment.OnDateClickListener() {
+-+            @Override
+-+            public void onDateClick(PersianDate persianDate) {
+-+
+-+                // Do something when a date is clicked
+-+                binding.monthCardReservation.setText(persianDate.getMonthName());
+-+                binding.daysCardReservation.setText(String.valueOf(persianDate.getDayOfMonth()));
+-+                int i = persianDate.getDayOfWeek();
+-+                binding.weekCardReservation.setText(week[i]);
+-+                Recycler();
+-+
+-+
+-+            }
+-+        });
+-+        persianCaldroidFragment.setOnChangeMonthListener(new PersianCaldroidFragment.OnChangeMonthListener() {
+-+            @Override
+-+            public void onChangeMonth() {
+-+
+-+                // Do something when user switches to previous or next month
+-+
+-+            }
+-+        });
+-+        /* Add dates with a specified colors, you want to be circled on calendar */
+-+        HashMap<PersianDate, Integer> backgroundForDatesMap = new HashMap<>();
+-+        backgroundForDatesMap.put(new PersianDate(), R.color.main);
+-+        persianCaldroidFragment.setBackgroundResourceForDates(backgroundForDatesMap);
+-+        PersianDate persianDate = new PersianDate();
+-+        binding.daysCardReservation.setText(String.valueOf(persianDate.getDayOfMonth()));
+-+        binding.monthCardReservation.setText(persianDate.getMonthName());
+-+        int i = persianDate.getDayOfWeek();
+-+        binding.weekCardReservation.setText(week[i]);
+-+
+-+
+-+        requireActivity().getSupportFragmentManager().beginTransaction().replace(
+-+                R.id.persianCaldroid,
+-+                persianCaldroidFragment,
+-+                PersianCaldroidFragment.class.getName()).commit();
+-+
+-+        date_show = String.valueOf(persianDate.getYear())+"-"+String.valueOf(persianDate.getMonth())+"-"+String.valueOf(persianDate.getDayOfMonth());
+-+        Log.d("CALENDER DATE", "Calender: "+date_show);
+-+    }
+-+
+-+    public void Tabale() {
+-+        SqlDatabaseReserve sqlDatabase = new SqlDatabaseReserve(getContext());
+-+        sqlDatabase.Insert("1401-5-25T09:00:00.000z", "09:00 تا 10:00", 1, "پا");
+-+        sqlDatabase.Insert("1401-5-25T11:00:00.000z", "11:00 تا 12:00", 1, "بدن");
+-+        sqlDatabase.Insert("1401-5-25T12:30:00.000z", "12:30 تا 13:00", 1, "پا");
+-+        sqlDatabase.Insert("1401-5-25T13:00:00.000z", "13:00 تا 14:00", 1, "پا");
+-+        sqlDatabase.Insert("1401-5-25T14:00:00.000z", "14:00 تا 15:00", 1, "بدن");
+-+        sqlDatabase.Insert("1401-5-25T15:00:00.000z", "15:00 تا 16:00", 1, "پا");
+-+        sqlDatabase.Insert("1401-5-25T16:00:00.000z", "20:00 تا 21:00", 1, "دست");
+-+
+-+
+-+        sqlDatabase.Insert("1401-5-26T11:00:00.000z", "11:00 تا 12:00", 0, "بدن");
+-+        sqlDatabase.Insert("1401-5-26T12:30:00.000z", "12:30 تا 13:30", 0, "بدن");
+-+        sqlDatabase.Insert("1401-5-26T14:00:00.000z", "14:00 تا 16:00", 0, "پا");
+-+        sqlDatabase.Insert("1401-5-26T17:00:00.000z", "17:00 تا 18:00", 0 , "دست");
+-+        sqlDatabase.Insert("1401-5-26T19:00:00.000z", "19:00 تا 20:00", 0, "بدن");
+-+    }
+-+
+-+    public void Recycler() {
+-+        SqlDatabaseReserve sqlDatabaseReserve = new SqlDatabaseReserve(getContext());
+-+        ArrayList<ReserveModel> reserveModels = sqlDatabaseReserve.getData();
+-+        ArrayList<ReserveModel> result = new ArrayList<>();
+-+
+-+        for ( int i = 0; i<reserveModels.size(); i++) {
+-+
+-+            if (binding.spinnerServices.getSelectedItemPosition() == 0) {
+-+                if (reserveModels.get(i).id.contains("1401-5-26")) {
+-+                    result.add(reserveModels.get(i));
+-+                }
+-+            }else if (reserveModels.get(i).id.contains("1401-5-26")
+-+                    && reserveModels.get(i).service.equals(binding.spinnerServices.getSelectedItem())) {
+-+                result.add(reserveModels.get(i));
+-+            }
+-+        }
+-+        reserveModels.clear();
+-+        reserveModels.addAll(result);
+-+
+-+//        Log.d(TAG, "Recycler: " + reserveModels.size());
+-+
+-+        LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(getContext(),
+-+                RecyclerView.HORIZONTAL, false);
+-+        binding.recyclerViewMorningReserve.setLayoutManager(verticalLayoutManager);
+-+        adapter = new ReserveAdapter( reserveModels);
+-+        binding.recyclerViewMorningReserve.setAdapter(adapter);
+-+//        if (result.isEmpty()){
+-+//            em.setVisibility(View.VISIBLE);
+-+//        }else {
+-+//            em.setVisibility(View.INVISIBLE);
+-+//        }
+-+        adapter.notifyDataSetChanged();
+-+
+-+
+-+    }
+-+
+- }
+-\ No newline at end of file
+-Index: app/build.gradle
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>plugins {\r\n    id 'com.android.application'\r\n}\r\n\r\nandroid {\r\n    compileSdk 32\r\n\r\n    defaultConfig {\r\n        applicationId \"ir.tamuk.reservation\"\r\n        minSdk 21\r\n        targetSdk 32\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_1_8\r\n        targetCompatibility JavaVersion.VERSION_1_8\r\n    }\r\n\r\n    buildFeatures {\r\n        viewBinding true\r\n    }\r\n}\r\n\r\ndependencies {\r\n\r\n    implementation 'androidx.appcompat:appcompat:1.4.2'\r\n    implementation 'com.google.android.material:material:1.6.1'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'\r\n    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'\r\n    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'\r\n    implementation 'androidx.navigation:navigation-fragment:2.5.1'\r\n    implementation 'androidx.navigation:navigation-ui:2.5.1'\r\n    testImplementation 'junit:junit:4.13.2'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.3'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'\r\n    //Picasso\r\n    implementation 'com.squareup.picasso:picasso:2.71828'\r\n    //Retrofit\r\n    /*\r\n    این رتروفیت اصلی است\r\n    */\r\n    implementation 'com.squareup.retrofit2:retrofit:2.9.0'\r\n    /*\r\n    برای قابل فهم کردن جیسون برای اندروید Gson به کار میرود.\r\n    * */\r\n    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'\r\n    //Client\r\n    /*\r\n    اعمال تنظیمات بیشتر برای رتروفیت مثلا زمان انتظار و...\r\n    * */\r\n    implementation 'com.squareup.okhttp3:okhttp:4.9.1'\r\n    //Gson\r\n    implementation 'com.google.code.gson:gson:2.9.0'\r\n\r\n    //FastNetworking Lib for MultipartRequest\r\n//    implementation 'com.amitshekhar.android:android-networking:1.0.2'\r\n\r\n    implementation 'com.github.maks1990:CDP:1.0.1'\r\n\r\n\r\n}
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/build.gradle b/app/build.gradle
+---- a/app/build.gradle	(revision 235e836196a941c7ea89a5d5cd2e0c32e4d5c801)
+-+++ b/app/build.gradle	(date 1661071766532)
+-@@ -33,7 +33,7 @@
+- 
+- dependencies {
+- 
+--    implementation 'androidx.appcompat:appcompat:1.4.2'
+-+    implementation 'androidx.appcompat:appcompat:1.5.0'
+-     implementation 'com.google.android.material:material:1.6.1'
+-     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+-     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+-@@ -67,5 +67,6 @@
+- 
+-     implementation 'com.github.maks1990:CDP:1.0.1'
+- 
+-+    implementation 'com.github.dariushm2:PersianCaldroid:1.0.1'
+- 
+- }
+-\ No newline at end of file
+-Index: app/src/main/res/layout/fragment_reservation.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.core.widget.NestedScrollView\r\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    tools:context=\".fragments.ui.reservation.ReservationFragment\"\r\n\r\n\r\n    >\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:orientation=\"vertical\"\r\n        >\r\n\r\n        <androidx.cardview.widget.CardView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"@dimen/_50cdp\"\r\n            android:layout_marginRight=\"@dimen/_15cdp\"\r\n            android:layout_marginTop=\"@dimen/_10cdp\"\r\n            android:layout_marginLeft=\"@dimen/_15cdp\"\r\n            app:cardCornerRadius=\"@dimen/_16cdp\"\r\n            >\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:orientation=\"horizontal\"\r\n                >\r\n\r\n                <RelativeLayout\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"match_parent\"\r\n                    android:layout_weight=\"1\"\r\n                    >\r\n\r\n                    <TextView\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:layout_centerInParent=\"true\"\r\n                        android:fontFamily=\"@font/iraniansans\"\r\n                        android:text=\"25\"\r\n                        android:textColor=\"@color/main\"\r\n                        android:textSize=\"@dimen/_16cdp\" />\r\n\r\n\r\n                </RelativeLayout>\r\n\r\n                <RelativeLayout\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"match_parent\"\r\n                    android:layout_weight=\"1\"\r\n                    >\r\n\r\n                    <ImageView\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:layout_centerInParent=\"true\"\r\n                        android:src=\"@drawable/ic_arrow_back_ios_fill0_wght400_grad0_opsz48__left_\" />\r\n\r\n\r\n                </RelativeLayout>\r\n\r\n                <RelativeLayout\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"match_parent\"\r\n                    android:layout_weight=\"1\"\r\n                    >\r\n\r\n                    <TextView\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"match_parent\"\r\n                        android:layout_weight=\"2\"\r\n                        android:fontFamily=\"@font/iraniansans\"\r\n                        android:gravity=\"center\"\r\n                        android:text=\"اردیبهشت\"\r\n                        android:textSize=\"@dimen/_14cdp\" />\r\n\r\n\r\n\r\n                </RelativeLayout>\r\n\r\n                <RelativeLayout\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"match_parent\"\r\n                    android:layout_weight=\"1\"\r\n                    >\r\n\r\n                    <ImageView\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:layout_centerInParent=\"true\"\r\n                        android:src=\"@drawable/ic_arrow_back_ios_fill0_wght400_grad0_opsz48__right_\" />\r\n\r\n\r\n                </RelativeLayout>\r\n\r\n                <RelativeLayout\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"match_parent\"\r\n                    android:layout_weight=\"1\"\r\n                    >\r\n\r\n                    <TextView\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"match_parent\"\r\n                        android:layout_weight=\"3\"\r\n                        android:gravity=\"center\"\r\n                        android:fontFamily=\"@font/iraniansans\"\r\n                        android:textSize=\"@dimen/_14cdp\"\r\n                        android:text=\"یکشنبه\" />\r\n\r\n\r\n                </RelativeLayout>\r\n\r\n\r\n            </LinearLayout>\r\n        </androidx.cardview.widget.CardView>\r\n\r\n        <RelativeLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"340dp\"\r\n            android:background=\"@color/main\"\r\n            android:layout_marginRight=\"@dimen/_15cdp\"\r\n            android:layout_marginTop=\"@dimen/_10cdp\"\r\n            android:layout_marginLeft=\"@dimen/_15cdp\"\r\n            >\r\n\r\n\r\n        </RelativeLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"@dimen/_25cdp\"\r\n            android:layout_marginTop=\"@dimen/_10cdp\"\r\n            android:layout_marginLeft=\"@dimen/_25cdp\"\r\n            android:layout_marginRight=\"@dimen/_25cdp\"\r\n            android:orientation=\"horizontal\"\r\n            >\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:orientation=\"horizontal\"\r\n                >\r\n\r\n                <TextView\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:text=\"دارای ظرفیت\"\r\n                    android:fontFamily=\"@font/iraniansans\"\r\n                    android:textSize=\"@dimen/_16cdp\"\r\n                    android:layout_gravity=\"center\"\r\n                    />\r\n                <ImageView\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:src=\"@drawable/ic_group_13\"\r\n                    android:layout_gravity=\"center\"\r\n                    android:layout_marginLeft=\"@dimen/_5cdp\"\r\n                    />\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:orientation=\"horizontal\"\r\n                android:layout_marginLeft=\"@dimen/_5cdp\"\r\n                >\r\n\r\n                <TextView\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:text=\"ساعت های آزاد\"\r\n                    android:fontFamily=\"@font/iraniansans\"\r\n                    android:textSize=\"@dimen/_16cdp\"\r\n                    android:layout_gravity=\"center\"\r\n                    />\r\n                <ImageView\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:src=\"@drawable/ic_ellipse_34\"\r\n                    android:layout_gravity=\"center\"\r\n                    android:layout_marginLeft=\"@dimen/_5cdp\"\r\n                    />\r\n\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:orientation=\"horizontal\"\r\n                android:layout_marginLeft=\"@dimen/_5cdp\"\r\n                >\r\n\r\n                <TextView\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:text=\"پر شده\"\r\n                    android:fontFamily=\"@font/iraniansans\"\r\n                    android:textSize=\"@dimen/_16cdp\"\r\n                    android:layout_gravity=\"center\"\r\n                    />\r\n                <ImageView\r\n                    android:layout_width=\"@dimen/_20cdp\"\r\n                    android:layout_height=\"@dimen/_20cdp\"\r\n                    android:src=\"@drawable/ic_group_11\"\r\n                    android:layout_gravity=\"center\"\r\n                    android:layout_marginLeft=\"@dimen/_5cdp\"\r\n                    />\r\n\r\n            </LinearLayout>\r\n\r\n\r\n        </LinearLayout>\r\n\r\n        <TextView\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"نوبت صبح\"\r\n            android:fontFamily=\"@font/iraniansans\"\r\n            android:textSize=\"@dimen/_16cdp\"\r\n            android:textStyle=\"bold\"\r\n            android:layout_gravity=\"right\"\r\n            android:layout_marginRight=\"@dimen/_15cdp\"\r\n            android:layout_marginTop=\"@dimen/_25cdp\"\r\n            />\r\n\r\n        <androidx.recyclerview.widget.RecyclerView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"@dimen/_5cdp\"\r\n            android:layout_marginRight=\"@dimen/_15cdp\"\r\n            android:layout_marginLeft=\"@dimen/_15cdp\"\r\n            />\r\n\r\n        <TextView\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"نوبت بعدازظهر\"\r\n            android:fontFamily=\"@font/iraniansans\"\r\n            android:textSize=\"@dimen/_16cdp\"\r\n            android:textStyle=\"bold\"\r\n            android:layout_gravity=\"right\"\r\n            android:layout_marginRight=\"@dimen/_15cdp\"\r\n            android:layout_marginTop=\"@dimen/_25cdp\"\r\n            />\r\n\r\n        <androidx.recyclerview.widget.RecyclerView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"@dimen/_5cdp\"\r\n            android:layout_marginRight=\"@dimen/_15cdp\"\r\n            android:layout_marginLeft=\"@dimen/_15cdp\"\r\n            />\r\n\r\n        <androidx.cardview.widget.CardView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"@dimen/_50cdp\"\r\n            android:layout_marginRight=\"@dimen/_15cdp\"\r\n            android:layout_marginTop=\"@dimen/_10cdp\"\r\n            android:layout_marginLeft=\"@dimen/_15cdp\"\r\n            app:cardCornerRadius=\"@dimen/_16cdp\"\r\n            >\r\n\r\n            <Spinner\r\n                android:id=\"@+id/spinner_services\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:gravity=\"start\"\r\n                />\r\n        </androidx.cardview.widget.CardView>\r\n\r\n        <androidx.appcompat.widget.AppCompatButton\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"@dimen/_60cdp\"\r\n            android:text=\"رزرو نوبت\"\r\n            android:textColor=\"@color/white\"\r\n            android:textSize=\"@dimen/_18cdp\"\r\n            android:textStyle=\"bold\"\r\n            android:fontFamily=\"@font/iraniansans\"\r\n            android:layout_marginLeft=\"@dimen/_15cdp\"\r\n            android:layout_marginRight=\"@dimen/_15cdp\"\r\n            android:layout_marginTop=\"@dimen/_10cdp\"\r\n            android:background=\"@drawable/reserve_button\"\r\n            android:layout_marginBottom=\"@dimen/_15cdp\"\r\n            />\r\n\r\n\r\n    </LinearLayout>\r\n\r\n\r\n\r\n\r\n\r\n\r\n</androidx.core.widget.NestedScrollView>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/res/layout/fragment_reservation.xml b/app/src/main/res/layout/fragment_reservation.xml
+---- a/app/src/main/res/layout/fragment_reservation.xml	(revision 235e836196a941c7ea89a5d5cd2e0c32e4d5c801)
+-+++ b/app/src/main/res/layout/fragment_reservation.xml	(date 1661075382607)
+-@@ -39,6 +39,7 @@
+-                     >
+- 
+-                     <TextView
+-+                        android:id="@+id/days_card_reservation"
+-                         android:layout_width="wrap_content"
+-                         android:layout_height="wrap_content"
+-                         android:layout_centerInParent="true"
+-@@ -50,20 +51,22 @@
+- 
+-                 </RelativeLayout>
+- 
+--                <RelativeLayout
+--                    android:layout_width="match_parent"
+--                    android:layout_height="match_parent"
+--                    android:layout_weight="1"
+--                    >
+--
+--                    <ImageView
+--                        android:layout_width="wrap_content"
+--                        android:layout_height="wrap_content"
+--                        android:layout_centerInParent="true"
+--                        android:src="@drawable/ic_arrow_back_ios_fill0_wght400_grad0_opsz48__left_" />
+--
+--
+--                </RelativeLayout>
+-+<!--                <RelativeLayout-->
+-+<!--                    android:layout_width="match_parent"-->
+-+<!--                    android:layout_height="match_parent"-->
+-+<!--                    android:layout_weight="1"-->
+-+<!--                    >-->
+-+
+-+<!--                    <ImageView-->
+-+<!--                        android:visibility="invisible"-->
+-+<!--                        android:id="@+id/forward_calender_button"-->
+-+<!--                        android:layout_width="wrap_content"-->
+-+<!--                        android:layout_height="wrap_content"-->
+-+<!--                        android:layout_centerInParent="true"-->
+-+<!--                        android:src="@drawable/ic_arrow_back_ios_fill0_wght400_grad0_opsz48__left_" />-->
+-+
+-+
+-+<!--                </RelativeLayout>-->
+- 
+-                 <RelativeLayout
+-                     android:layout_width="match_parent"
+-@@ -72,6 +75,7 @@
+-                     >
+- 
+-                     <TextView
+-+                        android:id="@+id/month_card_reservation"
+-                         android:layout_width="match_parent"
+-                         android:layout_height="match_parent"
+-                         android:layout_weight="2"
+-@@ -84,20 +88,22 @@
+- 
+-                 </RelativeLayout>
+- 
+--                <RelativeLayout
+--                    android:layout_width="match_parent"
+--                    android:layout_height="match_parent"
+--                    android:layout_weight="1"
+--                    >
+--
+--                    <ImageView
+--                        android:layout_width="wrap_content"
+--                        android:layout_height="wrap_content"
+--                        android:layout_centerInParent="true"
+--                        android:src="@drawable/ic_arrow_back_ios_fill0_wght400_grad0_opsz48__right_" />
+--
+--
+--                </RelativeLayout>
+-+<!--                <RelativeLayout-->
+-+<!--                    android:layout_width="match_parent"-->
+-+<!--                    android:layout_height="match_parent"-->
+-+<!--                    android:layout_weight="1"-->
+-+<!--                    >-->
+-+
+-+<!--                    <ImageView-->
+-+<!--                        android:visibility="invisible"-->
+-+<!--                        android:id="@+id/backward_calender_button"-->
+-+<!--                        android:layout_width="wrap_content"-->
+-+<!--                        android:layout_height="wrap_content"-->
+-+<!--                        android:layout_centerInParent="true"-->
+-+<!--                        android:src="@drawable/ic_arrow_back_ios_fill0_wght400_grad0_opsz48__right_" />-->
+-+
+-+
+-+<!--                </RelativeLayout>-->
+- 
+-                 <RelativeLayout
+-                     android:layout_width="match_parent"
+-@@ -106,13 +112,14 @@
+-                     >
+- 
+-                     <TextView
+-+                        android:id="@+id/week_card_reservation"
+-                         android:layout_width="match_parent"
+-                         android:layout_height="match_parent"
+-                         android:layout_weight="3"
+-+                        android:fontFamily="@font/iraniansans"
+-                         android:gravity="center"
+--                        android:fontFamily="@font/iraniansans"
+--                        android:textSize="@dimen/_14cdp"
+--                        android:text="یکشنبه" />
+-+                        android:text="یکشنبه"
+-+                        android:textSize="@dimen/_14cdp" />
+- 
+- 
+-                 </RelativeLayout>
+-@@ -121,17 +128,28 @@
+-             </LinearLayout>
+-         </androidx.cardview.widget.CardView>
+- 
+--        <RelativeLayout
+-+        <androidx.cardview.widget.CardView
+-             android:layout_width="match_parent"
+--            android:layout_height="340dp"
+--            android:background="@color/main"
+-+            android:layout_height="wrap_content"
+-             android:layout_marginRight="@dimen/_15cdp"
+-             android:layout_marginTop="@dimen/_10cdp"
+-             android:layout_marginLeft="@dimen/_15cdp"
+-+            app:cardCornerRadius="@dimen/_16cdp"
+-+
+-             >
+-+
+-+            <FrameLayout
+-+                android:id="@+id/persianCaldroid"
+-+                android:layout_width="wrap_content"
+-+                android:layout_height="wrap_content"
+-+                android:layout_gravity="center_vertical"
+-+                android:layout_marginTop="@dimen/_10cdp"
+-+
+-+                />
+- 
+- 
+--        </RelativeLayout>
+-+        </androidx.cardview.widget.CardView>
+-+
+- 
+-         <LinearLayout
+-             android:layout_width="match_parent"
+-@@ -232,6 +250,7 @@
+-             />
+- 
+-         <androidx.recyclerview.widget.RecyclerView
+-+            android:id="@+id/recyclerView_morning_reserve"
+-             android:layout_width="match_parent"
+-             android:layout_height="wrap_content"
+-             android:layout_marginTop="@dimen/_5cdp"
+-@@ -257,6 +276,7 @@
+-             android:layout_marginTop="@dimen/_5cdp"
+-             android:layout_marginRight="@dimen/_15cdp"
+-             android:layout_marginLeft="@dimen/_15cdp"
+-+            android:id="@+id/recyclerView_evening_reserve"
+-             />
+- 
+-         <androidx.cardview.widget.CardView
+-Index: app/src/main/res/layout/fragment_home.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:background=\"@color/white\"\r\n    tools:context=\".fragments.ui.home.HomeFragment\">\r\n\r\n    <ImageView\r\n        android:id=\"@+id/imageView2\"\r\n        android:layout_width=\"0dp\"\r\n        android:layout_height=\"100dp\"\r\n        android:layout_marginStart=\"15dp\"\r\n        android:layout_marginTop=\"15dp\"\r\n        android:layout_marginEnd=\"15dp\"\r\n        android:scaleType=\"center\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.56\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        tools:src=\"@tools:sample/backgrounds/scenic\" />\r\n\r\n    <com.google.android.material.tabs.TabLayout\r\n        android:id=\"@+id/tabLayout\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"40dp\"\r\n        android:layout_marginTop=\"15dp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.0\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/imageView2\">\r\n\r\n        <com.google.android.material.tabs.TabItem\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"Monday\" />\r\n\r\n        <com.google.android.material.tabs.TabItem\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"Tuesday\" />\r\n\r\n        <com.google.android.material.tabs.TabItem\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"Wednesday\" />\r\n    </com.google.android.material.tabs.TabLayout>\r\n\r\n    <ScrollView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"0dp\"\r\n        android:layout_marginTop=\"15dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/tabLayout\">\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"vertical\" >\r\n\r\n\r\n\r\n            <include\r\n                layout=\"@layout/text_home_fragment\"/>\r\n\r\n            <androidx.recyclerview.widget.RecyclerView\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:layout_weight=\"1\" />\r\n\r\n        </LinearLayout>\r\n    </ScrollView>\r\n\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/res/layout/fragment_home.xml b/app/src/main/res/layout/fragment_home.xml
+---- a/app/src/main/res/layout/fragment_home.xml	(revision 235e836196a941c7ea89a5d5cd2e0c32e4d5c801)
+-+++ b/app/src/main/res/layout/fragment_home.xml	(date 1661076149844)
+-@@ -1,5 +1,6 @@
+- <?xml version="1.0" encoding="utf-8"?>
+--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-+<androidx.constraintlayout.widget.ConstraintLayout
+-+    xmlns:android="http://schemas.android.com/apk/res/android"
+-     xmlns:app="http://schemas.android.com/apk/res-auto"
+-     xmlns:tools="http://schemas.android.com/tools"
+-     android:layout_width="match_parent"
+-Index: app/src/main/java/ir/tamuk/reservation/fragments/ui/reservation/adapter/ReserveAdapter.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/java/ir/tamuk/reservation/fragments/ui/reservation/adapter/ReserveAdapter.java b/app/src/main/java/ir/tamuk/reservation/fragments/ui/reservation/adapter/ReserveAdapter.java
+-new file mode 100644
+---- /dev/null	(date 1661076575882)
+-+++ b/app/src/main/java/ir/tamuk/reservation/fragments/ui/reservation/adapter/ReserveAdapter.java	(date 1661076575882)
+-@@ -0,0 +1,164 @@
+-+package ir.tamuk.reservation.fragments.ui.reservation.adapter;
+-+
+-+import android.annotation.SuppressLint;
+-+import android.content.Context;
+-+import android.graphics.Color;
+-+import android.view.LayoutInflater;
+-+import android.view.View;
+-+import android.view.ViewGroup;
+-+import android.widget.ImageView;
+-+import android.widget.LinearLayout;
+-+import android.widget.RelativeLayout;
+-+import android.widget.TextView;
+-+import android.widget.Toast;
+-+
+-+import androidx.annotation.NonNull;
+-+import androidx.recyclerview.widget.RecyclerView;
+-+
+-+import java.util.ArrayList;
+-+
+-+import ir.tamuk.reservation.R;
+-+import ir.tamuk.reservation.activities.MainActivity;
+-+import ir.tamuk.reservation.fragments.ui.reservation.database.SqlDatabaseReserve;
+-+
+-+public class ReserveAdapter extends RecyclerView.Adapter<ReserveAdapter.MyView>{
+-+
+-+    ArrayList<ReserveModel> rs;
+-+    Context context;
+-+    boolean flag = true;
+-+
+-+
+-+    public ReserveAdapter(ArrayList<ReserveModel> rs){
+-+        this.rs=rs;
+-+    }
+-+
+-+
+-+    @NonNull
+-+    @Override
+-+    public ReserveAdapter.MyView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+-+        context = parent.getContext();
+-+        View itemview = LayoutInflater.from(parent.getContext()).inflate(R.layout.reserved_row, parent, false);
+-+        return new ReserveAdapter.MyView(itemview);
+-+    }
+-+
+-+    @Override
+-+    public void onBindViewHolder(@NonNull ReserveAdapter.MyView holder, @SuppressLint("RecyclerView") int position) {
+-+
+-+        SqlDatabaseReserve sqlDatabaseReserve = new SqlDatabaseReserve(context);
+-+
+-+//        if (position % 2 == 0){
+-+//            holder.layout.setBackgroundResource(R.drawable.spinner2);
+-+//        }else {
+-+//            holder.layout.setBackgroundResource(R.drawable.spinner_radious);
+-+//        }
+-+
+-+        holder.time.setText(rs.get(position).time);
+-+
+-+        if (rs.get(position).reserved == 0){
+-+//            holder.checkBox.setImageResource(R.drawable.ic_baseline_bookmark_border_24);
+-+            if (sqlDatabaseReserve.getByIdO(rs.get(position).id)){
+-+                holder.layout.setBackgroundResource(R.color.main);
+-+            }
+-+
+-+            holder.layout.setOnClickListener(new View.OnClickListener() {
+-+                @Override
+-+                public void onClick(View view) {
+-+                    if (flag){
+-+                        if (sqlDatabaseReserve.getDataId().isEmpty()){
+-+                            sqlDatabaseReserve.Insert(rs.get(position).id);
+-+                            holder.layout.setBackgroundResource(R.color.main);
+-+
+-+                        }else {
+-+                            Toast.makeText(context, "انتخاب کرده اید", Toast.LENGTH_SHORT).show();
+-+                        }
+-+
+-+                        flag=false;
+-+
+-+                    }else {
+-+                        sqlDatabaseReserve.deleteId(rs.get(position).id);
+-+                        holder.layout.setBackgroundResource(View.GONE);
+-+//                        if (position % 2 == 0){
+-+//                            holder.layout.setBackgroundResource(R.drawable.spinner2);
+-+//                        }else {
+-+//                            holder.layout.setBackgroundResource(R.drawable.spinner_radious);
+-+//                        }
+-+                        flag=true;
+-+
+-+                    }
+-+
+-+
+-+                }
+-+            });
+-+//            if (sqlDatabaseReserve.getByIdO(rs.get(position).id)){
+-+//                holder.checkBox.setVisibility(View.INVISIBLE);
+-+//                holder.checkBox2.setVisibility(View.VISIBLE);
+-+//            }else {
+-+//                holder.checkBox2.setVisibility(View.INVISIBLE);
+-+//                holder.checkBox.setVisibility(View.VISIBLE);
+-+//            }
+-+//
+-+//            holder.checkBox.setOnClickListener(new View.OnClickListener() {
+-+//                @Override
+-+//                public void onClick(View view) {
+-+//
+-+//                    if (sqlDatabaseReserve.getDataId().isEmpty()){
+-+//                        sqlDatabaseReserve.Insert(rs.get(position).id);
+-+//                        holder.checkBox.setVisibility(View.INVISIBLE);
+-+//                        holder.checkBox2.setVisibility(View.VISIBLE);
+-+//                    }else{
+-+//                        Toast.makeText(context, "شما قبلا انتخاب کرده اید", Toast.LENGTH_SHORT).show();
+-+//                    }
+-+//
+-+//
+-+//                }
+-+//            });
+-+//
+-+//            holder.checkBox2.setOnClickListener(new View.OnClickListener() {
+-+//                @Override
+-+//                public void onClick(View view) {
+-+//                    sqlDatabaseReserve.deleteId(rs.get(position).id);
+-+//                    holder.checkBox.setVisibility(View.VISIBLE);
+-+//                    holder.checkBox2.setVisibility(View.INVISIBLE);
+-+//                }
+-+//            });
+-+
+-+        }else {
+-+            holder.reserved.setText("رزرو شده");
+-+            holder.layout.setBackgroundColor(Color.RED);
+-+
+-+
+-+        }
+-+
+-+    }
+-+
+-+    @Override
+-+    public int getItemCount() {
+-+        return rs.size();
+-+    }
+-+
+-+    public class MyView extends RecyclerView.ViewHolder {
+-+
+-+        public TextView id;
+-+        public TextView time;
+-+        public TextView reserved;
+-+        public RelativeLayout layout;
+-+
+-+//        public ImageView checkBox2;
+-+
+-+        public MyView(@NonNull View itemView) {
+-+            super(itemView);
+-+            time = itemView.findViewById(R.id.time_reserve);
+-+            layout = itemView.findViewById(R.id.relative_layout_click);
+-+//            checkBox2 = itemView.findViewById(R.id.checkboxRes2);
+-+
+-+
+-+        }
+-+
+-+    }
+-+
+-+    public void backgrnd(){
+-+
+-+    }
+-+
+-+}
+-+
+-Index: app/src/main/java/ir/tamuk/reservation/fragments/ui/reservation/adapter/ReserveModel.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/java/ir/tamuk/reservation/fragments/ui/reservation/adapter/ReserveModel.java b/app/src/main/java/ir/tamuk/reservation/fragments/ui/reservation/adapter/ReserveModel.java
+-new file mode 100644
+---- /dev/null	(date 1661071901337)
+-+++ b/app/src/main/java/ir/tamuk/reservation/fragments/ui/reservation/adapter/ReserveModel.java	(date 1661071901337)
+-@@ -0,0 +1,31 @@
+-+package ir.tamuk.reservation.fragments.ui.reservation.adapter;
+-+
+-+public class ReserveModel {
+-+    public String id;
+-+    public String time;
+-+    public int reserved;
+-+    public String service;
+-+    public String id2;
+-+
+-+    public ReserveModel(String id,String time, int reserved, String service) {
+-+        this.id = id;
+-+        this.time = time;
+-+        this.reserved = reserved;
+-+        this.service = service;
+-+
+-+    }
+-+
+-+    public ReserveModel(String id) {
+-+        this.id = id;
+-+
+-+
+-+    }
+-+
+-+    public String getId() {
+-+        return id;
+-+    }
+-+
+-+    public void setId(String id) {
+-+        this.id = id;
+-+    }
+-+}
+-Index: app/src/main/res/layout/reserved_row.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/res/layout/reserved_row.xml b/app/src/main/res/layout/reserved_row.xml
+-new file mode 100644
+---- /dev/null	(date 1661076536166)
+-+++ b/app/src/main/res/layout/reserved_row.xml	(date 1661076536166)
+-@@ -0,0 +1,27 @@
+-+<?xml version="1.0" encoding="utf-8"?>
+-+
+-+<RelativeLayout
+-+    android:id="@+id/relative_layout_click"
+-+    xmlns:android="http://schemas.android.com/apk/res/android"
+-+    android:layout_width="wrap_content"
+-+    android:layout_height="wrap_content"
+-+    xmlns:app="http://schemas.android.com/apk/res-auto"
+-+    android:layout_marginRight="@dimen/_16cdp"
+-+    >
+-+
+-+    <androidx.cardview.widget.CardView
+-+        android:layout_width="@dimen/_60cdp"
+-+        android:layout_height="@dimen/_60cdp"
+-+        app:cardCornerRadius="@dimen/_8cdp">
+-+
+-+        <TextView
+-+            android:id="@+id/time_reserve"
+-+            android:layout_width="wrap_content"
+-+            android:layout_height="wrap_content"
+-+            android:layout_gravity="center"
+-+            android:fontFamily="@font/iraniansans"
+-+            android:text="14:00"
+-+            android:textSize="@dimen/_16cdp" />
+-+
+-+    </androidx.cardview.widget.CardView>
+-+</RelativeLayout>
+-\ No newline at end of file
+-Index: app/src/main/java/ir/tamuk/reservation/fragments/ui/reservation/database/SqlDatabaseReserve.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/java/ir/tamuk/reservation/fragments/ui/reservation/database/SqlDatabaseReserve.java b/app/src/main/java/ir/tamuk/reservation/fragments/ui/reservation/database/SqlDatabaseReserve.java
+-new file mode 100644
+---- /dev/null	(date 1661071741748)
+-+++ b/app/src/main/java/ir/tamuk/reservation/fragments/ui/reservation/database/SqlDatabaseReserve.java	(date 1661071741748)
+-@@ -0,0 +1,151 @@
+-+package ir.tamuk.reservation.fragments.ui.reservation.database;
+-+
+-+import android.annotation.SuppressLint;
+-+import android.content.ContentValues;
+-+import android.content.Context;
+-+import android.database.Cursor;
+-+import android.database.sqlite.SQLiteDatabase;
+-+import android.database.sqlite.SQLiteOpenHelper;
+-+
+-+import java.util.ArrayList;
+-+
+-+import ir.tamuk.reservation.fragments.ui.reservation.adapter.ReserveModel;
+-+
+-+public class SqlDatabaseReserve extends SQLiteOpenHelper {
+-+    String TABLE_NAME = "Reserved";
+-+    String TABLE_NAME_2 = "orderd";
+-+
+-+
+-+    public SqlDatabaseReserve(Context context) {
+-+        super(context, "sqliteReserved", null, 1);
+-+    }
+-+
+-+
+-+    @Override
+-+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+-+
+-+        sqLiteDatabase.execSQL(" CREATE TABLE " + TABLE_NAME +
+-+                "(ida TEXT PRIMARY KEY , " +
+-+                " time TEXT ," +
+-+                " reserved INTEGER , " +
+-+                " service TEXT)");
+-+
+-+        sqLiteDatabase.execSQL(" CREATE TABLE " + TABLE_NAME_2 + "( id TEXT PRIMARY KEY )");
+-+
+-+    }
+-+
+-+    @Override
+-+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+-+
+-+    }
+-+
+-+    public ArrayList<ReserveModel> getData() {
+-+
+-+        ArrayList<ReserveModel> productsList = new ArrayList<>();
+-+        SQLiteDatabase db = this.getReadableDatabase();
+-+        Cursor c = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+-+        if (c.moveToFirst()) {
+-+            do {
+-+                // Passing values
+-+                String id = c.getString(0);
+-+                String time = c.getString(1);
+-+                int reserved = c.getInt(2);
+-+                String service = c.getString(3);
+-+                ReserveModel reserveModel = new ReserveModel(id, time, reserved, service);
+-+                productsList.add(reserveModel);
+-+
+-+                // Do something Here with values
+-+            } while (c.moveToNext());
+-+        }
+-+        c.close();
+-+
+-+        return productsList;
+-+
+-+
+-+    }
+-+
+-+    public ArrayList<ReserveModel> getDataId() {
+-+
+-+        ArrayList<ReserveModel> productsList = new ArrayList<>();
+-+        SQLiteDatabase db = this.getReadableDatabase();
+-+        Cursor c = db.rawQuery("SELECT * FROM " + TABLE_NAME_2, null);
+-+        if (c.moveToFirst()) {
+-+            do {
+-+                // Passing values
+-+                String id = c.getString(0);
+-+                ReserveModel reserveModel = new ReserveModel(id);
+-+                productsList.add(reserveModel);
+-+
+-+                // Do something Here with values
+-+            } while (c.moveToNext());
+-+        }
+-+        c.close();
+-+
+-+        return productsList;
+-+
+-+
+-+    }
+-+
+-+    public boolean getByIdO(String id) {
+-+        SQLiteDatabase db = getReadableDatabase();
+-+        Cursor c = db.rawQuery("Select id from orderd where id = ?", new String[]{id + ""});
+-+        if (c.moveToFirst()) {
+-+            return true;
+-+
+-+
+-+        }
+-+        c.close();
+-+
+-+        return false;
+-+    }
+-+
+-+    //SELECT Find ID
+-+    public String getById(String id) {
+-+        SQLiteDatabase db = getReadableDatabase();
+-+        @SuppressLint("Recycle") Cursor c = db.rawQuery("Select ida from Reserved where ida = ?", new String[]{id + ""});
+-+//        if (c.moveToFirst()){
+-+//        }while(c.moveToNext());
+-+//        c.close();
+-+//        return id;
+-+        if (c != null && c.moveToFirst()) {
+-+            return c.getString(0);
+-+        } else {
+-+            return null;  // because you have to return something
+-+        }
+-+    }
+-+
+-+    //DELETE
+-+    public void delete(String id) {
+-+        SQLiteDatabase database = this.getReadableDatabase();
+-+        database.delete(TABLE_NAME, "ida=?", new String[]{id + ""});
+-+
+-+    }
+-+
+-+    public void deleteId(String id) {
+-+        SQLiteDatabase database = this.getReadableDatabase();
+-+        database.delete(TABLE_NAME_2, "id=?", new String[]{id + ""});
+-+
+-+    }
+-+
+-+    //INSERT
+-+    public void Insert(String ida, String time, int reserved, String service) {
+-+
+-+        SQLiteDatabase database = this.getReadableDatabase();
+-+        ContentValues contentValues = new ContentValues();
+-+        contentValues.put("ida", ida);
+-+        contentValues.put("time", time);
+-+        contentValues.put("reserved", reserved);
+-+        contentValues.put("service", service);
+-+        database.insert(TABLE_NAME, null, contentValues);
+-+
+-+    }
+-+
+-+    public void Insert(String id) {
+-+
+-+        SQLiteDatabase database = this.getReadableDatabase();
+-+        ContentValues contentValues = new ContentValues();
+-+        contentValues.put("id", id);
+-+        database.insert(TABLE_NAME_2, null, contentValues);
+-+
+-+    }
+-+}
+-Index: app/src/main/res/layout/test.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/res/layout/test.xml b/app/src/main/res/layout/test.xml
+-new file mode 100644
+---- /dev/null	(date 1661076149839)
+-+++ b/app/src/main/res/layout/test.xml	(date 1661076149839)
+-@@ -0,0 +1,51 @@
+-+<?xml version="1.0" encoding="utf-8"?>
+-+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-+    android:layout_width="match_parent"
+-+    android:layout_height="match_parent"
+-+    xmlns:app="http://schemas.android.com/apk/res-auto">
+-+
+-+    <TextView
+-+        android:id="@+id/text"
+-+        android:layout_width="wrap_content"
+-+        android:layout_height="wrap_content"
+-+        android:text="test"
+-+        android:textSize="@dimen/_30cdp"
+-+        app:layout_constraintBottom_toBottomOf="parent"
+-+        app:layout_constraintTop_toTopOf="parent"
+-+        app:layout_constraintRight_toRightOf="parent"
+-+        app:layout_constraintLeft_toLeftOf="parent"
+-+        />
+-+
+-+    <TextView
+-+        android:layout_width="wrap_content"
+-+        android:layout_height="wrap_content"
+-+        android:textSize="@dimen/_30cdp"
+-+        android:text="Test2"
+-+        app:layout_constraintTop_toTopOf="@id/text"
+-+        app:layout_constraintBottom_toBottomOf="parent"
+-+        app:layout_constraintRight_toRightOf="parent"
+-+        />
+-+
+-+    <RelativeLayout
+-+        android:layout_width="match_parent"
+-+        android:layout_height="@dimen/_60cdp"
+-+        >
+-+        <ImageView
+-+            android:layout_width="match_parent"
+-+            android:layout_height="match_parent"
+-+            />
+-+        <TextView
+-+            android:layout_width="wrap_content"
+-+            android:layout_height="wrap_content"
+-+            android:text="Text1"
+-+            />
+-+
+-+        <TextView
+-+            android:layout_width="wrap_content"
+-+            android:layout_height="wrap_content"
+-+            android:text="Text1"
+-+            />
+-+
+-+
+-+    </RelativeLayout>
+-+</androidx.constraintlayout.widget.ConstraintLayout>
+-\ No newline at end of file
+-Index: .idea/misc.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"DesignSurface\">\r\n    <option name=\"filePathToZoomLevelMap\">\r\n      <map>\r\n        <entry key=\"..\\:/Reservation/app/src/main/res/layout/activity_main.xml\" value=\"0.22826086956521738\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/activity_main.xml\" value=\"0.19814814814814816\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/app_bar_main.xml\" value=\"0.2\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/content_main.xml\" value=\"0.3104166666666667\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_gallery.xml\" value=\"0.290625\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_home.xml\" value=\"0.290625\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_reservation.xml\" value=\"0.225\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_services.xml\" value=\"0.290625\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_slideshow.xml\" value=\"0.290625\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_test.xml\" value=\"0.225\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/nav_header_main.xml\" value=\"0.290625\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/menu/activity_main_drawer.xml\" value=\"0.225\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/menu/main.xml\" value=\"0.225\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation/app/src/main/res/layout/activity_main.xml\" value=\"0.3104166666666667\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/reserve_button.xml\" value=\"0.164\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/app_bar_main.xml\" value=\"0.2151268115942029\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/content_main.xml\" value=\"0.12771739130434784\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/font_spinner.xml\" value=\"0.2151268115942029\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/fragment_home.xml\" value=\"0.2151268115942029\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/fragment_reservation.xml\" value=\"0.264\" />\r\n        <entry key=\"..\\:/Work/reservd/app/src/main/res/layout/activity_main.xml\" value=\"0.12771739130434784\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/drawable/ic_menu_slideshow.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/drawable/ic_nav_calendar.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/drawable/ic_nav_home.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/drawable/side_nav_bar.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/activity_main.xml\" value=\"0.1539855072463768\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/activity_splash.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/app_bar_main.xml\" value=\"0.1539855072463768\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/content_main.xml\" value=\"0.2\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/fragment_home.xml\" value=\"0.22\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/fragment_reservation.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/nav_header_main.xml\" value=\"0.1539855072463768\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/text_home_fragment.xml\" value=\"0.22\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/menu/activity_main_drawer.xml\" value=\"0.17222222222222222\" />\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_11\" default=\"true\" project-jdk-name=\"Android Studio default JDK\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/misc.xml b/.idea/misc.xml
+---- a/.idea/misc.xml	(revision 235e836196a941c7ea89a5d5cd2e0c32e4d5c801)
+-+++ b/.idea/misc.xml	(date 1661076150277)
+-@@ -18,11 +18,14 @@
+-         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/menu/main.xml" value="0.225" />
+-         <entry key="..\:/Users/Ghazal/Desktop/Reservation/app/src/main/res/layout/activity_main.xml" value="0.3104166666666667" />
+-         <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/reserve_button.xml" value="0.164" />
+-+        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/activity_main.xml" value="0.12771739130434784" />
+-         <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/app_bar_main.xml" value="0.2151268115942029" />
+-         <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/content_main.xml" value="0.12771739130434784" />
+-         <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/font_spinner.xml" value="0.2151268115942029" />
+-         <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/fragment_home.xml" value="0.2151268115942029" />
+-         <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/fragment_reservation.xml" value="0.264" />
+-+        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/reserved_row.xml" value="0.2151268115942029" />
+-+        <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/test.xml" value="0.16614583333333333" />
+-         <entry key="..\:/Work/reservd/app/src/main/res/layout/activity_main.xml" value="0.12771739130434784" />
+-         <entry key="..\:/reservation-android/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.1" />
+-         <entry key="..\:/reservation-android/app/src/main/res/drawable/ic_nav_calendar.xml" value="0.1" />
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    package=\"ir.tamuk.reservation\">\r\n\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"false\"\r\n        android:theme=\"@style/Theme.Reservation\"\r\n        tools:targetApi=\"31\">\r\n\r\n        <activity\r\n            android:name=\".activities.MainActivity\"\r\n            android:exported=\"true\"\r\n            android:label=\"@string/title_activity_main\"\r\n            android:theme=\"@style/Theme.Reservation.NoActionBar\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <activity\r\n            android:name=\".activities.SplashActivity\"\r\n            android:exported=\"true\"></activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision 8a12203577eaa46d89fc7780d72a23842482c74c)
++++ b/app/src/main/AndroidManifest.xml	(date 1661684735314)
+@@ -14,7 +14,9 @@
+         android:roundIcon="@mipmap/ic_launcher_round"
+         android:supportsRtl="false"
+         android:theme="@style/Theme.Reservation"
+-        tools:targetApi="31">
++        tools:targetApi="31"
++        tools:replace="android:supportsRtl"
++        >
+ 
+         <activity
+             android:name=".activities.MainActivity"
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"testRunner\" value=\"GRADLE\" />\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n            <option value=\"$PROJECT_DIR$/app\" />\r\n          </set>\r\n        </option>\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	(revision 8a12203577eaa46d89fc7780d72a23842482c74c)
++++ b/.idea/gradle.xml	(date 1661748720278)
+@@ -13,6 +13,7 @@
+             <option value="$PROJECT_DIR$/app" />
+           </set>
+         </option>
++        <option name="resolveModulePerSourceSet" value="false" />
+       </GradleProjectSettings>
+     </option>
+   </component>
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"DesignSurface\">\r\n    <option name=\"filePathToZoomLevelMap\">\r\n      <map>\r\n        <entry key=\"..\\:/Reservation/app/src/main/res/layout/activity_main.xml\" value=\"0.22826086956521738\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/activity_main.xml\" value=\"0.19814814814814816\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/app_bar_main.xml\" value=\"0.2\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/content_main.xml\" value=\"0.3104166666666667\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_gallery.xml\" value=\"0.290625\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_home.xml\" value=\"0.290625\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_reservation.xml\" value=\"0.225\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_services.xml\" value=\"0.290625\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_slideshow.xml\" value=\"0.290625\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_test.xml\" value=\"0.225\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/nav_header_main.xml\" value=\"0.290625\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/menu/activity_main_drawer.xml\" value=\"0.225\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/menu/main.xml\" value=\"0.225\" />\r\n        <entry key=\"..\\:/Users/Ghazal/Desktop/Reservation/app/src/main/res/layout/activity_main.xml\" value=\"0.3104166666666667\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/drawable/reserve_button.xml\" value=\"0.164\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/app_bar_main.xml\" value=\"0.2151268115942029\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/content_main.xml\" value=\"0.12771739130434784\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/font_spinner.xml\" value=\"0.2151268115942029\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/fragment_home.xml\" value=\"0.2151268115942029\" />\r\n        <entry key=\"..\\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/fragment_reservation.xml\" value=\"0.264\" />\r\n        <entry key=\"..\\:/Work/reservd/app/src/main/res/layout/activity_main.xml\" value=\"0.12771739130434784\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/drawable/ic_call.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/drawable/ic_close.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/drawable/ic_instagram.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/drawable/ic_location.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/drawable/ic_menu_appbar.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/drawable/ic_menu_slideshow.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/drawable/ic_nav_calendar.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/drawable/ic_nav_home.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/drawable/row_maincolor_reserve.xml\" value=\"0.128\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/drawable/row_transparent_reserve.xml\" value=\"0.128\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/drawable/side_nav_bar.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/font/iransans.xml\" value=\"0.1527777777777778\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout-v23/fragment_home.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/activity_main.xml\" value=\"0.2\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/activity_main2.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/activity_splash.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/app_bar_main.xml\" value=\"0.2\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/content_main.xml\" value=\"0.2\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/fragment_home.xml\" value=\"0.15717628705148207\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/fragment_profile.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/fragment_reservation.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/home_row.xml\" value=\"0.12409420289855072\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/layout_show_more.xml\" value=\"0.25\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/main_toolbar.xml\" value=\"0.1\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/maintoolbar_.xml\" value=\"0.17222222222222222\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/nav_header_main.xml\" value=\"0.1539855072463768\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/reserved_row.xml\" value=\"0.12409420289855072\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/layout/text_home_fragment.xml\" value=\"0.22\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/menu/activity_main_drawer.xml\" value=\"0.17222222222222222\" />\r\n        <entry key=\"..\\:/reservation-android/app/src/main/res/menu/main.xml\" value=\"0.170042194092827\" />\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_11\" default=\"true\" project-jdk-name=\"Android Studio default JDK\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 8a12203577eaa46d89fc7780d72a23842482c74c)
++++ b/.idea/misc.xml	(date 1661687496290)
+@@ -42,9 +42,11 @@
+         <entry key="..\:/reservation-android/app/src/main/res/layout/activity_splash.xml" value="0.1" />
+         <entry key="..\:/reservation-android/app/src/main/res/layout/app_bar_main.xml" value="0.2" />
+         <entry key="..\:/reservation-android/app/src/main/res/layout/content_main.xml" value="0.2" />
++        <entry key="..\:/reservation-android/app/src/main/res/layout/fragment_factor.xml" value="0.1793478260869565" />
+         <entry key="..\:/reservation-android/app/src/main/res/layout/fragment_home.xml" value="0.15717628705148207" />
+         <entry key="..\:/reservation-android/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
+         <entry key="..\:/reservation-android/app/src/main/res/layout/fragment_reservation.xml" value="0.1" />
++        <entry key="..\:/reservation-android/app/src/main/res/layout/fragment_sign_in_validdationcode.xml" value="0.16621376811594202" />
+         <entry key="..\:/reservation-android/app/src/main/res/layout/home_row.xml" value="0.12409420289855072" />
+         <entry key="..\:/reservation-android/app/src/main/res/layout/layout_show_more.xml" value="0.25" />
+         <entry key="..\:/reservation-android/app/src/main/res/layout/main_toolbar.xml" value="0.1" />

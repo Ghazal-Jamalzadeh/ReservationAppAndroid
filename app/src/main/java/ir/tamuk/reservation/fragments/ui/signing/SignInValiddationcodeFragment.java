@@ -1,4 +1,4 @@
-package ir.tamuk.reservation;
+package ir.tamuk.reservation.fragments.ui.signing;
 
 import static androidx.navigation.Navigation.findNavController;
 
@@ -32,14 +32,14 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.FragmentSignInValiddationcodeBinding;
 
 public class SignInValiddationcodeFragment extends Fragment {
+
     private FragmentSignInValiddationcodeBinding  binding;
-
-    NotificationManager NM;
-    Timer t;
-
+    private Timer t;
+    private TimerTask timerTask;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,18 +53,17 @@ public class SignInValiddationcodeFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentSignInValiddationcodeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
+        //SharedPreferences for get Number & CodeVerification
         SharedPreferences prefs = getActivity().getSharedPreferences("NumberPhone", Context.MODE_PRIVATE);
         String numb = prefs.getString("number", null);//"No name defined" is the default value.
         String code = prefs.getString("code", null);
         Log.d("KIANOOSH", "Verfi: "+code);
         binding.text.setText(numb);
-
+        //for Keyboard come Up
         InputMethodManager imgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imgr.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
         binding.one.requestFocus();
-
-
+        //Number1 Code
         binding.one.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -75,29 +74,19 @@ public class SignInValiddationcodeFragment extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
 
-                        if (binding.one.getText().length() == 1){
-                            binding.two.requestFocus();
+                if (binding.one.getText().length() == 1){
+                    binding.two.requestFocus();
 
-                        }
-
-
-
-
-
-
-
-
-
+                }
 
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
 
-
-
             }
         });
+        //Number2 Code
         binding.two.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -115,7 +104,6 @@ public class SignInValiddationcodeFragment extends Fragment {
 
                 }
 
-
             }
 
             @Override
@@ -123,6 +111,7 @@ public class SignInValiddationcodeFragment extends Fragment {
 
             }
         });
+        //Number3 Code
         binding.three.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -138,7 +127,6 @@ public class SignInValiddationcodeFragment extends Fragment {
                     binding.two.requestFocus();
 
                 }
-
             }
 
             @Override
@@ -146,6 +134,7 @@ public class SignInValiddationcodeFragment extends Fragment {
 
             }
         });
+        //Number4 Code
         binding.four.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -159,8 +148,6 @@ public class SignInValiddationcodeFragment extends Fragment {
 
                 }
 
-
-
                 if (binding.four.getText().length() != 0) {
                     imgr.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                     String all = binding.one.getText()+binding.two.getText().toString()
@@ -172,12 +159,11 @@ public class SignInValiddationcodeFragment extends Fragment {
                         binding.two.getText().clear();
                         binding.three.getText().clear();
                         binding.four.getText().clear();
-                        SuccsesFull();
+                        Successful();
                     }else{
                         snackBarIconError();
                     }
                 }
-
 
             }
 
@@ -186,43 +172,39 @@ public class SignInValiddationcodeFragment extends Fragment {
 
             }
         });
+        //Action Keyboard Button
+        binding.four.setOnEditorActionListener((textView, i, keyEvent) -> {
+            if (i == EditorInfo.IME_ACTION_DONE) {
+                imgr.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+                String all = binding.one.getText()+binding.two.getText().toString()
+                        +binding.three.getText().toString()+binding.four.getText().toString();
+                if (all.equals(code)){
+                    t.cancel();
+                    Navigation.findNavController(getView()).navigate(R.id.action_signInValiddationcodeFragment_to_factorFragment);
+                    binding.one.getText().clear();
+                    binding.two.getText().clear();
+                    binding.three.getText().clear();
+                    binding.four.getText().clear();
+                    Successful();
+                    if (all.equals("")){
 
-
-
-        binding.four.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_DONE) {
-                    imgr.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
-                    String all = binding.one.getText()+binding.two.getText().toString()
-                            +binding.three.getText().toString()+binding.four.getText().toString();
-                    if (all.equals(code)){
-                        t.cancel();
-                        Navigation.findNavController(getView()).navigate(R.id.action_signInValiddationcodeFragment_to_factorFragment);
-                        binding.one.getText().clear();
-                        binding.two.getText().clear();
-                        binding.three.getText().clear();
-                        binding.four.getText().clear();
-                        SuccsesFull();
-                        if (all.equals("")){
-
-                        }
-
-                    }else {
-                        snackBarIconError();
                     }
-                    //do here your stuff f
-                    return true;
-                }
-                return false;
-            }
-        });
 
+                }else {
+                    snackBarIconError();
+                }
+                //do here your stuff f
+                return true;
+            }
+            return false;
+        });
+        //Accept Button
         binding.acceptButtonSigning.setOnClickListener(view -> {
             String all = binding.one.getText()+binding.two.getText().toString()
                     +binding.three.getText().toString()+binding.four.getText().toString();
             Log.d("KIANOOSH", "VerfCode: "+all);
             Log.d("KIANOOSH", "Verf: "+code);
+
             if (all.equals(code)){
                 t.cancel();
                 Navigation.findNavController(view).navigate(R.id.action_signInValiddationcodeFragment_to_factorFragment);
@@ -230,66 +212,81 @@ public class SignInValiddationcodeFragment extends Fragment {
                 binding.two.getText().clear();
                 binding.three.getText().clear();
                 binding.four.getText().clear();
-                SuccsesFull();
+                Successful();
                 if (all.equals("")){
 
                 }
 
             }else{
                 snackBarIconError();
-
             }
         });
+        //Refresh Icon
+        binding.image.setOnClickListener(view -> {
+            if(binding.textTimer.getText().equals("1")){
+            Animation a= AnimationUtils.loadAnimation(getContext(), R.anim.rotation);
+            binding.image.startAnimation(a);
+            binding.textTimer.setText("120");
+            binding.textTimer.getText().toString();
 
+            binding.one.getText().clear();
+            binding.two.getText().clear();
+            binding.three.getText().clear();
+            binding.four.getText().clear();
+            //Timer
+                t = new Timer();
+                timerTask = new TimerTask() {
+                    @Override
+                    public void run() {
+                        try {
+                            getActivity().runOnUiThread(() -> {
+                                binding.textTimer.setText(String.valueOf(Integer.parseInt(binding.textTimer.getText().toString()) - 1));
+                                if (Integer.parseInt(binding.textTimer.getText().toString()) - 1 == 0) {
+                                    t.cancel();
+                                }
+                            });
+                        } catch (Exception e) {
+                            t.cancel();
+                        }
 
-        binding.image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Animation a= AnimationUtils.loadAnimation(getContext(), R.anim.rotation);
-                binding.image.startAnimation(a);
-                binding.textTimer.setText("120");
-                binding.one.getText().clear();
-                binding.two.getText().clear();
-                binding.three.getText().clear();
-                binding.four.getText().clear();
+                    }
+                };
+                t.schedule(timerTask,1000,1000);
 
             }
-        });
 
-        t = new Timer();
-        t.schedule(new TimerTask() {
+
+        });
+        //Timer
+        timerTask = new TimerTask() {
             @Override
             public void run() {
                 try {
                     getActivity().runOnUiThread(() -> {
-                        binding.textTimer.setText(String.valueOf(Integer.parseInt(binding.textTimer.getText().toString())-1));
-                        if(Integer.parseInt(binding.textTimer.getText().toString())-1 == 0){
+                        binding.textTimer.setText(String.valueOf(Integer.parseInt(binding.textTimer.getText().toString()) - 1));
+                        if (Integer.parseInt(binding.textTimer.getText().toString()) - 1 == 0) {
                             t.cancel();
                         }
                     });
-                }catch (Exception e){
+                } catch (Exception e) {
                     t.cancel();
                 }
 
             }
-        },1000,1000);
+        };
+        t = new Timer();
+        t.schedule(timerTask, 1000, 1000);
 
+        //back Button (Edit Number Phone)
+        binding.editing.setOnClickListener(view -> {
+            t.cancel();
+            findNavController(view).popBackStack();
 
-
-
-        binding.editing.setOnClickListener(new View.OnClickListener()
-
-        {
-            @Override
-            public void onClick (View view){
-                t.cancel();
-                findNavController(view).popBackStack();
-
-            }
         });
+
+
         return root;
     }
-
 
 
     @Override
@@ -298,6 +295,7 @@ public class SignInValiddationcodeFragment extends Fragment {
 
     }
 
+    //Error SnackBar
     private void snackBarIconError() {
         final Snackbar snackbar = Snackbar.make(getView(), "", Snackbar.LENGTH_SHORT);
         //inflate view
@@ -313,8 +311,8 @@ public class SignInValiddationcodeFragment extends Fragment {
         snackBarView.addView(custom_view, 0);
         snackbar.show();
     }
-
-    private void SuccsesFull() {
+    //successful SnackBAr
+    private void Successful() {
         final Snackbar snackbar = Snackbar.make(getView(), "", Snackbar.LENGTH_SHORT);
         //inflate view
         View custom_view = getLayoutInflater().inflate(R.layout.snackbar_layout, null);
@@ -323,7 +321,7 @@ public class SignInValiddationcodeFragment extends Fragment {
         Snackbar.SnackbarLayout snackBarView = (Snackbar.SnackbarLayout) snackbar.getView();
         snackBarView.setPadding(0, 0, 0, 0);
 
-        ((TextView) custom_view.findViewById(R.id.message)).setText("شماره با موفقیت ثبت شد");
+        ((TextView) custom_view.findViewById(R.id.message)).setText("با موفقیت وارد شدید");
         ((ImageView) custom_view.findViewById(R.id.icon)).setImageResource(R.drawable.ic_baseline_perm_device_information_24);
         (custom_view.findViewById(R.id.parent_view)).setBackgroundColor(getResources().getColor(R.color.main));
         snackBarView.addView(custom_view, 0);
