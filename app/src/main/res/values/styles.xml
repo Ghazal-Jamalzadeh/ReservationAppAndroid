@@ -97,7 +97,27 @@
         <item name="android:textAlignment">textStart</item>
     </style>
 
-<!--    <style name="SpinnerTheme" parent="android:Widget.DeviceDefault.Spinner">-->
+    <style name="Theme.verfi.code" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@color/show_more_text</item>
+        <item name="colorControlActivated">#ff5722</item>
+        <item name="colorControlHighlight">#f44336</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/iran_sans_mob</item>
+        <item name="android:textColor">@color/show_more_text</item>
+        <item name="android:textSize">@dimen/bml_text_size</item>
+    </style>
+
+    <style name="Theme.number.code" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@color/show_more_text</item>
+        <item name="colorControlActivated">#ff5722</item>
+        <item name="colorControlHighlight">#f44336</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">@font/iran_sans_mob</item>
+        <item name="android:textSize">@dimen/medium_text_size</item>
+    </style>
+
+
+    <!--    <style name="SpinnerTheme" parent="android:Widget.DeviceDefault.Spinner">-->
 <!--        <item name="android:background">@drawable/soinner_draw</item>-->
 <!--        <item name="android:padding">8dp</item>-->
 <!--        <item name="android:paddingTop">0dp</item>-->

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/backgroundSigning"
-    tools:context=".SigningFragment">
+    tools:context=".fragments.ui.signing.SigningFragment">
 
     <ImageView
         android:id="@+id/cancel_button_signing_"
@@ -59,6 +59,7 @@
                     app:errorTextColor="#D50000"
                     app:hintTextColor="@color/show_more_text"
 
+
                     >
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -70,10 +71,12 @@
                         android:drawablePadding="@dimen/_10cdp"
                         android:hint="شماره تلفن همراه"
                         android:inputType="number"
+                        android:maxLength="11"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:textColor="@color/white"
-                         android:maxLength="11"
+                        android:theme="@style/Theme.number.code"
+                        android:paddingTop="@dimen/_24cdp"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>

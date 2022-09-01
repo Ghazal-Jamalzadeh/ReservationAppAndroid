@@ -1,6 +1,8 @@
 package ir.tamuk.reservation.fragments.ui.reservation;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,13 +10,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -32,25 +39,26 @@ import ir.tamuk.reservation.fragments.ui.reservation.database.SqlDatabaseReserve
 public class ReservationFragment extends Fragment {
     //binding
     private FragmentReservationBinding binding;
+    //SQLite
+    private SqlDatabaseReserve sqlDatabase;
     //adapter
-    public ReserveAdapter adapter;
+    private ReserveAdapter adapter;
     //selected Date
-    public String date_show = "";
+    private String date_show = "";
     //context
-    public Context context = getContext();
-    //week of Calender
-    public String[] week = {
+    private Context context = getContext();
+
+    //week of Calender Exchange
+    private String[] week = {
             "",
             "شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنجشنبه", "جمعه"
     };
-
-    public String[] mounth = {
+    //month of Calender Exchange
+    private String[] month = {
             "",
             "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد",
             "شهریور ", "مهر", "آبان", " آذر", "دی", "بهمن", "اسفند"
     };
-
-    SqlDatabaseReserve sqlDatabase;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -67,13 +75,19 @@ public class ReservationFragment extends Fragment {
         int i = persianDate.getDayOfWeek();
         int x = persianDate.getMonth();
         binding.weekCardReservation.setText(week[i]);
-        binding.monthCardReservation.setText(mounth[x]);
+        binding.monthCardReservation.setText(month[x]);
 
+        //Date of Calender Today
         date_show = String.valueOf(persianDate.getYear()) +"-"+String.valueOf(persianDate.getMonth())+"-"
                 +String.valueOf(persianDate.getDayOfMonth());
 
+        //Signing Button
         binding.signingButtonReservation.setOnClickListener(view -> {
+            if (sqlDatabase.getDataId().isEmpty()){
+                snackBarIconError();
+            }else {
                 Navigation.findNavController(view).navigate(R.id.action_nav_reservation_to_signingFragment);
+            }
         });
 
 
@@ -96,6 +110,7 @@ public class ReservationFragment extends Fragment {
         binding = null;
     }
 
+    //Services Spinner
     public  void Spinnerr(){
         String[] items = new String[]
                 {"همه موارد"  , "دست", "پا", "بدن" };
@@ -132,6 +147,7 @@ public class ReservationFragment extends Fragment {
 
     }
 
+    //Calender
     public void Calender(){
 
 
@@ -150,6 +166,8 @@ public class ReservationFragment extends Fragment {
         calendarHandler.getLocalEvents();
         calendarHandler.getLocalEventsForDay(today);
         calendarHandler.getOfficialEventsForDay(today);
+        Typeface typeface = ResourcesCompat.getFont(getContext(), R.font.iraniansans);
+        calendarHandler.setTypeface(typeface);
 
         calendarView.setOnDayClickedListener(persianDate -> {
 
@@ -157,7 +175,7 @@ public class ReservationFragment extends Fragment {
             int i = persianDate.getDayOfWeek();
             int x = persianDate.getMonth();
             binding.weekCardReservation.setText(week[i]);
-            binding.monthCardReservation.setText(mounth[x]);
+            binding.monthCardReservation.setText(month[x]);
             date_show = String.valueOf(persianDate.getYear()) +"-"+String.valueOf(persianDate.getMonth())+"-"
                     +String.valueOf(persianDate.getDayOfMonth());
             Log.d("KIANOOSH", "Calender: "+ date_show);
@@ -165,31 +183,35 @@ public class ReservationFragment extends Fragment {
             sqlDatabase.deleteIdAll();
         });
         calendarView.setOnMonthChangedListener(persianDate -> {
-
+            int x = persianDate.getMonth();
+            binding.monthCardReservation.setText(month[x]);
+            binding.weekCardReservation.setText("");
+            binding.daysCardReservation.setText(String.valueOf(persianDate.getYear()));
         });
 
     }
 
-
+    //Reservations Example
     public void Tabale() {
         sqlDatabase = new SqlDatabaseReserve(getContext());
         if (sqlDatabase.getDataId().isEmpty()) {
 
-            sqlDatabase.Insert("1401-6-5T09:00:00.000z", "09:00", 0, "پا");
-            sqlDatabase.Insert("1401-6-5T11:00:00.000z", "11:00", 0, "بدن");
-            sqlDatabase.Insert("1401-6-5T12:30:00.000z", "12:30", 0, "پا");
-            sqlDatabase.Insert("1401-6-5T13:00:00.000z", "14:00", 0, "پا");
-            sqlDatabase.Insert("1401-6-5T14:00:00.000z", "15:00", 0, "بدن");
-            sqlDatabase.Insert("1401-6-5T15:00:00.000z", "16:00", 0, "پا");
-            sqlDatabase.Insert("1401-6-5T16:00:00.000z", "21:00", 0, "دست");
+            sqlDatabase.Insert("1401-6-9T09:00:00.000z", "09:00", 0, "پا");
+            sqlDatabase.Insert("1401-6-9T11:00:00.000z", "11:00", 0, "بدن");
+            sqlDatabase.Insert("1401-6-9T12:30:00.000z", "12:30", 0, "پا");
+            sqlDatabase.Insert("1401-6-9T13:00:00.000z", "14:00", 0, "پا");
+            sqlDatabase.Insert("1401-6-9T14:00:00.000z", "15:00", 0, "بدن");
+            sqlDatabase.Insert("1401-6-9T15:00:00.000z", "16:00", 0, "پا");
+            sqlDatabase.Insert("1401-6-9T16:00:00.000z", "21:00", 0, "دست");
 
-            sqlDatabase.Insert("1401-6-6T11:00:00.000z", "11:00", 0, "بدن");
-            sqlDatabase.Insert("1401-6-6T12:30:00.000z", "13:30", 0, "بدن");
-            sqlDatabase.Insert("1401-6-6T14:00:00.000z", "16:00", 0, "پا");
-            sqlDatabase.Insert("1401-6-6T17:00:00.000z", "17:00", 0, "دست");
+            sqlDatabase.Insert("1401-6-10T11:00:00.000z", "11:00", 0, "بدن");
+            sqlDatabase.Insert("1401-6-10T12:30:00.000z", "13:30", 0, "بدن");
+            sqlDatabase.Insert("1401-6-10T14:00:00.000z", "16:00", 0, "پا");
+            sqlDatabase.Insert("1401-6-10T17:00:00.000z", "17:00", 0, "دست");
         }
     }
 
+    //RecyclerView for Reservations
     public void Recycler() {
         //sql Database
         SqlDatabaseReserve sqlDatabaseReserve = new SqlDatabaseReserve(getContext());
@@ -230,6 +252,25 @@ public class ReservationFragment extends Fragment {
         //refresh
         adapter.notifyDataSetChanged();
     }
+
+    //error snackbar for Verification phone
+    private void snackBarIconError() {
+        final Snackbar snackbar = Snackbar.make(getView(), "", Snackbar.LENGTH_SHORT);
+        //inflate view
+        View custom_view = getLayoutInflater().inflate(R.layout.snackbar_layout, null);
+
+        snackbar.getView().setBackgroundColor(Color.TRANSPARENT);
+        Snackbar.SnackbarLayout snackBarView = (Snackbar.SnackbarLayout) snackbar.getView();
+        snackBarView.setPadding(0, 0, 0, 0);
+
+        ((TextView) custom_view.findViewById(R.id.message)).setText("باید یک رزرو انتخاب کنید");
+        ((ImageView) custom_view.findViewById(R.id.icon)).setImageResource(R.drawable.ic_baseline_perm_device_information_24);
+        (custom_view.findViewById(R.id.parent_view)).setBackgroundColor(getResources().getColor(R.color.red));
+        snackBarView.addView(custom_view, 0);
+        snackbar.show();
+    }
+
+
 
 
 
