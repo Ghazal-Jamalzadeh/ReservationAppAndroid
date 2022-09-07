@@ -69,6 +69,8 @@ public class SignInValiddationcodeFragment extends Fragment {
         binding = FragmentSignInValiddationcodeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        binding.text.setText(getArguments().getString("number"));
+
         //Keyboard Come Up
         Tools.keyboardPopUp(getActivity());
         binding.one.requestFocus();
@@ -210,7 +212,6 @@ public class SignInValiddationcodeFragment extends Fragment {
 
                 if (binding.six.getText().length() != 0) {
 
-
                 }
 
             }
@@ -222,10 +223,9 @@ public class SignInValiddationcodeFragment extends Fragment {
         });
 
         //Action Keyboard Button
-        binding.six.setOnEditorActionListener((textView, i, keyEvent) -> {
+        binding.acceptButtonSigning.setOnEditorActionListener((textView, i, keyEvent) -> {
             if (i == EditorInfo.IME_ACTION_DONE) {
-                String all = binding.one.getText()+binding.two.getText().toString()
-                        +binding.three.getText().toString()+binding.four.getText().toString();
+                Tools.removePhoneKeypad(getParentFragment());
                 //do here your stuff f
                 return true;
             }
@@ -248,8 +248,10 @@ public class SignInValiddationcodeFragment extends Fragment {
                 if (aBoolean){
                     //navigate to next frg
                     Log.d("KIA", "onCreateView: "+aBoolean);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("number", mobile);
                     Navigation.findNavController(view).popBackStack();
-                    Navigation.findNavController(view).navigate(R.id.factorFragment);
+                    Navigation.findNavController(view).navigate(R.id.factorFragment, bundle);
                 }
             });
 

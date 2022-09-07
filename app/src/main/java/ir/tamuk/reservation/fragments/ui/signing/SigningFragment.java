@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
@@ -60,12 +61,16 @@ public class SigningFragment extends Fragment {
         //Accept Button
         binding.acceptButtonSigning.setOnClickListener(view -> {
 
+
+
             //editText
             if (binding.mobileEditTextSigning.getText().length() == 11) {
-                binding.mobileEditTextSigning.setTextColor(Color.WHITE);
+                binding.progressCircularSigning.setVisibility(View.VISIBLE);
+                binding.acceptButtonSigning.setTextColor(Color.WHITE);
                 body.mobile = binding.mobileEditTextSigning.getText().toString();
 
-                signingViewModel.callSendActivationCode(body);
+                Log.d("KIA", "onEd: ");
+                signingViewModel.callSendActivationCode(body, getContext());
                 signingViewModel.isSuccessLiveData.observe(getViewLifecycleOwner(), aBoolean -> {
                     if (aBoolean){
                         //navigate to next frg
@@ -76,10 +81,14 @@ public class SigningFragment extends Fragment {
                         Navigation.findNavController(getView()).navigate(R.id.action_signingFragment_to_signInValiddationcodeFragment, bundle);
                     }
                 });
-                signingViewModel.errorMessageLiveData.observe(getViewLifecycleOwner(), new Observer<String>() {
-                    @Override
-                    public void onChanged(String s) {
-                        Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+                signingViewModel.errorMessageLiveData.observe(getViewLifecycleOwner(), s -> {
+                    Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+                    Log.d("KIA", "onChanged: "+s);
+                });
+                signingViewModel.isProgress.observe(getViewLifecycleOwner(), aBoolean ->{
+                    if (aBoolean){
+                        binding.progressCircularSigning.setVisibility(View.INVISIBLE);
+                        binding.acceptButtonSigning.setTextColor(Color.RED);
                     }
                 });
 
@@ -123,28 +132,18 @@ public class SigningFragment extends Fragment {
 //
         });
 
+        binding.acceptButtonSigning.setOnEditorActionListener((textView, i, keyEvent) -> {
+            if (i == EditorInfo.IME_ACTION_DONE) {
+                Tools.removePhoneKeypad(getParentFragment());
+                //do here your stuff f
+                return true;
+            }
+            return false;
+        });
+
         return root;
     }
 
-    public  void hideKeyboard() {
-        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(getContext().INPUT_METHOD_SERVICE);
-        //Find the currently focused view, so we can grab the correct window token from it.
-        View view = getActivity().getCurrentFocus();
-        //If no view currently has focus, create a new one, just so we can grab a window token from it
-        if (view == null) {
-            view = new View(getActivity());
-        }
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }
 
-    public static void removePhoneKeypad(Fragment fragment) {
-        InputMethodManager inputManager = (InputMethodManager) fragment.getView()
-                .getContext()
-                .getSystemService(Context.INPUT_METHOD_SERVICE);
-
-        IBinder binder = fragment.getView().getWindowToken();
-        inputManager.hideSoftInputFromWindow(binder,
-                InputMethodManager.HIDE_NOT_ALWAYS);
-    }
 
 }

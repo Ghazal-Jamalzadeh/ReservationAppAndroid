@@ -1,6 +1,7 @@
 package ir.tamuk.reservation.utils;
 
 public class Constants {
+    public static final String TAG_KIA = "Kianoosh";
     //Api
     public static final String BASE_URL = "http://moeenkashisaz.ir";
     public static final long NETWORK_TIMEOUT = 60L ;

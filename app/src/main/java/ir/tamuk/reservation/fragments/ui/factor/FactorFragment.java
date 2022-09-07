@@ -49,9 +49,8 @@ public class FactorFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentFactorBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        //SharedPreferences for NumberPhone of SigningFragment
-        SharedPreferences prefs = getActivity().getSharedPreferences("NumberPhone", Context.MODE_PRIVATE);
-        String numb = prefs.getString("number", null);//"No name defined" is the default value.
+
+        String numb = getArguments().getString("number", null);//"No name defined" is the default value.
         binding.phoneTextForm.setText(numb);
 
         //sql Database for get the Informations of reservations
