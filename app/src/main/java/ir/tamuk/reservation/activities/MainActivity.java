@@ -31,7 +31,6 @@ import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.ActivityMainBinding;
 import ir.tamuk.reservation.fragments.ui.home.HomeFragment;
 
-import android.provider.Settings.Secure;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -40,9 +39,7 @@ public class MainActivity extends AppCompatActivity {
     NavController navController;
     private boolean isDubblePress = false;
 
-    @SuppressLint("HardwareIds")
-    private String android_id = Secure.getString(this.getContentResolver(),
-            Secure.ANDROID_ID);
+    private String android_id ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,8 +121,12 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-        Log.d("ghazal", "onCreate: " + android_id);
-
+///////////////////getting device Id//////////////////////
+        try {
+            android_id = Settings.Secure.getString(this.getContentResolver(),
+                    Settings.Secure.ANDROID_ID);
+        }catch (Exception e){}
+        Log.d("ghazal", "android id: " + android_id);
     }
 
 
