@@ -30,10 +30,10 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="right|top"
-            style="@style/fontForLargeText"
+            style="@style/fontForMediumBoldText"
             android:textStyle="bold"
             android:textColor="@color/backgroundSigning"
-            android:textSize="@dimen/_19cdp"
+            android:textSize="@dimen/_15cdp"
             android:text="لیزر صورت" />
 
     </LinearLayout>
