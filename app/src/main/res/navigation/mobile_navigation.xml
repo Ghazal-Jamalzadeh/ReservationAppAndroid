@@ -43,7 +43,12 @@
         android:id="@+id/nav_services"
         android:name="ir.tamuk.reservation.fragments.ui.services.ServicesFragment"
         android:label="fragment_services"
-        tools:layout="@layout/fragment_services" />
+        tools:layout="@layout/fragment_services" >
+        <action
+            android:id="@+id/action_nav_services_to_serviceInfoFragment"
+            app:destination="@id/serviceInfoFragment"
+            app:enterAnim="@anim/slide_up" />
+    </fragment>
     <fragment
         android:id="@+id/factorFragment"
         android:name="ir.tamuk.reservation.fragments.ui.factor.FactorFragment"
@@ -75,5 +80,17 @@
             app:popEnterAnim="@anim/wait"
             app:popExitAnim="@android:anim/fade_out" />
     </fragment>
-        tools:layout="@layout/fragment_signing" />
+    <fragment
+        android:id="@+id/serviceInfoFragment"
+        android:name="ir.tamuk.reservation.fragments.ui.ServiceInfoFragment"
+        android:label="fragment_service_info"
+        tools:layout="@layout/fragment_service_info">
+        <action
+            android:id="@+id/action_serviceInfoFragment_to_nav_reservation"
+            app:destination="@id/nav_reservation"
+            app:enterAnim="@anim/slide_up"
+            app:popEnterAnim="@anim/wait"
+            app:popExitAnim="@anim/slide_down"/>
+    </fragment>
+
 </navigation>

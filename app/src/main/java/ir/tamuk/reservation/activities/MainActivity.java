@@ -83,7 +83,11 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             binding.bottomNav.setVisibility(View.VISIBLE);
                         }
-
+                        if (navDestination.getId()==R.id.serviceInfoFragment){
+                            binding.bottomNav.setVisibility(View.GONE);
+                        }else {
+                            binding.bottomNav.setVisibility(View.VISIBLE);
+                        }
                     }
                 };
                 h.postDelayed(r, 100);
@@ -92,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         ////////////////////////////////////////////////////////
-
 
     }
 
@@ -134,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             } else {
                 super.onBackPressed();
+
             }
 
 

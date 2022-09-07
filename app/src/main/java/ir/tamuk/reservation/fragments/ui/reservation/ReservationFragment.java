@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
@@ -153,7 +154,7 @@ public class ReservationFragment extends Fragment {
 
         PersianCalendarView calendarView  = binding.persianCalendar;
         PersianCalendarHandler calendarHandler = calendarView.getCalendar();
-        ir.mirrajabi.persiancalendar.core.models.PersianDate today = calendarHandler.getToday();
+        PersianDate today = calendarHandler.getToday();
 
         // Add an event called "Custom event" to this day
         calendarHandler.addLocalEvent(new CalendarEvent(today, "Custom event", false));

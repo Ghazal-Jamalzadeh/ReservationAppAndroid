@@ -212,7 +212,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:layout_centerHorizontal="true"
                             android:drawableRight="@drawable/ic_ellipse_34"
                             android:drawablePadding="@dimen/_8cdp"
                             android:text="ساعت های آزاد" />
