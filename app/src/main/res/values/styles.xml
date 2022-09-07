@@ -175,12 +175,12 @@
 <!--        <item name="android:textColor">@color/tamuk_g3</item>-->
 <!--        <item name="android:textSize">@dimen/small_text_size</item>-->
 <!--    </style>-->
-<!--    <style name="fontForMediumText">-->
-<!--        <item name="android:textStyle">normal</item>-->
-<!--        <item name="android:fontFamily">@font/iran_sans_mob</item>-->
-<!--        <item name="android:textColor">@color/tamuk_g3</item>-->
-<!--        <item name="android:textSize">@dimen/medium_text_size</item>-->
-<!--    </style>-->
+    <style name="fontForMediumText">
+        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">@font/iran_sans_mob</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textSize">@dimen/medium_text_size</item>
+    </style>
    <style name="fontForBMLText">-->
        <item name="android:textStyle">normal</item>-->
         <item name="android:fontFamily">@font/iran_sans_mob</item>-->

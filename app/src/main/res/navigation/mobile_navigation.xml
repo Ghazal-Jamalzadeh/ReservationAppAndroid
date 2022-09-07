@@ -33,7 +33,11 @@
         android:id="@+id/nav_profile"
         android:name="ir.tamuk.reservation.fragments.ui.profile.ProfileFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_nav_profile_to_appointmentFragment"
+            app:destination="@id/appointmentFragment" />
+    </fragment>
     <fragment
         android:id="@+id/testFragment"
         android:name="ir.tamuk.reservation.fragments.ui.TestFragment"
@@ -75,5 +79,9 @@
             app:popEnterAnim="@anim/wait"
             app:popExitAnim="@android:anim/fade_out" />
     </fragment>
-        tools:layout="@layout/fragment_signing" />
+    <fragment
+        android:id="@+id/appointmentFragment"
+        android:name="ir.tamuk.reservation.fragments.ui.Appointments.AppointmentFragment"
+        android:label="AppointmentFragment" />
+    tools:layout="@layout/fragment_signing" />
 </navigation>
