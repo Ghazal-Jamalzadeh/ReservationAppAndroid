@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -69,6 +71,7 @@ public class ReservationFragment extends Fragment {
         binding = FragmentReservationBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+
         //calender Today
         PersianCalendarHandler handler = binding.persianCalendar.getCalendar();
         PersianDate persianDate = handler.getToday();
@@ -117,22 +120,45 @@ public class ReservationFragment extends Fragment {
                 {"همه موارد"  , "دست", "پا", "بدن" };
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(),R.layout.font_spinner, items);
         binding.spinnerServices.setAdapter(arrayAdapter);
+
+        binding.spinnerServices.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        Log.e("Techie", "----------------------------Action down----------------------------");
+//                        view.setBackgroundResource( R.drawable.spinner_draw_2);
+                        break;
+
+                    case MotionEvent.ACTION_BUTTON_RELEASE:
+                        Log.e("Techie", "----------------------------Cancel----------------------------");
+                        view.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.blue));
+                        break;
+                }
+                return false;
+            }
+        });
         binding.spinnerServices.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 switch (position) {
                     case 0:
                         Recycler();
+                        binding.spinnerServices.setBackgroundResource(R.drawable.spinner_draw);
+
                         break;
                     case 1:
                         Recycler();
+//                        binding.spinnerServices.setBackgroundResource(R.drawable.spinner_draw);
                         break;
                     case 2:
                         Recycler();
+//                        binding.spinnerServices.setBackgroundResource(R.drawable.spinner_draw);
 
                         break;
                     case 3:
                         Recycler();
+//                        binding.spinnerServices.setBackgroundResource(R.drawable.spinner_draw);
 
                         break;
                 }
@@ -141,6 +167,7 @@ public class ReservationFragment extends Fragment {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 Toast.makeText(context, "لطفا یکی از خدمات رو انتخاب کنید", Toast.LENGTH_SHORT).show();
+                binding.spinnerServices.setBackgroundResource(R.drawable.spinner_back);
 
             }
         });

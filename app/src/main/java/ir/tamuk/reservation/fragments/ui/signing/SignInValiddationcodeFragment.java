@@ -22,9 +22,12 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -34,12 +37,22 @@ import java.util.TimerTask;
 
 import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.FragmentSignInValiddationcodeBinding;
+import ir.tamuk.reservation.models.BodySendActivationCode;
+import ir.tamuk.reservation.models.ResponseSendActivationCode;
+import ir.tamuk.reservation.utils.Tools;
+import ir.tamuk.reservation.viewModels.SigningValiddationCodeViewModel;
+import ir.tamuk.reservation.viewModels.SigningViewModel;
+import retrofit2.Response;
 
 public class SignInValiddationcodeFragment extends Fragment {
 
     private FragmentSignInValiddationcodeBinding  binding;
     private Timer t;
     private TimerTask timerTask;
+
+
+    private BodySendActivationCode body = new BodySendActivationCode();
+    private Response<ResponseSendActivationCode> responce;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,17 +64,13 @@ public class SignInValiddationcodeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        SigningValiddationCodeViewModel signingViewModel =  new ViewModelProvider(this).get(SigningValiddationCodeViewModel.class);
+
         binding = FragmentSignInValiddationcodeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        //SharedPreferences for get Number & CodeVerification
-        SharedPreferences prefs = getActivity().getSharedPreferences("NumberPhone", Context.MODE_PRIVATE);
-        String numb = prefs.getString("number", null);//"No name defined" is the default value.
-        String code = prefs.getString("code", null);
-        Log.d("KIANOOSH", "Verfi: "+code);
-        binding.text.setText(numb);
-        //for Keyboard come Up
-        InputMethodManager imgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imgr.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+
+        //Keyboard Come Up
+        Tools.keyboardPopUp(getActivity());
         binding.one.requestFocus();
         //Number1 Code
         binding.one.addTextChangedListener(new TextWatcher() {
@@ -148,21 +157,60 @@ public class SignInValiddationcodeFragment extends Fragment {
 
                 }
 
-                if (binding.four.getText().length() != 0) {
-                    imgr.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                    String all = binding.one.getText()+binding.two.getText().toString()
-                            +binding.three.getText().toString()+binding.four.getText().toString();
-                    if (all.equals(code)) {
-                        t.cancel();
-                        Navigation.findNavController(getView()).navigate(R.id.action_signInValiddationcodeFragment_to_factorFragment);
-                        binding.one.getText().clear();
-                        binding.two.getText().clear();
-                        binding.three.getText().clear();
-                        binding.four.getText().clear();
-                        Successful();
-                    }else{
-                        snackBarIconError();
-                    }
+                if (binding.four.getText().length() == 1){
+                    binding.five.requestFocus();
+                }
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        //Number5 Code
+        binding.five.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (binding.five.getText().length() == 0){
+                    binding.four.requestFocus();
+
+                }
+                if (binding.five.getText().length() == 1){
+                    binding.six.requestFocus();
+                }
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        //Number6 Code
+        binding.six.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (binding.six.getText().length() == 0){
+                    binding.five.requestFocus();
+
+                }
+
+                if (binding.six.getText().length() != 0) {
+
+
                 }
 
             }
@@ -172,27 +220,12 @@ public class SignInValiddationcodeFragment extends Fragment {
 
             }
         });
+
         //Action Keyboard Button
-        binding.four.setOnEditorActionListener((textView, i, keyEvent) -> {
+        binding.six.setOnEditorActionListener((textView, i, keyEvent) -> {
             if (i == EditorInfo.IME_ACTION_DONE) {
-                imgr.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
                 String all = binding.one.getText()+binding.two.getText().toString()
                         +binding.three.getText().toString()+binding.four.getText().toString();
-                if (all.equals(code)){
-                    t.cancel();
-                    Navigation.findNavController(getView()).navigate(R.id.action_signInValiddationcodeFragment_to_factorFragment);
-                    binding.one.getText().clear();
-                    binding.two.getText().clear();
-                    binding.three.getText().clear();
-                    binding.four.getText().clear();
-                    Successful();
-                    if (all.equals("")){
-
-                    }
-
-                }else {
-                    snackBarIconError();
-                }
                 //do here your stuff f
                 return true;
             }
@@ -201,25 +234,32 @@ public class SignInValiddationcodeFragment extends Fragment {
         //Accept Button
         binding.acceptButtonSigning.setOnClickListener(view -> {
             String all = binding.one.getText()+binding.two.getText().toString()
-                    +binding.three.getText().toString()+binding.four.getText().toString();
-            Log.d("KIANOOSH", "VerfCode: "+all);
-            Log.d("KIANOOSH", "Verf: "+code);
+                    +binding.three.getText().toString()+binding.four.getText().toString()
+                    +binding.five.getText().toString()+binding.six.getText().toString();
+            Log.d("KIA", "Code: "+all);
 
-            if (all.equals(code)){
-                t.cancel();
-                Navigation.findNavController(view).navigate(R.id.action_signInValiddationcodeFragment_to_factorFragment);
-                binding.one.getText().clear();
-                binding.two.getText().clear();
-                binding.three.getText().clear();
-                binding.four.getText().clear();
-                Successful();
-                if (all.equals("")){
+            String mobile = getArguments().getString("number");
+            Log.d("KIA", "onCreateView: "+mobile);
+            body.mobile = mobile;
+            body.code = all;
+            signingViewModel.callReceiveActivationCode(body);
 
+            signingViewModel.isSuccessLiveData.observe(getViewLifecycleOwner(), aBoolean -> {
+                if (aBoolean){
+                    //navigate to next frg
+                    Log.d("KIA", "onCreateView: "+aBoolean);
+                    Navigation.findNavController(view).popBackStack();
+                    Navigation.findNavController(view).navigate(R.id.factorFragment);
                 }
+            });
 
-            }else{
-                snackBarIconError();
-            }
+            signingViewModel.errorMessageLiveData.observe(getViewLifecycleOwner(), new Observer<String>() {
+                @Override
+                public void onChanged(String s) {
+                    Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+                }
+            });
+
         });
         //Refresh Icon
         binding.image.setOnClickListener(view -> {
@@ -296,7 +336,7 @@ public class SignInValiddationcodeFragment extends Fragment {
     }
 
     //Error SnackBar
-    private void snackBarIconError() {
+  /*  private void snackBarIconError() {
         final Snackbar snackbar = Snackbar.make(getView(), "", Snackbar.LENGTH_SHORT);
         //inflate view
         View custom_view = getLayoutInflater().inflate(R.layout.snackbar_layout, null);
@@ -310,9 +350,9 @@ public class SignInValiddationcodeFragment extends Fragment {
         (custom_view.findViewById(R.id.parent_view)).setBackgroundColor(getResources().getColor(R.color.red));
         snackBarView.addView(custom_view, 0);
         snackbar.show();
-    }
+    }*/
     //successful SnackBAr
-    private void Successful() {
+ /*   private void Successful() {
         final Snackbar snackbar = Snackbar.make(getView(), "", Snackbar.LENGTH_SHORT);
         //inflate view
         View custom_view = getLayoutInflater().inflate(R.layout.snackbar_layout, null);
@@ -326,11 +366,6 @@ public class SignInValiddationcodeFragment extends Fragment {
         (custom_view.findViewById(R.id.parent_view)).setBackgroundColor(getResources().getColor(R.color.main));
         snackBarView.addView(custom_view, 0);
         snackbar.show();
-    }
-
-
-
-
-
+    }*/
 
 }

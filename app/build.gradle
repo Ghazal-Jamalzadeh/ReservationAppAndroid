@@ -77,4 +77,6 @@ dependencies {
     implementation 'com.github.roojin:persian-calendar-view:1.2.2'
     implementation 'com.github.arcadefire:nice-spinner:1.4.4'
 
+    implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
+
 }

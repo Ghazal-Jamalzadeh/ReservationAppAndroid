@@ -86,10 +86,10 @@
     </style>
 
     <style name="SpinnerTheme" parent="android:Widget.Material.Spinner.Underlined">
-        <item name="android:background">@drawable/soinner_draw
-        </item>
+        <item name="android:background">@drawable/spinner_draw</item>
         <item name="android:popupBackground">@color/white</item>
-        <item name="android:padding">1px</item>
+        <item name="android:padding">0px</item>
+        <item name="android:dropDownWidth">match_parent</item>
         <item name="android:paddingBottom">4dp</item>
         <item name="elevation">@dimen/_8cdp</item>
         <item name="android:popupElevation">1dp</item>
