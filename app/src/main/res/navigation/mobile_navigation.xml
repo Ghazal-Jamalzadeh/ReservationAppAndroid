@@ -75,5 +75,10 @@
             app:popEnterAnim="@anim/wait"
             app:popExitAnim="@android:anim/fade_out" />
     </fragment>
-        tools:layout="@layout/fragment_signing" />
+    <fragment
+        android:id="@+id/paid"
+        android:name="ir.tamuk.reservation.fragments.ui.paid.Paid"
+        android:label="fragment_paid"
+        tools:layout="@layout/fragment_paid" />
+    tools:layout="@layout/fragment_signing" />
 </navigation>
