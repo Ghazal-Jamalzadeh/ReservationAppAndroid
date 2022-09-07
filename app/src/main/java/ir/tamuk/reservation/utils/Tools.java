@@ -32,6 +32,7 @@ public class Tools {
     public static void scrollToPosition(NestedScrollView scrollView , View targetView) {
 
         scrollView.postDelayed(() -> scrollView.smoothScrollTo(0, targetView.getTop()), 300);
+
     }
 
     //Keyboard show
