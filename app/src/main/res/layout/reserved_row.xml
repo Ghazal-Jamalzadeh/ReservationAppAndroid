@@ -10,14 +10,16 @@
 
     <RelativeLayout
         android:id="@+id/relative_layout_click"
-        android:elevation="4dp"
-
         android:layout_width="@dimen/_60cdp"
-        android:layout_height="@dimen/_60cdp"
-        android:background="@drawable/row_transparent_reserve"
-        android:layout_margin="@dimen/_10cdp"
 
-        >
+        android:layout_height="@dimen/_60cdp"
+        android:layout_marginStart="@dimen/_10cdp"
+        android:layout_marginTop="@dimen/_10cdp"
+
+        android:layout_marginEnd="@dimen/_10cdp"
+        android:layout_marginBottom="@dimen/_10cdp"
+        android:background="@drawable/row_transparent_reserve"
+        android:elevation="4dp">
 
         <TextView
             android:id="@+id/time_reserve"

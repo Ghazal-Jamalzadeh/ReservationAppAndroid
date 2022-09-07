@@ -1,47 +1,39 @@
 package ir.tamuk.reservation.fragments.ui.signing;
 
-import static android.content.Context.MODE_PRIVATE;
-import static androidx.navigation.Navigation.findNavController;
-
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
-
-import android.os.PatternMatcher;
-import android.telephony.PhoneNumberFormattingTextWatcher;
+import android.os.IBinder;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.FragmentSigningBinding;
-import ir.tamuk.reservation.fragments.ui.reservation.ReservationViewModel;
-import ir.tamuk.reservation.fragments.ui.signing.notification.Constants;
-import ir.tamuk.reservation.fragments.ui.signing.notification.MyNotificationManager;
+import ir.tamuk.reservation.models.BodySendActivationCode;
+import ir.tamuk.reservation.models.ResponseSendActivationCode;
+import ir.tamuk.reservation.utils.Tools;
+import ir.tamuk.reservation.viewModels.SigningViewModel;
+import retrofit2.Response;
 
 public class SigningFragment extends Fragment {
 
     private FragmentSigningBinding binding;
-    //for notification
-    private String result = "";
+
+    private BodySendActivationCode body = new BodySendActivationCode();
+    private Response<ResponseSendActivationCode> responce;
+
 
 
     @Override
@@ -52,16 +44,13 @@ public class SigningFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ReservationViewModel galleryViewModel =
-                new ViewModelProvider(this).get(ReservationViewModel.class);
+
+        SigningViewModel signingViewModel =  new ViewModelProvider(this).get(SigningViewModel.class);
         binding = FragmentSigningBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        //a random 4Number
-        ShuffleNumb();
 
         //Keyboard come up
-        InputMethodManager imgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imgr.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+        Tools.keyboardPopUp(getActivity());
         binding.mobileEditTextSigning.requestFocus();
 
         //Cancel Button
@@ -74,18 +63,26 @@ public class SigningFragment extends Fragment {
             //editText
             if (binding.mobileEditTextSigning.getText().length() == 11) {
                 binding.mobileEditTextSigning.setTextColor(Color.WHITE);
+                body.mobile = binding.mobileEditTextSigning.getText().toString();
 
-                String x = binding.mobileEditTextSigning.getText().toString();
-                SharedPreferences.Editor editor = getActivity().getSharedPreferences("NumberPhone", MODE_PRIVATE).edit();
-                editor.remove("NumberPhone").apply();
-                editor.putString("number", x);
-                editor.putString("code", result);
-                Log.d("KIAN", "onClick: " + result);
-                editor.apply();
+                signingViewModel.callSendActivationCode(body);
+                signingViewModel.isSuccessLiveData.observe(getViewLifecycleOwner(), aBoolean -> {
+                    if (aBoolean){
+                        //navigate to next frg
+                        Log.d("KKI", "onCreateView: "+aBoolean);
+                        Bundle bundle = new Bundle();
+                        bundle.clear();
+                        bundle.putString("number", binding.mobileEditTextSigning.getText().toString());
+                        Navigation.findNavController(getView()).navigate(R.id.action_signingFragment_to_signInValiddationcodeFragment, bundle);
+                    }
+                });
+                signingViewModel.errorMessageLiveData.observe(getViewLifecycleOwner(), new Observer<String>() {
+                    @Override
+                    public void onChanged(String s) {
+                        Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+                    }
+                });
 
-                Notif();
-
-                findNavController(view).navigate(R.id.action_signingFragment_to_signInValiddationcodeFragment);
 
             } else {
                 //EditText Field error enable
@@ -105,7 +102,6 @@ public class SigningFragment extends Fragment {
                 binding.mobileEditTextSigning.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
                     }
 
                     @Override
@@ -118,121 +114,37 @@ public class SigningFragment extends Fragment {
                         if (binding.mobileEditTextSigning.getText().toString().trim().length() > 0) {
                             binding.textField.setErrorEnabled(false);
                             binding.mobileEditTextSigning.setTextColor(Color.WHITE);
-
                         }
+
                     }
                 });
 
             }
 //
-
-
-        });
-
-        //editText mobile
-        binding.mobileEditTextSigning.setOnClickListener(view -> {
-            //input Mobile number
-            if (binding.mobileEditTextSigning.getText().length() == 11) {
-                binding.mobileEditTextSigning.setTextColor(Color.WHITE);
-
-                String x = binding.mobileEditTextSigning.getText().toString();
-                //SharedPreferences for save Number
-                SharedPreferences.Editor editor = getActivity().getSharedPreferences("NumberPhone", MODE_PRIVATE).edit();
-                editor.remove("NumberPhone").apply();
-                editor.putString("number", x);
-                //save code Verification
-                editor.putString("code", result);
-                editor.apply();
-                Notif();
-                //next Fragment
-                findNavController(view).navigate(R.id.action_signingFragment_to_signInValiddationcodeFragment);
-
-            } else {
-                //EditText Field error enable
-                binding.textField.setErrorEnabled(true);
-                binding.textField.setBoxStrokeErrorColor(ColorStateList.valueOf(Color.RED));
-                binding.textField.setErrorIconDrawable(R.drawable.ic_baseline_cancel_24);
-                binding.mobileEditTextSigning.setTextColor(Color.RED);
-                binding.textField.setError("شماره اشتباه است");
-                //delete error icon
-                binding.textField.setErrorIconOnClickListener(view1 -> {
-                    binding.mobileEditTextSigning.getText().clear();
-                    binding.textField.setErrorEnabled(false);
-                    binding.mobileEditTextSigning.setTextColor(Color.WHITE);
-
-                });
-                //if changed number error false nad Pattern
-                binding.mobileEditTextSigning.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-                        if (binding.mobileEditTextSigning.getText().toString().trim().length() > 0) {
-                            binding.textField.setErrorEnabled(false);
-                            binding.mobileEditTextSigning.setTextColor(Color.WHITE);
-
-                        }
-
-
-                    }
-                });
-
-            }
         });
 
         return root;
     }
 
-    //FAKE NOTIFICATION
-    public void Notif() {
-
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            NotificationManager mNotificationManager =
-                    (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
-            int importance = NotificationManager.IMPORTANCE_HIGH;
-            NotificationChannel mChannel = new NotificationChannel(Constants.CHANNEL_ID, Constants.CHANNEL_NAME, importance);
-            mChannel.setDescription(Constants.CHANNEL_DESCRIPTION);
-            mChannel.enableLights(true);
-            mChannel.setLightColor(Color.RED);
-            mChannel.enableVibration(true);
-            mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
-            mNotificationManager.createNotificationChannel(mChannel);
+    public  void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(getContext().INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = getActivity().getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(getActivity());
         }
-
-        /*
-         * Displaying a notification locally
-         */
-        MyNotificationManager.getInstance(getContext()).displayNotification("کد تایید شماره", result);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
-    //RANDOM 4NUMBER for Verification
-    public void ShuffleNumb() {
-        int max = 9;
-        int min = 1;
-        int range = max - min + 1;
-        int rand = 0;
-        List<String> myAnswerList = new ArrayList<>();
 
-        // generate random numbers within 1 to 10
-        for (int i = 0; i < 4; i++) {
-            rand = (int) (Math.random() * range) + min;
-            String randS = String.valueOf(rand);
-            myAnswerList.add(randS);
-            // Output is different everytime this code is executed
+    public static void removePhoneKeypad(Fragment fragment) {
+        InputMethodManager inputManager = (InputMethodManager) fragment.getView()
+                .getContext()
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
 
-        }
-
-        Log.d("KIA", "ShuffleNumb: "+ myAnswerList);
-        result = myAnswerList.get(0)+myAnswerList.get(1)+
-                myAnswerList.get(2)+myAnswerList.get(3);
-        Log.d("KIA", "ShuffleNumb: "+result);
-
+        IBinder binder = fragment.getView().getWindowToken();
+        inputManager.hideSoftInputFromWindow(binder,
+                InputMethodManager.HIDE_NOT_ALWAYS);
     }
+
 }
