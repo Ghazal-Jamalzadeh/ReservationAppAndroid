@@ -190,6 +190,46 @@
                     android:layout_width="1px"
                     android:layout_height="0dp" />
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/five"
+                    android:theme="@style/Theme.verfi.code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_4cdp"
+                    android:layout_marginRight="@dimen/_4cdp"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+
+                    />
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="0dp" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/six"
+                    android:theme="@style/Theme.verfi.code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_4cdp"
+                    android:layout_marginRight="@dimen/_4cdp"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+
+                    />
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="0dp" />
+
 
             </LinearLayout>
 
