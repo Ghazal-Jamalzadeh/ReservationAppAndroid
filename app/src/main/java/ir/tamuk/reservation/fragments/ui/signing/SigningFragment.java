@@ -23,6 +23,7 @@ import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.FragmentSigningBinding;
 import ir.tamuk.reservation.models.BodySendActivationCode;
 import ir.tamuk.reservation.models.ResponseSendActivationCode;
+import ir.tamuk.reservation.utils.Connectivity;
 import ir.tamuk.reservation.utils.Tools;
 import ir.tamuk.reservation.viewModels.SigningViewModel;
 import retrofit2.Response;
@@ -65,15 +66,23 @@ public class SigningFragment extends Fragment {
                 binding.mobileEditTextSigning.setTextColor(Color.WHITE);
                 body.mobile = binding.mobileEditTextSigning.getText().toString();
 
-                signingViewModel.callSendActivationCode(body);
+                if (Connectivity.isConnected(getContext())) {
+                    signingViewModel.callSendActivationCode(body);
+                } else {
+                    Toast.makeText(getContext(), "اینترنت وصل نیس ", Toast.LENGTH_SHORT).show();
+                }
+
                 signingViewModel.isSuccessLiveData.observe(getViewLifecycleOwner(), aBoolean -> {
                     if (aBoolean){
                         //navigate to next frg
-                        Log.d("KKI", "onCreateView: "+aBoolean);
+                        Log.d("KKI", "onCreateView: "+ aBoolean );
                         Bundle bundle = new Bundle();
                         bundle.clear();
                         bundle.putString("number", binding.mobileEditTextSigning.getText().toString());
-                        Navigation.findNavController(getView()).navigate(R.id.action_signingFragment_to_signInValiddationcodeFragment, bundle);
+
+                        if (Tools.checkDestination(view , R.id.signingFragment)){
+                            Navigation.findNavController(view).navigate(R.id.action_signingFragment_to_signInValiddationcodeFragment, bundle);
+                        }
                     }
                 });
                 signingViewModel.errorMessageLiveData.observe(getViewLifecycleOwner(), new Observer<String>() {
