@@ -2,6 +2,7 @@ package ir.tamuk.reservation.api;
 
 import ir.tamuk.reservation.models.BodySendActivationCode;
 import ir.tamuk.reservation.models.MoviesList;
+import ir.tamuk.reservation.models.ResponseCategoriesList;
 import ir.tamuk.reservation.models.ResponseSendActivationCode;
 import ir.tamuk.reservation.models.ResponseValidateCode;
 import retrofit2.Call;
@@ -19,5 +20,9 @@ public interface ApiServices {
     //http://moeenkashisaz.ir/garson/api/v1/send-code-activation
     @POST("/garson/api/v1/validate-code-activation")
     Call<ResponseValidateCode> validateCode(@Body BodySendActivationCode bodySendActivationCode);
+
+    //http://moeenkashisaz.ir/laser/api/v1/get-all-category-by-customer
+    @GET("/laser/api/v1/get-all-category-by-customer")
+    Call<ResponseCategoriesList> getAllCategories ();
 
 }

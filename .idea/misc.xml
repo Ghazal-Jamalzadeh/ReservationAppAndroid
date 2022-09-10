@@ -8,9 +8,10 @@
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/app_bar_main.xml" value="0.2" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/content_main.xml" value="0.3104166666666667" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_gallery.xml" value="0.290625" />
-        <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_home.xml" value="0.290625" />
+        <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_reservation.xml" value="0.225" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_services.xml" value="0.290625" />
+        <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_signing.xml" value="0.30572916666666666" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_slideshow.xml" value="0.290625" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_test.xml" value="0.225" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/nav_header_main.xml" value="0.290625" />
@@ -24,12 +25,8 @@
         <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/fragment_home.xml" value="0.2151268115942029" />
         <entry key="..\:/Users/RHMN/Desktop/reservation-android/app/src/main/res/layout/fragment_reservation.xml" value="0.264" />
         <entry key="..\:/Work/reservd/app/src/main/res/layout/activity_main.xml" value="0.12771739130434784" />
-        <entry key="..\:/reservation-android/app/src/main/res/drawable/circle_selected_day.xml" value="0.19537037037037036" />
-        <entry key="..\:/reservation-android/app/src/main/res/drawable/circle_today.xml" value="0.19537037037037036" />
         <entry key="..\:/reservation-android/app/src/main/res/drawable/ic_call.xml" value="0.1" />
         <entry key="..\:/reservation-android/app/src/main/res/drawable/ic_close.xml" value="0.1" />
-        <entry key="..\:/reservation-android/app/src/main/res/drawable/ic_group_11.xml" value="0.19537037037037036" />
-        <entry key="..\:/reservation-android/app/src/main/res/drawable/ic_group_13.xml" value="0.19537037037037036" />
         <entry key="..\:/reservation-android/app/src/main/res/drawable/ic_instagram.xml" value="0.1" />
         <entry key="..\:/reservation-android/app/src/main/res/drawable/ic_location.xml" value="0.1" />
         <entry key="..\:/reservation-android/app/src/main/res/drawable/ic_menu_appbar.xml" value="0.1" />
@@ -46,30 +43,23 @@
         <entry key="..\:/reservation-android/app/src/main/res/layout/activity_splash.xml" value="0.1" />
         <entry key="..\:/reservation-android/app/src/main/res/layout/app_bar_main.xml" value="0.2" />
         <entry key="..\:/reservation-android/app/src/main/res/layout/content_main.xml" value="0.2" />
-        <entry key="..\:/reservation-android/app/src/main/res/layout/fragment_complete_profile_info.xml" value="0.22327898550724637" />
-        <entry key="..\:/reservation-android/app/src/main/res/layout/fragment_factor.xml" value="0.11980749746707194" />
         <entry key="..\:/reservation-android/app/src/main/res/layout/fragment_home.xml" value="0.15717628705148207" />
-        <entry key="..\:/reservation-android/app/src/main/res/layout/fragment_paid.xml" value="0.22826086956521738" />
         <entry key="..\:/reservation-android/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
         <entry key="..\:/reservation-android/app/src/main/res/layout/fragment_reservation.xml" value="0.1" />
-        <entry key="..\:/reservation-android/app/src/main/res/layout/fragment_service_info.xml" value="0.24635416666666668" />
-        <entry key="..\:/reservation-android/app/src/main/res/layout/fragment_services.xml" value="0.24635416666666668" />
-        <entry key="..\:/reservation-android/app/src/main/res/layout/fragment_sign_in_validdationcode.xml" value="0.11980749746707194" />
-        <entry key="..\:/reservation-android/app/src/main/res/layout/fragment_signing.xml" value="0.13858695652173914" />
         <entry key="..\:/reservation-android/app/src/main/res/layout/home_row.xml" value="0.12409420289855072" />
         <entry key="..\:/reservation-android/app/src/main/res/layout/layout_show_more.xml" value="0.25" />
         <entry key="..\:/reservation-android/app/src/main/res/layout/main_toolbar.xml" value="0.1" />
         <entry key="..\:/reservation-android/app/src/main/res/layout/maintoolbar_.xml" value="0.17222222222222222" />
         <entry key="..\:/reservation-android/app/src/main/res/layout/nav_header_main.xml" value="0.1539855072463768" />
         <entry key="..\:/reservation-android/app/src/main/res/layout/reserved_row.xml" value="0.12409420289855072" />
-        <entry key="..\:/reservation-android/app/src/main/res/layout/row_services.xml" value="0.24635416666666668" />
+        <entry key="..\:/reservation-android/app/src/main/res/layout/row_services.xml" value="0.28442028985507245" />
         <entry key="..\:/reservation-android/app/src/main/res/layout/text_home_fragment.xml" value="0.22" />
         <entry key="..\:/reservation-android/app/src/main/res/menu/activity_main_drawer.xml" value="0.17222222222222222" />
         <entry key="..\:/reservation-android/app/src/main/res/menu/main.xml" value="0.170042194092827" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15_PREVIEW" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
