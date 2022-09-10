@@ -29,15 +29,16 @@ public class SigningValiddationCodeViewModel extends ViewModel {
             @Override
             public void onResponse(Call<ResponseValidateCode> call, Response<ResponseValidateCode> response) {
 
-                Log.d("ghazal", "onResponse: " );
 
                 if (response.body() != null){
                 Log.d("KIA", "onResponse: "+ response.body().status);
                     if (response.body().status == 200){
                         isSuccessLiveData.setValue(true);
                     }else {
+
                         isSuccessLiveData.setValue(false);
                         errorMessageLiveData.setValue(response.body().message);
+
                     }
                 }
             }
