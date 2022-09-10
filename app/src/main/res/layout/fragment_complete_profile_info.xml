@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".CompleteProfileInfoFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/login_blue">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="@dimen/_20cdp"
+            android:layout_height="@dimen/_30cdp"
+            android:layout_marginTop="@dimen/_5cdp"
+            android:src="@drawable/zabdare2"
+            android:layout_marginLeft="@dimen/_20cdp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="تکمیل اطلاعات"
+            android:fontFamily="@font/iran_sans_mob"
+            android:gravity="center"
+            android:textColor="@color/red"
+            style="@style/fontForLargeBoldText"
+            android:layout_marginTop="@dimen/_100cdp"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/white"
+            app:boxStrokeColor="@color/show_more_text"
+            android:layout_marginRight="@dimen/_60cdp"
+            android:layout_marginLeft="@dimen/_60cdp"
+
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:id="@+id/edit1"
+                android:layout_height="wrap_content"
+                android:hint="نام"
+                android:textColor="@color/white"
+                android:backgroundTint="#0081A7"                android:gravity="right"
+                android:singleLine="true"
+                android:layout_marginTop="@dimen/_50cdp"
+                android:paddingRight="@dimen/_20cdp"
+                android:paddingLeft="@dimen/_20cdp"
+                android:theme="@style/Theme.number.code"
+                android:paddingTop="@dimen/_40cdp"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/white"
+            app:boxStrokeColor="@color/show_more_text"
+            android:layout_marginRight="@dimen/_60cdp"
+            android:layout_marginLeft="@dimen/_60cdp"
+
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:id="@+id/edit2"
+                android:layout_height="wrap_content"
+                android:hint="نام خانوادگی"
+                android:textColor="@color/white"
+                android:backgroundTint="#0081A7"
+                android:gravity="right"
+                android:singleLine="true"
+                android:paddingLeft="@dimen/_20cdp"
+                android:paddingRight="@dimen/_20cdp"
+                android:theme="@style/Theme.number.code"
+                android:paddingTop="@dimen/_40cdp"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+             <RelativeLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 >
+                 <androidx.cardview.widget.CardView
+                     android:id="@+id/card_view"
+                     android:layout_width="match_parent"
+                     android:layout_height="@dimen/_50cdp"
+                     app:cardCornerRadius="@dimen/_5cdp"
+                     android:layout_marginLeft="@dimen/_40cdp"
+                     android:layout_marginRight="@dimen/_40cdp"
+                     android:layout_centerVertical="true">
+                     <TextView
+                         android:layout_width="match_parent"
+                         android:layout_height="match_parent"
+                         android:text="ثبت"
+                         android:layout_gravity="center"
+                         android:gravity="center"
+                         android:textColor="@color/login_blue"
+                         style="@style/fontForLargeBoldText"
+                         android:fontFamily="@font/iran_sans_mob"/>
+
+                 </androidx.cardview.widget.CardView>
+
+             </RelativeLayout>
+
+
+
+
+    </LinearLayout>
+
+</FrameLayout>

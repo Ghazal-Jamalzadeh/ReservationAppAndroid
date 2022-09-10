@@ -73,12 +73,8 @@
         android:label="fragment_sign_in_validdationcode"
         tools:layout="@layout/fragment_sign_in_validdationcode" >
         <action
-            android:id="@+id/action_signInValiddationcodeFragment_to_factorFragment"
-            app:destination="@id/factorFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@anim/wait"
-            app:popEnterAnim="@anim/wait"
-            app:popExitAnim="@android:anim/fade_out" />
+            android:id="@+id/action_signInValiddationcodeFragment_to_completeProfileInfoFragment"
+            app:destination="@id/completeProfileInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/serviceInfoFragment"
@@ -91,6 +87,15 @@
             app:enterAnim="@anim/slide_up"
             app:popEnterAnim="@anim/wait"
             app:popExitAnim="@anim/slide_down"/>
+    </fragment>
+    <fragment
+        android:id="@+id/completeProfileInfoFragment"
+        android:name="ir.tamuk.reservation.CompleteProfileInfoFragment"
+        android:label="fragment_complete_profile_info"
+        tools:layout="@layout/fragment_complete_profile_info" >
+        <action
+            android:id="@+id/action_completeProfileInfoFragment_to_factorFragment"
+            app:destination="@id/factorFragment" />
     </fragment>
 
 </navigation>

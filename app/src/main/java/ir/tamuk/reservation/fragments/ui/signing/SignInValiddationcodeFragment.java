@@ -249,7 +249,7 @@ public class SignInValiddationcodeFragment extends Fragment {
                     //navigate to next frg
                     Log.d("KIA", "onCreateView: "+aBoolean);
                     Navigation.findNavController(view).popBackStack();
-                    Navigation.findNavController(view).navigate(R.id.factorFragment);
+                    Navigation.findNavController(view).navigate(R.id.completeProfileInfoFragment);
                 }
             });
 
