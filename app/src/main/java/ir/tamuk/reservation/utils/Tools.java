@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ScrollView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
@@ -33,7 +34,7 @@ public class Tools {
     }
 
 
-    public static void scrollToPosition(NestedScrollView scrollView , View targetView) {
+    public static void scrollToPosition(ScrollView scrollView , View targetView) {
 
         scrollView.postDelayed(() -> scrollView.smoothScrollTo(0, targetView.getTop()), 300);
 

@@ -216,16 +216,16 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
     private void selectTab(int position) {
         switch (position) {
             case 0:
-                Tools.scrollToPosition(binding.scrollView, binding.recyclerTitle1.getRoot());
+                Tools.scrollToPosition(binding.scrollView, binding.recyclerTitle1);
                 break;
             case 1:
-                Tools.scrollToPosition(binding.scrollView, binding.recyclerTitle1.getRoot());
+                Tools.scrollToPosition(binding.scrollView, binding.recyclerTitle1);
                 break;
             case 2:
-                Tools.scrollToPosition(binding.scrollView, binding.recyclerTitle1.getRoot());
+                Tools.scrollToPosition(binding.scrollView, binding.recyclerTitle1);
                 break;
             case 3:
-                Tools.scrollToPosition(binding.scrollView, binding.recyclerTitle1.getRoot());
+                Tools.scrollToPosition(binding.scrollView, binding.recyclerTitle1);
                 break;
 
         }
@@ -233,7 +233,7 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
 
     @Override
     public void changeTitle(String string, int flag) {
-        binding.recyclerTitle1.textView3.setText(string);
+        binding.textView5.setText(string);
     }
 
     //ScapHelper
