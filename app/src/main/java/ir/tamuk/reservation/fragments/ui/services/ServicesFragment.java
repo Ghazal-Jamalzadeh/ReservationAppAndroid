@@ -34,6 +34,8 @@ public class ServicesFragment extends Fragment {
         ReservationViewModel galleryViewModel =
                 new ViewModelProvider(this).get(ReservationViewModel.class);
 
+        binding.swipeRefreshLayout.setEnabled(true);
+
         ser.text1 = "salam";
         ser.text2 = "hello";
 

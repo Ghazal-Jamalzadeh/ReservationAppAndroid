@@ -3,6 +3,7 @@ package ir.tamuk.reservation.api;
 import ir.tamuk.reservation.models.BodySendActivationCode;
 import ir.tamuk.reservation.models.MoviesList;
 import ir.tamuk.reservation.models.ResponseCategoriesList;
+import ir.tamuk.reservation.models.ResponseSearchServices;
 import ir.tamuk.reservation.models.ResponseSendActivationCode;
 import ir.tamuk.reservation.models.ResponseValidateCode;
 import retrofit2.Call;
@@ -24,5 +25,12 @@ public interface ApiServices {
     //http://moeenkashisaz.ir/laser/api/v1/get-all-category-by-customer
     @GET("/laser/api/v1/get-all-category-by-customer")
     Call<ResponseCategoriesList> getAllCategories ();
+
+    //http://moeenkashisaz.ir/laser/api/v1/search-services?pageNumber=1&limit=20&categories=631867b5222c9efbb3dd899b
+    @GET("/laser/api/v1/search-services?")
+    Call<ResponseSearchServices> getServices (
+            @Query("pageNumber") int page ,
+            @Query("limit") int limit  ,
+            @Query("categories") String categories ) ;
 
 }
