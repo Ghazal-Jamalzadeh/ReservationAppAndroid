@@ -13,11 +13,11 @@ import retrofit2.http.Query;
 public interface ApiServices {
 
     //http://moeenkashisaz.ir/garson/api/v1/send-code-activation
-    @POST("/garson/api/v1/send-code-activation")
+    @POST("/laser/api/v1/send-code-activation")
     Call<ResponseSendActivationCode> sendActivationCode(@Body BodySendActivationCode bodySendActivationCode);
 
     //http://moeenkashisaz.ir/garson/api/v1/send-code-activation
-    @POST("/garson/api/v1/validate-code-activation")
+    @POST("/laser/api/v1/validate-code-activation")
     Call<ResponseValidateCode> validateCode(@Body BodySendActivationCode bodySendActivationCode);
 
 }
