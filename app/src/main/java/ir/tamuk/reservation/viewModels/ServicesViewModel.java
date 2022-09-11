@@ -19,17 +19,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ServicesViewModel extends AndroidViewModel {
+public class ServicesViewModel extends ViewModel {
 
-    private Application application ;
     public MutableLiveData<ArrayList<Service>> servicesLiveData = new MutableLiveData<>();
     public MutableLiveData<Boolean> loading = new MutableLiveData<>();
     public MutableLiveData<String> errorMessage = new MutableLiveData<>();
-
-    public ServicesViewModel(@NonNull Application application) {
-        super(application);
-        this.application = application ;
-    }
 
     public void searchServices (int page , int limit , String categories ){
         Call<ResponseSearchServices> call = ServicesRepository.callGetServices(page , limit , categories) ;
@@ -49,7 +43,7 @@ public class ServicesViewModel extends AndroidViewModel {
                             errorMessage.setValue(response.body().message);
                         }
                     }else{
-                        errorMessage.setValue(application.getString(R.string.error_null_response_body));
+                        errorMessage.setValue("خطا در دریافت اطلاعات");
                     }
                 }else{
 

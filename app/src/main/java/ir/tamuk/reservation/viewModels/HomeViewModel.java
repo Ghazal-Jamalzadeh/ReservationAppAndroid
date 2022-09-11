@@ -22,18 +22,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeViewModel extends AndroidViewModel {
+public class HomeViewModel extends ViewModel {
 
-    private Application application ;
     public MutableLiveData<ArrayList<Category>> categoriesLiveData = new MutableLiveData<>();
     public MutableLiveData<Boolean> loading = new MutableLiveData<>();
     public MutableLiveData<String> errorMessage = new MutableLiveData<>();
-
-    public HomeViewModel(@NonNull Application application) {
-        super(application);
-        this.application = application  ;
-    }
-
 
     public void getAllCategories(){
 
@@ -56,7 +49,7 @@ public class HomeViewModel extends AndroidViewModel {
                             errorMessage.setValue(response.body().message);
                         }
                     }else{
-                        errorMessage.setValue(application.getString(R.string.error_null_response_body));
+                        errorMessage.setValue("خطا در دریافت اطلاعات");
                     }
                 }else{
 
