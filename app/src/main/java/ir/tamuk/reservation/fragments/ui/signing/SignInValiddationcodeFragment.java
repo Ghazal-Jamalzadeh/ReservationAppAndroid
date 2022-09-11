@@ -39,6 +39,7 @@ import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.FragmentSignInValiddationcodeBinding;
 import ir.tamuk.reservation.models.BodySendActivationCode;
 import ir.tamuk.reservation.models.ResponseSendActivationCode;
+import ir.tamuk.reservation.utils.Constants;
 import ir.tamuk.reservation.utils.Tools;
 import ir.tamuk.reservation.viewModels.SigningValiddationCodeViewModel;
 import ir.tamuk.reservation.viewModels.SigningViewModel;
@@ -236,18 +237,18 @@ public class SignInValiddationcodeFragment extends Fragment {
             String all = binding.one.getText()+binding.two.getText().toString()
                     +binding.three.getText().toString()+binding.four.getText().toString()
                     +binding.five.getText().toString()+binding.six.getText().toString();
-            Log.d("KIA", "Code: "+all);
+            Log.d(Constants.TAG_KIA, "Code: "+all);
 
             String mobile = getArguments().getString("number");
-            Log.d("KIA", "onCreateView: "+mobile);
+            Log.d(Constants.TAG_KIA, "onCreateView: "+mobile);
             body.mobile = mobile;
             body.code = all;
-            signingViewModel.callReceiveActivationCode(body);
+            signingViewModel.callReceiveActivationCode(body, getContext());
 
             signingViewModel.isSuccessLiveData.observe(getViewLifecycleOwner(), aBoolean -> {
                 if (aBoolean){
                     //navigate to next frg
-                    Log.d("KIA", "onCreateView: "+aBoolean);
+                    Log.d(Constants.TAG_KIA, "onCreateView: "+aBoolean);
                     Bundle bundle = new Bundle();
                     bundle.putString("number", mobile);
                     Navigation.findNavController(view).popBackStack();

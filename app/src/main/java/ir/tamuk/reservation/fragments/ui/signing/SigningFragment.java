@@ -24,6 +24,7 @@ import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.FragmentSigningBinding;
 import ir.tamuk.reservation.models.BodySendActivationCode;
 import ir.tamuk.reservation.models.ResponseSendActivationCode;
+import ir.tamuk.reservation.utils.Constants;
 import ir.tamuk.reservation.utils.Tools;
 import ir.tamuk.reservation.viewModels.SigningViewModel;
 import retrofit2.Response;
@@ -69,12 +70,12 @@ public class SigningFragment extends Fragment {
                 binding.acceptButtonSigning.setTextColor(Color.WHITE);
                 body.mobile = binding.mobileEditTextSigning.getText().toString();
 
-                Log.d("KIA", "onEd: ");
+                Log.d(Constants.TAG_KIA, "onEd: ");
                 signingViewModel.callSendActivationCode(body, getContext());
                 signingViewModel.isSuccessLiveData.observe(getViewLifecycleOwner(), aBoolean -> {
                     if (aBoolean){
                         //navigate to next frg
-                        Log.d("KKI", "onCreateView: "+aBoolean);
+                        Log.d(Constants.TAG_KIA, "viewModelBoolean: "+aBoolean);
                         Bundle bundle = new Bundle();
                         bundle.clear();
                         bundle.putString("number", binding.mobileEditTextSigning.getText().toString());
@@ -83,7 +84,7 @@ public class SigningFragment extends Fragment {
                 });
                 signingViewModel.errorMessageLiveData.observe(getViewLifecycleOwner(), s -> {
                     Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
-                    Log.d("KIA", "onChanged: "+s);
+                    Log.d(Constants.TAG_KIA, "onChanged: "+s);
                 });
                 signingViewModel.isProgress.observe(getViewLifecycleOwner(), aBoolean ->{
                     if (aBoolean){

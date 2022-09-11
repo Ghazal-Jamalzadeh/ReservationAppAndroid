@@ -56,7 +56,7 @@ public class SigningViewModel extends ViewModel {
 
                     }
                 }else {
-                    Toast.makeText(context, "asa", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
                     isProgress.setValue(true);
                 }
             }
@@ -64,7 +64,7 @@ public class SigningViewModel extends ViewModel {
             @Override
             public void onFailure(Call<ResponseSendActivationCode> call, Throwable t) {
 
-                Log.d("VIEWMODELCALLTEST", "onFailer: "+ t.getMessage());
+                Log.d(Constants.TAG_KIA, "onFailerSigning: "+ t.getMessage());
                 isSuccessLiveData.setValue(false);
                 errorMessageLiveData.setValue(t.getMessage());
             }
