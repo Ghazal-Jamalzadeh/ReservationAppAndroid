@@ -69,6 +69,7 @@ public class SignInValiddationcodeFragment extends Fragment {
         binding = FragmentSignInValiddationcodeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        binding.text.setText(getArguments().getString("number"));
         //Keyboard Come Up
         Tools.keyboardPopUp(getActivity());
         binding.one.requestFocus();
@@ -222,7 +223,7 @@ public class SignInValiddationcodeFragment extends Fragment {
         });
 
         //Action Keyboard Button
-        binding.six.setOnEditorActionListener((textView, i, keyEvent) -> {
+        binding.acceptButtonSigning.setOnEditorActionListener((textView, i, keyEvent) -> {
             if (i == EditorInfo.IME_ACTION_DONE) {
                 String all = binding.one.getText()+binding.two.getText().toString()
                         +binding.three.getText().toString()+binding.four.getText().toString();
@@ -243,6 +244,8 @@ public class SignInValiddationcodeFragment extends Fragment {
             body.mobile = mobile;
             body.code = all;
             signingViewModel.callReceiveActivationCode(body);
+            binding.progressCircularSigning.setVisibility(View.VISIBLE);
+            binding.acceptButtonSigning.setTextColor(Color.WHITE);
 
             signingViewModel.isSuccessLiveData.observe(getViewLifecycleOwner(), aBoolean -> {
                 if (aBoolean){
@@ -256,7 +259,10 @@ public class SignInValiddationcodeFragment extends Fragment {
             signingViewModel.errorMessageLiveData.observe(getViewLifecycleOwner(), new Observer<String>() {
                 @Override
                 public void onChanged(String s) {
-                    Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+                    Snackbar.make(getView(), s, Toast.LENGTH_SHORT).show();
+                    binding.acceptButtonSigning.setTextColor(getResources().getColor(R.color.backgroundSigning));
+                    binding.progressCircularSigning.setVisibility(View.GONE);
                 }
             });
 

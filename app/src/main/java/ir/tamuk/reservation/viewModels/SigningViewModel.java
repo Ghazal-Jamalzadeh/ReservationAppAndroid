@@ -21,6 +21,7 @@ import ir.tamuk.reservation.models.BodySendActivationCode;
 import ir.tamuk.reservation.models.ResponseSendActivationCode;
 import ir.tamuk.reservation.repository.SigningRepository;
 import ir.tamuk.reservation.utils.Connectivity;
+import ir.tamuk.reservation.utils.Constants;
 import ir.tamuk.reservation.utils.Tools;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -70,6 +71,7 @@ public class SigningViewModel extends ViewModel {
 
                             isSuccessLiveData.setValue(false);
                             errorMessageLiveData.setValue(response.body().message);
+                            Log.d(Constants.TAG_KIA, "onResponse: "+"200!");
 
                         }
                     }
@@ -80,6 +82,7 @@ public class SigningViewModel extends ViewModel {
 
                         isSuccessLiveData.setValue(false);
                         errorMessageLiveData.setValue(Tools.extractErrorBodyMessage(response.errorBody().string()));
+                        Log.d(Constants.TAG_KIA, "onResponse: ");
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -94,6 +97,7 @@ public class SigningViewModel extends ViewModel {
             public void onFailure(Call<ResponseSendActivationCode> call, Throwable t) {
                 isSuccessLiveData.setValue(false);
                 errorMessageLiveData.setValue(t.getMessage());
+                Log.d(Constants.TAG_KIA, "onFailure: ");
             }
         });
     }

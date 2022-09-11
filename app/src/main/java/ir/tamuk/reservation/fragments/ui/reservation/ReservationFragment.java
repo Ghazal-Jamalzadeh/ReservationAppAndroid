@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -139,6 +140,8 @@ public class ReservationFragment extends Fragment {
         });
 
 
+
+
         binding.spinnerServices.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
@@ -167,7 +170,7 @@ public class ReservationFragment extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
+                adapterView.getEmptyView().setBackgroundResource(R.drawable.spinner_draw);
 
             }
         });
