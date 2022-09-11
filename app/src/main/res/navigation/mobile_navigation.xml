@@ -47,7 +47,11 @@
         android:id="@+id/nav_services"
         android:name="ir.tamuk.reservation.fragments.ui.services.ServicesFragment"
         android:label="fragment_services"
-        tools:layout="@layout/fragment_services" />
+        tools:layout="@layout/fragment_services" >
+        <action
+            android:id="@+id/action_nav_services_to_serviceInfoFragment"
+            app:destination="@id/serviceInfoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/factorFragment"
         android:name="ir.tamuk.reservation.fragments.ui.factor.FactorFragment"
@@ -89,5 +93,19 @@
         android:id="@+id/appointmentFragment"
         android:name="ir.tamuk.reservation.fragments.ui.Appointments.AppointmentFragment"
         android:label="AppointmentFragment" />
+    <fragment
+        android:id="@+id/serviceInfoFragment"
+        android:name="ir.tamuk.reservation.fragments.ui.ServiceInfoFragment"
+        android:label="fragment_service_info"
+        tools:layout="@layout/fragment_service_info" />
+    <fragment
+        android:id="@+id/completeProfileInfoFragment"
+        android:name="ir.tamuk.reservation.CompleteProfileInfoFragment"
+        android:label="fragment_complete_profile_info"
+        tools:layout="@layout/fragment_complete_profile_info" >
+        <action
+            android:id="@+id/action_completeProfileInfoFragment_to_factorFragment"
+            app:destination="@id/factorFragment" />
+    </fragment>
     tools:layout="@layout/fragment_signing" />
 </navigation>

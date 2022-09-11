@@ -1,25 +1,25 @@
 package ir.tamuk.reservation.fragments.ui.home;
 
 import android.annotation.SuppressLint;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -33,7 +33,10 @@ import ir.tamuk.reservation.api.ApiServices;
 import ir.tamuk.reservation.databinding.FragmentHomeBinding;
 import ir.tamuk.reservation.fragments.ui.home.Adapter.OptionAdapter;
 import ir.tamuk.reservation.fragments.ui.home.Model.OptionList;
+import ir.tamuk.reservation.models.Category;
+import ir.tamuk.reservation.utils.Connectivity;
 import ir.tamuk.reservation.utils.Tools;
+import ir.tamuk.reservation.viewModels.HomeViewModel;
 
 public class HomeFragment extends Fragment implements HomeAdapterInterface {
 
@@ -49,6 +52,8 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
     private ArrayList<OptionList.Option> options;
     private LinearLayoutManager layoutManager;
     private LinearLayoutManager layoutManager2;
+
+    HomeViewModel homeViewModel;
 
 
     int position;
@@ -77,11 +82,44 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        binding.swipeRefreshLayout.setEnabled(true);
+
+        //call api
+        callGetCategories();
+
+        homeViewModel.loading.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean b) {
+                binding.swipeRefreshLayout.setRefreshing(b);
+                if (!b) {
+                    binding.container.setVisibility(View.VISIBLE);
+                }
+
+            }
+        });
+
+        homeViewModel.categoriesLiveData.observe(getViewLifecycleOwner(), new Observer<ArrayList<Category>>() {
+            @Override
+            public void onChanged(ArrayList<Category> categories) {
+                binding.swipeRefreshLayout.setEnabled(false);
+
+                buildTabLayout(categories);
+
+            }
+        });
+
+        binding.swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                callGetCategories();
+            }
+        });
 
 
         binding.imageView2.setImageResource(R.drawable.test);
@@ -107,60 +145,9 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
         //intitialize RecyclerViews
         optionAdapter = new OptionAdapter(getActivity(), options, this::changeTitle, 1);
         layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, true);
-        initLoopRecyclerView(binding.optionRecycler,optionAdapter,layoutManager);
+        initLoopRecyclerView(binding.optionRecycler, optionAdapter, layoutManager);
 
-        optionAdapter2 = new OptionAdapter(getActivity(), options, this::changeTitle, 2);
-        layoutManager2 = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, true);
-        initLoopRecyclerView(binding.optionRecycler2,optionAdapter2,layoutManager2);
 
-        //TabLayout
-        binding.tabLayout.removeAllTabs();
-
-        TabLayout.Tab tab1 = binding.tabLayout.newTab();
-        tab1.setText("فول بادی کاربردی");
-        binding.tabLayout.addTab(tab1, 0);
-
-        TabLayout.Tab tab2 = binding.tabLayout.newTab();
-        tab2.setText("لیزر صورت");
-        binding.tabLayout.addTab(tab2, 1);
-
-        TabLayout.Tab tab3 = binding.tabLayout.newTab();
-        tab3.setText("جوانسازی پوست");
-        binding.tabLayout.addTab(tab3, 2);
-
-        TabLayout.Tab tab4 = binding.tabLayout.newTab();
-        tab4.setText("فول بادی");
-        binding.tabLayout.addTab(tab4, 3);
-
-        TabLayout.Tab tab5 = binding.tabLayout.newTab();
-        tab5.setText("فول بادی");
-        binding.tabLayout.addTab(tab5, 4);
-
-        binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                selectTab(binding.tabLayout.getSelectedTabPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-                selectTab(binding.tabLayout.getSelectedTabPosition());
-            }
-        });
-
-        //tab scroll to right
-        new Handler().postDelayed(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        binding.tabLayout.getTabAt(4).select();
-                    }
-                }, 1000);
 
 
         return root;
@@ -172,7 +159,6 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
         super.onResume();
         //loop recycler
         runAutoScrollBanner(binding.optionRecycler);
-        runAutoScrollBanner(binding.optionRecycler2);
     }
 
     @Override
@@ -180,7 +166,6 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
         super.onPause();
         //loop recycler
         stopAutoScrollBanner(layoutManager);
-        stopAutoScrollBanner(layoutManager2);
     }
 
     //loop recycler
@@ -231,16 +216,16 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
     private void selectTab(int position) {
         switch (position) {
             case 0:
-                Tools.scrollToPosition(binding.scrollView, binding.recyclerTitle1.getRoot());
+                Tools.scrollToPosition(binding.scrollView, binding.recyclerTitle1);
                 break;
             case 1:
-                Tools.scrollToPosition(binding.scrollView, binding.recyclerTitle2.getRoot());
+                Tools.scrollToPosition(binding.scrollView, binding.recyclerTitle1);
                 break;
             case 2:
-                Tools.scrollToPosition(binding.scrollView, binding.recyclerTitle1.getRoot());
+                Tools.scrollToPosition(binding.scrollView, binding.recyclerTitle1);
                 break;
             case 3:
-                Tools.scrollToPosition(binding.scrollView, binding.recyclerTitle1.getRoot());
+                Tools.scrollToPosition(binding.scrollView, binding.recyclerTitle1);
                 break;
 
         }
@@ -248,16 +233,7 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
 
     @Override
     public void changeTitle(String string, int flag) {
-        switch (flag) {
-            case 1:
-                binding.recyclerTitle1.textView3.setText(string);
-                break;
-            case 2:
-                binding.recyclerTitle2.textView3.setText(string);
-                break;
-        }
-
-
+        binding.textView5.setText(string);
     }
 
     //ScapHelper
@@ -266,7 +242,7 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
         snapHelper.attachToRecyclerView((RecyclerView) view);
     }
 
-    public void initLoopRecyclerView(RecyclerView view,OptionAdapter optionAdapter,LinearLayoutManager manager ) {
+    public void initLoopRecyclerView(RecyclerView view, OptionAdapter optionAdapter, LinearLayoutManager manager) {
         view.setLayoutManager(manager);
         view.setAdapter(optionAdapter);
         view.setHasFixedSize(true);
@@ -293,5 +269,50 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
             }
         });
 
+    }
+
+    private void buildTabLayout(ArrayList<Category> categories) {
+        //TabLayout
+        binding.tabLayout.removeAllTabs();
+
+        for (Category category:categories) {
+            TabLayout.Tab tab = binding.tabLayout.newTab();
+            tab.setText(category.name);
+            binding.tabLayout.addTab(tab, 0);
+        }
+        binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                selectTab(binding.tabLayout.getSelectedTabPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                selectTab(binding.tabLayout.getSelectedTabPosition());
+            }
+        });
+
+        //tab scroll to right
+        new Handler().postDelayed(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        binding.tabLayout.getTabAt(categories.size() -1).select();
+                    }
+                }, 1000);
+
+    }
+
+    private void callGetCategories() {
+        if (Connectivity.isConnected(getContext())) {
+            homeViewModel.getAllCategories();
+        } else {
+            Toast.makeText(getContext(), "اینترنت وصل نیس ", Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -39,7 +39,6 @@ import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.FragmentSignInValiddationcodeBinding;
 import ir.tamuk.reservation.models.BodySendActivationCode;
 import ir.tamuk.reservation.models.ResponseSendActivationCode;
-import ir.tamuk.reservation.utils.Constants;
 import ir.tamuk.reservation.utils.Tools;
 import ir.tamuk.reservation.viewModels.SigningValiddationCodeViewModel;
 import ir.tamuk.reservation.viewModels.SigningViewModel;
@@ -69,8 +68,6 @@ public class SignInValiddationcodeFragment extends Fragment {
 
         binding = FragmentSignInValiddationcodeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-        binding.text.setText(getArguments().getString("number"));
 
         //Keyboard Come Up
         Tools.keyboardPopUp(getActivity());
@@ -213,6 +210,7 @@ public class SignInValiddationcodeFragment extends Fragment {
 
                 if (binding.six.getText().length() != 0) {
 
+
                 }
 
             }
@@ -224,9 +222,10 @@ public class SignInValiddationcodeFragment extends Fragment {
         });
 
         //Action Keyboard Button
-        binding.acceptButtonSigning.setOnEditorActionListener((textView, i, keyEvent) -> {
+        binding.six.setOnEditorActionListener((textView, i, keyEvent) -> {
             if (i == EditorInfo.IME_ACTION_DONE) {
-                Tools.removePhoneKeypad(getParentFragment());
+                String all = binding.one.getText()+binding.two.getText().toString()
+                        +binding.three.getText().toString()+binding.four.getText().toString();
                 //do here your stuff f
                 return true;
             }
@@ -237,22 +236,20 @@ public class SignInValiddationcodeFragment extends Fragment {
             String all = binding.one.getText()+binding.two.getText().toString()
                     +binding.three.getText().toString()+binding.four.getText().toString()
                     +binding.five.getText().toString()+binding.six.getText().toString();
-            Log.d(Constants.TAG_KIA, "Code: "+all);
+            Log.d("KIA", "Code: "+all);
 
             String mobile = getArguments().getString("number");
-            Log.d(Constants.TAG_KIA, "onCreateView: "+mobile);
+            Log.d("KIA", "onCreateView: "+mobile);
             body.mobile = mobile;
             body.code = all;
-            signingViewModel.callReceiveActivationCode(body, getContext());
+            signingViewModel.callReceiveActivationCode(body);
 
             signingViewModel.isSuccessLiveData.observe(getViewLifecycleOwner(), aBoolean -> {
                 if (aBoolean){
                     //navigate to next frg
-                    Log.d(Constants.TAG_KIA, "onCreateView: "+aBoolean);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("number", mobile);
+                    Log.d("KIA", "onCreateView: "+aBoolean);
                     Navigation.findNavController(view).popBackStack();
-                    Navigation.findNavController(view).navigate(R.id.factorFragment, bundle);
+                    Navigation.findNavController(view).navigate(R.id.completeProfileInfoFragment);
                 }
             });
 

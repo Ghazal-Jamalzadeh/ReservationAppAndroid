@@ -1,16 +1,21 @@
 package ir.tamuk.reservation.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.RowServicesBinding;
 import ir.tamuk.reservation.models.Services;
 
@@ -42,8 +47,19 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
 
     // هر عملیاتی میخوای انجام بدی اینجا انجام میدی
     @Override
-    public void onBindViewHolder(@NonNull ServicesAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        int x=position;
+        holder.binding.constraint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.clear();
+                bundle.putInt("id", x);
+                Log.d("MAN", "onClick: "+x);
+                Navigation.findNavController(view).navigate(R.id.action_nav_services_to_serviceInfoFragment,bundle );
 
+            }
+        });
         Services item = services.get(position)  ;
 
         holder.binding.text1.setText(item.text1);

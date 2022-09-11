@@ -29,17 +29,19 @@ public class ServicesFragment extends Fragment {
     private ServicesAdapter adapter ;
 
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
+    public View onCreateView(@NonNull LayoutInflater  inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         ReservationViewModel galleryViewModel =
                 new ViewModelProvider(this).get(ReservationViewModel.class);
+
+//        binding.swipeRefreshLayout.setEnabled(true);
 
         ser.text1 = "salam";
         ser.text2 = "hello";
 
         ser2.text1 = "salam";
         ser2.text2 = "hello";
-
+        services.clear();
         services.add(ser);
         services.add(ser2);
 

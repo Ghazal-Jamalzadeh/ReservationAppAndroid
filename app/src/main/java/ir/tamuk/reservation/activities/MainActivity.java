@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         });
         ////////////////////////////////////////////////////////
 
-        /////////////get token from firebase and send itto serer//////////////
+        /////////////get token from firebase and send it to serer//////////////
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
                     @Override

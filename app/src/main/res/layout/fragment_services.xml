@@ -7,6 +7,10 @@
     tools:context=".fragments.ui.services.ServicesFragment"
     android:orientation="vertical"
     >
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/swipe_Refresh_Layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
    <androidx.recyclerview.widget.RecyclerView
        android:id="@+id/recycler"
@@ -15,5 +19,6 @@
 
    </androidx.recyclerview.widget.RecyclerView>
 
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

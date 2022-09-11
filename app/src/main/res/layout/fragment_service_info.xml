@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.ui.ServiceInfoFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_10cdp">
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="@dimen/_50cdp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/zabdar"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:padding="@dimen/_15cdp"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="فول بادی کاربردی"
+                android:textColor="@color/red"
+                style="@style/fontForLargeBoldText"
+                android:textSize="@dimen/_18cdp"
+                android:justificationMode="inter_word"
+                android:fontFamily="@font/iran_sans_mob"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:justificationMode="inter_word"
+                android:text="کلینیک تخصصی پوست مو و زیبایی لیزر درخشان با اخذ مجوز رسمی از وزارت بهداشت،توانسته است جزو بهترین کلینیک های زیبایی در تهران باشد که دارای کادری مجرب وتوانا در حوضه پزشکی و زیبایی می باشد و پیشرفته ترین دستاوردهای دانش و  وزارت بهداشت می FDAتکنولوژی که مطابق با استاندارد های باشد که به باعث درخشندگی بیشتر کلینیک لیزر درخشان شده است  این کلینیک با بهره گیری از همکاران متخصص ومجرب در رشته های فوق تخصص جراحی پلاستیک،زیبایی،پوست،مو،لیزرمو،تغذیه ورژیم درمانی و جوانسازی پوست خدمات خود را در محیط سالم و امن ارائه می دهد  بهترین دستگاه لیزرفول بادی برای آقایان و خانم ها دستگاه لیزر الکساندرایت است که بسیار پیشرفته و مجهز است و همچنین دارای قدرت نفوذ بالایی است و برای هر نوع پوست ومویی کاربرددارد  "
+                style="@style/fontForMediumEditText"
+                android:textSize="@dimen/_14cdp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/iran_sans_mob"
+                android:layout_marginTop="@dimen/_5cdp"/>
+
+
+
+        </LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_60cdp"
+            android:background="@color/main"
+            app:cardCornerRadius="@dimen/_5cdp"
+            android:layout_marginRight="@dimen/_15cdp"
+            android:layout_marginLeft="@dimen/_15cdp"
+            android:layout_marginBottom="@dimen/_15cdp">
+            <RelativeLayout
+                android:id="@+id/relative"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/main"
+                android:gravity="center"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="رزرو نوبت"
+                    android:textColor="@color/white"
+                    style="@style/fontForMediumEditText"
+                    android:fontFamily="@font/iran_sans_mob"
+                    android:justificationMode="inter_word"/>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+
+</FrameLayout>

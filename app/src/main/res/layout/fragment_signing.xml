@@ -73,11 +73,10 @@
                         android:inputType="number"
                         android:maxLength="11"
                         android:maxLines="1"
+                        android:paddingTop="@dimen/_24cdp"
                         android:singleLine="true"
                         android:textColor="@color/white"
-                        android:theme="@style/Theme.number.code"
-                        android:paddingTop="@dimen/_24cdp"
-                        />
+                        android:theme="@style/Theme.number.code" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 

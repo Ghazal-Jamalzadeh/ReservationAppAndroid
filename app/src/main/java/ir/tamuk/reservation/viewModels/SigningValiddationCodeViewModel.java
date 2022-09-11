@@ -1,8 +1,6 @@
 package ir.tamuk.reservation.viewModels;
 
-import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -12,7 +10,6 @@ import ir.tamuk.reservation.models.ResponseSendActivationCode;
 import ir.tamuk.reservation.models.ResponseValidateCode;
 import ir.tamuk.reservation.repository.SigningRepository;
 import ir.tamuk.reservation.repository.SigningValiddationCodeRepository;
-import ir.tamuk.reservation.utils.Constants;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,7 +21,7 @@ public class SigningValiddationCodeViewModel extends ViewModel {
     public MutableLiveData<Boolean> isSuccessLiveData = new MutableLiveData<>() ;
     public MutableLiveData<String> errorMessageLiveData = new MutableLiveData<>() ;
 
-    public void callReceiveActivationCode(BodySendActivationCode body, Context context){
+    public void callReceiveActivationCode(BodySendActivationCode body){
         //CallApi
         Call<ResponseValidateCode> call = repository.callReceiveActivationCode(body);
         //Response
@@ -32,16 +29,15 @@ public class SigningValiddationCodeViewModel extends ViewModel {
             @Override
             public void onResponse(Call<ResponseValidateCode> call, Response<ResponseValidateCode> response) {
 
-                Log.d(Constants.TAG_KIA, "onResponse: " );
 
                 if (response.body() != null){
-                Log.d(Constants.TAG_KIA, "responseBody: "+ response.body().status);
+                Log.d("KIA", "onResponse: "+ response.body().status);
                     if (response.body().status == 200){
                         isSuccessLiveData.setValue(true);
                     }else {
+
                         isSuccessLiveData.setValue(false);
                         errorMessageLiveData.setValue(response.body().message);
-                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
 
                     }
                 }
@@ -50,7 +46,7 @@ public class SigningValiddationCodeViewModel extends ViewModel {
             @Override
             public void onFailure(Call<ResponseValidateCode> call, Throwable t) {
 
-                Log.d(Constants.TAG_KIA, "onFailer: "+ t.getMessage());
+                Log.d("ghazal", "onFailer: "+ t.getMessage());
                 isSuccessLiveData.setValue(false);
                 errorMessageLiveData.setValue(t.getMessage());
             }
