@@ -34,6 +34,7 @@ import ir.tamuk.reservation.databinding.FragmentHomeBinding;
 import ir.tamuk.reservation.fragments.ui.home.Adapter.OptionAdapter;
 import ir.tamuk.reservation.fragments.ui.home.Model.OptionList;
 import ir.tamuk.reservation.models.Category;
+import ir.tamuk.reservation.models.Service;
 import ir.tamuk.reservation.utils.Connectivity;
 import ir.tamuk.reservation.utils.Tools;
 import ir.tamuk.reservation.viewModels.HomeViewModel;
@@ -43,15 +44,12 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
     private FragmentHomeBinding binding;
     //adapter
     private OptionAdapter optionAdapter;
-    private OptionAdapter optionAdapter2;
     //api
-    private ApiServices apiServices;
     private Timer timer;
     private TimerTask timerTask;
 
-    private ArrayList<OptionList.Option> options;
+    private ArrayList<Service> services = new ArrayList<>();
     private LinearLayoutManager layoutManager;
-    private LinearLayoutManager layoutManager2;
 
     HomeViewModel homeViewModel;
 
@@ -70,12 +68,7 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
             }
         };
 
-        //loop recycler
-        //set smooth scroll to 2 for using chance app
-        if (options != null) {
-            position = Integer.MAX_VALUE / 2;
-            binding.optionRecycler.smoothScrollToPosition(position);
-        }
+
 
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
     }
@@ -88,9 +81,18 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        binding.imageView2.setImageResource(R.drawable.test);
+
+        layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, true);
+
+        //intitialize RecyclerViews
+
+
+
+
         binding.swipeRefreshLayout.setEnabled(true);
 
-        //call api
+        //call category api
         callGetCategories();
 
         homeViewModel.loading.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
@@ -120,35 +122,32 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
                 callGetCategories();
             }
         });
+        ///////
 
 
-        binding.imageView2.setImageResource(R.drawable.test);
-        options = new ArrayList<>();
-        OptionList optionList = new OptionList();
+        //call services Api
+        callGetServices();
+        homeViewModel.servicesLiveData.observe(getViewLifecycleOwner(), new Observer<ArrayList<Service>>() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onChanged(ArrayList<Service> serviceArrayList) {
 
-        OptionList.Option option = optionList.new Option();
-        option.setId(R.drawable.test2);
-        option.setTitle("خط ریش آقایان");
-        options.add(option);
+                Log.d("ghazal", "size :  " + serviceArrayList.size());
+                services = serviceArrayList;
+//                optionAdapter.notifyDataSetChanged();
 
-        OptionList.Option option1 = optionList.new Option();
-        option1.setId(R.drawable.test2);
-        option1.setTitle("فول بادی ویژه");
-        options.add(option1);
-
-        OptionList.Option option2 = optionList.new Option();
-        option2.setId(R.drawable.test2);
-        option2.setTitle("لیزر مو های زائد");
-        options.add(option2);
+                initLoopRecyclerView(binding.optionRecycler, layoutManager);
+//                //loop recycler
+//                //set smooth scroll to 2 for using chance app
 
 
-        //intitialize RecyclerViews
-        optionAdapter = new OptionAdapter(getActivity(), options, this::changeTitle, 1);
-        layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, true);
-        initLoopRecyclerView(binding.optionRecycler, optionAdapter, layoutManager);
+                if (services != null) {
+                    position = Integer.MAX_VALUE / 2;
+                    binding.optionRecycler.smoothScrollToPosition(position);
+                }
 
-
-
+            }
+        });
 
         return root;
     }
@@ -232,17 +231,13 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
     }
 
     @Override
-    public void changeTitle(String string, int flag) {
+    public void changeTitle(String string) {
         binding.textView5.setText(string);
     }
 
-    //ScapHelper
-    public void newSnapHelper(View view) {
-        SnapHelper snapHelper = new LinearSnapHelper();
-        snapHelper.attachToRecyclerView((RecyclerView) view);
-    }
 
-    public void initLoopRecyclerView(RecyclerView view, OptionAdapter optionAdapter, LinearLayoutManager manager) {
+    public void initLoopRecyclerView(RecyclerView view, LinearLayoutManager manager) {
+        optionAdapter = new OptionAdapter(getActivity(), services, this::changeTitle);
         view.setLayoutManager(manager);
         view.setAdapter(optionAdapter);
         view.setHasFixedSize(true);
@@ -250,7 +245,9 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
 
         // on below line we are creating a new variable for
         // our snap helper class and initializing it for our Linear Snap Helper.
-        newSnapHelper(view);
+        SnapHelper snapHelper = new LinearSnapHelper();
+        view.setOnFlingListener(null);
+        snapHelper.attachToRecyclerView((RecyclerView) view);
 
         //loop recycler
         view.smoothScrollBy(5, 0);
@@ -275,7 +272,7 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
         //TabLayout
         binding.tabLayout.removeAllTabs();
 
-        for (Category category:categories) {
+        for (Category category : categories) {
             TabLayout.Tab tab = binding.tabLayout.newTab();
             tab.setText(category.name);
             binding.tabLayout.addTab(tab, 0);
@@ -302,7 +299,7 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
                 new Runnable() {
                     @Override
                     public void run() {
-                        binding.tabLayout.getTabAt(categories.size() -1).select();
+                        binding.tabLayout.getTabAt(categories.size() - 1).select();
                     }
                 }, 1000);
 
@@ -311,6 +308,14 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
     private void callGetCategories() {
         if (Connectivity.isConnected(getContext())) {
             homeViewModel.getAllCategories();
+        } else {
+            Toast.makeText(getContext(), "اینترنت وصل نیس ", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void callGetServices() {
+        if (Connectivity.isConnected(getContext())) {
+            homeViewModel.getAllServices(1, 20, "631867b5222c9efbb3dd899b");
         } else {
             Toast.makeText(getContext(), "اینترنت وصل نیس ", Toast.LENGTH_SHORT).show();
         }
