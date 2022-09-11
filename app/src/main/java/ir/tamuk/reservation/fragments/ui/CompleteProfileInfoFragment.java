@@ -1,4 +1,4 @@
-package ir.tamuk.reservation;
+package ir.tamuk.reservation.fragments.ui;
 
 import android.os.Bundle;
 
@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.FragmentCompleteProfileInfoBinding;
+import ir.tamuk.reservation.databinding.FragmentServiceInfoBinding;
 import ir.tamuk.reservation.databinding.FragmentSignInValiddationcodeBinding;
 import ir.tamuk.reservation.databinding.FragmentSigningBinding;
 
