@@ -8,26 +8,28 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 import ir.tamuk.reservation.Interfaces.HomeAdapterInterface;
 import ir.tamuk.reservation.databinding.HomeRowBinding;
 import ir.tamuk.reservation.fragments.ui.home.Model.OptionList;
+import ir.tamuk.reservation.models.Service;
+import ir.tamuk.reservation.utils.Constants;
 
 public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.ViewHolder> {
 
-    private ArrayList<OptionList.Option> optionArrayList;
+    private ArrayList<Service> serviceArrayList;
     private Activity activity;
-    private int flag;
     HomeAdapterInterface homeAdapterInterface;
 
 
-    public OptionAdapter(Activity activity, ArrayList<OptionList.Option> optionArrayList, HomeAdapterInterface homeAdapterInterface, int flag) {
+    public OptionAdapter(Activity activity, ArrayList<Service> serviceArrayList, HomeAdapterInterface homeAdapterInterface) {
 
         this.activity = activity;
-        this.optionArrayList = optionArrayList;
+        this.serviceArrayList = serviceArrayList;
         this.homeAdapterInterface = homeAdapterInterface;
-        this.flag = flag;
 
     }
 
@@ -51,23 +53,20 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull OptionAdapter.ViewHolder holder, int position) {
         //loop recycler
-        OptionList.Option item = optionArrayList.get(position % optionArrayList.size());
-        homeAdapterInterface.changeTitle(item.getTitle(), flag);
-        holder.binding.imageView3.setImageResource(item.getId());
-
-//        Log.d("testLog", "onBindViewHolder: " + moviesList.get(position));
-
+        Service item = serviceArrayList.get(position % serviceArrayList.size());
+        homeAdapterInterface.changeTitle(item.name);
+        Glide.with(activity).load(Constants.DOWNLOAD_PHOTO_URL + item.mainPhoto.filename).into(holder.binding.imageView3);
     }
 
-    public OptionList.Option getItem(int position) {
+    public Service getItem(int position) {
         //loop recycler
-        int positionInList = position % optionArrayList.size();
-        return optionArrayList.get(position);
+        int positionInList = position % serviceArrayList.size();
+        return serviceArrayList.get(position);
     }
 
     @Override
     public int getItemCount() {
-        return optionArrayList == null ? 0 : Integer.MAX_VALUE;
+        return serviceArrayList == null ? 0 : Integer.MAX_VALUE;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
