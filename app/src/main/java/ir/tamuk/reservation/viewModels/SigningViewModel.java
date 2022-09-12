@@ -27,14 +27,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SigningViewModel extends ViewModel {
-    //    public MutableLiveData<ResponseSendActivationCode> sendActivationLiveData;
+
     public SigningRepository repository = new SigningRepository();
-
-    public MutableLiveData<String> stringMutableLiveData = new MutableLiveData<>();
-
     public MutableLiveData<Boolean> isSuccessLiveData = new MutableLiveData<>();
     public MutableLiveData<String> errorMessageLiveData = new MutableLiveData<>();
-
 
 
 //    public LiveData<ResponseSendActivationCode> getActivationCodeResponse(BodySendActivationCode body){
@@ -51,7 +47,7 @@ public class SigningViewModel extends ViewModel {
     public void callSendActivationCode(BodySendActivationCode body) {
 //        CallApi
         Call<ResponseSendActivationCode> call = repository.callSendActivationCode(body);
-
+        errorMessageLiveData = new MutableLiveData<>() ;
         //Response
         call.enqueue(new Callback<ResponseSendActivationCode>() {
             @Override
@@ -63,13 +59,11 @@ public class SigningViewModel extends ViewModel {
 
                         if (response.body().status == 200) {
 
-                                isSuccessLiveData.setValue(true);
-
+                              isSuccessLiveData.setValue(true);
 
                         } else {
 
-                            isSuccessLiveData.setValue(false);
-                            errorMessageLiveData.setValue(response.body().message);
+                            errorMessageLiveData.postValue(response.body().message);
 
                         }
                     }
@@ -78,8 +72,9 @@ public class SigningViewModel extends ViewModel {
                 } else {
                     try {
 
-                        isSuccessLiveData.setValue(false);
-                        errorMessageLiveData.setValue(Tools.extractErrorBodyMessage(response.errorBody().string()));
+                        String err = Tools.extractErrorBodyMessage(response.errorBody().string()) ;
+
+                        errorMessageLiveData.setValue(err);
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -92,9 +87,11 @@ public class SigningViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<ResponseSendActivationCode> call, Throwable t) {
-                isSuccessLiveData.setValue(false);
-                errorMessageLiveData.setValue(t.getMessage());
+
+                errorMessageLiveData.postValue(t.getMessage());
+
             }
         });
     }
-    }
+
+}
