@@ -23,6 +23,7 @@ public class ApiClient {
                 .connectTimeout(Constants.NETWORK_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(Constants.NETWORK_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(Constants.NETWORK_TIMEOUT, TimeUnit.SECONDS)
+                .retryOnConnectionFailure(true)
                 .addInterceptor(interceptor)
                 .build();
 

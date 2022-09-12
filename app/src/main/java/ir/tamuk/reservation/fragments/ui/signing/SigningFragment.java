@@ -14,7 +14,9 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -31,22 +33,21 @@ import retrofit2.Response;
 public class SigningFragment extends Fragment {
 
     private FragmentSigningBinding binding;
+    private SigningViewModel signingViewModel ;
 
     private BodySendActivationCode body = new BodySendActivationCode();
-    private Response<ResponseSendActivationCode> responce;
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        SigningViewModel signingViewModel =  new ViewModelProvider(this).get(SigningViewModel.class);
+        signingViewModel =  new ViewModelProvider(this).get(SigningViewModel.class);
         binding = FragmentSigningBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -71,27 +72,6 @@ public class SigningFragment extends Fragment {
                 } else {
                     Toast.makeText(getContext(), "اینترنت وصل نیس ", Toast.LENGTH_SHORT).show();
                 }
-
-                signingViewModel.isSuccessLiveData.observe(getViewLifecycleOwner(), aBoolean -> {
-                    if (aBoolean){
-                        //navigate to next frg
-                        Log.d("KKI", "onCreateView: "+ aBoolean );
-                        Bundle bundle = new Bundle();
-                        bundle.clear();
-                        bundle.putString("number", binding.mobileEditTextSigning.getText().toString());
-
-                        if (Tools.checkDestination(view , R.id.signingFragment)){
-                            Navigation.findNavController(view).navigate(R.id.action_signingFragment_to_signInValiddationcodeFragment, bundle);
-                        }
-                    }
-                });
-                signingViewModel.errorMessageLiveData.observe(getViewLifecycleOwner(), new Observer<String>() {
-                    @Override
-                    public void onChanged(String s) {
-                        Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
-                    }
-                });
-
 
             } else {
                 //EditText Field error enable
@@ -130,6 +110,28 @@ public class SigningFragment extends Fragment {
 
             }
 //
+
+            signingViewModel.isSuccessLiveData.observe(getViewLifecycleOwner(), aBoolean -> {
+
+                    if (aBoolean) {
+                            //navigate to next frg
+                            Bundle bundle = new Bundle();
+                            bundle.clear();
+                            bundle.putString("number", binding.mobileEditTextSigning.getText().toString());
+
+                            if (Tools.checkDestination(view, R.id.signingFragment)) {
+                               getViewModelStore().clear();
+                                Navigation.findNavController(view).navigate(R.id.action_signingFragment_to_signInValiddationcodeFragment, bundle);
+                            }
+                }
+            });
+
+
+            signingViewModel.errorMessageLiveData.observe(getViewLifecycleOwner(), s -> {
+
+                    Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+
+            });
         });
 
         return root;
