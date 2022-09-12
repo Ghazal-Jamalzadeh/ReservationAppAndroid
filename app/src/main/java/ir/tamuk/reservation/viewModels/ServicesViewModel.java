@@ -35,14 +35,12 @@ public class ServicesViewModel extends ViewModel {
                 if(response.isSuccessful())
                 {
                     if(response.body()!=null)
-                    {
-                        if(response.body().status == 200)
-                        {
+                        if (response.body().status == 200) {
                             servicesLiveData.setValue(response.body().data.services);
-                        }else{
+                        } else {
                             errorMessage.setValue(response.body().message);
                         }
-                    }else{
+                    else{
                         errorMessage.setValue("خطا در دریافت اطلاعات");
                     }
                 }else{

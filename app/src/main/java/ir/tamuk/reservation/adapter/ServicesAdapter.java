@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.RowServicesBinding;
 import ir.tamuk.reservation.models.Service;
 import ir.tamuk.reservation.models.Services;
+import ir.tamuk.reservation.utils.Constants;
 
 
 /* از  RecyclerView.Adapter ارث بیر کن و یک viewHolder یهش پاس بده*/
@@ -64,6 +66,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
         holder.binding.text1.setText(item.name);
         Log.d("kia", "onBindViewHolder: " + item.name);
         holder.binding.text2.setText(item.description);
+        Glide.with(context).load(Constants.DOWNLOAD_PHOTO_URL + item.mainPhoto.filename).into(holder.binding.img);
 //        Picasso.get().load(String.valueOf(item.mainPhoto.filename)).into(holder.binding.img);
 
     }
