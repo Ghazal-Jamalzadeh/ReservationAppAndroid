@@ -33,7 +33,7 @@ android {
 }
 
 dependencies {
-
+    //Android
     implementation 'androidx.appcompat:appcompat:1.5.0'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -49,38 +49,24 @@ dependencies {
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
     //Retrofit
-    /*
-    این رتروفیت اصلی است
-    */
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    /*
-    برای قابل فهم کردن جیسون برای اندروید Gson به کار میرود.
-    * */
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     //Client
-    /*
-    اعمال تنظیمات بیشتر برای رتروفیت مثلا زمان انتظار و...
-    * */
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'
     //Gson
     implementation 'com.google.code.gson:gson:2.9.0'
-
-
-
-    //FastNetworking Lib for MultipartRequest
-//    implementation 'com.amitshekhar.android:android-networking:1.0.2'
-
-    implementation 'com.github.maks1990:CDP:1.0.1'
-    implementation 'com.squareup.picasso:picasso:2.8'
-
-
-    implementation 'com.github.roojin:persian-calendar-view:1.2.2'
-    implementation 'com.github.arcadefire:nice-spinner:1.4.4'
-
+    //logging interceptor
     implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
-
+    //CDP
+    implementation 'com.github.maks1990:CDP:1.0.1'
+    //persian calender
+    implementation 'com.github.roojin:persian-calendar-view:1.2.2'
     //glide
     implementation 'com.github.bumptech.glide:glide:4.13.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
+
+    implementation 'com.github.arcadefire:nice-spinner:1.4.4'
+
+
 
 }

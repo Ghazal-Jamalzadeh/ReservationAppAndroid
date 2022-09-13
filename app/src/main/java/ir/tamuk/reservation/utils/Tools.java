@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
@@ -31,6 +32,10 @@ public class Tools {
         }
 
         return apiServices ;
+    }
+
+    public static void showToast(Context context , String message ){
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
 
@@ -70,8 +75,11 @@ public class Tools {
        return message ;
     }
 
+    //use this before navigate between fragments
     public static Boolean checkDestination (View view , int fragmentId){
-      return   Navigation.findNavController(view).getCurrentDestination() == Navigation.findNavController(view).findDestination(fragmentId);
+
+      return  Navigation.findNavController(view).getCurrentDestination() == Navigation.findNavController(view).findDestination(fragmentId);
+
     }
 
 
