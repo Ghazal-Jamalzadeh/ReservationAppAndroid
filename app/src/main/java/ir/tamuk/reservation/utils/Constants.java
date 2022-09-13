@@ -1,6 +1,7 @@
 package ir.tamuk.reservation.utils;
 
 public class Constants {
+    //KiaTAg
     public static final String TAG_KIA = "Kianoosh";
     //Api
     public static final String BASE_URL = "http://moeenkashisaz.ir";

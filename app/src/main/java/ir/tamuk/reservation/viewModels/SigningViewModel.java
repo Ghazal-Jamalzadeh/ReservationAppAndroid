@@ -28,14 +28,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SigningViewModel extends ViewModel {
+
     //    public MutableLiveData<ResponseSendActivationCode> sendActivationLiveData;
     public SigningRepository repository = new SigningRepository();
-
     public MutableLiveData<String> stringMutableLiveData = new MutableLiveData<>();
-
     public MutableLiveData<Boolean> isSuccessLiveData = new MutableLiveData<>();
     public MutableLiveData<String> errorMessageLiveData = new MutableLiveData<>();
-
 
 
 //    public LiveData<ResponseSendActivationCode> getActivationCodeResponse(BodySendActivationCode body){
@@ -48,6 +46,7 @@ public class SigningViewModel extends ViewModel {
 //            }
 //            return sendActivationLiveData;
 //    }
+
 
     public void callSendActivationCode(BodySendActivationCode body) {
 //        CallApi
@@ -66,12 +65,11 @@ public class SigningViewModel extends ViewModel {
 
                                 isSuccessLiveData.setValue(true);
 
-
                         } else {
 
                             isSuccessLiveData.setValue(false);
                             errorMessageLiveData.setValue(response.body().message);
-                            Log.d(Constants.TAG_KIA, "onResponse: "+"200!");
+                            Log.d(Constants.TAG_KIA, "onResponseS: ->"+"200!");
 
                         }
                     }
@@ -82,7 +80,7 @@ public class SigningViewModel extends ViewModel {
 
                         isSuccessLiveData.setValue(false);
                         errorMessageLiveData.setValue(Tools.extractErrorBodyMessage(response.errorBody().string()));
-                        Log.d(Constants.TAG_KIA, "onResponse: ");
+                        Log.d(Constants.TAG_KIA, "Successful!: ->");
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -97,7 +95,7 @@ public class SigningViewModel extends ViewModel {
             public void onFailure(Call<ResponseSendActivationCode> call, Throwable t) {
                 isSuccessLiveData.setValue(false);
                 errorMessageLiveData.setValue(t.getMessage());
-                Log.d(Constants.TAG_KIA, "onFailure: ");
+                Log.d(Constants.TAG_KIA, "onFailureS: ->");
             }
         });
     }

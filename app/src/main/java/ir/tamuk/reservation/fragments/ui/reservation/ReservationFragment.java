@@ -35,12 +35,14 @@ import ir.mirrajabi.persiancalendar.core.PersianCalendarHandler;
 import ir.mirrajabi.persiancalendar.core.models.CalendarEvent;
 import ir.mirrajabi.persiancalendar.core.models.PersianDate;
 import ir.tamuk.reservation.R;
+import ir.tamuk.reservation.activities.MainActivity;
 import ir.tamuk.reservation.databinding.FragmentReservationBinding;
 import ir.tamuk.reservation.fragments.ui.reservation.adapter.ReserveAdapter;
 import ir.tamuk.reservation.fragments.ui.reservation.adapter.ReserveModel;
 import ir.tamuk.reservation.fragments.ui.reservation.adapter.RtlGridLayoutManager;
 import ir.tamuk.reservation.fragments.ui.reservation.database.SqlDatabaseReserve;
 import ir.tamuk.reservation.utils.Constants;
+import ir.tamuk.reservation.utils.SharedPerferencesClass;
 
 public class ReservationFragment extends Fragment {
     //binding
@@ -97,6 +99,12 @@ public class ReservationFragment extends Fragment {
             }
         });
 
+        //test
+        String a = SharedPerferencesClass.getPrefsAccess(getContext());
+        String r = SharedPerferencesClass.getPrefsRefresh(getContext());
+
+        Log.d(Constants.TAG_KIA, "tokensA: ->"+a );
+        Log.d(Constants.TAG_KIA, "tokensR: ->"+r );
 
         //recycler
         Recycler();
@@ -209,7 +217,7 @@ public class ReservationFragment extends Fragment {
             binding.monthCardReservation.setText(month[x]);
             date_show = String.valueOf(persianDate.getYear()) +"-"+String.valueOf(persianDate.getMonth())+"-"
                     +String.valueOf(persianDate.getDayOfMonth());
-            Log.d(Constants.TAG_KIA, "Calender: "+ date_show);
+            Log.d(Constants.TAG_KIA, "Calender: ->"+ date_show);
             Recycler();
             sqlDatabase.deleteIdAll();
         });
@@ -253,7 +261,7 @@ public class ReservationFragment extends Fragment {
         for ( int i = 0; i<reserveModels.size(); i++) {
             if (binding.spinnerServices.getSelectedItemPosition() == 0) {
                 if (reserveModels.get(i).id.contains(date_show)) {
-                    Log.d(Constants.TAG_KIA, "Recycler: "+ date_show);
+                    Log.d(Constants.TAG_KIA, "Recycler: ->"+ date_show);
                     result.add(reserveModels.get(i));
                 }
             }else if (reserveModels.get(i).id.contains(String.valueOf(date_show))

@@ -233,31 +233,43 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/text_Timer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/aa"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/_4cdp"
-                android:text="120"
-                android:textColor="@color/white" />
-
-            <TextView
-                android:id="@+id/aa"
-                style="@style/fontForMediumEditTextHint"
+            <LinearLayout
+                android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ver"
+                android:layout_marginTop="@dimen/_8cdp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/_28cdp"
-                android:text="زمان باقی مانده:" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_Timer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/aa"
+                    android:layout_centerHorizontal="true"
+                    android:text="120"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/aa"
+                    style="@style/fontForMediumEditTextHint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ver"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="@dimen/_32cdp"
+                    android:text="زمان باقی مانده:" />
+
+
+            </LinearLayout>
+
 
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/text_Timer"
+                android:layout_below="@id/time"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_32cdp"

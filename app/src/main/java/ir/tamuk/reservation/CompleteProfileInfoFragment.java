@@ -31,17 +31,19 @@ public class CompleteProfileInfoFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentCompleteProfileInfoBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        binding.image.setOnClickListener(new View.OnClickListener() {
+        binding.cancelButtonSigning.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(getView()).popBackStack(R.id.nav_home, false);
             }
         });
-         binding.cardView.setOnClickListener(new View.OnClickListener() {
+         binding.acceptButtonSigning.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                 if (binding.edit1.getText().length() !=0&& binding.edit2.getText().length() !=0) {
+                 if (binding.nameEditComplete.getText().length() !=0 &&
+                         binding.lastNameEditComplete.getText().length() !=0) {
                      Navigation.findNavController(getView()).navigate(R.id.action_completeProfileInfoFragment_to_factorFragment);
+
                  }else {
                      Toast.makeText(getContext(), "فرم کامل کنید", Toast.LENGTH_SHORT).show();
 

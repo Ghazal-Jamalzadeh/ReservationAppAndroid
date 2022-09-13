@@ -76,7 +76,8 @@
                         android:paddingTop="@dimen/_24cdp"
                         android:singleLine="true"
                         android:textColor="@color/white"
-                        android:theme="@style/Theme.number.code" />
+                        android:theme="@style/Theme.number.code"
+                        />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
