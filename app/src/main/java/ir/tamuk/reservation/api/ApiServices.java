@@ -14,20 +14,20 @@ import retrofit2.http.Query;
 
 public interface ApiServices {
 
-    //http://moeenkashisaz.ir/laser/api/v1/send-code-activation
-    @POST("/laser/api/v1/send-code-activation")
+    //http://moeenkashisaz.ir/garson/api/v1/send-code-activation
+    @POST("v1/send-code-activation")
     Call<ResponseSendActivationCode> sendActivationCode(@Body BodySendActivationCode bodySendActivationCode);
 
-    //http://moeenkashisaz.ir/laser/api/v1/validate-code-activation
-    @POST("/laser/api/v1/validate-code-activation")
+    //http://moeenkashisaz.ir/garson/api/v1/send-code-activation
+    @POST("v1/validate-code-activation")
     Call<ResponseValidateCode> validateCode(@Body BodySendActivationCode bodySendActivationCode);
 
     //http://moeenkashisaz.ir/laser/api/v1/get-all-category-by-customer
-    @GET("/laser/api/v1/get-all-category-by-customer")
+    @GET("v1/get-all-category-by-customer")
     Call<ResponseCategoriesList> getAllCategories ();
 
     //http://moeenkashisaz.ir/laser/api/v1/search-services?pageNumber=1&limit=20&categories=631867b5222c9efbb3dd899b
-    @GET("/laser/api/v1/search-services?")
+    @GET("v1/search-services?")
     Call<ResponseSearchServices> getServices (
             @Query("pageNumber") int page ,
             @Query("limit") int limit  ,

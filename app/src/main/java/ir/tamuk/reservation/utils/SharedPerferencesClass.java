@@ -13,21 +13,21 @@ public class SharedPerferencesClass {
 
     //get
     public static String getPrefsAccess(Context context) {
-        return getPrefs(context).getString(Constants.ACCESS_Token, "default");
+        return getPrefs(context).getString(Constants.ACCESS_TOKEN, "default");
     }
     public static String getPrefsRefresh(Context context) {
 
-        return getPrefs(context).getString(Constants.REFRESH_Token, "default");
+        return getPrefs(context).getString(Constants.REFRESH_TOKEN, "default");
     }
 
     //set
     public static void setPrefsAccess(Context context, String value) {
         // perform validation etc..
-        getPrefs(context).edit().putString(Constants.ACCESS_Token, value).commit();
+        getPrefs(context).edit().putString(Constants.ACCESS_TOKEN, value).commit();
     }
     public static void setPrefsRefresh(Context context, String value) {
         // perform validation etc..
-        getPrefs(context).edit().putString(Constants.REFRESH_Token, value).commit();
+        getPrefs(context).edit().putInt(Constants.REFRESH_TOKEN, value).commit();
     }
 
 

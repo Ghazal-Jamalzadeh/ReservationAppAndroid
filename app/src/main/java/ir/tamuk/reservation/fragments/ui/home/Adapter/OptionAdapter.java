@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 
 import java.util.ArrayList;
 
@@ -53,9 +54,16 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull OptionAdapter.ViewHolder holder, int position) {
         //loop recycler
-        Service item = serviceArrayList.get(position % serviceArrayList.size());
-        homeAdapterInterface.changeTitle(item.name);
-        Glide.with(activity).load(Constants.DOWNLOAD_PHOTO_URL + item.mainPhoto.filename).into(holder.binding.imageView3);
+        try {
+            Service item = serviceArrayList.get(position % serviceArrayList.size());
+            homeAdapterInterface.changeTitle(item.name);
+            Glide.with(activity)
+                    .load(Constants.DOWNLOAD_PHOTO_URL + item.mainPhoto.filename)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(holder.binding.imageView3);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public Service getItem(int position) {

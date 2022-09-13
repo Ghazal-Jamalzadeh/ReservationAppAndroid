@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -37,22 +38,21 @@ import retrofit2.Response;
 public class SigningFragment extends Fragment {
 
     private FragmentSigningBinding binding;
+    private SigningViewModel signingViewModel ;
 
     private BodySendActivationCode body = new BodySendActivationCode();
-    private Response<ResponseSendActivationCode> responce;
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        SigningViewModel signingViewModel =  new ViewModelProvider(this).get(SigningViewModel.class);
+        signingViewModel =  new ViewModelProvider(this).get(SigningViewModel.class);
         binding = FragmentSigningBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -97,6 +97,13 @@ public class SigningFragment extends Fragment {
                 });
 
 
+
+                if (Connectivity.isConnected(getContext())) {
+                    signingViewModel.callSendActivationCode(body);
+                } else {
+                    Toast.makeText(getContext(), "اینترنت وصل نیس ", Toast.LENGTH_SHORT).show();
+                }
+
             } else {
                 //EditText Field error enable
                 binding.textField.setErrorEnabled(true);
@@ -134,19 +141,52 @@ public class SigningFragment extends Fragment {
 
             }
 //
-        });
 
-        binding.acceptButtonSigning.setOnEditorActionListener((textView, i, keyEvent) -> {
-            if (i == EditorInfo.IME_ACTION_DONE) {
-                Tools.removePhoneKeypad((AppCompatActivity) getActivity());
-                //do here your stuff f
-                return true;
-            }
-            return false;
+            signingViewModel.isSuccessLiveData.observe(getViewLifecycleOwner(), aBoolean -> {
+
+                    if (aBoolean) {
+                            //navigate to next frg
+                            Bundle bundle = new Bundle();
+                            bundle.clear();
+                            bundle.putString("number", binding.mobileEditTextSigning.getText().toString());
+
+                            if (Tools.checkDestination(view, R.id.signingFragment)) {
+                               getViewModelStore().clear();
+                                Navigation.findNavController(view).navigate(R.id.action_signingFragment_to_signInValiddationcodeFragment, bundle);
+                            }
+                }
+            });
+
+
+            signingViewModel.errorMessageLiveData.observe(getViewLifecycleOwner(), s -> {
+
+                    Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+
+            });
         });
 
         return root;
     }
 
+    public  void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(getContext().INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = getActivity().getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(getActivity());
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    public static void removePhoneKeypad(Fragment fragment) {
+        InputMethodManager inputManager = (InputMethodManager) fragment.getView()
+                .getContext()
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        IBinder binder = fragment.getView().getWindowToken();
+        inputManager.hideSoftInputFromWindow(binder,
+                InputMethodManager.HIDE_NOT_ALWAYS);
+    }
 
 }

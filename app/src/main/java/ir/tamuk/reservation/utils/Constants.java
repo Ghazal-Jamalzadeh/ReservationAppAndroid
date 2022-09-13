@@ -5,10 +5,14 @@ public class Constants {
     public static final String TAG_KIA = "Kianoosh";
     //Api
     public static final String BASE_URL = "http://moeenkashisaz.ir";
+    //URL
+    public static final String BASE_URL = "http://moeenkashisaz.ir/laser/api/";
     public static final String DOWNLOAD_PHOTO_URL = "http://moeenkashisaz.ir/laser/downloads/" ;
 
+    //client settings
     public static final long NETWORK_TIMEOUT = 60L ;
-    //SharedPerferences Class
-    public static final String ACCESS_Token = "accessToken";
-    public static final String REFRESH_Token = "refreshToken";
+
+    //SharedPreferences Class
+    public static final String ACCESS_TOKEN = "accessToken";
+    public static final String REFRESH_TOKEN = "refreshToken";
 }
