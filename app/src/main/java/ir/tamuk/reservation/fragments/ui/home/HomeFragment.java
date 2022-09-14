@@ -1,18 +1,20 @@
 package ir.tamuk.reservation.fragments.ui.home;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,42 +26,38 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import ir.tamuk.reservation.Interfaces.HomeAdapterInterface;
 import ir.tamuk.reservation.R;
-import ir.tamuk.reservation.api.ApiServices;
 import ir.tamuk.reservation.databinding.FragmentHomeBinding;
-import ir.tamuk.reservation.fragments.ui.home.Adapter.OptionAdapter;
-import ir.tamuk.reservation.fragments.ui.home.Model.OptionList;
+import ir.tamuk.reservation.fragments.ui.home.Adapter.ServicesByCategoryAdapter;
 import ir.tamuk.reservation.models.Category;
 import ir.tamuk.reservation.models.Service;
 import ir.tamuk.reservation.utils.Connectivity;
 import ir.tamuk.reservation.utils.Tools;
-import ir.tamuk.reservation.viewModels.HomeViewModel;
 
-public class HomeFragment extends Fragment implements HomeAdapterInterface {
-
+public class HomeFragment extends Fragment {
+    private static final String TAG = "ghazal";
+    //binding
     private FragmentHomeBinding binding;
-    //adapter
-    private OptionAdapter optionAdapter;
-    //api
-    private Timer timer;
-    private TimerTask timerTask;
-
+    private HomeViewModel homeViewModel;
+    //context
+    private final Context context = getContext();
+    //list
     private ArrayList<Service> services = new ArrayList<>();
-    private LinearLayoutManager layoutManager;
+    private ArrayList<Category> categories = new ArrayList<>();
+    //adapter
+    private ServicesByCategoryAdapter adapter;
+    //other
+    private int tabIndex = 0;
 
-    HomeViewModel homeViewModel;
-
-
-    int position;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Log.d(TAG, "onCreate: ");
+
+        //On Back Pressed
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
@@ -67,8 +65,6 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
 //                Navigation.findNavController(getView()).popBackStack();
             }
         };
-
-
 
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
     }
@@ -79,245 +75,234 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
 
-        binding.imageView2.setImageResource(R.drawable.test);
+        Log.d(TAG, "onCreateView: ");
 
-        layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, true);
-
-        //intitialize RecyclerViews
-
-
-
-
-        binding.swipeRefreshLayout.setEnabled(true);
-
-        //call category api
-        callGetCategories();
-
-        homeViewModel.loading.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean b) {
-                binding.swipeRefreshLayout.setRefreshing(b);
-                if (!b) {
-                    binding.container.setVisibility(View.VISIBLE);
-                }
-
-            }
-        });
-
-        homeViewModel.categoriesLiveData.observe(getViewLifecycleOwner(), new Observer<ArrayList<Category>>() {
-            @Override
-            public void onChanged(ArrayList<Category> categories) {
-                binding.swipeRefreshLayout.setEnabled(false);
-
-                buildTabLayout(categories);
-
-            }
-        });
-
-        binding.swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                callGetCategories();
-            }
-        });
-        ///////
-
-
-        //call services Api
-        callGetServices();
-        homeViewModel.servicesLiveData.observe(getViewLifecycleOwner(), new Observer<ArrayList<Service>>() {
-            @SuppressLint("NotifyDataSetChanged")
-            @Override
-            public void onChanged(ArrayList<Service> serviceArrayList) {
-
-                Log.d("ghazal", "size :  " + serviceArrayList.size());
-                services = serviceArrayList;
-//                optionAdapter.notifyDataSetChanged();
-
-                initLoopRecyclerView(binding.optionRecycler, layoutManager);
-//                //loop recycler
-//                //set smooth scroll to 2 for using chance app
-
-
-                if (services != null) {
-                    position = Integer.MAX_VALUE / 2;
-                    binding.optionRecycler.smoothScrollToPosition(position);
-                }
-
-            }
-        });
-
-        return root;
+        return binding.getRoot();
     }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        //loop recycler
-        runAutoScrollBanner(binding.optionRecycler);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        //loop recycler
-        stopAutoScrollBanner(layoutManager);
-    }
-
-    //loop recycler
-    private void stopAutoScrollBanner(LinearLayoutManager manager) {
-        if (timer != null && timerTask != null) {
-            timerTask.cancel();
-            timer.cancel();
-            timer = null;
-            timerTask = null;
-            position = manager.findFirstCompletelyVisibleItemPosition();
-        }
-    }
-
-    //loop recycler
-    private void runAutoScrollBanner(RecyclerView recyclerView) {
-        if (timer == null && timerTask == null) {
-            timer = new Timer();
-            timerTask = new TimerTask() {
-                @Override
-                public void run() {
-                    if (position == Integer.MAX_VALUE) {
-                        position = Integer.MAX_VALUE / 2;
-                        recyclerView.scrollToPosition(position);
-                        recyclerView.smoothScrollBy(5, 0);
-                    } else {
-                        position++;
-                        recyclerView.smoothScrollToPosition(position);
-
-                    }
-                }
-            };
-            timer.schedule(timerTask, 4000, 4000);
-        }
-    }
-
 
     @SuppressLint("ResourceAsColor")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Log.d(TAG, "onViewCreated: ");
+
+        //swipe layout attributes
+        binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.show_more_text), getResources().getColor(R.color.main));
+        binding.refreshLayout.setRefreshing(true);
+        binding.refreshLayout.setEnabled(true);
+
+        binding.bannerImg.setImageResource(R.drawable.test);
+
+        binding.refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                homeViewModel.getAllCategories();
+            }
+        });
+
+
+        //--------------------------------Observers------------------------------------------------>
+        homeViewModel.getAllCategories().observe(getViewLifecycleOwner(), new Observer<ArrayList<Category>>() {
+            @Override
+            public void onChanged(ArrayList<Category> list) {
+
+                Log.d(TAG, "onChanged: get all categories");
+
+                categories.clear();
+                categories.addAll(list);
+                buildTabLayout(categories);
+
+            }
+        });
+
+        homeViewModel.servicesLiveData.observe(getViewLifecycleOwner(), new Observer<ArrayList<Service>>() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onChanged(ArrayList<Service> serviceArrayList) {
+
+                Log.d(TAG, "onChanged:  services live data ");
+
+                services.clear();
+                services.addAll(serviceArrayList);
+
+                if (services.size() > 0) {
+
+                    buildRecyclerView(services);
+                    binding.txtServiceName.setText(services.get(0).name);
+                    binding.container.setVisibility(View.VISIBLE);
+                    binding.contentLay.setVisibility(View.VISIBLE);
+                    binding.emptyLay.setVisibility(View.GONE);
+                } else {
+                    binding.contentLay.setVisibility(View.GONE);
+                    binding.container.setVisibility(View.VISIBLE);
+                    binding.emptyLay.setVisibility(View.VISIBLE);
+                    binding.refreshLayout.setRefreshing(false);
+                    binding.refreshLayout.setEnabled(false);
+                }
+
+            }
+        });
+
+        homeViewModel.errorMessageLiveData.observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String errorMessage) {
+
+                Log.d(TAG, "onChanged: error live data ");
+                binding.refreshLayout.setRefreshing(false);
+                binding.refreshLayout.setEnabled(true);
+                Tools.showToast(getContext(), errorMessage);
+            }
+        });
+
+        //--------------------------------Observers-----------------------------------------------//
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        Log.d(TAG, "onResume: onResume");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop: ");
+//        homeViewModel.errorMessageLiveData.removeObservers(getViewLifecycleOwner());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause: ");
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-    }
-
-    private void selectTab(int position) {
-        switch (position) {
-            case 0:
-                Tools.scrollToPosition(binding.scrollView, binding.recyclerTitle1);
-                break;
-            case 1:
-                Tools.scrollToPosition(binding.scrollView, binding.recyclerTitle1);
-                break;
-            case 2:
-                Tools.scrollToPosition(binding.scrollView, binding.recyclerTitle1);
-                break;
-            case 3:
-                Tools.scrollToPosition(binding.scrollView, binding.recyclerTitle1);
-                break;
-
-        }
+        Log.d(TAG, "onDestroyView: ");
     }
 
     @Override
-    public void changeTitle(String string) {
-        binding.textView5.setText(string);
+    public void onDetach() {
+        super.onDetach();
+        Log.d(TAG, "onDetach: ");
     }
 
 
-    public void initLoopRecyclerView(RecyclerView view, LinearLayoutManager manager) {
-        optionAdapter = new OptionAdapter(getActivity(), services, this::changeTitle);
-        view.setLayoutManager(manager);
-        view.setAdapter(optionAdapter);
-        view.setHasFixedSize(true);
-        view.getLayoutManager().scrollToPosition(Integer.MAX_VALUE / 2);
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy: ");
+    }
 
-        // on below line we are creating a new variable for
-        // our snap helper class and initializing it for our Linear Snap Helper.
+    //--------------------------RecyclerView------------------------------------------------------->
+    private void buildRecyclerView(ArrayList<Service> items) {
+//        if (adapter == null ){
+        adapter = new ServicesByCategoryAdapter(getActivity(), items);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(context, RecyclerView.HORIZONTAL, true);
+        binding.optionRecycler.setAdapter(adapter);
+        binding.optionRecycler.setLayoutManager(layoutManager);
+        binding.optionRecycler.setHasFixedSize(true);
+
+        binding.txtServiceName.setText(items.get(0).name);
+
         SnapHelper snapHelper = new LinearSnapHelper();
-        view.setOnFlingListener(null);
-        snapHelper.attachToRecyclerView((RecyclerView) view);
+        binding.optionRecycler.setOnFlingListener(null);
+        snapHelper.attachToRecyclerView((RecyclerView) binding.optionRecycler);
 
-        //loop recycler
-        view.smoothScrollBy(5, 0);
+        binding.optionRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
-        view.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    View centerView = snapHelper.findSnapView(layoutManager);
+                    if (centerView != null) {
+                        int pos = layoutManager.getPosition(centerView);
+                        binding.txtServiceName.setText(items.get(pos).name);
 
-                if (newState == 1) {
-                    stopAutoScrollBanner(manager);
-                } else if (newState == 0) {
-                    position = manager.findFirstCompletelyVisibleItemPosition();
-                    runAutoScrollBanner(view);
+                    }
                 }
             }
         });
+//        }else{
+//            adapter.notifyDataSetChanged();
+//        }
 
+        binding.refreshLayout.setRefreshing(false);
+        binding.refreshLayout.setEnabled(false);
     }
+    //--------------------------RecyclerView------------------------------------------------------->
 
+    //----------------------------TabLayout-------------------------------------------------------->
     private void buildTabLayout(ArrayList<Category> categories) {
-        //TabLayout
-        binding.tabLayout.removeAllTabs();
+        //don't build tab layout twice if it already exists
+        Log.d(TAG, "buildTabLayout: last pos : " + homeViewModel.tabLastPos + " tab counts " + binding.tabLayout.getTabCount());
+        if (binding.tabLayout.getTabCount() == 0) {
 
-        for (Category category : categories) {
-            TabLayout.Tab tab = binding.tabLayout.newTab();
-            tab.setText(category.name);
-            binding.tabLayout.addTab(tab, 0);
+            binding.tabLayout.removeAllTabs();
+
+            for (Category category : categories) {
+                TabLayout.Tab tab = binding.tabLayout.newTab();
+                tab.setText(category.name);
+                binding.tabLayout.addTab(tab, 0);
+            }
+
+            binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                @Override
+                public void onTabSelected(TabLayout.Tab tab) {
+                    selectTab(binding.tabLayout.getSelectedTabPosition());
+                }
+
+                @Override
+                public void onTabUnselected(TabLayout.Tab tab) {
+
+                }
+
+                @Override
+                public void onTabReselected(TabLayout.Tab tab) {
+                    selectTab(binding.tabLayout.getSelectedTabPosition());
+                }
+            });
+
+            //tab scroll to right
+            if ( homeViewModel.tabLastPos >categories.size()  ) {
+                tabIndex = categories.size() - 1;
+            } else {
+                tabIndex = homeViewModel.tabLastPos;
+            }
+        } else {
+            binding.container.setVisibility(View.VISIBLE);
+            tabIndex = homeViewModel.tabLastPos;
+
         }
-        binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                selectTab(binding.tabLayout.getSelectedTabPosition());
-            }
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-                selectTab(binding.tabLayout.getSelectedTabPosition());
-            }
-        });
-
-        //tab scroll to right
         new Handler().postDelayed(
                 new Runnable() {
                     @Override
                     public void run() {
-                        binding.tabLayout.getTabAt(categories.size() - 1).select();
+                        binding.tabLayout.getTabAt(tabIndex).select();
+                        binding.container.setVisibility(View.VISIBLE);
+                        binding.refreshLayout.setRefreshing(false);
+                        binding.refreshLayout.setEnabled(false);
                     }
-                }, 1000);
-
+                }, 100);
     }
 
-    private void callGetCategories() {
-        if (Connectivity.isConnected(getContext())) {
-            homeViewModel.getAllCategories();
-        } else {
-            Toast.makeText(getContext(), "اینترنت وصل نیس ", Toast.LENGTH_SHORT).show();
-        }
-    }
+    private void selectTab(int position) {
 
-    private void callGetServices() {
-        if (Connectivity.isConnected(getContext())) {
-            homeViewModel.getAllServices(1, 20, "631867b5222c9efbb3dd899b");
-        } else {
-            Toast.makeText(getContext(), "اینترنت وصل نیس ", Toast.LENGTH_SHORT).show();
-        }
+        Log.d(TAG, "selectTab: ");
+        homeViewModel.tabLastPos = position;
+        binding.refreshLayout.setRefreshing(true);
+        binding.refreshLayout.setEnabled(true);
+        homeViewModel.getAllServices(1, 20, categories.get(categories.size() - position - 1).id);
+
+
     }
+    //----------------------------TabLayout-------------------------------------------------------//
+
+
 }

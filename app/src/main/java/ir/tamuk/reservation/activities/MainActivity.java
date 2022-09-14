@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
@@ -22,6 +23,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -30,7 +32,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.ActivityMainBinding;
 import ir.tamuk.reservation.fragments.ui.home.HomeFragment;
-
+import ir.tamuk.reservation.fragments.ui.home.HomeViewModel;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -48,10 +50,14 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //create homeViewModel
+        new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(HomeViewModel.class);
+
         ///navigatin bar
         BottomNavigationView navView = findViewById(R.id.bottomNav);
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupWithNavController(binding.bottomNav, navController);
+
 
 
         ///////drawer////////
