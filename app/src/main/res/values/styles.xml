@@ -87,13 +87,13 @@
 
     <style name="SpinnerTheme" parent="android:Widget.Material.Spinner.Underlined">
         <item name="android:background">@drawable/spinner_draw</item>
-        <item name="android:popupBackground">@color/white</item>
+        <item name="android:popupBackground">@drawable/spinner_draw_popup</item>
         <item name="android:padding">0px</item>
         <item name="android:dropDownWidth">match_parent</item>
-        <item name="android:paddingBottom">4dp</item>
-        <item name="elevation">@dimen/_8cdp</item>
+        <item name="android:paddingBottom">0dp</item>
+<!--        <item name="elevation">@dimen/_8cdp</item>-->
         <item name="android:popupElevation">1dp</item>
-        <item name="android:layout_marginBottom">@dimen/_12cdp</item>
+        <item name="android:layout_marginBottom">@dimen/_4cdp</item>
         <item name="android:textAlignment">textStart</item>
     </style>
 

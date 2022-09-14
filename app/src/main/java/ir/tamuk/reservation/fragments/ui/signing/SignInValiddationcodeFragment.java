@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -24,14 +25,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.math.BigDecimal;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -39,6 +43,7 @@ import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.FragmentSignInValiddationcodeBinding;
 import ir.tamuk.reservation.models.BodySendActivationCode;
 import ir.tamuk.reservation.models.ResponseSendActivationCode;
+import ir.tamuk.reservation.utils.Constants;
 import ir.tamuk.reservation.utils.Tools;
 import ir.tamuk.reservation.viewModels.SigningValiddationCodeViewModel;
 import ir.tamuk.reservation.viewModels.SigningViewModel;
@@ -47,12 +52,13 @@ import retrofit2.Response;
 public class SignInValiddationcodeFragment extends Fragment {
 
     private FragmentSignInValiddationcodeBinding  binding;
-    private Timer t;
-    private TimerTask timerTask;
-
 
     private BodySendActivationCode body = new BodySendActivationCode();
     private Response<ResponseSendActivationCode> responce;
+    private SigningValiddationCodeViewModel signingViewModel;
+    private ir.tamuk.reservation.utils.Timer timer = new ir.tamuk.reservation.utils.Timer();
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,10 +70,29 @@ public class SignInValiddationcodeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        SigningValiddationCodeViewModel signingViewModel =  new ViewModelProvider(this).get(SigningValiddationCodeViewModel.class);
-
+        signingViewModel =  new ViewModelProvider(this).get(SigningValiddationCodeViewModel.class);
         binding = FragmentSignInValiddationcodeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        //numberPhone
+        binding.text.setText(getArguments().getString("number"));
+
+        VerferiEditText();
+        allButtons();
+        backPress();
+        timerDo();
+
+        return root;}
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+
+    }
+
+    //edittext ValidationCode
+    public void VerferiEditText(){
 
         //Keyboard Come Up
         Tools.keyboardPopUp(getActivity());
@@ -221,8 +246,13 @@ public class SignInValiddationcodeFragment extends Fragment {
             }
         });
 
+    }
+
+    //Buttons /accept, image, editing/
+    public void allButtons(){
+
         //Action Keyboard Button
-        binding.six.setOnEditorActionListener((textView, i, keyEvent) -> {
+        binding.acceptButtonSigning.setOnEditorActionListener((textView, i, keyEvent) -> {
             if (i == EditorInfo.IME_ACTION_DONE) {
                 String all = binding.one.getText()+binding.two.getText().toString()
                         +binding.three.getText().toString()+binding.four.getText().toString();
@@ -242,130 +272,73 @@ public class SignInValiddationcodeFragment extends Fragment {
             Log.d("KIA", "onCreateView: "+mobile);
             body.mobile = mobile;
             body.code = all;
-            signingViewModel.callReceiveActivationCode(body);
+            signingViewModel.callReceiveActivationCode(body, getContext());
+            binding.progressCircularSigning.setVisibility(View.VISIBLE);
+            binding.acceptButtonSigning.setTextColor(Color.WHITE);
 
             signingViewModel.isSuccessLiveData.observe(getViewLifecycleOwner(), aBoolean -> {
                 if (aBoolean){
                     //navigate to next frg
-                    Log.d("KIA", "onCreateView: "+aBoolean);
-                    Navigation.findNavController(view).popBackStack();
-                    Navigation.findNavController(view).navigate(R.id.completeProfileInfoFragment);
+                    Log.d(Constants.TAG_KIA, "isSuccessLiveData: "+aBoolean);
+
+                    Navigation.findNavController(getView())
+                            .navigate(R.id.action_signInValiddationcodeFragment_to_completeProfileInfoFragment);
                 }
             });
 
             signingViewModel.errorMessageLiveData.observe(getViewLifecycleOwner(), new Observer<String>() {
                 @Override
                 public void onChanged(String s) {
-                    Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+                    Snackbar.make(getView(), s, Toast.LENGTH_SHORT).show();
+                    binding.acceptButtonSigning.setTextColor(getResources().getColor(R.color.backgroundSigning));
+                    binding.progressCircularSigning.setVisibility(View.GONE);
                 }
             });
 
         });
-        //Refresh Icon
+
         binding.image.setOnClickListener(view -> {
-            if(binding.textTimer.getText().equals("1")){
-            Animation a= AnimationUtils.loadAnimation(getContext(), R.anim.rotation);
-            binding.image.startAnimation(a);
-            binding.textTimer.setText("120");
-            binding.textTimer.getText().toString();
 
-            binding.one.getText().clear();
-            binding.two.getText().clear();
-            binding.three.getText().clear();
-            binding.four.getText().clear();
-            //Timer
-                t = new Timer();
-                timerTask = new TimerTask() {
-                    @Override
-                    public void run() {
-                        try {
-                            getActivity().runOnUiThread(() -> {
-                                binding.textTimer.setText(String.valueOf(Integer.parseInt(binding.textTimer.getText().toString()) - 1));
-                                if (Integer.parseInt(binding.textTimer.getText().toString()) - 1 == 0) {
-                                    t.cancel();
-                                }
-                            });
-                        } catch (Exception e) {
-                            t.cancel();
-                        }
-
-                    }
-                };
-                t.schedule(timerTask,1000,1000);
+            if (timer.updateTimer(binding.textTimer).equals("0:00")) {
+                timer.cancelTimer();
+                timer.stopTimer(binding.textTimer);
+                Animation a = AnimationUtils.loadAnimation(getActivity(), R.anim.rotation);
+                binding.image.startAnimation(a);
 
             }
-
 
         });
-        //Timer
-        timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                try {
-                    getActivity().runOnUiThread(() -> {
-                        binding.textTimer.setText(String.valueOf(Integer.parseInt(binding.textTimer.getText().toString()) - 1));
-                        if (Integer.parseInt(binding.textTimer.getText().toString()) - 1 == 0) {
-                            t.cancel();
-                        }
-                    });
-                } catch (Exception e) {
-                    t.cancel();
-                }
 
-            }
-        };
-        t = new Timer();
-        t.schedule(timerTask, 1000, 1000);
-
-        //back Button (Edit Number Phone)
         binding.editing.setOnClickListener(view -> {
-            t.cancel();
+            timer.cancelTimer();
             findNavController(view).popBackStack();
 
         });
-
-
-        return root;
     }
 
+    //onBackPress
+    public void backPress(){
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button event
+                Navigation.findNavController(getView()).popBackStack();
+                timer.cancelTimer();
+                timer.stopTimer(binding.textTimer);
 
-    @Override
-    public void onResume() {
-        super.onResume();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getActivity(), callback);
 
     }
 
-    //Error SnackBar
-  /*  private void snackBarIconError() {
-        final Snackbar snackbar = Snackbar.make(getView(), "", Snackbar.LENGTH_SHORT);
-        //inflate view
-        View custom_view = getLayoutInflater().inflate(R.layout.snackbar_layout, null);
+    //Timer
+    public void timerDo(){
+        timer.updateTimer(binding.textTimer);
+        Log.d(Constants.TAG_KIA, "timerDo: ->" + timer.updateTimer(binding.textTimer));
+        timer.startTimer(binding.textTimer);
 
-        snackbar.getView().setBackgroundColor(Color.TRANSPARENT);
-        Snackbar.SnackbarLayout snackBarView = (Snackbar.SnackbarLayout) snackbar.getView();
-        snackBarView.setPadding(0, 0, 0, 0);
-
-        ((TextView) custom_view.findViewById(R.id.message)).setText("کد تایید اشتباه است");
-        ((ImageView) custom_view.findViewById(R.id.icon)).setImageResource(R.drawable.ic_baseline_perm_device_information_24);
-        (custom_view.findViewById(R.id.parent_view)).setBackgroundColor(getResources().getColor(R.color.red));
-        snackBarView.addView(custom_view, 0);
-        snackbar.show();
-    }*/
-    //successful SnackBAr
- /*   private void Successful() {
-        final Snackbar snackbar = Snackbar.make(getView(), "", Snackbar.LENGTH_SHORT);
-        //inflate view
-        View custom_view = getLayoutInflater().inflate(R.layout.snackbar_layout, null);
-
-        snackbar.getView().setBackgroundColor(Color.TRANSPARENT);
-        Snackbar.SnackbarLayout snackBarView = (Snackbar.SnackbarLayout) snackbar.getView();
-        snackBarView.setPadding(0, 0, 0, 0);
-
-        ((TextView) custom_view.findViewById(R.id.message)).setText("با موفقیت وارد شدید");
-        ((ImageView) custom_view.findViewById(R.id.icon)).setImageResource(R.drawable.ic_baseline_perm_device_information_24);
-        (custom_view.findViewById(R.id.parent_view)).setBackgroundColor(getResources().getColor(R.color.main));
-        snackBarView.addView(custom_view, 0);
-        snackbar.show();
-    }*/
+    }
 
 }

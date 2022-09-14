@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
@@ -21,11 +22,16 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Objects;
+
 import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.FragmentSigningBinding;
 import ir.tamuk.reservation.models.BodySendActivationCode;
 import ir.tamuk.reservation.models.ResponseSendActivationCode;
 import ir.tamuk.reservation.utils.Connectivity;
+import ir.tamuk.reservation.utils.Constants;
 import ir.tamuk.reservation.utils.Tools;
 import ir.tamuk.reservation.viewModels.SigningViewModel;
 import retrofit2.Response;
@@ -51,6 +57,7 @@ public class SigningFragment extends Fragment {
         binding = FragmentSigningBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+
         //Keyboard come up
         Tools.keyboardPopUp(getActivity());
         binding.mobileEditTextSigning.requestFocus();
@@ -66,6 +73,31 @@ public class SigningFragment extends Fragment {
             if (binding.mobileEditTextSigning.getText().length() == 11) {
                 binding.mobileEditTextSigning.setTextColor(Color.WHITE);
                 body.mobile = binding.mobileEditTextSigning.getText().toString();
+                binding.progressCircularSigning.setVisibility(View.VISIBLE);
+                binding.acceptButtonSigning.setTextColor(Color.WHITE);
+                signingViewModel.callSendActivationCode(body);
+                signingViewModel.isSuccessLiveData.observe(getViewLifecycleOwner(), aBoolean -> {
+                    if (aBoolean){
+                        //navigate to next frg
+                        Log.d("KKI", "onCreateView: "+aBoolean);
+                        Bundle bundle = new Bundle();
+                        bundle.clear();
+                        bundle.putString("number", binding.mobileEditTextSigning.getText().toString());
+                        Navigation.findNavController(getView())
+                                .navigate(R.id.action_signingFragment_to_signInValiddationcodeFragment, bundle);
+                    }
+                });
+                signingViewModel.errorMessageLiveData.observe(getViewLifecycleOwner(), s -> {
+
+//                    Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+                    Log.d(Constants.TAG_KIA, "onCreateView: "+"ERROR");
+                    Snackbar.make(requireView(), s, Toast.LENGTH_SHORT).show();
+                    binding.acceptButtonSigning.setTextColor(getResources().getColor(R.color.backgroundSigning));
+                    binding.progressCircularSigning.setVisibility(View.GONE);
+
+                });
+
+
 
                 if (Connectivity.isConnected(getContext())) {
                     signingViewModel.callSendActivationCode(body);

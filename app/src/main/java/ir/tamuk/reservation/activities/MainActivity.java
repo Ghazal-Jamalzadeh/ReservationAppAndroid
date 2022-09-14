@@ -27,6 +27,8 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.ActivityMainBinding;
 import ir.tamuk.reservation.fragments.ui.home.HomeViewModel;
+import ir.tamuk.reservation.utils.Constants;
+import ir.tamuk.reservation.utils.SharedPerferencesClass;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -84,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
 
                         //navController Hide When OpenSigning Fragment
                         if (navDestination.getId() == R.id.signingFragment ||
-                                navDestination.getId() == R.id.signInValiddationcodeFragment) {
+                                navDestination.getId() == R.id.signInValiddationcodeFragment ||
+                        navDestination.getId() == R.id.completeProfileInfoFragment) {
                             binding.bottomNav.setVisibility(View.GONE);
                         } else {
                             binding.bottomNav.setVisibility(View.VISIBLE);
