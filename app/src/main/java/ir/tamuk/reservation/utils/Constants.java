@@ -4,7 +4,6 @@ public class Constants {
     //KiaTAg
     public static final String TAG_KIA = "Kianoosh";
     //Api
-    public static final String BASE_URL = "http://moeenkashisaz.ir";
     //URL
     public static final String BASE_URL = "http://moeenkashisaz.ir/laser/api/";
     public static final String DOWNLOAD_PHOTO_URL = "http://moeenkashisaz.ir/laser/downloads/" ;

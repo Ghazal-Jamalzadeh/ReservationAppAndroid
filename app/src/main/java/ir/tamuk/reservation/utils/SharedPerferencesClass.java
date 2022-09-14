@@ -27,7 +27,7 @@ public class SharedPerferencesClass {
     }
     public static void setPrefsRefresh(Context context, String value) {
         // perform validation etc..
-        getPrefs(context).edit().putInt(Constants.REFRESH_TOKEN, value).commit();
+        getPrefs(context).edit().putString(Constants.REFRESH_TOKEN, value).commit();
     }
 
 

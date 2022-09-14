@@ -30,6 +30,7 @@ import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.FragmentSigningBinding;
 import ir.tamuk.reservation.models.BodySendActivationCode;
 import ir.tamuk.reservation.models.ResponseSendActivationCode;
+import ir.tamuk.reservation.utils.Connectivity;
 import ir.tamuk.reservation.utils.Constants;
 import ir.tamuk.reservation.utils.Tools;
 import ir.tamuk.reservation.viewModels.SigningViewModel;
