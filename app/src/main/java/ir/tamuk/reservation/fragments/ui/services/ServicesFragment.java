@@ -26,7 +26,7 @@ import ir.tamuk.reservation.adapter.ServicesAdapter;
 import ir.tamuk.reservation.fragments.ui.reservation.ReservationViewModel;
 import ir.tamuk.reservation.databinding.FragmentServicesBinding;
 import ir.tamuk.reservation.utils.Connectivity;
-import ir.tamuk.reservation.viewModels.HomeViewModel;
+//import ir.tamuk.reservation.viewModels.HomeViewModel;
 import ir.tamuk.reservation.viewModels.ServicesViewModel;
 
 

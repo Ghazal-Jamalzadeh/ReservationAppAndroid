@@ -1,11 +1,17 @@
 package ir.tamuk.reservation.activities;
 
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.provider.Settings;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
@@ -13,17 +19,6 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import android.annotation.SuppressLint;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Handler;
-import android.provider.Settings;
-import android.util.Log;
-import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -31,7 +26,6 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.ActivityMainBinding;
-import ir.tamuk.reservation.fragments.ui.home.HomeFragment;
 import ir.tamuk.reservation.fragments.ui.home.HomeViewModel;
 
 
@@ -98,6 +92,12 @@ public class MainActivity extends AppCompatActivity {
 
                         //toolbar hide in profile fragment
                         if (navDestination.getId() == R.id.nav_profile) {
+                            binding.toolbarconstraintLayout.setVisibility(View.GONE);
+                        } else {
+                            binding.toolbarconstraintLayout.setVisibility(View.VISIBLE);
+                        }
+                        //toolbar hide in profile fragment
+                        if (navDestination.getId() == R.id.nav_services) {
                             binding.toolbarconstraintLayout.setVisibility(View.GONE);
                         } else {
                             binding.toolbarconstraintLayout.setVisibility(View.VISIBLE);
