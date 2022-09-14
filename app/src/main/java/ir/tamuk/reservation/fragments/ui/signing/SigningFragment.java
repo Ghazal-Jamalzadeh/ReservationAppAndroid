@@ -75,18 +75,29 @@ public class SigningFragment extends Fragment {
                 body.mobile = binding.mobileEditTextSigning.getText().toString();
                 binding.progressCircularSigning.setVisibility(View.VISIBLE);
                 binding.acceptButtonSigning.setTextColor(Color.WHITE);
-                signingViewModel.callSendActivationCode(body);
+
+                if (Connectivity.isConnected(getContext())) {
+                    signingViewModel.callSendActivationCode(body);
+                } else {
+                    Toast.makeText(getContext(), "اینترنت وصل نیس ", Toast.LENGTH_SHORT).show();
+                }
+
                 signingViewModel.isSuccessLiveData.observe(getViewLifecycleOwner(), aBoolean -> {
-                    if (aBoolean){
+
+                    if (aBoolean) {
                         //navigate to next frg
-                        Log.d("KKI", "onCreateView: "+aBoolean);
                         Bundle bundle = new Bundle();
                         bundle.clear();
                         bundle.putString("number", binding.mobileEditTextSigning.getText().toString());
-                        Navigation.findNavController(getView())
-                                .navigate(R.id.action_signingFragment_to_signInValiddationcodeFragment, bundle);
+
+                        if (Tools.checkDestination(view, R.id.signingFragment)) {
+                            getViewModelStore().clear();
+                            Navigation.findNavController(view)
+                                    .navigate(R.id.action_signingFragment_to_signInValiddationcodeFragment, bundle);
+                        }
                     }
                 });
+
                 signingViewModel.errorMessageLiveData.observe(getViewLifecycleOwner(), s -> {
 
 //                    Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
@@ -99,11 +110,6 @@ public class SigningFragment extends Fragment {
 
 
 
-                if (Connectivity.isConnected(getContext())) {
-                    signingViewModel.callSendActivationCode(body);
-                } else {
-                    Toast.makeText(getContext(), "اینترنت وصل نیس ", Toast.LENGTH_SHORT).show();
-                }
 
             } else {
                 //EditText Field error enable
@@ -142,28 +148,6 @@ public class SigningFragment extends Fragment {
 
             }
 //
-
-            signingViewModel.isSuccessLiveData.observe(getViewLifecycleOwner(), aBoolean -> {
-
-                    if (aBoolean) {
-                            //navigate to next frg
-                            Bundle bundle = new Bundle();
-                            bundle.clear();
-                            bundle.putString("number", binding.mobileEditTextSigning.getText().toString());
-
-                            if (Tools.checkDestination(view, R.id.signingFragment)) {
-                               getViewModelStore().clear();
-                                Navigation.findNavController(view).navigate(R.id.action_signingFragment_to_signInValiddationcodeFragment, bundle);
-                            }
-                }
-            });
-
-
-            signingViewModel.errorMessageLiveData.observe(getViewLifecycleOwner(), s -> {
-
-                    Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
-
-            });
         });
 
         return root;

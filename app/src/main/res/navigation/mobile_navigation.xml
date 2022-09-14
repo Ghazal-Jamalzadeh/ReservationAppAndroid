@@ -10,9 +10,6 @@
         android:name="ir.tamuk.reservation.fragments.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_nav_home_to_testFragment"
-            app:destination="@id/testFragment" />
     </fragment>
 
     <fragment
@@ -20,15 +17,15 @@
         android:name="ir.tamuk.reservation.fragments.ui.reservation.ReservationFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_reservation" >
-        <action
-            android:id="@+id/action_nav_reservation_to_signingFragment"
-            app:destination="@id/signingFragment"
-            app:enterAnim="@anim/slide_up"
-            app:popEnterAnim="@anim/wait"
-            app:popExitAnim="@anim/slide_down"
-            />
     </fragment>
 
+    <action
+        android:id="@+id/action_to_signingFragment"
+        app:destination="@id/signingFragment"
+        app:enterAnim="@anim/slide_up"
+        app:popEnterAnim="@anim/wait"
+        app:popExitAnim="@anim/slide_down"
+        />
     <fragment
         android:id="@+id/nav_profile"
         android:name="ir.tamuk.reservation.fragments.ui.profile.ProfileFragment"
@@ -38,11 +35,6 @@
             android:id="@+id/action_nav_profile_to_appointmentFragment"
             app:destination="@id/appointmentFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/testFragment"
-        android:name="ir.tamuk.reservation.fragments.ui.TestFragment"
-        android:label="fragment_test"
-        tools:layout="@layout/fragment_test" />
     <fragment
         android:id="@+id/nav_services"
         android:name="ir.tamuk.reservation.fragments.ui.services.ServicesFragment"
@@ -91,41 +83,35 @@
             app:exitAnim="@anim/wait"
             app:popEnterAnim="@anim/wait"
             app:popExitAnim="@anim/slide_right" />
-        <action
-            android:id="@+id/action_signInValiddationcodeFragment_to_factorFragment"
-            app:destination="@id/factorFragment"
-            app:enterAnim="@anim/slide_left"
-            app:exitAnim="@anim/wait"
-            app:popEnterAnim="@anim/wait"
-            app:popExitAnim="@anim/slide_right" />
     </fragment>
     <fragment
         android:id="@+id/paid"
         android:name="ir.tamuk.reservation.fragments.ui.paid.Paid"
         android:label="fragment_paid"
         tools:layout="@layout/fragment_paid" />
-    tools:layout="@layout/fragment_signing" />
+
     <fragment
         android:id="@+id/appointmentFragment"
         android:name="ir.tamuk.reservation.fragments.ui.Appointments.AppointmentFragment"
-        android:label="AppointmentFragment" />
+        android:label="AppointmentFragment"
+        tools:layout="@layout/fragment_appointment"/>
     <fragment
         android:id="@+id/serviceInfoFragment"
-        android:name="ir.tamuk.reservation.fragments.ui.ServiceInfoFragment"
+        android:name="ir.tamuk.reservation.fragments.ui.services.ServiceInfoFragment"
         android:label="fragment_service_info"
         tools:layout="@layout/fragment_service_info" />
     <fragment
         android:id="@+id/completeProfileInfoFragment"
-        android:name="ir.tamuk.reservation.fragments.ui.CompleteProfileInfoFragment"
+        android:name="ir.tamuk.reservation.fragments.ui.signing.CompleteProfileInfoFragment"
         android:label="fragment_complete_profile_info"
         tools:layout="@layout/fragment_complete_profile_info" >
-        <action
-            android:id="@+id/action_completeProfileInfoFragment_to_factorFragment"
-            app:destination="@id/factorFragment"
-            app:enterAnim="@anim/slide_left"
-            app:exitAnim="@anim/wait"
-            app:popEnterAnim="@anim/wait"
-            app:popExitAnim="@anim/slide_right" />
     </fragment>
-    tools:layout="@layout/fragment_signing" />
+    <action
+        android:id="@+id/action_to_factorFragment"
+        app:destination="@id/factorFragment"
+        app:enterAnim="@anim/slide_left"
+        app:exitAnim="@anim/wait"
+        app:popEnterAnim="@anim/wait"
+        app:popExitAnim="@anim/slide_right" />
+
 </navigation>

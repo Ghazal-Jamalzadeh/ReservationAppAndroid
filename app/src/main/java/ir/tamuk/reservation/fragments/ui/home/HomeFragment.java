@@ -17,6 +17,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,6 +29,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 
 import ir.tamuk.reservation.R;
+import ir.tamuk.reservation.activities.MainActivity;
 import ir.tamuk.reservation.databinding.FragmentHomeBinding;
 import ir.tamuk.reservation.fragments.ui.home.Adapter.ServicesByCategoryAdapter;
 import ir.tamuk.reservation.models.Category;
@@ -36,7 +38,6 @@ import ir.tamuk.reservation.utils.Connectivity;
 import ir.tamuk.reservation.utils.Tools;
 
 public class HomeFragment extends Fragment {
-    private static final String TAG = "ghazal";
     //binding
     private FragmentHomeBinding binding;
     private HomeViewModel homeViewModel;
@@ -48,21 +49,17 @@ public class HomeFragment extends Fragment {
     //adapter
     private ServicesByCategoryAdapter adapter;
     //other
-    private int tabIndex = 0;
-
+    int tabIndex = 0;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Log.d(TAG, "onCreate: ");
 
         //On Back Pressed
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
                 // Handle the back button event
-//                Navigation.findNavController(getView()).popBackStack();
             }
         };
 
@@ -76,8 +73,6 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
 
-        Log.d(TAG, "onCreateView: ");
-
         return binding.getRoot();
     }
 
@@ -86,8 +81,6 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Log.d(TAG, "onViewCreated: ");
-
         //swipe layout attributes
         binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.show_more_text), getResources().getColor(R.color.main));
         binding.refreshLayout.setRefreshing(true);
@@ -95,6 +88,7 @@ public class HomeFragment extends Fragment {
 
         binding.bannerImg.setImageResource(R.drawable.test);
 
+        //refresh
         binding.refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -102,13 +96,18 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        //Buttons
+        binding.txtShowAll.setOnClickListener(view1 -> {
+
+                ((MainActivity)getActivity()).clickBottomNav(R.id.nav_services);
+
+        });
+
 
         //--------------------------------Observers------------------------------------------------>
         homeViewModel.getAllCategories().observe(getViewLifecycleOwner(), new Observer<ArrayList<Category>>() {
             @Override
             public void onChanged(ArrayList<Category> list) {
-
-                Log.d(TAG, "onChanged: get all categories");
 
                 categories.clear();
                 categories.addAll(list);
@@ -121,8 +120,6 @@ public class HomeFragment extends Fragment {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onChanged(ArrayList<Service> serviceArrayList) {
-
-                Log.d(TAG, "onChanged:  services live data ");
 
                 services.clear();
                 services.addAll(serviceArrayList);
@@ -148,11 +145,13 @@ public class HomeFragment extends Fragment {
         homeViewModel.errorMessageLiveData.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String errorMessage) {
-
-                Log.d(TAG, "onChanged: error live data ");
                 binding.refreshLayout.setRefreshing(false);
                 binding.refreshLayout.setEnabled(true);
-                Tools.showToast(getContext(), errorMessage);
+                if (homeViewModel.ignoreMessage){
+                    homeViewModel.ignoreMessage = false ;
+                }else {
+                    Tools.showToast(getContext(), errorMessage);
+                }
             }
         });
 
@@ -162,45 +161,17 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
-        Log.d(TAG, "onResume: onResume");
+        homeViewModel.ignoreMessage =  false ;
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        Log.d(TAG, "onStop: ");
-//        homeViewModel.errorMessageLiveData.removeObservers(getViewLifecycleOwner());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause: ");
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.d(TAG, "onDestroyView: ");
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        Log.d(TAG, "onDetach: ");
-    }
-
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy: ");
+        homeViewModel.ignoreMessage =  true ;
     }
 
     //--------------------------RecyclerView------------------------------------------------------->
     private void buildRecyclerView(ArrayList<Service> items) {
-//        if (adapter == null ){
         adapter = new ServicesByCategoryAdapter(getActivity(), items);
         LinearLayoutManager layoutManager = new LinearLayoutManager(context, RecyclerView.HORIZONTAL, true);
         binding.optionRecycler.setAdapter(adapter);
@@ -221,16 +192,17 @@ public class HomeFragment extends Fragment {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     View centerView = snapHelper.findSnapView(layoutManager);
                     if (centerView != null) {
-                        int pos = layoutManager.getPosition(centerView);
-                        binding.txtServiceName.setText(items.get(pos).name);
+                        try {
+                            int pos = layoutManager.getPosition(centerView);
+                            binding.txtServiceName.setText(items.get(pos).name);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                     }
                 }
             }
         });
-//        }else{
-//            adapter.notifyDataSetChanged();
-//        }
 
         binding.refreshLayout.setRefreshing(false);
         binding.refreshLayout.setEnabled(false);
@@ -240,7 +212,6 @@ public class HomeFragment extends Fragment {
     //----------------------------TabLayout-------------------------------------------------------->
     private void buildTabLayout(ArrayList<Category> categories) {
         //don't build tab layout twice if it already exists
-        Log.d(TAG, "buildTabLayout: last pos : " + homeViewModel.tabLastPos + " tab counts " + binding.tabLayout.getTabCount());
         if (binding.tabLayout.getTabCount() == 0) {
 
             binding.tabLayout.removeAllTabs();
@@ -267,23 +238,20 @@ public class HomeFragment extends Fragment {
                     selectTab(binding.tabLayout.getSelectedTabPosition());
                 }
             });
-
-            //tab scroll to right
-            if ( homeViewModel.tabLastPos >categories.size()  ) {
-                tabIndex = categories.size() - 1;
-            } else {
-                tabIndex = homeViewModel.tabLastPos;
-            }
-        } else {
-            binding.container.setVisibility(View.VISIBLE);
-            tabIndex = homeViewModel.tabLastPos;
-
         }
+
 
         new Handler().postDelayed(
                 new Runnable() {
                     @Override
                     public void run() {
+
+                        if ( homeViewModel.tabLastPos >categories.size() || homeViewModel.tabLastPos == -1) {
+                            tabIndex = categories.size() - 1;
+                        } else {
+                            tabIndex = homeViewModel.tabLastPos;
+                        }
+
                         binding.tabLayout.getTabAt(tabIndex).select();
                         binding.container.setVisibility(View.VISIBLE);
                         binding.refreshLayout.setRefreshing(false);
@@ -294,7 +262,6 @@ public class HomeFragment extends Fragment {
 
     private void selectTab(int position) {
 
-        Log.d(TAG, "selectTab: ");
         homeViewModel.tabLastPos = position;
         binding.refreshLayout.setRefreshing(true);
         binding.refreshLayout.setEnabled(true);

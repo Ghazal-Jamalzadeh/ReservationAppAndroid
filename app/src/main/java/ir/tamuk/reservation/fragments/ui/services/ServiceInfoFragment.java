@@ -1,4 +1,4 @@
-package ir.tamuk.reservation.fragments.ui;
+package ir.tamuk.reservation.fragments.ui.services;
 
 import static android.content.ContentValues.TAG;
 
