@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,11 +35,14 @@ import ir.mirrajabi.persiancalendar.core.PersianCalendarHandler;
 import ir.mirrajabi.persiancalendar.core.models.CalendarEvent;
 import ir.mirrajabi.persiancalendar.core.models.PersianDate;
 import ir.tamuk.reservation.R;
+import ir.tamuk.reservation.activities.MainActivity;
 import ir.tamuk.reservation.databinding.FragmentReservationBinding;
 import ir.tamuk.reservation.fragments.ui.reservation.adapter.ReserveAdapter;
 import ir.tamuk.reservation.fragments.ui.reservation.adapter.ReserveModel;
 import ir.tamuk.reservation.fragments.ui.reservation.adapter.RtlGridLayoutManager;
 import ir.tamuk.reservation.fragments.ui.reservation.database.SqlDatabaseReserve;
+import ir.tamuk.reservation.utils.Constants;
+import ir.tamuk.reservation.utils.SharedPerferencesClass;
 
 public class ReservationFragment extends Fragment {
     //binding
@@ -94,6 +99,12 @@ public class ReservationFragment extends Fragment {
             }
         });
 
+        //test
+        String a = SharedPerferencesClass.getPrefsAccess(getContext());
+        String r = SharedPerferencesClass.getPrefsRefresh(getContext());
+
+        Log.d(Constants.TAG_KIA, "tokensA: ->"+a );
+        Log.d(Constants.TAG_KIA, "tokensR: ->"+r );
 
         //recycler
         Recycler();
@@ -121,23 +132,24 @@ public class ReservationFragment extends Fragment {
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(),R.layout.font_spinner, items);
         binding.spinnerServices.setAdapter(arrayAdapter);
 
-        binding.spinnerServices.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        Log.e("Techie", "----------------------------Action down----------------------------");
-//                        view.setBackgroundResource( R.drawable.spinner_draw_2);
-                        break;
+        binding.spinnerServices.setOnTouchListener((view, motionEvent) -> {
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    Log.e(Constants.TAG_KIA, "----------------------------Action down----------------------------");
+                    view.setBackgroundResource( R.drawable.spinner_draw_2);
+                    break;
 
-                    case MotionEvent.ACTION_BUTTON_RELEASE:
-                        Log.e("Techie", "----------------------------Cancel----------------------------");
-                        view.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.blue));
-                        break;
-                }
-                return false;
+                case MotionEvent.ACTION_HOVER_EXIT:
+                    Log.e(Constants.TAG_KIA, "----------------------------Cancel----------------------------");
+                    view.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.blue));
+                    break;
             }
+            return false;
         });
+
+
+
+
         binding.spinnerServices.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
@@ -149,16 +161,16 @@ public class ReservationFragment extends Fragment {
                         break;
                     case 1:
                         Recycler();
-//                        binding.spinnerServices.setBackgroundResource(R.drawable.spinner_draw);
+                        binding.spinnerServices.setBackgroundResource(R.drawable.spinner_draw);
                         break;
                     case 2:
                         Recycler();
-//                        binding.spinnerServices.setBackgroundResource(R.drawable.spinner_draw);
+                        binding.spinnerServices.setBackgroundResource(R.drawable.spinner_draw);
 
                         break;
                     case 3:
                         Recycler();
-//                        binding.spinnerServices.setBackgroundResource(R.drawable.spinner_draw);
+                        binding.spinnerServices.setBackgroundResource(R.drawable.spinner_draw);
 
                         break;
                 }
@@ -166,8 +178,7 @@ public class ReservationFragment extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                Toast.makeText(context, "لطفا یکی از خدمات رو انتخاب کنید", Toast.LENGTH_SHORT).show();
-                binding.spinnerServices.setBackgroundResource(R.drawable.spinner_back);
+                adapterView.getEmptyView().setBackgroundResource(R.drawable.spinner_draw);
 
             }
         });
@@ -206,7 +217,7 @@ public class ReservationFragment extends Fragment {
             binding.monthCardReservation.setText(month[x]);
             date_show = String.valueOf(persianDate.getYear()) +"-"+String.valueOf(persianDate.getMonth())+"-"
                     +String.valueOf(persianDate.getDayOfMonth());
-            Log.d("KIANOOSH", "Calender: "+ date_show);
+            Log.d(Constants.TAG_KIA, "Calender: ->"+ date_show);
             Recycler();
             sqlDatabase.deleteIdAll();
         });
@@ -250,7 +261,7 @@ public class ReservationFragment extends Fragment {
         for ( int i = 0; i<reserveModels.size(); i++) {
             if (binding.spinnerServices.getSelectedItemPosition() == 0) {
                 if (reserveModels.get(i).id.contains(date_show)) {
-                    Log.d("DATEA", "Recycler: "+ date_show);
+                    Log.d(Constants.TAG_KIA, "Recycler: ->"+ date_show);
                     result.add(reserveModels.get(i));
                 }
             }else if (reserveModels.get(i).id.contains(String.valueOf(date_show))

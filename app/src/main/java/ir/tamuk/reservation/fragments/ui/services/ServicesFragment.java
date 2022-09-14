@@ -1,16 +1,6 @@
 package ir.tamuk.reservation.fragments.ui.services;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,12 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import java.util.ArrayList;
 
-import ir.tamuk.reservation.models.Service;
-import ir.tamuk.reservation.models.Services;
 import ir.tamuk.reservation.adapter.ServicesAdapter;
 import ir.tamuk.reservation.databinding.FragmentServicesBinding;
+import ir.tamuk.reservation.models.Service;
+import ir.tamuk.reservation.models.Services;
 import ir.tamuk.reservation.utils.Connectivity;
 import ir.tamuk.reservation.viewModels.ServicesViewModel;
 

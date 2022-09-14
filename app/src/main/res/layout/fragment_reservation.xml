@@ -11,7 +11,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/linear_back"
+        >
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -233,15 +235,15 @@
         </androidx.cardview.widget.CardView>
 
 
-        <!--        <androidx.cardview.widget.CardView-->
-        <!--            android:id="@+id/card_spinner_reservation"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="@dimen/_50cdp"-->
-        <!--            android:layout_marginLeft="@dimen/_20cdp"-->
-        <!--            android:layout_marginTop="@dimen/_15cdp"-->
-        <!--            android:layout_marginRight="@dimen/_20cdp"-->
-        <!--            app:cardCornerRadius="@dimen/_18cdp"-->
-        <!--            >-->
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:id="@+id/card_spinner_reservation"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="@dimen/_50cdp"-->
+<!--                    android:layout_marginLeft="@dimen/_20cdp"-->
+<!--                    android:layout_marginTop="@dimen/_15cdp"-->
+<!--                    android:layout_marginRight="@dimen/_20cdp"-->
+<!--                    app:cardCornerRadius="@dimen/_18cdp"-->
+<!--                    >-->
 
 
         <Spinner
@@ -263,7 +265,7 @@
 <!--            android:padding="@dimen/_24cdp"-->
 
 
-        <!--        </androidx.cardview.widget.CardView>-->
+<!--                </androidx.cardview.widget.CardView>-->
 
 
         <TextView

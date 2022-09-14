@@ -76,7 +76,8 @@
                         android:paddingTop="@dimen/_24cdp"
                         android:singleLine="true"
                         android:textColor="@color/white"
-                        android:theme="@style/Theme.number.code" />
+                        android:theme="@style/Theme.number.code"
+                        />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -95,7 +96,27 @@
                 android:text="تایید"
                 android:textColor="@color/backgroundSigning"
                 android:textStyle="bold"
-                app:cornerRadius="@dimen/_8cdp" />
+                app:cornerRadius="@dimen/_8cdp"
+
+                />
+
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_60cdp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/_15cdp"
+            android:layout_marginRight="@dimen/_15cdp"
+            >
+
+            <ProgressBar
+                android:id="@+id/progress_circular_signing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="invisible" />
 
         </RelativeLayout>
 

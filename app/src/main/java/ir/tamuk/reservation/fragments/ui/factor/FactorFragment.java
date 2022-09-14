@@ -30,6 +30,27 @@ public class FactorFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        onBackPress();
+    }
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        binding = FragmentFactorBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+
+        buttons();
+
+        sqldatabase();
+
+        return root;
+    }
+
+    //onBack
+    public void onBackPress(){
+
+
         //BackPress Action (for back to HomeFragment)
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
@@ -41,20 +62,31 @@ public class FactorFragment extends Fragment {
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
 
         // The callback can be enabled or disabled here or in handleOnBackPressed()
+
     }
 
+    //Buttons /cancel, edit, pay/
+    public void buttons(){
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        binding = FragmentFactorBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-        //SharedPreferences for NumberPhone of SigningFragment
-        SharedPreferences prefs = getActivity().getSharedPreferences("NumberPhone", Context.MODE_PRIVATE);
-        String numb = prefs.getString("number", null);//"No name defined" is the default value.
-        binding.phoneTextForm.setText(numb);
+        binding.cancelButtonForm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(getView()).popBackStack(R.id.nav_home, false);
+            }
+        });
 
-        //sql Database for get the Informations of reservations
+        binding.editButtonForm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(getView()).popBackStack(R.id.nav_reservation, false);
+            }
+        });
+
+
+    }
+
+    //dataBase
+    public void sqldatabase(){
         sqlDatabaseReserve = new SqlDatabaseReserve(getContext());
         //arrays
         ArrayList<ReserveModel> allModels = sqlDatabaseReserve.getData();
@@ -75,21 +107,5 @@ public class FactorFragment extends Fragment {
 
         binding.serviceTextForm.setText(services);
         binding.timeTextForm.setText(time);
-
-        binding.cancelButtonForm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(getView()).popBackStack(R.id.nav_home, false);
-            }
-        });
-        
-        binding.editButtonForm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(getView()).popBackStack(R.id.nav_reservation, false);
-            }
-        });
-
-        return root;
     }
 }
