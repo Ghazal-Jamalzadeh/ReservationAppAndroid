@@ -43,6 +43,8 @@ import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.FragmentSignInValiddationcodeBinding;
 import ir.tamuk.reservation.models.BodySendActivationCode;
 import ir.tamuk.reservation.models.ResponseSendActivationCode;
+import ir.tamuk.reservation.models.ResponseValidateCode;
+import ir.tamuk.reservation.repository.SigningValiddationCodeRepository;
 import ir.tamuk.reservation.utils.Constants;
 import ir.tamuk.reservation.utils.Tools;
 import ir.tamuk.reservation.viewModels.SigningValiddationCodeViewModel;
@@ -54,7 +56,7 @@ public class SignInValiddationcodeFragment extends Fragment {
     private FragmentSignInValiddationcodeBinding  binding;
 
     private BodySendActivationCode body = new BodySendActivationCode();
-    private Response<ResponseSendActivationCode> responce;
+    private Response<ResponseValidateCode> responce;
     private SigningValiddationCodeViewModel signingViewModel;
     private ir.tamuk.reservation.utils.Timer timer = new ir.tamuk.reservation.utils.Timer();
 
@@ -280,9 +282,24 @@ public class SignInValiddationcodeFragment extends Fragment {
                 if (aBoolean){
                     //navigate to next frg
                     Log.d(Constants.TAG_KIA, "isSuccessLiveData: "+aBoolean);
+                    if (Tools.checkDestination(view, R.id.signInValiddationcodeFragment)) {
 
-                    Navigation.findNavController(getView())
-                            .navigate(R.id.action_signInValiddationcodeFragment_to_completeProfileInfoFragment);
+                        signingViewModel.isLogin.observe(getViewLifecycleOwner(), aBoolean1 -> {
+                            if (aBoolean){
+                                getViewModelStore().clear();
+                                Navigation.findNavController(getView())
+                                        .navigate(R.id.action_signInValiddationcodeFragment_to_factorFragment);
+
+                            }else{
+
+                                getViewModelStore().clear();
+                                Navigation.findNavController(getView())
+                                        .navigate(R.id.action_signInValiddationcodeFragment_to_completeProfileInfoFragment);
+                            }
+                        });
+                    }
+
+                    timer.cancelTimer();
                 }
             });
 
@@ -291,8 +308,6 @@ public class SignInValiddationcodeFragment extends Fragment {
                 public void onChanged(String s) {
 //                    Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
                     Snackbar.make(getView(), s, Toast.LENGTH_SHORT).show();
-                    binding.acceptButtonSigning.setTextColor(getResources().getColor(R.color.backgroundSigning));
-                    binding.progressCircularSigning.setVisibility(View.GONE);
                 }
             });
 

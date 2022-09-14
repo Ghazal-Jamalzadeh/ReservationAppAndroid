@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,11 +12,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
@@ -28,27 +24,20 @@ import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.ArrayList;
-
 import ir.mirrajabi.persiancalendar.PersianCalendarView;
 import ir.mirrajabi.persiancalendar.core.PersianCalendarHandler;
 import ir.mirrajabi.persiancalendar.core.models.CalendarEvent;
 import ir.mirrajabi.persiancalendar.core.models.PersianDate;
 import ir.tamuk.reservation.R;
-import ir.tamuk.reservation.activities.MainActivity;
 import ir.tamuk.reservation.databinding.FragmentReservationBinding;
 import ir.tamuk.reservation.fragments.ui.reservation.adapter.ReserveAdapter;
-import ir.tamuk.reservation.fragments.ui.reservation.adapter.ReserveModel;
 import ir.tamuk.reservation.fragments.ui.reservation.adapter.RtlGridLayoutManager;
-import ir.tamuk.reservation.fragments.ui.reservation.database.SqlDatabaseReserve;
 import ir.tamuk.reservation.utils.Constants;
 import ir.tamuk.reservation.utils.SharedPerferencesClass;
 
 public class ReservationFragment extends Fragment {
     //binding
     private FragmentReservationBinding binding;
-    //SQLite
-    private SqlDatabaseReserve sqlDatabase;
     //adapter
     private ReserveAdapter adapter;
     //selected Date
@@ -92,11 +81,11 @@ public class ReservationFragment extends Fragment {
 
         //Signing Button
         binding.signingButtonReservation.setOnClickListener(view -> {
-            if (sqlDatabase.getDataId().isEmpty()){
-                snackBarIconError();
-            }else {
+//            if (sqlDatabase.getDataId().isEmpty()){
+//                snackBarIconError();
+//            }else {
                 Navigation.findNavController(view).navigate(R.id.action_nav_reservation_to_signingFragment);
-            }
+//            }
         });
 
         //test
@@ -107,9 +96,7 @@ public class ReservationFragment extends Fragment {
         Log.d(Constants.TAG_KIA, "tokensR: ->"+r );
 
         //recycler
-        Recycler();
-        //database Samples
-        Tabale();
+//        Recycler();
         //Calender
         Calender();
         //Spinner
@@ -219,7 +206,7 @@ public class ReservationFragment extends Fragment {
                     +String.valueOf(persianDate.getDayOfMonth());
             Log.d(Constants.TAG_KIA, "Calender: ->"+ date_show);
             Recycler();
-            sqlDatabase.deleteIdAll();
+
         });
         calendarView.setOnMonthChangedListener(persianDate -> {
             int x = persianDate.getMonth();
@@ -230,48 +217,29 @@ public class ReservationFragment extends Fragment {
 
     }
 
-    //Reservations Example
-    public void Tabale() {
-        sqlDatabase = new SqlDatabaseReserve(getContext());
-        if (sqlDatabase.getDataId().isEmpty()) {
-
-            sqlDatabase.Insert("1401-6-9T09:00:00.000z", "09:00", 0, "پا");
-            sqlDatabase.Insert("1401-6-9T11:00:00.000z", "11:00", 0, "بدن");
-            sqlDatabase.Insert("1401-6-9T12:30:00.000z", "12:30", 0, "پا");
-            sqlDatabase.Insert("1401-6-9T13:00:00.000z", "14:00", 0, "پا");
-            sqlDatabase.Insert("1401-6-9T14:00:00.000z", "15:00", 0, "بدن");
-            sqlDatabase.Insert("1401-6-9T15:00:00.000z", "16:00", 0, "پا");
-            sqlDatabase.Insert("1401-6-9T16:00:00.000z", "21:00", 0, "دست");
-
-            sqlDatabase.Insert("1401-6-10T11:00:00.000z", "11:00", 0, "بدن");
-            sqlDatabase.Insert("1401-6-10T12:30:00.000z", "13:30", 0, "بدن");
-            sqlDatabase.Insert("1401-6-10T14:00:00.000z", "16:00", 0, "پا");
-            sqlDatabase.Insert("1401-6-10T17:00:00.000z", "17:00", 0, "دست");
-        }
-    }
 
     //RecyclerView for Reservations
     public void Recycler() {
-        //sql Database
-        SqlDatabaseReserve sqlDatabaseReserve = new SqlDatabaseReserve(getContext());
-        //arrays
-        ArrayList<ReserveModel> reserveModels = sqlDatabaseReserve.getData();
-        ArrayList<ReserveModel> result = new ArrayList<>();
-        //for loop for filters
-        for ( int i = 0; i<reserveModels.size(); i++) {
-            if (binding.spinnerServices.getSelectedItemPosition() == 0) {
-                if (reserveModels.get(i).id.contains(date_show)) {
-                    Log.d(Constants.TAG_KIA, "Recycler: ->"+ date_show);
-                    result.add(reserveModels.get(i));
-                }
-            }else if (reserveModels.get(i).id.contains(String.valueOf(date_show))
-                    && reserveModels.get(i).service.equals(binding.spinnerServices.getSelectedItem())) {
-                result.add(reserveModels.get(i));
-
-            }
-        }
-        reserveModels.clear();
-        reserveModels.addAll(result);
+//        //sql Database
+//        SqlDatabaseReserve sqlDatabaseReserve = new SqlDatabaseReserve(getContext());
+//        //arrays
+//        ArrayList<ReserveModel> reserveModels = sqlDatabaseReserve.getData();
+//        ArrayList<ReserveModel> result = new ArrayList<>();
+//        //for loop for filters
+//        for ( int i = 0; i<reserveModels.size(); i++) {
+//            if (binding.spinnerServices.getSelectedItemPosition() == 0) {
+//                if (reserveModels.get(i).id.contains(date_show)) {
+//                    Log.d(Constants.TAG_KIA, "Recycler: ->"+ date_show);
+//                    result.add(reserveModels.get(i));
+//                }
+//            }else if (reserveModels.get(i).id.contains(String.valueOf(date_show))
+//                    && reserveModels.get(i).service.equals(binding.spinnerServices.getSelectedItem())) {
+//                result.add(reserveModels.get(i));
+//
+//            }
+//        }
+//        reserveModels.clear();
+//        reserveModels.addAll(result);
 
         //horizontal Morning recycler
 //        LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(getContext(),
@@ -281,15 +249,15 @@ public class ReservationFragment extends Fragment {
         GridLayoutManager gridLayoutManager = new RtlGridLayoutManager(getContext(), numberOfColumns);
         binding.recyclerViewMorningReserve.setLayoutManager(gridLayoutManager);
 //        binding.recyclerViewMorningReserve.setLayoutManager(verticalLayoutManager);
-        adapter = new ReserveAdapter( reserveModels);
+//        adapter = new ReserveAdapter( reserveModels);
         binding.recyclerViewMorningReserve.setAdapter(adapter);
-        if (result.isEmpty()){
-            binding.emptyTextReservation.setVisibility(View.VISIBLE);
-        }else {
-            binding.emptyTextReservation.setVisibility(View.INVISIBLE);
-        }
+//        if (result.isEmpty()){
+//            binding.emptyTextReservation.setVisibility(View.VISIBLE);
+//        }else {
+//            binding.emptyTextReservation.setVisibility(View.INVISIBLE);
+//        }
         //refresh
-        adapter.notifyDataSetChanged();
+//        adapter.notifyDataSetChanged();
     }
 
     //error snackbar for Verification phone

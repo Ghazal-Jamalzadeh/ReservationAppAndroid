@@ -1,30 +1,22 @@
 package ir.tamuk.reservation.fragments.ui.factor;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import java.util.ArrayList;
-
 import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.FragmentFactorBinding;
-import ir.tamuk.reservation.databinding.FragmentSigningBinding;
-import ir.tamuk.reservation.fragments.ui.reservation.adapter.ReserveModel;
-import ir.tamuk.reservation.fragments.ui.reservation.database.SqlDatabaseReserve;
 
 
 public class FactorFragment extends Fragment {
 
     private FragmentFactorBinding binding;
-    private SqlDatabaseReserve sqlDatabaseReserve;
+//    private SqlDatabaseReserve sqlDatabaseReserve;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,7 +34,7 @@ public class FactorFragment extends Fragment {
 
         buttons();
 
-        sqldatabase();
+//        sqldatabase();
 
         return root;
     }
@@ -86,26 +78,26 @@ public class FactorFragment extends Fragment {
     }
 
     //dataBase
-    public void sqldatabase(){
-        sqlDatabaseReserve = new SqlDatabaseReserve(getContext());
-        //arrays
-        ArrayList<ReserveModel> allModels = sqlDatabaseReserve.getData();
-        ArrayList<ReserveModel> models = sqlDatabaseReserve.getDataId();
-        ArrayList<ReserveModel> result = new ArrayList<>();
-        result.clear();
-        for (int i = 0; i<allModels.size(); i++){
-            if (allModels.get(i).id.contains(models.get(0).id)){
-                result.add(allModels.get(i));
-            }
-
-        }
-        allModels.clear();
-        allModels.addAll(result);
-
-        String services = allModels.get(0).service;
-        String time = allModels.get(0).id.substring(9,14);
-
-        binding.serviceTextForm.setText(services);
-        binding.timeTextForm.setText(time);
-    }
+//    public void sqldatabase(){
+//        sqlDatabaseReserve = new SqlDatabaseReserve(getContext());
+//        //arrays
+//        ArrayList<ReserveModel> allModels = sqlDatabaseReserve.getData();
+//        ArrayList<ReserveModel> models = sqlDatabaseReserve.getDataId();
+//        ArrayList<ReserveModel> result = new ArrayList<>();
+//        result.clear();
+//        for (int i = 0; i<allModels.size(); i++){
+//            if (allModels.get(i).id.contains(models.get(0).id)){
+//                result.add(allModels.get(i));
+//            }
+//
+//        }
+//        allModels.clear();
+//        allModels.addAll(result);
+//
+//        String services = allModels.get(0).service;
+//        String time = allModels.get(0).id.substring(9,14);
+//
+//        binding.serviceTextForm.setText(services);
+//        binding.timeTextForm.setText(time);
+//    }
 }
