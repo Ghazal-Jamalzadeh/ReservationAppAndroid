@@ -14,6 +14,8 @@ import androidx.lifecycle.ViewModel;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.models.Category;
@@ -31,8 +33,11 @@ public class HomeViewModel extends AndroidViewModel {
 
     @SuppressLint("StaticFieldLeak")
     private final Context context ;
-    public int tabLastPos =  0 ;
-    public MutableLiveData<ArrayList<Category>> categoriesLiveData ;
+    public int tabLastPos =  -1 ; //keep tabLayout last position
+    private boolean isFirst =  true ; //call get categories api just once
+    public boolean ignoreMessage = false ; // handle duplicate toast messages
+
+    public MutableLiveData<ArrayList<Category>> categoriesLiveData  = new MutableLiveData<>(); ;
     public MutableLiveData<ArrayList<Service>> servicesLiveData = new MutableLiveData<>();
     public MutableLiveData<String> errorMessageLiveData = new MutableLiveData<>();
 
@@ -43,8 +48,7 @@ public class HomeViewModel extends AndroidViewModel {
 
         public MutableLiveData<ArrayList<Category>> getAllCategories(){
 
-            if(categoriesLiveData == null){
-                categoriesLiveData = new MutableLiveData<>();
+            if(isFirst){
                 //callApi
                 callGetAllCategories();
             }
@@ -53,9 +57,7 @@ public class HomeViewModel extends AndroidViewModel {
 
     public void callGetAllCategories(){
 
-        Log.d("ghazal", "getAllCategories: api called ?");
         if (Connectivity.isConnected(context)) {
-
             Call<ResponseCategoriesList> call = HomeRepository.callGetAllCategories() ;
             call.enqueue(new Callback<ResponseCategoriesList>() {
                 @Override
@@ -67,6 +69,7 @@ public class HomeViewModel extends AndroidViewModel {
                         {
                             if(response.body().status == 200)
                             {
+                                isFirst = false ;
                                 categoriesLiveData.setValue(response.body().categories);
                             }else{
                                 errorMessageLiveData.setValue(response.body().message);
@@ -97,6 +100,7 @@ public class HomeViewModel extends AndroidViewModel {
         }
 
     }
+
 
     public void getAllServices (int page,int limit , String categories){
 

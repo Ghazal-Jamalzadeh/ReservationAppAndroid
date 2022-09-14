@@ -10,9 +10,6 @@
         android:name="ir.tamuk.reservation.fragments.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_nav_home_to_testFragment"
-            app:destination="@id/testFragment" />
     </fragment>
 
     <fragment
@@ -38,11 +35,6 @@
             android:id="@+id/action_nav_profile_to_appointmentFragment"
             app:destination="@id/appointmentFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/testFragment"
-        android:name="ir.tamuk.reservation.fragments.ui.TestFragment"
-        android:label="fragment_test"
-        tools:layout="@layout/fragment_test" />
     <fragment
         android:id="@+id/nav_services"
         android:name="ir.tamuk.reservation.fragments.ui.services.ServicesFragment"
@@ -88,11 +80,12 @@
         android:name="ir.tamuk.reservation.fragments.ui.paid.Paid"
         android:label="fragment_paid"
         tools:layout="@layout/fragment_paid" />
-    tools:layout="@layout/fragment_signing" />
+
     <fragment
         android:id="@+id/appointmentFragment"
         android:name="ir.tamuk.reservation.fragments.ui.Appointments.AppointmentFragment"
-        android:label="AppointmentFragment" />
+        android:label="AppointmentFragment"
+        tools:layout="@layout/fragment_appointment"/>
     <fragment
         android:id="@+id/serviceInfoFragment"
         android:name="ir.tamuk.reservation.fragments.ui.ServiceInfoFragment"
@@ -107,5 +100,8 @@
             android:id="@+id/action_completeProfileInfoFragment_to_factorFragment"
             app:destination="@id/factorFragment" />
     </fragment>
-    tools:layout="@layout/fragment_signing" />
+
+    <action
+        android:id="@+id/to_nav_services"
+        app:destination="@id/nav_services" />
 </navigation>

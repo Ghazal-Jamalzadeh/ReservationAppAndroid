@@ -58,8 +58,6 @@ public class MainActivity extends AppCompatActivity {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupWithNavController(binding.bottomNav, navController);
 
-
-
         ///////drawer////////
 
         binding.drawerButton.setOnClickListener(new View.OnClickListener() {
@@ -145,6 +143,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return super.onSupportNavigateUp();
+    }
+
+    public void clickBottomNav(int id){
+        binding.bottomNav.setSelectedItemId(id);
     }
 
     //when in honme Fragment backPress dont work else doublePress
