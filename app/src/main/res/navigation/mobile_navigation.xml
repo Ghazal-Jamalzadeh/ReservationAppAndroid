@@ -103,12 +103,12 @@
         tools:layout="@layout/fragment_appointment"/>
     <fragment
         android:id="@+id/serviceInfoFragment"
-        android:name="ir.tamuk.reservation.fragments.ui.ServiceInfoFragment"
+        android:name="ir.tamuk.reservation.fragments.ui.services.ServiceInfoFragment"
         android:label="fragment_service_info"
         tools:layout="@layout/fragment_service_info" />
     <fragment
         android:id="@+id/completeProfileInfoFragment"
-        android:name="ir.tamuk.reservation.fragments.ui.CompleteProfileInfoFragment"
+        android:name="ir.tamuk.reservation.fragments.ui.signing.CompleteProfileInfoFragment"
         android:label="fragment_complete_profile_info"
         tools:layout="@layout/fragment_complete_profile_info" >
         <action

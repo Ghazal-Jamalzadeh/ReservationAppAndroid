@@ -1,32 +1,25 @@
-package ir.tamuk.reservation.fragments.ui;
+package ir.tamuk.reservation.fragments.ui.signing;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
 import com.google.android.material.snackbar.Snackbar;
 
 import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.FragmentCompleteProfileInfoBinding;
-import ir.tamuk.reservation.databinding.FragmentServiceInfoBinding;
-import ir.tamuk.reservation.databinding.FragmentSignInValiddationcodeBinding;
-import ir.tamuk.reservation.databinding.FragmentSigningBinding;
-import ir.tamuk.reservation.models.BodySendActivationCode;
 import ir.tamuk.reservation.models.BodySubmitCustomer;
-import ir.tamuk.reservation.models.ResponseSendActivationCode;
 import ir.tamuk.reservation.models.ResponseSubmitCustomer;
 import ir.tamuk.reservation.utils.SharedPerferencesClass;
 import ir.tamuk.reservation.utils.Tools;
 import ir.tamuk.reservation.viewModels.CompleteProfileInfoViewModel;
-import ir.tamuk.reservation.viewModels.SigningValiddationCodeViewModel;
 import retrofit2.Response;
 
 
