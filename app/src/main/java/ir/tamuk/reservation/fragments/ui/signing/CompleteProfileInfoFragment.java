@@ -65,7 +65,7 @@ public class CompleteProfileInfoFragment extends Fragment {
                              if (Tools.checkDestination(view, R.id.completeProfileInfoFragment)) {
                                  getViewModelStore().clear();
                                  Navigation.findNavController(getView())
-                                         .navigate(R.id.action_completeProfileInfoFragment_to_factorFragment);
+                                         .navigate(R.id.action_to_factorFragment);
                              }
                          }
                      });

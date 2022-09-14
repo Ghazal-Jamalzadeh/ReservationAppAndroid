@@ -92,7 +92,8 @@ public class SigningFragment extends Fragment {
 
                         if (Tools.checkDestination(view, R.id.signingFragment)) {
                             getViewModelStore().clear();
-                            Navigation.findNavController(view).navigate(R.id.action_signingFragment_to_signInValiddationcodeFragment, bundle);
+                            Navigation.findNavController(view)
+                                    .navigate(R.id.action_signingFragment_to_signInValiddationcodeFragment, bundle);
                         }
                     }
                 });

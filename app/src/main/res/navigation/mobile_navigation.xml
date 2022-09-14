@@ -17,15 +17,15 @@
         android:name="ir.tamuk.reservation.fragments.ui.reservation.ReservationFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_reservation" >
-        <action
-            android:id="@+id/action_nav_reservation_to_signingFragment"
-            app:destination="@id/signingFragment"
-            app:enterAnim="@anim/slide_up"
-            app:popEnterAnim="@anim/wait"
-            app:popExitAnim="@anim/slide_down"
-            />
     </fragment>
 
+    <action
+        android:id="@+id/action_to_signingFragment"
+        app:destination="@id/signingFragment"
+        app:enterAnim="@anim/slide_up"
+        app:popEnterAnim="@anim/wait"
+        app:popExitAnim="@anim/slide_down"
+        />
     <fragment
         android:id="@+id/nav_profile"
         android:name="ir.tamuk.reservation.fragments.ui.profile.ProfileFragment"
@@ -82,13 +82,6 @@
             app:exitAnim="@anim/wait"
             app:popEnterAnim="@anim/wait"
             app:popExitAnim="@anim/slide_right" />
-        <action
-            android:id="@+id/action_signInValiddationcodeFragment_to_factorFragment"
-            app:destination="@id/factorFragment"
-            app:enterAnim="@anim/slide_left"
-            app:exitAnim="@anim/wait"
-            app:popEnterAnim="@anim/wait"
-            app:popExitAnim="@anim/slide_right" />
     </fragment>
     <fragment
         android:id="@+id/paid"
@@ -111,16 +104,13 @@
         android:name="ir.tamuk.reservation.fragments.ui.signing.CompleteProfileInfoFragment"
         android:label="fragment_complete_profile_info"
         tools:layout="@layout/fragment_complete_profile_info" >
-        <action
-            android:id="@+id/action_completeProfileInfoFragment_to_factorFragment"
-            app:destination="@id/factorFragment"
-            app:enterAnim="@anim/slide_left"
-            app:exitAnim="@anim/wait"
-            app:popEnterAnim="@anim/wait"
-            app:popExitAnim="@anim/slide_right" />
     </fragment>
-
     <action
-        android:id="@+id/to_nav_services"
-        app:destination="@id/nav_services" />
+        android:id="@+id/action_to_factorFragment"
+        app:destination="@id/factorFragment"
+        app:enterAnim="@anim/slide_left"
+        app:exitAnim="@anim/wait"
+        app:popEnterAnim="@anim/wait"
+        app:popExitAnim="@anim/slide_right" />
+
 </navigation>

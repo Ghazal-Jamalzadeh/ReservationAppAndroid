@@ -288,7 +288,7 @@ public class SignInValiddationcodeFragment extends Fragment {
                             if (aBoolean){
                                 getViewModelStore().clear();
                                 Navigation.findNavController(getView())
-                                        .navigate(R.id.action_signInValiddationcodeFragment_to_factorFragment);
+                                        .navigate(R.id.action_to_factorFragment);
 
                             }else{
 

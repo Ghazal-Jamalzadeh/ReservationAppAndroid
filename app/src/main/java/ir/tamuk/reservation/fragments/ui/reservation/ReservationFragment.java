@@ -84,7 +84,7 @@ public class ReservationFragment extends Fragment {
 //            if (sqlDatabase.getDataId().isEmpty()){
 //                snackBarIconError();
 //            }else {
-                Navigation.findNavController(view).navigate(R.id.action_nav_reservation_to_signingFragment);
+                Navigation.findNavController(view).navigate(R.id.action_to_signingFragment);
 //            }
         });
 
