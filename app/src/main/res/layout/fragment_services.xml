@@ -2,24 +2,75 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/serviceContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".fragments.ui.services.ServicesFragment">
 
-   <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-       android:id="@+id/swipe_Refresh_Layout"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent">
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_Refresh_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-      <androidx.recyclerview.widget.RecyclerView
-          android:id="@+id/recycler"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent">
 
-      </androidx.recyclerview.widget.RecyclerView>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-   </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            <LinearLayout
+                android:id="@+id/serviceContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+
+
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_18cdp">
+
+                    <ImageView
+                        android:layout_width="@dimen/_50cdp"
+                        android:layout_height="@dimen/_20cdp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_arrow_back_ios_fill0_wght400_grad0_opsz48__left_" />
+
+                    <TextView
+                        style="@style/fontForMediumEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/iran_sans_mob"
+                        android:gravity="center"
+                        android:text="خدمات کلینیک"
+                        android:textColor="@color/login_blue"
+                        android:textSize="@dimen/_20cdp" />
+
+                </LinearLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
 </LinearLayout>
+
+
+
+

@@ -12,14 +12,12 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.RowServicesBinding;
 import ir.tamuk.reservation.models.Service;
-import ir.tamuk.reservation.models.Services;
 import ir.tamuk.reservation.utils.Constants;
 
 
@@ -58,7 +56,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
                 bundle.clear();
                 bundle.putInt("id", x);
                 Log.d("MAN", "onClick: "+x);
-                Navigation.findNavController(view).navigate(R.id.action_nav_services_to_serviceInfoFragment,bundle );
+                Navigation.findNavController(view).navigate(R.id.action_to_serviceFragment,bundle );
 
             }
         });
