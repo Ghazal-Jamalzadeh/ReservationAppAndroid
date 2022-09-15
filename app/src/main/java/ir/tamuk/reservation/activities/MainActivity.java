@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import ir.tamuk.reservation.R;
@@ -38,12 +40,12 @@ import ir.tamuk.reservation.utils.SharedPerferencesClass;
 
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
     private ActivityMainBinding binding;
-    private AppBarConfiguration mAppBarConfiguration;
     NavController navController;
     private boolean isDubblePress = false;
 
-    private String android_id ;
+    private String android_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,13 +57,11 @@ public class MainActivity extends AppCompatActivity {
         //create homeViewModel
         new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(HomeViewModel.class);
 
-        ///navigatin bar
-        BottomNavigationView navView = findViewById(R.id.bottomNav);
+        //nav controller
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupWithNavController(binding.bottomNav, navController);
 
-        ///////drawer////////
-
+        //drawer
         binding.drawerButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                         //navController Hide When OpenSigning Fragment
                         if (navDestination.getId() == R.id.signingFragment ||
                                 navDestination.getId() == R.id.signInValiddationcodeFragment ||
-                        navDestination.getId() == R.id.completeProfileInfoFragment) {
+                                navDestination.getId() == R.id.completeProfileInfoFragment) {
                             binding.bottomNav.setVisibility(View.GONE);
                         } else {
                             binding.bottomNav.setVisibility(View.VISIBLE);
@@ -111,45 +111,70 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        ////////////////////////////////////////////////////////
 
-        /////////////get token from firebase and send it to serer//////////////
+        binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @SuppressLint("NonConstantResourceId")
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch (id) {
+                    case R.id.nav_home:
+                        navController.navigate(R.id.action_to_navHome);
+                        return true;
+                    case R.id.nav_services:
+                        navController.navigate(R.id.action_to_navServices);
+                        return true;
+                    case R.id.nav_reservation:
+                        navController.navigate(R.id.action_to_navReservation);
+                        return true;
+                    case R.id.nav_profile:
+                        if (SharedPerferencesClass.getPrefsAccess(MainActivity.this).equals("default")) {
+                            navController.navigate(R.id.action_to_signingFragment);
+                        } else {
+                            navController.navigate(R.id.action_to_navProfile);
+                        }
+                        return true;
+                    default:
+                        return false;
+                }
+
+            }
+        });
+
+        //get token from firebase and send it to server
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
                     @Override
                     public void onComplete(@NonNull Task<String> task) {
                         if (!task.isSuccessful()) {
-                            Log.d("ghazal", "Fetching FCM registration token failed", task.getException());
+                            Log.d("firebase", "Fetching FCM registration token failed", task.getException());
                             return;
                         }
                         // Get new FCM registration token
                         String token = task.getResult();
-                        Log.d("ghazal", "onComplete: " + token);
+                        Log.d("firebase", "onComplete: " + token);
                     }
                 });
 
-///////////////////getting device Id//////////////////////
+
+        //getting device Id
         try {
-            android_id = Settings.Secure.getString(this.getContentResolver(),
-                    Settings.Secure.ANDROID_ID);
-        }catch (Exception e){}
-        Log.d("ghazal", "android id: " + android_id);
+            android_id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Log.d("firebase", "android id: " + android_id);
     }
 
+    public void clickBottomNav(int fragmentId) {
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+        binding.bottomNav.setSelectedItemId(fragmentId);
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return super.onSupportNavigateUp();
-    }
-
-    public void clickBottomNav(int id){
-        binding.bottomNav.setSelectedItemId(id);
     }
 
     //when in honme Fragment backPress dont work else doublePress

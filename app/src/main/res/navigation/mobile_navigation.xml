@@ -113,4 +113,26 @@
         app:popEnterAnim="@anim/wait"
         app:popExitAnim="@anim/slide_right" />
 
+    <action
+        android:id="@+id/action_to_navHome"
+        app:destination="@id/nav_home" />
+
+    <action
+        android:id="@+id/action_to_navProfile"
+        app:destination="@id/nav_profile"
+        app:popUpTo="@+id/nav_home"
+        app:popUpToInclusive="false"/>
+
+    <action
+        android:id="@+id/action_to_navServices"
+        app:destination="@id/nav_services"
+        app:popUpTo="@+id/nav_home"
+        app:popUpToInclusive="false"/>
+
+    <action
+        android:id="@+id/action_to_navReservation"
+        app:destination="@id/nav_reservation"
+        app:popUpTo="@+id/nav_home"
+        app:popUpToInclusive="false"/>
+
 </navigation>
