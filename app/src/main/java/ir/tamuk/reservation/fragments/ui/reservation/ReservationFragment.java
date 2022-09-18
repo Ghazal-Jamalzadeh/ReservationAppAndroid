@@ -33,7 +33,7 @@ import ir.tamuk.reservation.databinding.FragmentReservationBinding;
 import ir.tamuk.reservation.fragments.ui.reservation.adapter.ReserveAdapter;
 import ir.tamuk.reservation.fragments.ui.reservation.adapter.RtlGridLayoutManager;
 import ir.tamuk.reservation.utils.Constants;
-import ir.tamuk.reservation.utils.SharedPerferencesClass;
+import ir.tamuk.reservation.utils.TokenManager;
 
 public class ReservationFragment extends Fragment {
     //binding
@@ -89,8 +89,8 @@ public class ReservationFragment extends Fragment {
         });
 
         //test
-        String a = SharedPerferencesClass.getPrefsAccess(getContext());
-        String r = SharedPerferencesClass.getPrefsRefresh(getContext());
+        String a = TokenManager.getAccessToken(getContext());
+        String r = TokenManager.getRefreshToken(getContext());
 
         Log.d(Constants.TAG_KIA, "tokensA: ->"+a );
         Log.d(Constants.TAG_KIA, "tokensR: ->"+r );

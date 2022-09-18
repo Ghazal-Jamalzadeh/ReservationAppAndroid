@@ -4,16 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,26 +20,23 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.ActivityMainBinding;
-import ir.tamuk.reservation.fragments.ui.home.HomeFragment;
 import ir.tamuk.reservation.fragments.ui.home.HomeViewModel;
-import ir.tamuk.reservation.utils.Constants;
-import ir.tamuk.reservation.utils.SharedPerferencesClass;
+import ir.tamuk.reservation.utils.TokenManager;
 
 
 public class MainActivity extends AppCompatActivity {
+
     private static final String TAG = "MainActivity";
+
     private ActivityMainBinding binding;
     NavController navController;
     private boolean isDubblePress = false;
@@ -78,32 +74,39 @@ public class MainActivity extends AppCompatActivity {
                 binding.drawerLayout.closeDrawer(binding.drawerMenu);
             }
         });
-        //////////////////////
 
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
             public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
                 Handler h = new Handler();
                 Runnable r = new Runnable() {
+                    @SuppressLint("NonConstantResourceId")
                     @Override
                     public void run() {
 
-                        //navController Hide When OpenSigning Fragment
-                        if (navDestination.getId() == R.id.signingFragment ||
-                                navDestination.getId() == R.id.signInValiddationcodeFragment ||
-                                navDestination.getId() == R.id.completeProfileInfoFragment) {
-                            binding.bottomNav.setVisibility(View.GONE);
-                        } else {
-                            binding.bottomNav.setVisibility(View.VISIBLE);
-                        }
+                        switch (navDestination.getId()) {
 
-                        //toolbar hide in profile fragment
-                        if (navDestination.getId() == R.id.nav_profile) {
-                            binding.toolbarconstraintLayout.setVisibility(View.GONE);
-                        } else {
-                            binding.toolbarconstraintLayout.setVisibility(View.VISIBLE);
-                        }
+                            case R.id.signingFragment:
+                            case R.id.signInValiddationcodeFragment:
+                            case R.id.completeProfileInfoFragment:
+                                binding.bottomNav.setVisibility(View.GONE);
+                                break;
 
+                            case R.id.nav_profile:
+                                binding.toolbarconstraintLayout.setVisibility(View.GONE);
+                                break;
+
+                            case R.id.splashFragment:
+                                binding.bottomNav.setVisibility(View.GONE);
+                                binding.toolbarconstraintLayout.setVisibility(View.GONE);
+                                break;
+
+                            default:
+                                binding.bottomNav.setVisibility(View.VISIBLE);
+                                binding.toolbarconstraintLayout.setVisibility(View.VISIBLE);
+                                break;
+
+                        }
                     }
                 };
                 h.postDelayed(r, 100);
@@ -128,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                         navController.navigate(R.id.action_to_navReservation);
                         return true;
                     case R.id.nav_profile:
-                        if (SharedPerferencesClass.getPrefsAccess(MainActivity.this).equals("default")) {
+                        if (TokenManager.getAccessToken(MainActivity.this).equals("default")) {
                             navController.navigate(R.id.action_to_signingFragment);
                         } else {
                             navController.navigate(R.id.action_to_navProfile);
@@ -200,8 +203,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
-
-
     }
 
 

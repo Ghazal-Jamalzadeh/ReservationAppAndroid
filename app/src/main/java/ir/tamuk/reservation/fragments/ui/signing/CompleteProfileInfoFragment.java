@@ -17,7 +17,7 @@ import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.FragmentCompleteProfileInfoBinding;
 import ir.tamuk.reservation.models.BodySubmitCustomer;
 import ir.tamuk.reservation.models.ResponseSubmitCustomer;
-import ir.tamuk.reservation.utils.SharedPerferencesClass;
+import ir.tamuk.reservation.utils.TokenManager;
 import ir.tamuk.reservation.utils.Tools;
 import ir.tamuk.reservation.viewModels.CompleteProfileInfoViewModel;
 import retrofit2.Response;
@@ -55,7 +55,7 @@ public class CompleteProfileInfoFragment extends Fragment {
                  if (binding.nameEditComplete.getText().length() >2 &&
                          binding.lastNameEditComplete.getText().length() > 3) {
 
-                     String token = SharedPerferencesClass.getPrefsAccess(getContext());
+                     String token = TokenManager.getAccessToken(getContext());
                      body.firstName = binding.nameEditComplete.getText().toString();
                      body.lastName = binding.lastNameEditComplete.getText().toString();
                      completeProfileInfoViewModel.callSendSubmit(body, token);

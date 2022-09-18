@@ -7,15 +7,12 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import ir.tamuk.reservation.models.BodySendActivationCode;
-import ir.tamuk.reservation.models.ResponseSendActivationCode;
 import ir.tamuk.reservation.models.ResponseValidateCode;
-import ir.tamuk.reservation.repository.SigningRepository;
 import ir.tamuk.reservation.repository.SigningValiddationCodeRepository;
 import ir.tamuk.reservation.utils.Constants;
-import ir.tamuk.reservation.utils.SharedPerferencesClass;
+import ir.tamuk.reservation.utils.TokenManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,9 +42,9 @@ public class SigningValiddationCodeViewModel extends AndroidViewModel {
                         isSuccessLiveData.setValue(true);
                         Log.d(Constants.TAG_KIA, "user_status: ->" + response.body().data.user.userStatus);
 
-                        SharedPerferencesClass.setPrefsAccess( context
+                        TokenManager.setAccessToken( context
                                 , "Bearer " + response.body().data.tokens.accessToken);
-                        SharedPerferencesClass.setPrefsRefresh(context
+                        TokenManager.setRefreshToken(context
                                 , response.body().data.tokens.refreshToken);
 
                         Log.d(Constants.TAG_KIA, "accessToken: ->"+ response.body().data.tokens.accessToken);

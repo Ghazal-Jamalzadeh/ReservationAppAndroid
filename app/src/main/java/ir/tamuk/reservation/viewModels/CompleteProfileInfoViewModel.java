@@ -1,19 +1,14 @@
 package ir.tamuk.reservation.viewModels;
 
-import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import ir.tamuk.reservation.models.BodySendActivationCode;
 import ir.tamuk.reservation.models.BodySubmitCustomer;
 import ir.tamuk.reservation.models.ResponseSubmitCustomer;
-import ir.tamuk.reservation.models.ResponseValidateCode;
 import ir.tamuk.reservation.repository.CompleteProfileInfoRepository;
-import ir.tamuk.reservation.repository.SigningValiddationCodeRepository;
 import ir.tamuk.reservation.utils.Constants;
-import ir.tamuk.reservation.utils.SharedPerferencesClass;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
