@@ -27,6 +27,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import net.time4j.android.ApplicationStarter;
+
 import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.ActivityMainBinding;
 import ir.tamuk.reservation.fragments.ui.home.HomeViewModel;
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        ApplicationStarter.initialize(this, true); // with prefetch on background thread
 
         //create homeViewModel
         new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(HomeViewModel.class);
