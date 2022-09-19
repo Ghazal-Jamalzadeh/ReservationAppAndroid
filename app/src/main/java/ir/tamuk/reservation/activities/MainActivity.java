@@ -28,6 +28,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import net.time4j.android.ApplicationStarter;
+
 import ir.tamuk.reservation.Interfaces.ApplicationCallBacks;
 import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.api.AccessTokenAuthenticator;
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements ApplicationCallBa
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        ApplicationStarter.initialize(this, true); // with prefetch on background thread
 
         AccessTokenAuthenticator.applicationCallBacks =  this::restartApplication ;
 

@@ -4,6 +4,7 @@ import ir.tamuk.reservation.models.BodySendActivationCode;
 import ir.tamuk.reservation.models.BodySubmitCustomer;
 import ir.tamuk.reservation.models.MoviesList;
 import ir.tamuk.reservation.models.ResponseCategoriesList;
+import ir.tamuk.reservation.models.ResponseReservation;
 import ir.tamuk.reservation.models.ResponseGetMyProfile;
 import ir.tamuk.reservation.models.ResponseSearchServices;
 import ir.tamuk.reservation.models.ResponseSendActivationCode;
@@ -55,5 +56,10 @@ public interface ApiServices {
     @GET("v1/get-my-profile")
     Call<ResponseGetMyProfile> getMyProfile(
             @Header("authorization") String token);
+
+    //http://moeenkashisaz.ir/laser/api/v1/finde-free-time?service=631869b10bfaf719ef8b76cf&date=2022-09-12&line=1
+    @GET("v1/finde-free-time?service?line=1")
+    Call<ResponseReservation> getReservations(
+            @Query("date") String time , @Query("service") String service);
 
 }

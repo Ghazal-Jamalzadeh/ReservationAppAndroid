@@ -235,15 +235,15 @@
         </androidx.cardview.widget.CardView>
 
 
-<!--                <androidx.cardview.widget.CardView-->
-<!--                    android:id="@+id/card_spinner_reservation"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="@dimen/_50cdp"-->
-<!--                    android:layout_marginLeft="@dimen/_20cdp"-->
-<!--                    android:layout_marginTop="@dimen/_15cdp"-->
-<!--                    android:layout_marginRight="@dimen/_20cdp"-->
-<!--                    app:cardCornerRadius="@dimen/_18cdp"-->
-<!--                    >-->
+        <!--                <androidx.cardview.widget.CardView-->
+        <!--                    android:id="@+id/card_spinner_reservation"-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="@dimen/_50cdp"-->
+        <!--                    android:layout_marginLeft="@dimen/_20cdp"-->
+        <!--                    android:layout_marginTop="@dimen/_15cdp"-->
+        <!--                    android:layout_marginRight="@dimen/_20cdp"-->
+        <!--                    app:cardCornerRadius="@dimen/_18cdp"-->
+        <!--                    >-->
 
 
         <Spinner
@@ -262,34 +262,17 @@
             android:dropDownWidth="match_parent"
 
             />
-<!--            android:padding="@dimen/_24cdp"-->
+        <!--            android:padding="@dimen/_24cdp"-->
 
 
-<!--                </androidx.cardview.widget.CardView>-->
+        <!--                </androidx.cardview.widget.CardView>-->
 
-
-        <TextView
-            style="@style/fontForMediumBoldText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="@dimen/_25cdp"
-            android:layout_marginRight="@dimen/_15cdp"
-            android:text="نوبت صبح" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_15cdp"
-            android:layout_marginTop="@dimen/_5cdp"
-            android:layout_marginRight="@dimen/_15cdp">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView_morning_reserve"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                />
+            android:orientation="vertical"
+            >
 
             <TextView
 
@@ -297,44 +280,82 @@
                 style="@style/fontForMediumEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_64cdp"
                 android:text="رزروی موجود نیست"
                 android:textColor="@color/main" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/show_all_reserves"
+                >
+
+                <TextView
+                    style="@style/fontForMediumBoldText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="@dimen/_25cdp"
+                    android:layout_marginRight="@dimen/_15cdp"
+                    android:text="نوبت صبح" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_15cdp"
+                    android:layout_marginTop="@dimen/_5cdp"
+                    android:layout_marginRight="@dimen/_15cdp">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView_morning_reserve"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        />
+
+
+
+                </RelativeLayout>
+
+
+                <TextView
+                    style="@style/fontForMediumBoldText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="@dimen/_25cdp"
+                    android:layout_marginRight="@dimen/_15cdp"
+                    android:text="نوبت بعدازظهر" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_evening_reserve"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_15cdp"
+                    android:layout_marginTop="@dimen/_5cdp"
+                    android:layout_marginRight="@dimen/_15cdp" />
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/signing_button_reservation"
+                    style="@style/fontForMediumEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_60cdp"
+                    android:layout_marginLeft="@dimen/_15cdp"
+                    android:layout_marginTop="@dimen/_10cdp"
+                    android:layout_marginRight="@dimen/_15cdp"
+                    android:layout_marginBottom="@dimen/_15cdp"
+                    android:text="رزرو نوبت"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
         </RelativeLayout>
 
-
-        <TextView
-            style="@style/fontForMediumEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="@dimen/_25cdp"
-            android:layout_marginRight="@dimen/_15cdp"
-            android:text="نوبت بعدازظهر"
-            android:textStyle="bold" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView_evening_reserve"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_15cdp"
-            android:layout_marginTop="@dimen/_5cdp"
-            android:layout_marginRight="@dimen/_15cdp" />
-
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/signing_button_reservation"
-            style="@style/fontForMediumEditText"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_60cdp"
-            android:layout_marginLeft="@dimen/_15cdp"
-            android:layout_marginTop="@dimen/_10cdp"
-            android:layout_marginRight="@dimen/_15cdp"
-            android:layout_marginBottom="@dimen/_15cdp"
-            android:text="رزرو نوبت"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
 
 
     </LinearLayout>
