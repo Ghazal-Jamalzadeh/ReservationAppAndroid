@@ -15,6 +15,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
@@ -62,10 +63,24 @@ public class SigningFragment extends Fragment {
         Tools.keyboardPopUp(getActivity());
         binding.mobileEditTextSigning.requestFocus();
 
+        // This callback will only be called when MyFragment is at least Started.
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button event
+                binding.cancelButtonSigning.performClick() ;
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+
+        // The callback can be enabled or disabled here or in handleOnBackPressed()
+
         //Cancel Button
         binding.cancelButtonSigning.setOnClickListener(view -> {
             Navigation.findNavController(view).popBackStack();
         });
+
+
         //Accept Button
         binding.acceptButtonSigning.setOnClickListener(view -> {
 

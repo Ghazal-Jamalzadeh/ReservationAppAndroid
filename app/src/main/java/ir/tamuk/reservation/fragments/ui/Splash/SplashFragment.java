@@ -34,6 +34,7 @@ public class SplashFragment extends Fragment {
 
         if (TokenManager.hasAccessToken(getContext())) {
             Log.d(TAG, "access token : " + TokenManager.getAccessToken(getContext()));
+            Log.d(TAG, "refresh token : " + TokenManager.getRefreshToken(getContext()));
         }else {
             Log.d(TAG, "pls login .... ");
         }

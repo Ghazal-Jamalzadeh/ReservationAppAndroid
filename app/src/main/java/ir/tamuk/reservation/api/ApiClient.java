@@ -1,13 +1,12 @@
 package ir.tamuk.reservation.api;
 
-import android.content.Context;
-
 import androidx.annotation.NonNull;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import ir.tamuk.reservation.utils.Constants;
+import ir.tamuk.reservation.utils.MyApp;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -43,7 +42,7 @@ public class ApiClient {
                     }
                 })
                 .addInterceptor(loggingInterceptor)
-//                .authenticator(new AccessTokenAuthenticator())
+                .authenticator(new AccessTokenAuthenticator(MyApp.getMyAppContext()))
                 .build();
 
         retrofit = new Retrofit.Builder()

@@ -5,6 +5,7 @@ import ir.tamuk.reservation.models.BodySubmitCustomer;
 import ir.tamuk.reservation.models.MoviesList;
 import ir.tamuk.reservation.models.ResponseCategoriesList;
 import ir.tamuk.reservation.models.ResponseReservation;
+import ir.tamuk.reservation.models.ResponseGetMyProfile;
 import ir.tamuk.reservation.models.ResponseSearchServices;
 import ir.tamuk.reservation.models.ResponseSendActivationCode;
 import ir.tamuk.reservation.models.ResponseSubmitCustomer;
@@ -21,11 +22,13 @@ public interface ApiServices {
 
     //http://moeenkashisaz.ir/laser/api/v1/send-code-activation
     @POST("v1/send-code-activation")
-    Call<ResponseSendActivationCode> sendActivationCode(@Body BodySendActivationCode bodySendActivationCode);
+    Call<ResponseSendActivationCode> sendActivationCode(
+            @Body BodySendActivationCode bodySendActivationCode);
 
     //http://moeenkashisaz.ir/laser/api/v1/send-code-activation
     @POST("v1/validate-code-activation")
-    Call<ResponseValidateCode> validateCode(@Body BodySendActivationCode bodySendActivationCode);
+    Call<ResponseValidateCode> validateCode(
+            @Body BodySendActivationCode bodySendActivationCode);
 
     //http://moeenkashisaz.ir/laser/api/v1/get-all-category-by-customer
     @GET("v1/get-all-category-by-customer")
@@ -40,8 +43,19 @@ public interface ApiServices {
 
     //http://moeenkashisaz.ir/laser/api/v1/submit-customer
     @POST("v1/submit-customer")
-    Call<ResponseSubmitCustomer> sendCustomer(@Body BodySubmitCustomer bodySubmitCustomer
-            , @Header("authorization") String token);
+    Call<ResponseSubmitCustomer> sendCustomer(
+            @Body BodySubmitCustomer bodySubmitCustomer,
+            @Header("authorization") String token);
+
+    //http://moeenkashisaz.ir/laser/api/v1/logout
+    @POST("v1/logout")
+    Call<ResponseSendActivationCode> logout(
+            @Header("authorization") String token) ;
+
+    //http://moeenkashisaz.ir/laser/api/v1/get-my-profile
+    @GET("v1/get-my-profile")
+    Call<ResponseGetMyProfile> getMyProfile(
+            @Header("authorization") String token);
 
     //http://moeenkashisaz.ir/laser/api/v1/finde-free-time?service=631869b10bfaf719ef8b76cf&date=2022-09-12&line=1
     @GET("v1/finde-free-time?service?line=1")

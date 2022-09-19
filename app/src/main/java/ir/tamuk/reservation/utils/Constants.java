@@ -7,6 +7,7 @@ public class Constants {
     //URL
     public static final String BASE_URL = "http://moeenkashisaz.ir/laser/api/";
     public static final String DOWNLOAD_PHOTO_URL = "http://moeenkashisaz.ir/laser/downloads/" ;
+    public static final String RefreshingAccessToken = "v1/create-refresh-token" ;
 
     //client settings
     public static final long NETWORK_TIMEOUT = 60L ;

@@ -12,6 +12,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,13 +30,17 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import net.time4j.android.ApplicationStarter;
 
+import ir.tamuk.reservation.Interfaces.ApplicationCallBacks;
 import ir.tamuk.reservation.R;
+import ir.tamuk.reservation.api.AccessTokenAuthenticator;
+import ir.tamuk.reservation.api.ApiClient;
 import ir.tamuk.reservation.databinding.ActivityMainBinding;
 import ir.tamuk.reservation.fragments.ui.home.HomeViewModel;
+import ir.tamuk.reservation.fragments.ui.profile.ProfileViewModel;
 import ir.tamuk.reservation.utils.TokenManager;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ApplicationCallBacks {
 
     private static final String TAG = "MainActivity";
 
@@ -53,8 +58,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         ApplicationStarter.initialize(this, true); // with prefetch on background thread
 
+        AccessTokenAuthenticator.applicationCallBacks =  this::restartApplication ;
+
         //create homeViewModel
         new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(HomeViewModel.class);
+        //create profile viewModel
+        new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(ProfileViewModel.class);
 
         //nav controller
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -134,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                         navController.navigate(R.id.action_to_navReservation);
                         return true;
                     case R.id.nav_profile:
-                        if (TokenManager.getAccessToken(MainActivity.this).equals("default")) {
+                        if (TokenManager.getAccessToken(MainActivity.this).equals("")) {
                             navController.navigate(R.id.action_to_signingFragment);
                         } else {
                             navController.navigate(R.id.action_to_navProfile);
@@ -183,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onSupportNavigateUp();
     }
 
-    //when in honme Fragment backPress dont work else doublePress
+    //handle double press to exit inside home fragment
     @Override
     public void onBackPressed() {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -209,4 +218,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void restartApplication() {
+        finishAffinity();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }
