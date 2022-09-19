@@ -12,7 +12,6 @@
         tools:layout="@layout/fragment_splash"
         />
 
-
     <fragment
         android:id="@+id/nav_home"
         android:name="ir.tamuk.reservation.fragments.ui.home.HomeFragment"
@@ -31,6 +30,7 @@
         android:id="@+id/action_to_signingFragment"
         app:destination="@id/signingFragment"
         app:enterAnim="@anim/slide_up"
+        app:exitAnim="@anim/slide_down"
         app:popEnterAnim="@anim/wait"
         app:popExitAnim="@anim/slide_down"
         />

@@ -58,8 +58,6 @@
                     app:endIconTint="@color/white"
                     app:errorTextColor="#D50000"
                     app:hintTextColor="@color/show_more_text"
-
-
                     >
 
                     <com.google.android.material.textfield.TextInputEditText

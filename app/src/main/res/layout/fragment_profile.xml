@@ -8,21 +8,19 @@
     android:fillViewport="true"
     tools:context=".fragments.ui.profile.ProfileFragment">
 
-
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.4"/>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline1"
+            android:id="@+id/guideline30"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.3"/>
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.4"/>
 
         <ImageView
             android:layout_width="0dp"
@@ -32,10 +30,10 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/guideline"/>
+            app:layout_constraintBottom_toTopOf="@id/guideline40"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/view"
+            android:id="@+id/container"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/profile_main_shape"
@@ -43,22 +41,22 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideline1"
+            app:layout_constraintTop_toBottomOf="@id/guideline30"
             app:layout_constraintVertical_bias="0.0">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/image1"
+                    android:id="@+id/imageInvisible"
                     android:layout_width="@dimen/_100cdp"
                     android:layout_height="@dimen/_100cdp"
                     android:background="@drawable/profile_image"
-                    app:layout_constraintBottom_toTopOf="@id/view"
+                    app:layout_constraintBottom_toTopOf="@id/container"
                     app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintLeft_toLeftOf="@id/view"
-                    app:layout_constraintRight_toRightOf="@id/view"
-                    app:layout_constraintTop_toTopOf="@id/view" />
+                    app:layout_constraintLeft_toLeftOf="@id/container"
+                    app:layout_constraintRight_toRightOf="@id/container"
+                    app:layout_constraintTop_toTopOf="@id/container" />
 
                 <LinearLayout
-                    android:id="@+id/linear"
+                    android:id="@+id/profileInfoLay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5cdp"
@@ -66,26 +64,26 @@
                     android:orientation="vertical"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/image1">
+                    app:layout_constraintTop_toBottomOf="@id/imageInvisible">
 
                         <TextView
-                            android:id="@+id/textView"
+                            android:id="@+id/txtName"
                             style="@style/fontForMediumEditText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="نام و نام خانوادگی من"
+                            tools:text="نام و نام خانوادگی من"
                             android:textAlignment="center"
                             android:textColor="@color/black" />
 
                         <TextView
-                            android:id="@+id/textView8"
+                            android:id="@+id/txtPhoneNumber"
                             style="@style/fontForMediumText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_5cdp"
                             android:gravity="center"
-                            android:text="شماره تلفن همراه"
+                            tools:text="شماره تلفن همراه"
                             android:textAlignment="center"
                             android:textColor="@color/backgroundSigning" />
                 </LinearLayout>
@@ -93,21 +91,22 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_50cdp"
                     android:orientation="vertical"
+                    android:layout_marginBottom="@dimen/_50cdp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/linear">
+                    app:layout_constraintTop_toBottomOf="@id/profileInfoLay"
+                    app:layout_constraintBottom_toBottomOf="parent">
 
                         <Button
+                            android:id="@+id/btnMyAppointments"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_50cdp"
+                            android:layout_height="wrap_content"
                             style="@style/fontForMediumText"
-                            android:layout_marginLeft="@dimen/_10cdp"
-                            android:layout_marginRight="@dimen/_10cdp"
+                            android:layout_marginHorizontal="@dimen/_16cdp"
+                            android:padding="@dimen/_16cdp"
                             android:backgroundTint="@color/white"
                             android:drawableLeft="@drawable/ic_arrow_back_ios_fill0_wght400_grad0_opsz48__left_"
-                            android:layout_marginTop="@dimen/_8cdp"
                             android:gravity="right|center_vertical"
                             android:text="نوبت های من"
                             android:textColor="@color/black"
@@ -115,31 +114,33 @@
                             app:cornerRadius="@dimen/_10cdp"
                             />
 
-
                         <Button
+                            android:id="@+id/btnEditProfile"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_50cdp"
+                            android:layout_height="wrap_content"
                             style="@style/fontForMediumText"
-                            android:layout_marginLeft="@dimen/_10cdp"
-                            android:layout_marginRight="@dimen/_10cdp"
+                           android:layout_marginHorizontal="@dimen/_16cdp"
+                            android:padding="@dimen/_16cdp"
                             android:backgroundTint="@color/white"
                             android:drawableLeft="@drawable/ic_arrow_back_ios_fill0_wght400_grad0_opsz48__left_"
-                            android:layout_marginTop="@dimen/_8cdp"
                             android:gravity="right|center_vertical"
-                            android:text="اطلاعات حساب کاربری"
+                            android:text="ویرایش اطلاعات حساب کاربری"
                             android:textColor="@color/black"
-                            app:cornerRadius="@dimen/_10cdp" />
-
+                            android:elevation="@dimen/_4cdp"
+                            app:cornerRadius="@dimen/_10cdp"
+                            />
 
                         <TextView
+                            android:id="@+id/btnLogout"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_15cdp"
-                            android:layout_marginRight="@dimen/_10cdp"
                             android:layout_gravity="right"
                             android:textColor="@color/show_more_text"
                             style="@style/fontForMediumText"
-                            android:text="  خروج از حساب"
+                            android:text="خروج از حساب"
+                            android:padding="@dimen/_16cdp"
+                            android:layout_marginHorizontal="@dimen/_16cdp"
+                            android:drawablePadding="@dimen/_8cdp"
                             android:drawableRight="@drawable/ic_logout"/>
 
                 </LinearLayout>
@@ -151,10 +152,10 @@
             android:layout_height="@dimen/_100cdp"
             app:layout_constraintDimensionRatio="1:1"
             android:elevation="@dimen/_4cdp"
-            app:layout_constraintTop_toTopOf="@id/view"
-            app:layout_constraintBottom_toTopOf="@id/view"
-            app:layout_constraintLeft_toLeftOf="@id/view"
-            app:layout_constraintRight_toRightOf="@id/view"
+            app:layout_constraintTop_toTopOf="@id/container"
+            app:layout_constraintBottom_toTopOf="@id/container"
+            app:layout_constraintLeft_toLeftOf="@id/container"
+            app:layout_constraintRight_toRightOf="@id/container"
             android:background="@drawable/profile_image"
             >
 

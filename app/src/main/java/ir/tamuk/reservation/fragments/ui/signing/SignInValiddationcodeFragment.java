@@ -339,6 +339,7 @@ public class SignInValiddationcodeFragment extends Fragment {
             public void handleOnBackPressed() {
                 // Handle the back button event
                 Navigation.findNavController(getView()).popBackStack();
+
                 timer.cancelTimer();
                 timer.stopTimer(binding.textTimer);
 
