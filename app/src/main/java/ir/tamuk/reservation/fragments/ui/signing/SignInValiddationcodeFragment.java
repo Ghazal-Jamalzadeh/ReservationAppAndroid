@@ -285,16 +285,17 @@ public class SignInValiddationcodeFragment extends Fragment {
                     if (Tools.checkDestination(view, R.id.signInValiddationcodeFragment)) {
 
                         signingViewModel.isLogin.observe(getViewLifecycleOwner(), aBoolean1 -> {
-                            if (aBoolean){
-                                getViewModelStore().clear();
-                                Navigation.findNavController(getView())
-                                        .navigate(R.id.action_to_factorFragment);
-
-                            }else{
-
+                            if (aBoolean1){
+                                Log.d(Constants.TAG_KIA, "if: "+aBoolean1);
                                 getViewModelStore().clear();
                                 Navigation.findNavController(getView())
                                         .navigate(R.id.action_signInValiddationcodeFragment_to_completeProfileInfoFragment);
+
+                            }else{
+                                Log.d(Constants.TAG_KIA, "else: "+aBoolean1);
+                                getViewModelStore().clear();
+                                Navigation.findNavController(getView())
+                                        .navigate(R.id.action_to_factorFragment);
                             }
                         });
                     }
