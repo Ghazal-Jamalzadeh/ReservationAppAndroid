@@ -36,6 +36,7 @@ import androidx.navigation.Navigation;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -82,6 +83,18 @@ public class SignInValiddationcodeFragment extends Fragment {
         allButtons();
         backPress();
         timerDo();
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button event
+                timer.cancelTimer();
+                timer.stopTimer(binding.textTimer);
+                Navigation.findNavController(requireView()).popBackStack();
+
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getActivity(), callback);
 
         return root;}
 
@@ -288,12 +301,14 @@ public class SignInValiddationcodeFragment extends Fragment {
                             if (aBoolean1){
                                 Log.d(Constants.TAG_KIA, "if: "+aBoolean1);
                                 getViewModelStore().clear();
+                                Navigation.findNavController(getView()).popBackStack() ;
                                 Navigation.findNavController(getView())
                                         .navigate(R.id.action_signInValiddationcodeFragment_to_completeProfileInfoFragment);
 
                             }else{
                                 Log.d(Constants.TAG_KIA, "else: "+aBoolean1);
                                 getViewModelStore().clear();
+                                Navigation.findNavController(getView()).popBackStack() ;
                                 Navigation.findNavController(getView())
                                         .navigate(R.id.action_to_factorFragment);
                             }
@@ -335,18 +350,7 @@ public class SignInValiddationcodeFragment extends Fragment {
 
     //onBackPress
     public void backPress(){
-        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
-            @Override
-            public void handleOnBackPressed() {
-                // Handle the back button event
-                Navigation.findNavController(getView()).popBackStack();
 
-                timer.cancelTimer();
-                timer.stopTimer(binding.textTimer);
-
-            }
-        };
-        requireActivity().getOnBackPressedDispatcher().addCallback(getActivity(), callback);
 
     }
 

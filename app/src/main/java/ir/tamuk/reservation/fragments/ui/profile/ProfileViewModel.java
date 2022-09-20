@@ -3,6 +3,7 @@ package ir.tamuk.reservation.fragments.ui.profile;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -29,7 +30,7 @@ public class ProfileViewModel extends AndroidViewModel {
     @SuppressLint("StaticFieldLeak")
     private final Context context ;
 
-    private boolean isFirst =  true ; //call getMyProfile api just once
+    public boolean isFirst =  true ; //call getMyProfile api just once
     public boolean ignoreMessage = false ; // handle duplicate toast messages
 
     private final ProfileRepository profileRepository =  new ProfileRepository() ;
@@ -67,6 +68,7 @@ public class ProfileViewModel extends AndroidViewModel {
                         {
                             if(response.body().status == 200)
                             {
+                                isFirst =  false ;
                                 userLiveData.setValue(response.body().user);
                             }else{
                                 errorMessageLiveData.setValue(response.body().message);
@@ -143,4 +145,9 @@ public class ProfileViewModel extends AndroidViewModel {
 
     }
 
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        Log.d("ProfileFragment", "onCleared: ");
+    }
 }

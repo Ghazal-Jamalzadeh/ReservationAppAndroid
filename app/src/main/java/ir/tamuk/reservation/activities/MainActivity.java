@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements ApplicationCallBa
     private ActivityMainBinding binding;
     NavController navController;
     private boolean isDubblePress = false;
+    private int currentDestination = R.id.nav_home;
 
     private String android_id;
 
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements ApplicationCallBa
         setContentView(binding.getRoot());
         ApplicationStarter.initialize(this, true); // with prefetch on background thread
 
-        AccessTokenAuthenticator.applicationCallBacks =  this::restartApplication ;
+        AccessTokenAuthenticator.applicationCallBacks = this::restartApplication;
 
         //create homeViewModel
         new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(HomeViewModel.class);
@@ -96,8 +97,9 @@ public class MainActivity extends AppCompatActivity implements ApplicationCallBa
                     @Override
                     public void run() {
 
-                        switch (navDestination.getId()) {
+                        currentDestination = navDestination.getId();
 
+                        switch (currentDestination) {
                             case R.id.signingFragment:
                             case R.id.signInValiddationcodeFragment:
                             case R.id.completeProfileInfoFragment:
@@ -132,28 +134,29 @@ public class MainActivity extends AppCompatActivity implements ApplicationCallBa
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
-                switch (id) {
-                    case R.id.nav_home:
-                        navController.navigate(R.id.action_to_navHome);
-                        return true;
-                    case R.id.nav_services:
-                        navController.navigate(R.id.action_to_navServices);
-                        return true;
-                    case R.id.nav_reservation:
-                        navController.navigate(R.id.action_to_navReservation);
-                        return true;
-                    case R.id.nav_profile:
-                        if (TokenManager.getAccessToken(MainActivity.this).equals("")) {
-                            navController.navigate(R.id.action_to_signingFragment);
-                        } else {
-                            navController.navigate(R.id.action_to_navProfile);
-                        }
-                        return true;
-                    default:
-                        return false;
+                if (id != currentDestination) {
+                    switch (id) {
+                        case R.id.nav_home:
+                            navController.navigate(R.id.action_to_navHome);
+                            return true;
+                        case R.id.nav_services:
+                            navController.navigate(R.id.action_to_navServices);
+                            return true;
+                        case R.id.nav_reservation:
+                            navController.navigate(R.id.action_to_navReservation);
+                            return true;
+                        case R.id.nav_profile:
+                            if (TokenManager.hasAccessToken(MainActivity.this)) {
+                                navController.navigate(R.id.action_to_navProfile);
+                            } else {
+                                navController.navigate(R.id.action_to_signingFragment);
+                            }
+                            return true;
+                    }
                 }
-
+                return false;
             }
+
         });
 
         //get token from firebase and send it to server
@@ -200,7 +203,6 @@ public class MainActivity extends AppCompatActivity implements ApplicationCallBa
         if (navController.getCurrentDestination().getId() == R.id.nav_home) {
             if (isDubblePress) {
 
-                Log.d("isDubblePress", "onBackPressed: ");
                 finish();
 
             } else {

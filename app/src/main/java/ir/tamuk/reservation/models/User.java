@@ -16,5 +16,11 @@ public class User {
     @SerializedName("status")
     public int userStatus;
 
+    @SerializedName("firstName")
+    public String firstName = "" ;
+
+    @SerializedName("lastName")
+    public String lastName = "" ;
+
 
 }

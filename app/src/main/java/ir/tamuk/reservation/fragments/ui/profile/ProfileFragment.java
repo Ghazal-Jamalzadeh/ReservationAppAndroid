@@ -1,7 +1,10 @@
 package ir.tamuk.reservation.fragments.ui.profile;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.Transition;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,18 +18,21 @@ import androidx.lifecycle.ViewModelProvider;
 
 import ir.tamuk.reservation.activities.MainActivity;
 import ir.tamuk.reservation.databinding.FragmentProfileBinding;
+import ir.tamuk.reservation.fragments.ui.home.HomeViewModel;
 import ir.tamuk.reservation.models.User;
 import ir.tamuk.reservation.utils.TokenManager;
 
 public class ProfileFragment extends Fragment {
 
+    private static final String TAG = "ProfileFragment";
     private FragmentProfileBinding binding;
     private ProfileViewModel profileViewModel ;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-         profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+        profileViewModel = new ViewModelProvider(getActivity()).get(ProfileViewModel.class);
 
+        Log.d(TAG, "onCreateView: is first " + profileViewModel.isFirst);
 
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -43,16 +49,18 @@ public class ProfileFragment extends Fragment {
         });
 
         profileViewModel.getMyProfile().observe(getViewLifecycleOwner(), new Observer<User>() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onChanged(User user) {
-                binding.txtName.setText(user.userName);
+                binding.txtName.setText(user.firstName + " " + user.lastName);
+                binding.txtPhoneNumber.setText(user.mobile);
             }
         });
 
         profileViewModel.logoutIsSuccess.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean isSuccess) {
-                if (isSuccess){
+                if (isSuccess) {
                     Toast.makeText(getContext(), "خروج موفق", Toast.LENGTH_SHORT).show();
 
                     TokenManager.removeAccessToken(getContext());
@@ -67,6 +75,11 @@ public class ProfileFragment extends Fragment {
         });
 
 
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy: ");
     }
 }
