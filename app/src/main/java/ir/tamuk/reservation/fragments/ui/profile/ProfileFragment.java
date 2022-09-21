@@ -15,12 +15,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
+import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.activities.MainActivity;
 import ir.tamuk.reservation.databinding.FragmentProfileBinding;
 import ir.tamuk.reservation.fragments.ui.home.HomeViewModel;
 import ir.tamuk.reservation.models.User;
 import ir.tamuk.reservation.utils.TokenManager;
+import ir.tamuk.reservation.utils.Tools;
 
 public class ProfileFragment extends Fragment {
 
@@ -31,8 +34,6 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         profileViewModel = new ViewModelProvider(getActivity()).get(ProfileViewModel.class);
-
-        Log.d(TAG, "onCreateView: is first " + profileViewModel.isFirst);
 
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -46,6 +47,12 @@ public class ProfileFragment extends Fragment {
 
         binding.btnLogout.setOnClickListener(view1 -> {
             profileViewModel.logoutUser();
+        });
+
+        binding.btnEditProfile.setOnClickListener(view12 -> {
+            if (Tools.checkDestination(view12 , R.id.nav_profile)){
+            Navigation.findNavController(view12).navigate(R.id.action_nav_profile_to_editProfileFragment);
+            }
         });
 
         profileViewModel.getMyProfile().observe(getViewLifecycleOwner(), new Observer<User>() {
@@ -73,13 +80,6 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
-
-
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy: ");
-    }
 }

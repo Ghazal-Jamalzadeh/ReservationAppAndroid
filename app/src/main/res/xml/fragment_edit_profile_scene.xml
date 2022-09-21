@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto"
+    xmlns:app="urn:oasis:names:tc:xliff:document:1.2">
+
+    <Transition
+        motion:constraintSetStart="@id/start"
+        motion:constraintSetEnd="@+id/end"
+        motion:duration="3000">
+        <OnSwipe motion:touchAnchorId="@id/container"/>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+
+        <Constraint
+            android:id="@+id/profileImageLay"
+            android:layout_width="@dimen/_80cdp"
+            android:layout_height="@dimen/_80cdp"
+            android:background="@drawable/profile_image"
+            android:elevation="@dimen/_4cdp"
+            android:layout_marginTop="@dimen/_8cdp"
+           android:layout_marginRight="@dimen/_24cdp"
+            app:layout_constraintDimensionRatio="1:1"
+           motion:layout_constraintTop_toTopOf="@id/container"
+            motion:layout_constraintBottom_toTopOf="@id/container"
+            motion:layout_constraintRight_toRightOf="parent"
+            />
+
+        <Constraint
+            android:id="@+id/title"
+            style="@style/fontForMediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ویرایش اطلاعات حساب"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/_8cdp"
+            android:layout_marginRight="@dimen/_16cdp"
+            motion:layout_constraintBottom_toTopOf="@id/container"
+            motion:layout_constraintRight_toLeftOf="@id/profileImageLay"
+             />
+
+        <Constraint
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_85cdp"
+            android:background="@drawable/profile_main_shape"
+           motion:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+
+
+    </ConstraintSet>
+</MotionScene>

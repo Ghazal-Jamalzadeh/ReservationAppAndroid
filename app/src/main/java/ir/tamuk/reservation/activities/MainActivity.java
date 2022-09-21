@@ -104,13 +104,16 @@ public class MainActivity extends AppCompatActivity implements ApplicationCallBa
                             case R.id.signInValiddationcodeFragment:
                             case R.id.completeProfileInfoFragment:
                                 binding.bottomNav.setVisibility(View.GONE);
+                                binding.toolbarconstraintLayout.setVisibility(View.VISIBLE);
                                 break;
 
                             case R.id.nav_profile:
+                                binding.bottomNav.setVisibility(View.VISIBLE);
                                 binding.toolbarconstraintLayout.setVisibility(View.GONE);
                                 break;
 
                             case R.id.splashFragment:
+                            case R.id.editProfileFragment:
                                 binding.bottomNav.setVisibility(View.GONE);
                                 binding.toolbarconstraintLayout.setVisibility(View.GONE);
                                 break;

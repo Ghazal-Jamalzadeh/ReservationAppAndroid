@@ -22,5 +22,10 @@ public class User {
     @SerializedName("lastName")
     public String lastName = "" ;
 
+    @SerializedName("birthday")
+    public String birthday = "" ;
+
+    @SerializedName("photo")
+    public Photo photo =  new Photo() ;
 
 }

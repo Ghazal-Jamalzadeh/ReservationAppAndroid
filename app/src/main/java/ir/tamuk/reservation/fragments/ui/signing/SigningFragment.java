@@ -71,7 +71,7 @@ public class SigningFragment extends Fragment {
                 binding.cancelButtonSigning.performClick() ;
             }
         };
-        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
         // The callback can be enabled or disabled here or in handleOnBackPressed()
 

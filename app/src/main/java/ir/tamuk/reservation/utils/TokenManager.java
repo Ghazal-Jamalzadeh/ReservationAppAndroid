@@ -20,7 +20,13 @@ public class TokenManager {
 
     //setters
     public static void setAccessToken(Context context, String value) {
-        getPrefs(context).edit().putString(Constants.ACCESS_TOKEN, value).apply();
+        String token  ;
+        if (value.startsWith("Bearer ")){
+            token =  value ;
+        }else {
+            token = "Bearer " + value ;
+        }
+        getPrefs(context).edit().putString(Constants.ACCESS_TOKEN, token).apply();
     }
 
     public static void setRefreshToken(Context context, String value) {

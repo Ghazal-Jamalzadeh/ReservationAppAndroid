@@ -42,6 +42,14 @@
         <action
             android:id="@+id/action_nav_profile_to_appointmentFragment"
             app:destination="@id/appointmentFragment" />
+        <action
+            android:id="@+id/action_nav_profile_to_editProfileFragment"
+            app:destination="@id/editProfileFragment"
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait"
+            app:popEnterAnim="@anim/wait"
+            app:popExitAnim="@anim/slide_right"
+            />
     </fragment>
     <fragment
         android:id="@+id/nav_services"
@@ -143,7 +151,11 @@
         app:destination="@id/nav_reservation"
         app:popUpTo="@+id/nav_home"
         app:popUpToInclusive="false"/>
-
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="ir.tamuk.reservation.fragments.ui.editProfile.EditProfileFragment"
+        android:label="EditProfileFragment"
+        tools:layout="@layout/fragment_edit_profile"/>
 
 
 </navigation>

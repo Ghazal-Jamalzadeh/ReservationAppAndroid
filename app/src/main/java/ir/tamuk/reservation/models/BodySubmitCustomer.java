@@ -9,4 +9,11 @@ public class BodySubmitCustomer {
 
     @SerializedName("lastName")
     public String lastName = "";
+
+    @SerializedName("photo")
+    public String Photo = "";
+
+    @SerializedName("birthday")
+    public String birthday = "";
+
 }
