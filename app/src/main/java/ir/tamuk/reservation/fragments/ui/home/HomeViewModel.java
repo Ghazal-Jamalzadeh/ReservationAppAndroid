@@ -36,6 +36,7 @@ public class HomeViewModel extends AndroidViewModel {
     public int tabLastPos =  -1 ; //keep tabLayout last position
     private boolean isFirst =  true ; //call get categories api just once
     public boolean ignoreMessage = false ; // handle duplicate toast messages
+    private final HomeRepository homeRepository =  new HomeRepository() ;
 
     public MutableLiveData<ArrayList<Category>> categoriesLiveData  = new MutableLiveData<>(); ;
     public MutableLiveData<ArrayList<Service>> servicesLiveData = new MutableLiveData<>();
@@ -46,19 +47,19 @@ public class HomeViewModel extends AndroidViewModel {
         this.context = application.getApplicationContext();    }
 
 
-        public MutableLiveData<ArrayList<Category>> getAllCategories(){
+    public MutableLiveData<ArrayList<Category>> getAllCategories(){
 
-            if(isFirst){
-                //callApi
-                callGetAllCategories();
-            }
-            return categoriesLiveData;
+        if(isFirst){
+            //callApi
+            callGetAllCategories();
+        }
+        return categoriesLiveData;
     }
 
     public void callGetAllCategories(){
 
         if (Connectivity.isConnected(context)) {
-            Call<ResponseCategoriesList> call = HomeRepository.callGetAllCategories() ;
+            Call<ResponseCategoriesList> call = homeRepository.callGetAllCategories() ;
             call.enqueue(new Callback<ResponseCategoriesList>() {
                 @Override
                 public void onResponse(Call<ResponseCategoriesList> call, Response<ResponseCategoriesList> response) {
@@ -96,7 +97,7 @@ public class HomeViewModel extends AndroidViewModel {
             });
 
         } else {
-           errorMessageLiveData.setValue(context.getString(R.string.internet_not_connected_error));
+            errorMessageLiveData.setValue(context.getString(R.string.internet_not_connected_error));
         }
 
     }
@@ -105,7 +106,7 @@ public class HomeViewModel extends AndroidViewModel {
     public void getAllServices (int page,int limit , String categories){
 
         if (Connectivity.isConnected(context)) {
-            Call<ResponseSearchServices> call1 = HomeRepository.callGetAllServices(page,limit,categories);
+            Call<ResponseSearchServices> call1 = homeRepository.callGetAllServices(page,limit,categories);
 
             call1.enqueue(new Callback<ResponseSearchServices>() {
                 @Override

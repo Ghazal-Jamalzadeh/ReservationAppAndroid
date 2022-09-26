@@ -2,8 +2,8 @@ package ir.tamuk.reservation.api;
 
 import ir.tamuk.reservation.models.BodySendActivationCode;
 import ir.tamuk.reservation.models.BodySubmitCustomer;
-import ir.tamuk.reservation.models.MoviesList;
 import ir.tamuk.reservation.models.ResponseCategoriesList;
+import ir.tamuk.reservation.models.ResponseGetServices;
 import ir.tamuk.reservation.models.ResponseSearchServices;
 import ir.tamuk.reservation.models.ResponseSendActivationCode;
 import ir.tamuk.reservation.models.ResponseSubmitCustomer;
@@ -13,6 +13,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiServices {
@@ -41,4 +42,7 @@ public interface ApiServices {
     Call<ResponseSubmitCustomer> sendCustomer(@Body BodySubmitCustomer bodySubmitCustomer
             , @Header("authorization") String token);
 
+//    http://moeenkashisaz.ir/laser/api/v1/get-services/631869b10bfaf719ef8b76cf
+    @GET("v1/get-services/{services_id}")
+    Call<ResponseGetServices> getServicesByld(@Path("services_id") String id);
 }

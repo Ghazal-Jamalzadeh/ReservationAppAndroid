@@ -2,10 +2,7 @@ package ir.tamuk.reservation.models;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-
-public class ResponseSearchServices {
-
+public class ResponseGetServices {
     @SerializedName("status")
     public int status = 0;
 
@@ -16,12 +13,5 @@ public class ResponseSearchServices {
     public String message = "";
 
     @SerializedName("data")
-    public Data data = new Data();
-
-    public class Data {
-
-        @SerializedName("docs")
-        public ArrayList<Service> services = new ArrayList<>() ;
-    }
-
+    public ServiceData serviceData = new ServiceData();
 }

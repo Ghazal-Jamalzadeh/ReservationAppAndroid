@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/relative_recycler"
     android:orientation="vertical"
     tools:context=".fragments.ui.services.ServicesFragment">
+
+
+
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_Refresh_Layout"
@@ -17,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/serviceContainer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -30,7 +34,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="@dimen/_18cdp">
+                    android:padding="@dimen/_18cdp"
+                    android:id="@+id/linear3">
 
                     <ImageView
                         android:layout_width="@dimen/_50cdp"
@@ -40,6 +45,7 @@
                         android:src="@drawable/ic_arrow_back_ios_fill0_wght400_grad0_opsz48__left_" />
 
                     <TextView
+                        android:id="@+id/text"
                         style="@style/fontForMediumEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -54,22 +60,185 @@
                 </LinearLayout>
 
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler"
+                <RelativeLayout
+
+                    android:layout_below="@id/linear3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    >
+                    android:layout_weight="5">
 
-                </androidx.recyclerview.widget.RecyclerView>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
 
-            </LinearLayout>
+                    </androidx.recyclerview.widget.RecyclerView>
+
+
+                </RelativeLayout>
+
+
+
+
+
+
+
+            </RelativeLayout>
+
 
         </androidx.core.widget.NestedScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_70cdp"
+            android:background="#4D000000"
+            android:id="@+id/linear_top"
+            android:orientation="vertical"
+            android:visibility="invisible"
+            >
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_service"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#4D000000"
+        android:orientation="vertical"
+        android:layout_below="@id/linear_top"
+        android:visibility="invisible"
+        >
+    </LinearLayout>
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/relative_service"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        android:layout_below="@id/linear_top"
+        tools:context=".fragments.ui.services.ServiceInfoFragment">
+
+        <!-- TODO: Update blank fragment layout -->
+        <!--    <RelativeLayout-->
+        <!--        android:id="@+id/text3"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="@dimen/_100cdp" />-->
+        <LinearLayout
+            android:id="@+id/linear2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background_service_info"
+            android:orientation="vertical"
+
+
+            >
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10cdp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="@dimen/_50cdp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/zabdar" />
+
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="6">
+
+                <ProgressBar
+                    android:id="@+id/progressbar"
+                    android:layout_width="@dimen/_50cdp"
+                    android:layout_height="@dimen/_50cdp"
+                    android:layout_centerInParent="true" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_15cdp">
+
+                    <TextView
+                        android:id="@+id/title_services_info"
+                        style="@style/fontForLargeBoldText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iran_sans_mob"
+                        android:justificationMode="inter_word"
+                        android:textColor="@color/red"
+                        android:textSize="@dimen/_18cdp" />
+
+                    <TextView
+                        android:id="@+id/description_services_info"
+                        style="@style/fontForMediumEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5cdp"
+                        android:fontFamily="@font/iran_sans_mob"
+                        android:justificationMode="inter_word"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14cdp" />
+
+
+                </LinearLayout>
+            </RelativeLayout>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_60cdp"
+                android:layout_marginLeft="@dimen/_15cdp"
+                android:layout_marginRight="@dimen/_15cdp"
+                android:layout_marginBottom="@dimen/_15cdp"
+                android:background="@color/main"
+                app:cardCornerRadius="@dimen/_5cdp">
+
+                <RelativeLayout
+                    android:id="@+id/relative"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/main"
+                    android:gravity="center">
+
+                    <TextView
+                        style="@style/fontForMediumEditText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iran_sans_mob"
+                        android:justificationMode="inter_word"
+                        android:text="رزرو نوبت"
+                        android:textColor="@color/white" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+</RelativeLayout>
 
 
 

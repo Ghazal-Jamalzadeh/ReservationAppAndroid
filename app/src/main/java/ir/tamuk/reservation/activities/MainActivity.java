@@ -73,6 +73,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //////////////////////
+        binding.textView5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.drawerLayout.closeDrawer(binding.drawerMenu);
+                Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment_content_main)
+                        .navigate(R.id.action_nav_services);
+            }
+        });
 
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
@@ -99,10 +107,15 @@ public class MainActivity extends AppCompatActivity {
                         }
                         //toolbar hide in profile fragment
                         if (navDestination.getId() == R.id.nav_services) {
-                            binding.toolbarconstraintLayout.setVisibility(View.GONE);
+                            binding.mainStatusBar.setVisibility(View.GONE);
+//                            binding.serviceStatusBar.setVisibility(View.VISIBLE);
                         } else {
-                            binding.toolbarconstraintLayout.setVisibility(View.VISIBLE);
+                            binding.mainStatusBar.setVisibility(View.VISIBLE);
+//                            binding.serviceStatusBar.setVisibility(View.GONE);
+
                         }
+
+
 
                     }
                 };

@@ -69,7 +69,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        homeViewModel = new ViewModelProvider(getActivity()).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
 
@@ -99,7 +99,7 @@ public class HomeFragment extends Fragment {
         //Buttons
         binding.txtShowAll.setOnClickListener(view1 -> {
 
-                ((MainActivity)getActivity()).clickBottomNav(R.id.nav_services);
+            ((MainActivity)getActivity()).clickBottomNav(R.id.nav_services);
 
         });
 

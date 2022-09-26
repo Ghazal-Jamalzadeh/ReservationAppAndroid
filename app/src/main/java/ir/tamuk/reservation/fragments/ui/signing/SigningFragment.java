@@ -85,6 +85,7 @@ public class SigningFragment extends Fragment {
                 signingViewModel.isSuccessLiveData.observe(getViewLifecycleOwner(), aBoolean -> {
 
                     if (aBoolean) {
+
                         //navigate to next frg
                         Bundle bundle = new Bundle();
                         bundle.clear();
