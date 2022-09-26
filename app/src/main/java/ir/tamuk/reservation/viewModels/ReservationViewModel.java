@@ -23,7 +23,7 @@ import retrofit2.Response;
 public class ReservationViewModel extends ViewModel {
 
     public MutableLiveData<ArrayList<Service>> servicesLiveData = new MutableLiveData<>();
-    public MutableLiveData<Boolean> loading = new MutableLiveData<>();
+//    public MutableLiveData<Boolean> loading = new MutableLiveData<>();
     public MutableLiveData<String> errorMessage = new MutableLiveData<>();
 
     public MutableLiveData<ArrayList<String>> freeAm = new MutableLiveData<>();
@@ -33,14 +33,15 @@ public class ReservationViewModel extends ViewModel {
 
     public void getServices (int page , int limit , String categories ) {
         Call<ResponseSearchServices> call = ReservationRepository.callSpinnerServices(page, limit, categories);
-        loading.setValue(true);
+//        loading.setValue(true);
         call.enqueue(new Callback<ResponseSearchServices>() {
             @Override
             public void onResponse(Call<ResponseSearchServices> call, Response<ResponseSearchServices> response) {
-                loading.setValue(false);
+//                loading.setValue(false);
                 if (response.isSuccessful()) {
                     if (response.body() != null)
                         if (response.body().status == 200) {
+                            Log.d("ghazal", "onResponse: ");
                             servicesLiveData.setValue(response.body().data.services);
                         } else {
                             errorMessage.setValue(response.body().message);
@@ -60,7 +61,7 @@ public class ReservationViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<ResponseSearchServices> call, Throwable t) {
-                loading.setValue(false);
+//                loading.setValue(false);
                 errorMessage.setValue(t.getMessage());
 
             }
@@ -107,7 +108,7 @@ public class ReservationViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<ResponseReservation> call, Throwable t) {
-                loading.setValue(false);
+//                loading.setValue(false);
                 errorMessageRes.setValue(t.getMessage());
                 Log.d("rhmn", "onFail: "+t.getMessage());
 

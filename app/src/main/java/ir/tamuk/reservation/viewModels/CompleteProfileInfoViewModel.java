@@ -13,7 +13,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CompleteProfileInfoViewModel extends ViewModel {
+public class  CompleteProfileInfoViewModel extends ViewModel {
 
     public CompleteProfileInfoRepository repository = new CompleteProfileInfoRepository();
     public MutableLiveData<Boolean> isSuccessLiveData = new MutableLiveData<>() ;

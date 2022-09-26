@@ -68,7 +68,6 @@ public class Timer {
         if (sec<10) timeLeftText += "0";
         timeLeftText += sec;
 
-        Log.d(Constants.TAG_KIA, "UpdateTimer:"+timeLeftText);
         textTimer.setText(timeLeftText);
 
         return timeLeftText;

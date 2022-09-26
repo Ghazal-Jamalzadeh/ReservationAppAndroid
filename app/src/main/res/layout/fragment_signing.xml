@@ -19,9 +19,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/_32cdp"
-        android:layout_marginTop="@dimen/_150cdp"
         android:layout_marginRight="@dimen/_32cdp"
-        android:layout_marginBottom="@dimen/_60cdp">
+        android:layout_below="@id/cancel_button_signing_"
+        android:layout_marginBottom="@dimen/_32cdp"
+        android:layout_marginTop="@dimen/_32cdp"
+        >
 
         <TextView
             android:id="@+id/a"
@@ -29,6 +31,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_32cdp"
+            android:layout_marginBottom="@dimen/_32cdp"
             android:text="ایجاد / ورود حساب کاربری" />
 
         <RelativeLayout
@@ -40,7 +44,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_62cdp"
+                android:layout_marginTop="@dimen/_32cdp"
                 android:orientation="vertical">
 
 
@@ -57,8 +61,7 @@
                     app:endIconMode="clear_text"
                     app:endIconTint="@color/white"
                     app:errorTextColor="#D50000"
-                    app:hintTextColor="@color/show_more_text"
-                    >
+                    app:hintTextColor="@color/show_more_text">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/mobile_editText_signing"
@@ -74,8 +77,7 @@
                         android:paddingTop="@dimen/_24cdp"
                         android:singleLine="true"
                         android:textColor="@color/white"
-                        android:theme="@style/Theme.number.code"
-                        />
+                        android:theme="@style/Theme.number.code" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,11 +88,12 @@
                 android:id="@+id/accept_button_signing"
                 style="@style/fontForMediumEditText"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_60cdp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginLeft="@dimen/_15cdp"
-                android:layout_marginRight="@dimen/_15cdp"
+                android:layout_marginLeft="@dimen/_18cdp"
+                android:layout_marginRight="@dimen/_18cdp"
                 android:backgroundTint="@color/white"
+                android:paddingVertical="@dimen/_12cdp"
                 android:text="تایید"
                 android:textColor="@color/backgroundSigning"
                 android:textStyle="bold"
@@ -99,15 +102,23 @@
                 />
 
 
-
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_60cdp"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="@dimen/_15cdp"
             android:layout_marginRight="@dimen/_15cdp"
             >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/_12cdp"
+                android:layout_marginBottom="@dimen/_8cdp"
+                style="@style/fontForMediumEditText"
+                />
 
             <ProgressBar
                 android:id="@+id/progress_circular_signing"

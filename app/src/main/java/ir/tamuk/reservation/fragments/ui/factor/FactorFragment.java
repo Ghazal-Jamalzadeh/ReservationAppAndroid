@@ -16,7 +16,6 @@ import ir.tamuk.reservation.databinding.FragmentFactorBinding;
 public class FactorFragment extends Fragment {
 
     private FragmentFactorBinding binding;
-//    private SqlDatabaseReserve sqlDatabaseReserve;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,14 +31,17 @@ public class FactorFragment extends Fragment {
         binding = FragmentFactorBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        buttons();
+        binding.phoneTextForm.setText(getArguments().getString("number"));
+        binding.serviceTextForm.setText(getArguments().getString("serviceName"));
+        binding.timeTextForm.setText(getArguments().getString("reserveTime"));
+        binding.dateTextForm.setText(getArguments().getString("reserveDate"));
 
-//        sqldatabase();
+        buttons();
 
         return root;
     }
 
-    //onBack
+    //OnBack
     public void onBackPress(){
 
 
@@ -77,27 +79,5 @@ public class FactorFragment extends Fragment {
 
     }
 
-    //dataBase
-//    public void sqldatabase(){
-//        sqlDatabaseReserve = new SqlDatabaseReserve(getContext());
-//        //arrays
-//        ArrayList<ReserveModel> allModels = sqlDatabaseReserve.getData();
-//        ArrayList<ReserveModel> models = sqlDatabaseReserve.getDataId();
-//        ArrayList<ReserveModel> result = new ArrayList<>();
-//        result.clear();
-//        for (int i = 0; i<allModels.size(); i++){
-//            if (allModels.get(i).id.contains(models.get(0).id)){
-//                result.add(allModels.get(i));
-//            }
-//
-//        }
-//        allModels.clear();
-//        allModels.addAll(result);
-//
-//        String services = allModels.get(0).service;
-//        String time = allModels.get(0).id.substring(9,14);
-//
-//        binding.serviceTextForm.setText(services);
-//        binding.timeTextForm.setText(time);
-//    }
+
 }
