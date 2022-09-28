@@ -1,6 +1,8 @@
 package ir.tamuk.reservation.api;
 
 import android.content.Context;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import org.json.JSONObject;
@@ -19,10 +21,9 @@ import okhttp3.Route;
 //401 Unauthorized — Renew JWT tokens with OkHttp3 Authenticator
 public class AccessTokenAuthenticator implements Authenticator {
 
+    private static final String TAG = "AccessTokenAuth: ";
     private Context context;
     public static ApplicationCallBacks applicationCallBacks ;
-
-    private static final String TAG = "AccessTokenAuth";
 
     public AccessTokenAuthenticator(Context context) {
         this.context = context;
@@ -35,6 +36,7 @@ public class AccessTokenAuthenticator implements Authenticator {
         final String accessToken = TokenManager.getAccessToken(context) ;
 
         if (isRequestWithAccessToken(response) && accessToken.equals("")) {
+            Log.d(TAG, "authenticate: There is no token ");
             TokenManager.removeAccessToken(context);
             TokenManager.removeRefreshToken(context);
 
@@ -56,6 +58,8 @@ public class AccessTokenAuthenticator implements Authenticator {
 
             json.put("oldRefreshToken", TokenManager.getRefreshToken(context));
             json.put("oldAccessToken", TokenManager.getAccessToken(context));
+
+            Log.d(TAG, "authenticate: refreshing tokens ");
 
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json.toString());
             Request request = new Request.Builder()
@@ -79,12 +83,14 @@ public class AccessTokenAuthenticator implements Authenticator {
                 TokenManager.setAccessToken(context , accessToken2);
                 TokenManager.setRefreshToken(context , refreshToken);
 
+                Log.d(TAG, "authenticate: tokens were successfully renewed");
                 //If user’s auth tokens were successfully renewed,
                 // the authenticator will attempt to retry the original request.
                 return newRequestWithAccessToken(response.request(), accessToken2);
 
             } else if (statusCode == 418) {
                 //refresh token has been expired
+                Log.d(TAG, "authenticate: 418 refresh token has been expired");
                 TokenManager.removeAccessToken(context);
                 TokenManager.removeRefreshToken(context);
                 applicationCallBacks.restartApplication();
@@ -93,6 +99,7 @@ public class AccessTokenAuthenticator implements Authenticator {
 
         } catch (Exception e) {
 
+            Log.d(TAG, "authenticate: error : " + e.getMessage());
             TokenManager.removeAccessToken(context);
             TokenManager.removeRefreshToken(context);
 

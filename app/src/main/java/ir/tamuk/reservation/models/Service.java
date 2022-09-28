@@ -19,10 +19,13 @@ public class Service {
     @SerializedName("price")
     public int price = 0;
 
-    @SerializedName("category")
-    public Category category = new Category() ;
+    //چون تو بعضی api ها آبجکت میاد تو بعضیاش String فعلا به مدل اضافه نشه باعث کرش میشه
+//    @SerializedName("category")
+//    public Category category = new Category() ;
 
     @SerializedName("time")
     public int time = 0;
 
+    @SerializedName("restTime")
+    public int restTime = 0;
 }

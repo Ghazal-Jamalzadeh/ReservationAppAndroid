@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.ui.myReserves.MyReservesFragment"
+    android:background="@color/white">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--Toolbar-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/toolbarLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_6cdp"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/imgProfile"
+                    android:layout_width="@dimen/_50cdp"
+                    android:layout_height="@dimen/_50cdp"
+                    android:layout_margin="@dimen/_8cdp"
+                    android:src="@drawable/ic_profile_unknown"
+                    android:elevation="@dimen/_4cdp"
+                    android:background="@drawable/circle_shape"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="پروفایل" />
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="نوبت های من"
+                    style="@style/fontForLargeBoldText"
+                    android:textColor="@color/backgroundSigning"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--Tabs-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/tabsLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/_8cdp"
+                app:layout_constraintTop_toBottomOf="@+id/toolbarLay">
+
+                <include
+                    android:id="@+id/btn1"
+                    layout="@layout/layout_appointment_tabs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/btn2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <include
+                    android:id="@+id/btn2"
+                    layout="@layout/layout_appointment_tabs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btn1"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/btn3"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <include
+                    android:id="@+id/btn3"
+                    layout="@layout/layout_appointment_tabs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btn2"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--Recycler-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/myReservesRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:clipToPadding="false"
+                android:paddingVertical="@dimen/_8cdp"
+                app:layout_constraintTop_toBottomOf="@+id/tabsLay"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <!--empty layout-->
+            <TextView
+                android:id="@+id/emptyLay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/show_more_text"
+                style="@style/fontForMediumText"
+                android:text="@string/empty"
+                android:visibility="invisible"
+                app:layout_constraintTop_toBottomOf="@id/tabsLay"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!--details-->
+            <View
+                android:id="@+id/blurBg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="invisible"
+                android:background="@color/gray_transparent"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/detailsLay"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:visibility="invisible"
+                android:background="@drawable/profile_main_shape"
+                app:layout_constraintTop_toBottomOf="@id/toolbarLay"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <include
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    layout="@layout/fragment_paid"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

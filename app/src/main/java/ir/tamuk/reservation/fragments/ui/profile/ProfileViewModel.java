@@ -13,9 +13,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import ir.tamuk.reservation.R;
+import ir.tamuk.reservation.models.BodySubmitCustomer;
 import ir.tamuk.reservation.models.Category;
 import ir.tamuk.reservation.models.ResponseGetMyProfile;
 import ir.tamuk.reservation.models.ResponseSendActivationCode;
+import ir.tamuk.reservation.models.ResponseSubmitCustomer;
 import ir.tamuk.reservation.models.User;
 import ir.tamuk.reservation.repository.ProfileRepository;
 import ir.tamuk.reservation.utils.Connectivity;
@@ -30,12 +32,19 @@ public class ProfileViewModel extends AndroidViewModel {
     @SuppressLint("StaticFieldLeak")
     private final Context context ;
 
-    public boolean isFirst =  true ; //call getMyProfile api just once
-    public boolean ignoreMessage = false ; // handle duplicate toast messages
+    //call getMyProfile api just once
+    public boolean isFirst =  true ;
 
+    // handle duplicate toast messages
+    public boolean ignoreMessage = false ;
+    public boolean ignoreSuccessMessage = false ;
+
+    //repository
     private final ProfileRepository profileRepository =  new ProfileRepository() ;
 
+    //live data
     public MutableLiveData<Boolean> logoutIsSuccess =  new MutableLiveData<>() ;
+    public MutableLiveData<Boolean> editIsSuccess = new MutableLiveData<>() ;
     public MutableLiveData<String> errorMessageLiveData = new MutableLiveData<>();
     public MutableLiveData<User> userLiveData =  new MutableLiveData<>() ;
 
@@ -51,8 +60,6 @@ public class ProfileViewModel extends AndroidViewModel {
         }
         return userLiveData;
     }
-
-
 
     public void callGetMyProfile(){
 
@@ -98,6 +105,51 @@ public class ProfileViewModel extends AndroidViewModel {
             errorMessageLiveData.setValue(context.getString(R.string.internet_not_connected_error));
         }
 
+    }
+
+    public void editProfile(BodySubmitCustomer body ){
+        if (Connectivity.isConnected(context)) {
+            Call<ResponseSubmitCustomer> call = profileRepository.callEditProfile( body ,TokenManager.getAccessToken(context)) ;
+            call.enqueue(new Callback<ResponseSubmitCustomer>() {
+                @Override
+                public void onResponse(Call<ResponseSubmitCustomer> call, Response<ResponseSubmitCustomer> response) {
+
+                    if(response.isSuccessful())
+                    {
+                        if(response.body()!=null)
+                        {
+                            if(response.body().status == 200)
+                            {
+                                editIsSuccess.setValue(response.body().success);
+                                isFirst = true ;  //call get profile api again
+
+                            }else{
+                                errorMessageLiveData.setValue(response.body().message);
+                            }
+                        }else{
+                            errorMessageLiveData.setValue(context.getString(R.string.null_response_body_error));
+                        }
+                    }else{
+
+                        try {
+                            errorMessageLiveData.setValue(Tools.extractErrorBodyMessage(response.errorBody().string()));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseSubmitCustomer> call, Throwable t) {
+
+                    errorMessageLiveData.setValue(t.getMessage());
+
+                }
+            });
+
+        } else {
+            errorMessageLiveData.setValue(context.getString(R.string.internet_not_connected_error));
+        }
     }
 
     public void logoutUser(){

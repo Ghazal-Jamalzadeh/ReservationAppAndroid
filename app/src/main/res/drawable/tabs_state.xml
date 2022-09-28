@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_focused="true"
+        android:drawable="@color/show_more_text" />
+
+    <item
+        android:state_focused="false"
+        android:drawable="@color/login_blue" />
+
+
+</selector>

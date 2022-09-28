@@ -49,6 +49,11 @@ public class ProfileFragment extends Fragment {
             profileViewModel.logoutUser();
         });
 
+        binding.btnMyAppointments.setOnClickListener(view13 -> {
+            if (Tools.checkDestination(view13 , R.id.nav_profile)){
+                Navigation.findNavController(view13).navigate(R.id.action_nav_profile_to_appointmentFragment);
+            }
+        });
         binding.btnEditProfile.setOnClickListener(view12 -> {
             if (Tools.checkDestination(view12 , R.id.nav_profile)){
             Navigation.findNavController(view12).navigate(R.id.action_nav_profile_to_editProfileFragment);
@@ -80,6 +85,30 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
+
+        profileViewModel.errorMessageLiveData.observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String errorMessage) {
+                //progress stop
+                if (profileViewModel.ignoreMessage){
+                    profileViewModel.ignoreMessage = false ;
+                }else {
+                    Tools.showToast(getContext(), errorMessage);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        profileViewModel.ignoreMessage =  false ;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        profileViewModel.ignoreMessage =  true ;
     }
 
 }

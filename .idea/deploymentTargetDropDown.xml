@@ -7,12 +7,12 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\Ghazal\.android\avd\4_WVGA_Nexus_S_API_30.avd" />
+            <value value="C:\Users\Ghazal\.android\avd\Pixel_4_XL_API_30_1.avd" />
           </Key>
         </deviceKey>
       </Target>
     </targetSelectedWithDropDown>
-    <timeTargetWasSelectedWithDropDown value="2022-09-21T07:46:58.889157700Z" />
+    <timeTargetWasSelectedWithDropDown value="2022-09-26T11:57:37.685849300Z" />
     <runningDeviceTargetsSelectedWithDialog>
       <Target>
         <type value="RUNNING_DEVICE_TARGET" />
