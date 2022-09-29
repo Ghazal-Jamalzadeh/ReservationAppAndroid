@@ -138,7 +138,7 @@ public class ServicesFragment extends Fragment implements ServiceDatailInterface
 //        });
 
 
-
+        binding.swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.show_more_text),getResources().getColor(R.color.main));
         binding.swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -275,6 +275,12 @@ public class ServicesFragment extends Fragment implements ServiceDatailInterface
         if (isPopUp){
             binding.linearService.setVisibility(View.INVISIBLE);
               binding.relativeService.setVisibility(View.INVISIBLE);
+            binding.linear3.setVisibility(View.INVISIBLE);
+            binding.relativeService.setVisibility(View.INVISIBLE);
+            binding.relativeRecycler.setVisibility(View.INVISIBLE);
+            binding.recycler.setVisibility(View.INVISIBLE);
+            binding.serviceContainer.setVisibility(View.INVISIBLE);
+            binding.swipeRefreshLayout.setVisibility(View.INVISIBLE);
             Log.d("mansour", "onPause: ");
             getViewModelStore().clear();
             isPopUp=false;
@@ -291,6 +297,12 @@ public class ServicesFragment extends Fragment implements ServiceDatailInterface
             binding.linearService.setVisibility(View.INVISIBLE);
             binding.relativeService.setVisibility(View.INVISIBLE);
             binding.linearTop.setVisibility(View.INVISIBLE);
+            binding.linear3.setVisibility(View.INVISIBLE);
+            binding.relativeService.setVisibility(View.INVISIBLE);
+            binding.relativeRecycler.setVisibility(View.INVISIBLE);
+            binding.recycler.setVisibility(View.INVISIBLE);
+            binding.serviceContainer.setVisibility(View.INVISIBLE);
+            binding.swipeRefreshLayout.setVisibility(View.INVISIBLE);
             getViewModelStore().clear();
             Log.d("mansour", "onPause: ");
             isPopUp=false;
