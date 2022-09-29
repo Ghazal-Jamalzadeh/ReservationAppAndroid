@@ -1,9 +1,11 @@
 package ir.tamuk.reservation.api;
 
+import ir.tamuk.reservation.models.BodyFactor;
 import ir.tamuk.reservation.models.BodySendActivationCode;
 import ir.tamuk.reservation.models.BodySubmitCustomer;
 import ir.tamuk.reservation.models.MoviesList;
 import ir.tamuk.reservation.models.ResponseCategoriesList;
+import ir.tamuk.reservation.models.ResponseFactor;
 import ir.tamuk.reservation.models.ResponseReservation;
 import ir.tamuk.reservation.models.ResponseGetMyProfile;
 import ir.tamuk.reservation.models.ResponseSearchServices;
@@ -61,5 +63,9 @@ public interface ApiServices {
     @GET("v1/finde-free-time?service?line=1")
     Call<ResponseReservation> getReservations(
             @Query("date") String time , @Query("service") String service);
+
+    //http://moeenkashisaz.ir/laser/api/v1/insert-reserve
+    @POST("v1/insert-reserve")
+    Call<ResponseFactor> getFactor(@Body BodyFactor bodyFactor, @Header("authorization") String token);
 
 }

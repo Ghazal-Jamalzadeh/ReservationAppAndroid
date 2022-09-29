@@ -7,15 +7,22 @@ import android.view.ViewGroup;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.FragmentFactorBinding;
+import ir.tamuk.reservation.models.BodyFactor;
+import ir.tamuk.reservation.utils.TokenManager;
+import ir.tamuk.reservation.viewModels.FactorViewModel;
 
 
 public class FactorFragment extends Fragment {
 
     private FragmentFactorBinding binding;
+    private FactorViewModel factorViewModel;
+    private BodyFactor bodyFactor = new BodyFactor();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,9 +36,29 @@ public class FactorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentFactorBinding.inflate(inflater, container, false);
+        factorViewModel = new ViewModelProvider(this).get(FactorViewModel.class);
         View root = binding.getRoot();
 
-        binding.phoneTextForm.setText(getArguments().getString("number"));
+//        bodyFactor.serviceFactor = getArguments().getString("serviceId");
+//        bodyFactor.dateFactor = "2022-09-13T18:30:00";
+//
+//        factorViewModel.callFactor(bodyFactor, TokenManager.getAccessToken(getContext()));
+//        factorViewModel.isSuccessLiveData.observe(getViewLifecycleOwner(), aBoolean -> {
+//            if (aBoolean){
+//                factorViewModel.order.observe(getViewLifecycleOwner(), order -> {
+//                    String s = order;
+//                });
+//
+//            }else{
+//                Navigation.findNavController(getView()).popBackStack();
+//            }
+//        });
+//
+//
+//        factorViewModel.errorMessageLiveData.observe(getViewLifecycleOwner(), error -> {
+//
+//        });
+//        binding.phoneTextForm.setText(getArguments().getString("number"));
         binding.serviceTextForm.setText(getArguments().getString("serviceName"));
         binding.timeTextForm.setText(getArguments().getString("reserveTime"));
         binding.dateTextForm.setText(getArguments().getString("reserveDate"));

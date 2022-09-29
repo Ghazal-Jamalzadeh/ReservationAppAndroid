@@ -116,6 +116,8 @@ public class SigningFragment extends Fragment {
                         bundle.putString("serviceName", getArguments().getString("serviceName"));
                         bundle.putString("reserveTime", getArguments().getString("reserveTime"));
                         bundle.putString("reserveDate", getArguments().getString("reserveDate"));
+                        bundle.putString("reserveDateMiladi", getArguments().getString("reserveDateMiladi"));
+                        bundle.putBoolean("isFactor", getArguments().getBoolean("isFactor"));
 
 
                         if (Tools.checkDestination(view, R.id.signingFragment)) {

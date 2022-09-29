@@ -76,6 +76,9 @@ public class CompleteProfileInfoFragment extends Fragment {
                                  bundle.putString("serviceName", getArguments().getString("serviceName"));
                                  bundle.putString("reserveTime", getArguments().getString("reserveTime"));
                                  bundle.putString("reserveDate", getArguments().getString("reserveDate"));
+                                 bundle.putString("reserveDateMiladi", getArguments().getString("reserveDateMiladi"));
+                                 bundle.putBoolean("isFactor", getArguments().getBoolean("isFactor"));
+
 
                                  Navigation.findNavController(getView())
                                          .navigate(R.id.action_to_factorFragment, bundle);

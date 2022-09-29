@@ -18,6 +18,7 @@
     <!-- errors   -->
     <string name="internet_not_connected_error">اتصال اینترنت خود را بررسی کنید</string>
     <string name="null_response_body_error">خطا در دریافت اطلاعات</string>
+    <string name="not_selection_reserve">باید یک رزرو انتخاب کنید</string>
 
     <!-- empty -->
     <string name="empty">داده ای یافت نشد!</string>

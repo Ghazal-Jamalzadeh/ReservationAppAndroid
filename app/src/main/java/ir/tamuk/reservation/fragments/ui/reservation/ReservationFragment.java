@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
@@ -49,12 +50,14 @@ import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.databinding.FragmentReservationBinding;
 import ir.tamuk.reservation.fragments.ui.reservation.adapter.ReserveAdapterAll;
 import ir.tamuk.reservation.fragments.ui.reservation.adapter.RtlGridLayoutManager;
+import ir.tamuk.reservation.models.BodyFactor;
 import ir.tamuk.reservation.models.FreeTimeAm;
 import ir.tamuk.reservation.models.FreeTimePm;
 import ir.tamuk.reservation.models.Service;
 import ir.tamuk.reservation.models.Services;
 import ir.tamuk.reservation.utils.Connectivity;
 import ir.tamuk.reservation.utils.Constants;
+import ir.tamuk.reservation.utils.SnackBars;
 import ir.tamuk.reservation.utils.TokenManager;
 import ir.tamuk.reservation.viewModels.ReservationViewModel;
 
@@ -89,6 +92,7 @@ public class ReservationFragment extends Fragment implements OnSelectedItem {
     private String selectedTime = "";
     //date of Selected Reserve
     private String selectedDate= "";
+    private String selectedDateMiladi= "";
 
     //Integers
     //lastReservation Select
@@ -101,6 +105,13 @@ public class ReservationFragment extends Fragment implements OnSelectedItem {
     //adapters
     private ReserveAdapterAll adapterAm;
     private ReserveAdapterAll adapterPm;
+
+    private BodyFactor bodyFactor = new BodyFactor();
+    private Bundle bundle = new Bundle();
+    private SnackBars snackBars = new SnackBars();
+
+
+
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -119,6 +130,17 @@ public class ReservationFragment extends Fragment implements OnSelectedItem {
         binding.weekCardReservation.setText(week[y]);
         binding.monthCardReservation.setText(month[x]);
         selectedDate = week[y]+" "+ persianDate.getDayOfMonth()+" "+ month[x];
+        String m = String.valueOf(persianDate.getMonth());
+        String dM = String.valueOf(persianDate.getDayOfMonth());
+        if (m.length() == 1){
+            m = "0"+persianDate.getMonth();
+        }
+        if (dM.length() == 1){
+            dM = "0"+persianDate.getDayOfMonth();
+        }
+        String d = persianDate.getYear()+"/"+m+"/"+dM;
+        selectedDateMiladi = date(d);
+
         ////////////////////----------~~ <calender Today> ~~----------////////////////////
 
         binding.showAllReserves.setVisibility(View.INVISIBLE);
@@ -128,6 +150,106 @@ public class ReservationFragment extends Fragment implements OnSelectedItem {
         String r = TokenManager.getRefreshToken(getContext());
         Log.d(Constants.TAG_KIA, "tokensA: ->" + a);
         Log.d(Constants.TAG_KIA, "tokensR: ->" + r);
+
+
+
+
+        ////////////////////----------~~ <Swipe> ~~----------////////////////////
+        binding.swipeRefreshLayoutReservation.setRefreshing(true);
+        binding.swipeRefreshLayoutReservation.setEnabled(true);
+        binding.swipeRefreshLayoutReservation.setColorSchemeColors(getResources().getColor(R.color.show_more_text), getResources().getColor(R.color.main));
+        binding.swipeRefreshLayoutReservation.setOnRefreshListener(() -> {
+//            binding.swipeRefreshLayoutReservation.setRefreshing(false);
+            callSearchServicesApi();
+        });
+
+
+        ////////////////////----------~~ <Swipe> ~~----------////////////////////
+
+        //callApi
+        Calender();
+        Spinnerr();
+        callSearchServicesApi();
+        Recycler();
+
+        galleryViewModel.order.observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                bundle.putString("order", s);
+                Log.d("JALLAD", "true: ");
+
+            }
+        });
+
+        galleryViewModel.isSuccessLiveData.observe(getViewLifecycleOwner(), aBoolean -> {
+
+            if (aBoolean){
+
+
+                Navigation.findNavController(getView()).navigate(R.id.action_to_factorFragment, bundle);
+
+            }
+        });
+
+        galleryViewModel.errorMessageLiveData.observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                snackBarIconError(s, getView());
+                Log.d("JALLAD", "err: ");
+            }
+        });
+
+
+
+
+        //Signing Button
+        binding.signingButtonReservation.setOnClickListener(view -> {
+
+            Log.d("KIAOKO", "lastSelectedIndexAm" + lastSelectedIndexAm);
+            Log.d("KIAOKO", "lastSelectedIndexPm" + lastSelectedIndexPm);
+            if (lastSelectedIndexPm != -1 || lastSelectedIndexAm != -1) {
+
+                if (lastSelectedIndexPm !=-1) {
+                    selectedTime = freeTimePmArrayList.get(lastSelectedIndexPm).title;
+                    Log.d(Constants.TAG_KIA, "pm: "+selectedTime);
+                }
+                if (lastSelectedIndexAm != -1){
+                    selectedTime = freeTimeAmArrayList.get(lastSelectedIndexAm).title;
+                    Log.d(Constants.TAG_KIA, "am: "+selectedTime);
+                }
+                bundle.putString("serviceId", idService);
+                bundle.putString("serviceName", nameService);
+                bundle.putString("reserveTime", selectedTime);
+                bundle.putString("reserveDate", selectedDate);
+                bundle.putString("reserveDateMiladi", selectedDateMiladi);
+                bundle.putBoolean("isFactor", true);
+
+                if (TokenManager.hasAccessToken(getContext())){
+                    bodyFactor.dateFactor = selectedDateMiladi+"T"+selectedTime;
+                    bodyFactor.serviceFactor = idService;
+
+                    galleryViewModel.callFactor(bodyFactor, TokenManager.getAccessToken(getContext()));
+
+
+
+
+                }else {
+                    Navigation.findNavController(view).navigate(R.id.action_to_signingFragment, bundle);
+                }
+
+            } else {
+//                snackBarIconError("باید یک رزرو انتخاب کنید", view);
+                snackBars.showErrorSelectReserve(getView(), getContext());
+            }
+
+        });
+
+        return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         ////////////////////----------~~ <ViewModels> ~~----------////////////////////
 
@@ -181,7 +303,6 @@ public class ReservationFragment extends Fragment implements OnSelectedItem {
                 binding.showAllReserves.setVisibility(View.GONE);
                 binding.emptyTextReservation.setVisibility(View.VISIBLE);
             } else {
-
                 binding.showAllReserves.setVisibility(View.VISIBLE);
                 binding.emptyTextReservation.setVisibility(View.GONE);
             }
@@ -193,59 +314,9 @@ public class ReservationFragment extends Fragment implements OnSelectedItem {
         });
         galleryViewModel.getServices(1, 20, "");
 
-        ////////////////////----------~~ <calender Today> ~~----------////////////////////
-
-        ////////////////////----------~~ <Swipe> ~~----------////////////////////
-        binding.swipeRefreshLayoutReservation.setColorSchemeColors(getResources().getColor(R.color.show_more_text), getResources().getColor(R.color.main));
-        binding.swipeRefreshLayoutReservation.setOnRefreshListener(() -> {
-//            binding.swipeRefreshLayoutReservation.setRefreshing(false);
-            callSearchServicesApi();
-        });
-
-        binding.swipeRefreshLayoutReservation.setRefreshing(true);
-        Handler h = new Handler();
-        Runnable runnable = () -> {
-            binding.swipeRefreshLayoutReservation.setRefreshing(false);
-            //callApi
-            callSearchServicesApi();
-
-            Calender();
-            Spinnerr();
-            Recycler();
+        ////////////////////----------~~ <ViewModels> ~~----------////////////////////
 
 
-        };h.postDelayed(runnable, 1000);
-        ////////////////////----------~~ <Swipe> ~~----------////////////////////
-
-
-        //Signing Button
-        binding.signingButtonReservation.setOnClickListener(view -> {
-
-            Log.d("KIAOKO", "lastSelectedIndexAm" + lastSelectedIndexAm);
-            Log.d("KIAOKO", "lastSelectedIndexPm" + lastSelectedIndexPm);
-            if (lastSelectedIndexPm != -1 || lastSelectedIndexAm != -1) {
-
-                if (lastSelectedIndexPm !=-1) {
-                    selectedTime = freeTimePmArrayList.get(lastSelectedIndexPm).title;
-                    Log.d(Constants.TAG_KIA, "pm: "+selectedTime);
-                }else{
-                    selectedDate = freeTimeAmArrayList.get(lastSelectedIndexAm).title;
-                    Log.d(Constants.TAG_KIA, "am: "+selectedTime);
-                }
-                    Bundle bundle = new Bundle();
-                    bundle.putString("serviceId", idService);
-                    bundle.putString("serviceName", nameService);
-                    bundle.putString("reserveTime", selectedTime);
-                    bundle.putString("reserveDate", selectedDate);
-                    Navigation.findNavController(view).navigate(R.id.action_to_signingFragment, bundle);
-
-            } else {
-                snackBarIconError("باید یک رزرو انتخاب کنید", view);
-            }
-
-        });
-
-        return root;
     }
 
 
@@ -366,6 +437,16 @@ public class ReservationFragment extends Fragment implements OnSelectedItem {
 
             time = date(date_show);
             selectedDate = week[i]+" "+ persianDate.getDayOfMonth()+" "+ month[x];
+            String m = String.valueOf(persianDate.getMonth());
+            String dM = String.valueOf(persianDate.getDayOfMonth());
+            if (m.length() == 1){
+                m = "0"+persianDate.getMonth();
+            }
+            if (dM.length() == 1){
+                dM = "0"+persianDate.getDayOfMonth();
+            }
+            String d = persianDate.getYear()+"/"+m+"/"+dM;
+            selectedDateMiladi = date(d);
             callSearchServicesApi();
             adapterPm.notifyDataSetChanged();
             adapterAm.notifyDataSetChanged();
@@ -401,11 +482,11 @@ public class ReservationFragment extends Fragment implements OnSelectedItem {
 
     //Check Internet and call api
     private void callSearchServicesApi() {
+
             if (Connectivity.isConnected(getContext())) {
-                binding.swipeRefreshLayoutReservation.setRefreshing(false);
-                binding.emptyTextReservation.setVisibility(View.INVISIBLE);
-                binding.showAllReserves.setVisibility(View.VISIBLE);
+
                 callApi();
+                binding.swipeRefreshLayoutReservation.setRefreshing(false);
                 Log.d("KIATAG", "callSearchServicesApi: ");
 
             } else {
@@ -416,9 +497,6 @@ public class ReservationFragment extends Fragment implements OnSelectedItem {
                 binding.swipeRefreshLayoutReservation.setRefreshing(false);
 
             }
-
-
-
     }
 
 
