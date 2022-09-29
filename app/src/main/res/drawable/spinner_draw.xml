@@ -12,18 +12,20 @@
                         android:startColor="#ffffff"
                         android:type="linear" />
 
-                    <corners android:radius="@dimen/_18cdp" />
+                    <corners android:radius="@dimen/_8cdp" />
 
                     <padding
-                        android:bottom="0dp"
+                        android:bottom="@dimen/_8cdp"
                         android:left="0dp"
                         android:right="0dp"
-                        android:top="0dp" />
+                        android:top="@dimen/_8cdp" />
                 </shape>
             </item>
 
             <item
-                android:left="4dp">
+                android:left="@dimen/_4cdp"
+
+                >
 
                 <bitmap android:gravity="center_vertical|left" android:src="@drawable/ic_arrow_drop_down_black_24dp" />
 

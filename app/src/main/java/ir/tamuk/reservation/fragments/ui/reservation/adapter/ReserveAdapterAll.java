@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ public class ReserveAdapterAll extends RecyclerView.Adapter<ReserveAdapterAll.Vi
 
     private boolean isClicked;
     private int clickPosition;
+    private OnSelectedItem onSelectedItem;
 
 
 
@@ -32,6 +34,7 @@ public class ReserveAdapterAll extends RecyclerView.Adapter<ReserveAdapterAll.Vi
 
     public ReserveAdapterAll(ArrayList<FreeTimeAm> freeTimeAms, OnSelectedItem onSelectedItem){
         this.freeTimeAms=freeTimeAms;
+        this.onSelectedItem= onSelectedItem;
     }
 
     @NonNull
@@ -47,33 +50,53 @@ public class ReserveAdapterAll extends RecyclerView.Adapter<ReserveAdapterAll.Vi
         FreeTimeAm item = freeTimeAms.get(position);
         holder.binding.timeReserve.setText(item.title);
 
-        if (isClicked) {
+        if (item.aBoolean){
+            //color
+            Log.d("RHMN", "color: ");
 
-            if (clickPosition == position) {
+            holder.binding.relativeLayoutClick.setBackground(context.getDrawable(R.drawable.row_maincolor_reserve));
+            holder.binding.timeReserve.setTextColor(Color.WHITE);
+        }else {
+            //white
+            Log.d("RHMN", "white: ");
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    holder.binding.relativeLayoutClick.setBackground(context.getDrawable(R.drawable.row_maincolor_reserve));
-                    holder.binding.timeReserve.setTextColor(Color.WHITE);
-
-
-
-                }
-
-            } else {
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    holder.binding.relativeLayoutClick.setBackground(context.getDrawable(R.drawable.row_transparent_reserve));
-                    holder.binding.timeReserve.setTextColor(Color.BLACK);
-                }
-
-            }
+            holder.binding.relativeLayoutClick.setBackground(context.getDrawable(R.drawable.row_transparent_reserve));
+            holder.binding.timeReserve.setTextColor(Color.BLACK);
         }
+
+//        if (isClicked) {
+//
+//            if (clickPosition == position) {
+//
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                    holder.binding.relativeLayoutClick.setBackground(context.getDrawable(R.drawable.row_maincolor_reserve));
+//                    holder.binding.timeReserve.setTextColor(Color.WHITE);
+//
+//
+//
+//                }
+//
+//            } else {
+//
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                    holder.binding.relativeLayoutClick.setBackground(context.getDrawable(R.drawable.row_transparent_reserve));
+//                    holder.binding.timeReserve.setTextColor(Color.BLACK);
+//                }
+//
+//            }
+//        }
 
         holder.itemView.setOnClickListener(view -> {
 
-            isClicked = true;
-            clickPosition = position;
-            notifyDataSetChanged();
+            String key = item.time;
+            boolean a = item.aBoolean;
+
+            onSelectedItem.onItem(position, key);
+            Log.d("RHMN", "setOnClick: ");
+
+//            isClicked = true;
+//            clickPosition = position;
+//            notifyDataSetChanged();
 //                    activity.selectFinalPlan(plans.get(position));
 
         });

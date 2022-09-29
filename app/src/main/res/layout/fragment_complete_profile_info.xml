@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".CompleteProfileInfoFragment"
+    tools:context=".fragments.ui.signing.CompleteProfileInfoFragment"
     android:background="@color/login_blue"
     >
 
@@ -19,9 +19,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/_32cdp"
-        android:layout_marginTop="@dimen/_150cdp"
         android:layout_marginRight="@dimen/_32cdp"
-        android:layout_marginBottom="@dimen/_60cdp">
+        android:layout_below="@id/cancel_button_signing_"
+        android:layout_marginTop="@dimen/_32cdp"
+        android:layout_marginBottom="@dimen/_32cdp"
+        >
 
 
         <RelativeLayout
@@ -35,6 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_32cdp"
                 android:fontFamily="@font/iran_sans_mob"
                 android:text="تکمیل اطلاعات" />
 
@@ -61,13 +64,13 @@
                         android:id="@+id/name_edit_complete"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="right"
                         android:backgroundTint="#0081A7"
                         android:hint="  نام"
                         android:maxLines="1"
                         android:paddingTop="@dimen/_24cdp"
                         android:singleLine="true"
                         android:textColor="@color/white"
-                        android:layout_gravity="right"
                         android:theme="@style/Theme.number.code" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -90,12 +93,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="#0081A7"
+                        android:gravity="right"
                         android:hint="  نام خانوادگی"
                         android:maxLines="1"
                         android:paddingTop="@dimen/_24cdp"
                         android:singleLine="true"
                         android:textColor="@color/white"
-                        android:gravity="right"
 
                         android:theme="@style/Theme.number.code" />
 
@@ -108,11 +111,12 @@
                 android:id="@+id/accept_button_signing"
                 style="@style/fontForMediumEditText"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_60cdp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginLeft="@dimen/_15cdp"
-                android:layout_marginRight="@dimen/_15cdp"
+                android:layout_marginLeft="@dimen/_18cdp"
+                android:layout_marginRight="@dimen/_18cdp"
                 android:backgroundTint="@color/white"
+                android:paddingVertical="@dimen/_12cdp"
                 android:text="تایید"
                 android:textColor="@color/backgroundSigning"
                 android:textStyle="bold"
@@ -123,11 +127,19 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_60cdp"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="@dimen/_15cdp"
             android:layout_marginRight="@dimen/_15cdp"
             >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/_12cdp"
+                android:layout_marginBottom="@dimen/_8cdp"
+                style="@style/fontForMediumEditText"
+                />
 
             <ProgressBar
                 android:id="@+id/progress_circular_signing"
@@ -137,7 +149,6 @@
                 android:visibility="invisible" />
 
         </RelativeLayout>
-
 
     </RelativeLayout>
 </RelativeLayout>

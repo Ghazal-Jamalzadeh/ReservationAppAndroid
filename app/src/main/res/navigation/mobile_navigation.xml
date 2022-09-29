@@ -96,14 +96,14 @@
         android:name="ir.tamuk.reservation.fragments.ui.signing.SignInValiddationcodeFragment"
         android:label="fragment_sign_in_validdationcode"
         tools:layout="@layout/fragment_sign_in_validdationcode" >
-        <action
-            android:id="@+id/action_signInValiddationcodeFragment_to_completeProfileInfoFragment"
-            app:destination="@id/completeProfileInfoFragment"
-            app:enterAnim="@anim/slide_left"
-            app:exitAnim="@anim/wait"
-            app:popEnterAnim="@anim/wait"
-            app:popExitAnim="@anim/slide_right" />
     </fragment>
+    <action
+        android:id="@+id/action_to_completeProfileInfoFragment"
+        app:destination="@id/completeProfileInfoFragment"
+        app:enterAnim="@anim/slide_left"
+        app:exitAnim="@anim/wait"
+        app:popEnterAnim="@anim/wait"
+        app:popExitAnim="@anim/slide_right" />
     <fragment
         android:id="@+id/paid"
         android:name="ir.tamuk.reservation.fragments.ui.paid.Paid"

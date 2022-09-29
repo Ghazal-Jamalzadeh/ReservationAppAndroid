@@ -90,7 +90,7 @@
         <item name="android:popupBackground">@drawable/spinner_draw_popup</item>
         <item name="android:padding">0px</item>
         <item name="android:dropDownWidth">match_parent</item>
-        <item name="android:paddingBottom">0dp</item>
+        <item name="android:paddingBottom">8dp</item>
 <!--        <item name="elevation">@dimen/_8cdp</item>-->
         <item name="android:popupElevation">1dp</item>
         <item name="android:layout_marginBottom">@dimen/_4cdp</item>

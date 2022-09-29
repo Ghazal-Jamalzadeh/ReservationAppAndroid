@@ -115,6 +115,8 @@ public class MainActivity extends AppCompatActivity implements ApplicationCallBa
                                 binding.toolbarconstraintLayout.setVisibility(View.GONE);
                                 break;
 
+
+
                             default:
                                 binding.bottomNav.setVisibility(View.VISIBLE);
                                 binding.toolbarconstraintLayout.setVisibility(View.VISIBLE);
@@ -214,7 +216,9 @@ public class MainActivity extends AppCompatActivity implements ApplicationCallBa
                 };
                 h.postDelayed(r, 4000);
             }
-        } else {
+        }
+
+        else {
             super.onBackPressed();
         }
     }
@@ -226,4 +230,6 @@ public class MainActivity extends AppCompatActivity implements ApplicationCallBa
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+
 }

@@ -41,7 +41,6 @@ public class SigningFragment extends Fragment {
 
     private FragmentSigningBinding binding;
     private SigningViewModel signingViewModel ;
-
     private BodySendActivationCode body = new BodySendActivationCode();
 
     @Override
@@ -58,10 +57,11 @@ public class SigningFragment extends Fragment {
         binding = FragmentSigningBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-
         //Keyboard come up
         Tools.keyboardPopUp(getActivity());
         binding.mobileEditTextSigning.requestFocus();
+
+        ////////////////////----------~~ <onBackPress> ~~----------////////////////////
 
         // This callback will only be called when MyFragment is at least Started.
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
@@ -69,15 +69,20 @@ public class SigningFragment extends Fragment {
             public void handleOnBackPressed() {
                 // Handle the back button event
                 binding.cancelButtonSigning.performClick() ;
+                Log.d("RHMN", "handleOnBackPressed: ");
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
         // The callback can be enabled or disabled here or in handleOnBackPressed()
 
+        ////////////////////----------~~ <onBackPress> ~~----------////////////////////
+
+
         //Cancel Button
         binding.cancelButtonSigning.setOnClickListener(view -> {
             Navigation.findNavController(view).popBackStack();
+            Log.d("RHMN", "cancel: ");
         });
 
 
@@ -85,11 +90,14 @@ public class SigningFragment extends Fragment {
         binding.acceptButtonSigning.setOnClickListener(view -> {
 
             //editText
-            if (binding.mobileEditTextSigning.getText().length() == 11) {
+            if (binding.mobileEditTextSigning.getText().length() == 11 &&
+                    binding.mobileEditTextSigning.getText().toString().startsWith("09")) {
                 binding.mobileEditTextSigning.setTextColor(Color.WHITE);
                 body.mobile = binding.mobileEditTextSigning.getText().toString();
                 binding.progressCircularSigning.setVisibility(View.VISIBLE);
                 binding.acceptButtonSigning.setTextColor(Color.WHITE);
+                binding.acceptButtonSigning.setClickable(false);
+
 
                 if (Connectivity.isConnected(getContext())) {
                     signingViewModel.callSendActivationCode(body);
@@ -104,6 +112,11 @@ public class SigningFragment extends Fragment {
                         Bundle bundle = new Bundle();
                         bundle.clear();
                         bundle.putString("number", binding.mobileEditTextSigning.getText().toString());
+                        bundle.putString("serviceId", getArguments().getString("serviceId"));
+                        bundle.putString("serviceName", getArguments().getString("serviceName"));
+                        bundle.putString("reserveTime", getArguments().getString("reserveTime"));
+                        bundle.putString("reserveDate", getArguments().getString("reserveDate"));
+
 
                         if (Tools.checkDestination(view, R.id.signingFragment)) {
                             getViewModelStore().clear();
@@ -120,6 +133,7 @@ public class SigningFragment extends Fragment {
                     Snackbar.make(requireView(), s, Toast.LENGTH_SHORT).show();
                     binding.acceptButtonSigning.setTextColor(getResources().getColor(R.color.backgroundSigning));
                     binding.progressCircularSigning.setVisibility(View.GONE);
+                    binding.acceptButtonSigning.setClickable(true);
 
                 });
 
@@ -168,25 +182,5 @@ public class SigningFragment extends Fragment {
         return root;
     }
 
-    public  void hideKeyboard() {
-        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(getContext().INPUT_METHOD_SERVICE);
-        //Find the currently focused view, so we can grab the correct window token from it.
-        View view = getActivity().getCurrentFocus();
-        //If no view currently has focus, create a new one, just so we can grab a window token from it
-        if (view == null) {
-            view = new View(getActivity());
-        }
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }
-
-    public static void removePhoneKeypad(Fragment fragment) {
-        InputMethodManager inputManager = (InputMethodManager) fragment.getView()
-                .getContext()
-                .getSystemService(Context.INPUT_METHOD_SERVICE);
-
-        IBinder binder = fragment.getView().getWindowToken();
-        inputManager.hideSoftInputFromWindow(binder,
-                InputMethodManager.HIDE_NOT_ALWAYS);
-    }
 
 }
