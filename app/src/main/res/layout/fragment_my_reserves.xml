@@ -60,35 +60,35 @@
                 app:layout_constraintTop_toBottomOf="@+id/toolbarLay">
 
                 <include
-                    android:id="@+id/btn1"
+                    android:id="@+id/btnDone"
                     layout="@layout/layout_appointment_tabs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/btn2"
+                    app:layout_constraintStart_toEndOf="@+id/btnReserved"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <include
-                    android:id="@+id/btn2"
+                    android:id="@+id/btnReserved"
                     layout="@layout/layout_appointment_tabs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/btn1"
+                    app:layout_constraintEnd_toStartOf="@+id/btnDone"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/btn3"
+                    app:layout_constraintStart_toEndOf="@+id/btnCanceled"
                     app:layout_constraintTop_toTopOf="parent" />
 
 
                 <include
-                    android:id="@+id/btn3"
+                    android:id="@+id/btnCanceled"
                     layout="@layout/layout_appointment_tabs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/btn2"
+                    app:layout_constraintEnd_toStartOf="@+id/btnReserved"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -137,6 +137,7 @@
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <include
+                    android:id="@+id/details"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     layout="@layout/fragment_paid"/>

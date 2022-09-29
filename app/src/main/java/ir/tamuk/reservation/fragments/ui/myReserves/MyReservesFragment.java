@@ -17,6 +17,8 @@ import androidx.transition.Slide;
 import androidx.transition.Transition;
 import androidx.transition.TransitionManager;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -27,30 +29,35 @@ import java.util.ArrayList;
 
 import ir.tamuk.reservation.Interfaces.MyReservesAdapterInterface;
 import ir.tamuk.reservation.R;
-import ir.tamuk.reservation.activities.MainActivity;
 import ir.tamuk.reservation.databinding.FragmentMyReservesBinding;
-import ir.tamuk.reservation.fragments.ui.home.Adapter.ServicesByCategoryAdapter;
+import ir.tamuk.reservation.enums.StatusReserve;
 import ir.tamuk.reservation.fragments.ui.profile.ProfileViewModel;
 import ir.tamuk.reservation.models.Reserve;
+import ir.tamuk.reservation.models.User;
+import ir.tamuk.reservation.utils.DateTime;
+import ir.tamuk.reservation.utils.PriceFormat;
 import ir.tamuk.reservation.utils.TokenManager;
 
 public class MyReservesFragment extends Fragment implements MyReservesAdapterInterface {
 
     private static final String TAG = "MyReservesFragment";
     private FragmentMyReservesBinding binding;
-    private MyReservesViewModel viewModel ;
-    private MyReservesAdapter adapter ;
-    private ArrayList<Reserve> myReserves = new ArrayList<>() ;
-    private boolean isOpen = false ;
+    private MyReservesViewModel myReservesViewModel;
+    private ProfileViewModel profileViewModel;
+    private MyReservesAdapter adapter;
+    private ArrayList<Reserve> myReserves = new ArrayList<>();
+    private boolean isOpen = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        viewModel = new ViewModelProvider(this).get(MyReservesViewModel.class);
+        myReservesViewModel = new ViewModelProvider(this).get(MyReservesViewModel.class);
+        profileViewModel = new ViewModelProvider(getActivity()).get(ProfileViewModel.class);
+
 
         binding = FragmentMyReservesBinding.inflate(inflater, container, false);
 
-        return binding.getRoot() ;
+        return binding.getRoot();
     }
 
     @Override
@@ -63,9 +70,9 @@ public class MyReservesFragment extends Fragment implements MyReservesAdapterInt
         binding.refreshLayout.setEnabled(true);
 
         //titles
-        binding.btn1.txt.setText("done");
-        binding.btn2.txt.setText("reserved");
-        binding.btn3.txt.setText("canceled");
+        binding.btnDone.txt.setText(StatusReserve.DONE.labelFa);
+        binding.btnReserved.txt.setText(StatusReserve.RESERVED.labelFa);
+        binding.btnCanceled.txt.setText(StatusReserve.CANCELED.labelFa);
 
         //recyclerView
         setupRecyclerView(myReserves);
@@ -74,10 +81,10 @@ public class MyReservesFragment extends Fragment implements MyReservesAdapterInt
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
-                if (isOpen){
-                    binding.blurBg.performClick() ;
-                }else {
-                    Navigation.findNavController(getView()).popBackStack() ;
+                if (isOpen) {
+                    binding.blurBg.performClick();
+                } else {
+                    Navigation.findNavController(getView()).popBackStack();
                 }
             }
         };
@@ -89,59 +96,80 @@ public class MyReservesFragment extends Fragment implements MyReservesAdapterInt
             public void onClick(View view) {
                 binding.blurBg.setVisibility(View.INVISIBLE);
                 toggle(binding.detailsLay);
-                isOpen = false ;
+                isOpen = false;
             }
         });
 
-        binding.btn1.card.setOnClickListener(view1 -> {
-        viewModel.callGetAllCategories(getContext() , TokenManager.getAccessToken(getContext()) ,"done" );
+        binding.btnDone.card.setOnClickListener(view1 -> {
 
-        binding.btn1.card.setCardBackgroundColor(ContextCompat.getColor(getContext() , R.color.show_more_text));
-        binding.btn2.card.setCardBackgroundColor(ContextCompat.getColor(getContext() , R.color.gray_lighter));
-        binding.btn3.card.setCardBackgroundColor(ContextCompat.getColor(getContext() , R.color.gray_lighter));
+//            if (!binding.refreshLayout.isRefreshing()) {
 
-        binding.btn1.txt.setTextColor(ContextCompat.getColor(getContext() , R.color.white));
-        binding.btn2.txt.setTextColor(ContextCompat.getColor(getContext() , R.color.black));
-        binding.btn3.txt.setTextColor(ContextCompat.getColor(getContext() , R.color.black));
+                myReservesViewModel.getDoneList(getContext(), TokenManager.getAccessToken(getContext()), StatusReserve.DONE.label);
+
+                binding.btnDone.card.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.show_more_text));
+                binding.btnReserved.card.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.gray_lighter));
+                binding.btnCanceled.card.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.gray_lighter));
+
+                binding.btnDone.txt.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
+                binding.btnReserved.txt.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+                binding.btnCanceled.txt.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+//            }
         });
 
-        binding.btn2.card.setOnClickListener(view1 -> {
-        viewModel.callGetAllCategories(getContext() , TokenManager.getAccessToken(getContext()) ,"reserved" );
+        binding.btnReserved.card.setOnClickListener(view1 -> {
 
-            binding.btn1.card.setCardBackgroundColor(ContextCompat.getColor(getContext() , R.color.gray_lighter));
-            binding.btn2.card.setCardBackgroundColor(ContextCompat.getColor(getContext() , R.color.show_more_text));
-            binding.btn3.card.setCardBackgroundColor(ContextCompat.getColor(getContext() , R.color.gray_lighter));
+//            if (!binding.refreshLayout.isRefreshing()){
+                myReservesViewModel.getReservedList(getContext(), TokenManager.getAccessToken(getContext()), StatusReserve.RESERVED.label);
 
-            binding.btn1.txt.setTextColor(ContextCompat.getColor(getContext() , R.color.black));
-            binding.btn2.txt.setTextColor(ContextCompat.getColor(getContext() , R.color.white));
-            binding.btn3.txt.setTextColor(ContextCompat.getColor(getContext() , R.color.black));
+                binding.btnDone.card.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.gray_lighter));
+                binding.btnReserved.card.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.show_more_text));
+                binding.btnCanceled.card.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.gray_lighter));
+
+                binding.btnDone.txt.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+                binding.btnReserved.txt.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
+                binding.btnCanceled.txt.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+//            }
+
         });
 
-        binding.btn3.card.setOnClickListener(view1 -> {
-        viewModel.callGetAllCategories(getContext() , TokenManager.getAccessToken(getContext()) ,"canceled" );
+        binding.btnCanceled.card.setOnClickListener(view1 -> {
 
-            binding.btn1.card.setCardBackgroundColor(ContextCompat.getColor(getContext() , R.color.gray_lighter));
-            binding.btn2.card.setCardBackgroundColor(ContextCompat.getColor(getContext() , R.color.gray_lighter));
-            binding.btn3.card.setCardBackgroundColor(ContextCompat.getColor(getContext() , R.color.show_more_text));
+//            if (!binding.refreshLayout.isRefreshing()){
 
-            binding.btn1.txt.setTextColor(ContextCompat.getColor(getContext() , R.color.black));
-            binding.btn2.txt.setTextColor(ContextCompat.getColor(getContext() , R.color.black));
-            binding.btn3.txt.setTextColor(ContextCompat.getColor(getContext() , R.color.white));
+            myReservesViewModel.getCanceledList(getContext(), TokenManager.getAccessToken(getContext()), StatusReserve.CANCELED.label);
+
+            binding.btnDone.card.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.gray_lighter));
+            binding.btnReserved.card.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.gray_lighter));
+            binding.btnCanceled.card.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.show_more_text));
+
+            binding.btnDone.txt.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+            binding.btnReserved.txt.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+            binding.btnCanceled.txt.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
+//            }
         });
 
         //observers
-        viewModel.myReservesLiveData.observe(getViewLifecycleOwner(), new Observer<ArrayList<Reserve>>() {
+        profileViewModel.getMyProfile().observe(getViewLifecycleOwner(), new Observer<User>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onChanged(User user) {
+                binding.details.nameTextForm.setText(user.firstName + " " + user.lastName);
+                binding.details.phoneTextForm.setText(user.mobile);
+            }
+        });
+
+        myReservesViewModel.myReservesLiveData.observe(getViewLifecycleOwner(), new Observer<ArrayList<Reserve>>() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onChanged(ArrayList<Reserve> reserves) {
-                Log.d(TAG, "onChanged: " + reserves.size());
+
                 myReserves.clear();
-                myReserves.addAll(reserves) ;
-                if (myReserves.size()>0){
+                myReserves.addAll(reserves);
+                if (myReserves.size() > 0) {
                     adapter.notifyDataSetChanged();
                     binding.myReservesRecycler.setVisibility(View.VISIBLE);
                     binding.emptyLay.setVisibility(View.INVISIBLE);
-                }else {
+                } else {
                     adapter.notifyDataSetChanged();
                     binding.myReservesRecycler.setVisibility(View.INVISIBLE);
                     binding.emptyLay.setVisibility(View.VISIBLE);
@@ -149,29 +177,59 @@ public class MyReservesFragment extends Fragment implements MyReservesAdapterInt
             }
         });
 
-        viewModel.isLoading.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+        myReservesViewModel.reserveDetailLiveData.observe(getViewLifecycleOwner(), new Observer<Reserve>() {
+            @Override
+            public void onChanged(Reserve reserve) {
+
+                showInfo(reserve);
+                binding.blurBg.setVisibility(View.VISIBLE);
+                toggle(binding.detailsLay);
+                isOpen = true;
+
+            }
+        });
+
+        myReservesViewModel.isLoading.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-                if(aBoolean){
+                if (aBoolean) {
                     binding.refreshLayout.setRefreshing(true);
                     binding.refreshLayout.setEnabled(true);
-                }else {
+                } else {
                     binding.refreshLayout.setRefreshing(false);
                     binding.refreshLayout.setEnabled(false);
                 }
             }
         });
 
+        //Text watcher - price format
+        TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                PriceFormat.formatPrice(binding.details.priceTextForm, this, charSequence);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        };
+        binding.details.priceTextForm.addTextChangedListener(textWatcher);
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        binding.btn1.card.performClick();
+        binding.btnDone.card.performClick();
     }
 
-    private void setupRecyclerView(ArrayList<Reserve> items){
-        adapter = new MyReservesAdapter( this ,  items);
+    private void setupRecyclerView(ArrayList<Reserve> items) {
+        adapter = new MyReservesAdapter(this, items);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         binding.myReservesRecycler.setAdapter(adapter);
         binding.myReservesRecycler.setLayoutManager(layoutManager);
@@ -187,16 +245,51 @@ public class MyReservesFragment extends Fragment implements MyReservesAdapterInt
         TransitionManager.beginDelayedTransition((ViewGroup) view, transition);
         if (view.getVisibility() == View.VISIBLE) {
             view.setVisibility(View.INVISIBLE);
+            binding.blurBg.setVisibility(View.INVISIBLE);
         } else {
             view.setVisibility(View.VISIBLE);
+            binding.blurBg.setVisibility(View.VISIBLE);
         }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void showInfo(Reserve reserve) {
+        //icon
+        if(reserve.isPay){
+
+            binding.details.tike.setColorFilter(ContextCompat.getColor(getContext(), R.color.main));
+            binding.details.txetTike.setTextColor(ContextCompat.getColor(getContext() ,  R.color.main));
+
+            binding.details.tike.setImageDrawable(ContextCompat.getDrawable(getContext() , R.drawable.ic_check_circle));
+            binding.details.txetTike.setText("پرداخت شده");
+
+        }else {
+            binding.details.tike.setColorFilter(ContextCompat.getColor(getContext(), R.color.show_more_text));
+            binding.details.txetTike.setTextColor(ContextCompat.getColor(getContext() ,  R.color.show_more_text));
+
+            binding.details.tike.setImageDrawable(ContextCompat.getDrawable(getContext() , R.drawable.ic_error_circle));
+            binding.details.txetTike.setText("پرداخت نشده");
+        }
+        //date
+        binding.details.dateTextForm.setText(DateTime.getPersianDate(reserve.date));
+        //time
+        binding.details.timeTextForm.setText(DateTime.getTime(reserve.date));
+        //service name
+        binding.details.serviceTextForm.setText(reserve.service.name);
+        //duration
+        binding.details.durationTextForm.setText(reserve.service.time + " دقیقه");
+        //price
+        binding.details.priceTextForm.setText(String.valueOf(reserve.service.price));
     }
 
 
     @Override
     public void getReserve(String id) {
-        binding.blurBg.setVisibility(View.VISIBLE);
-        toggle(binding.detailsLay);
-        isOpen = true ;
+
+//        if (!binding.refreshLayout.isRefreshing()){
+
+        myReservesViewModel.callGetReserveDetail(getContext(), TokenManager.getAccessToken(getContext()), id);
+//        }
+
     }
 }

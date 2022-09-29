@@ -44,7 +44,7 @@ public class MyReservesAdapter extends RecyclerView.Adapter<MyReservesAdapter.Vi
         Reserve item = myReserves.get(position) ;
 
         holder.itemView.setOnClickListener(view -> {
-            myReservesAdapterInterface.getReserve("");
+            myReservesAdapterInterface.getReserve(item.id);
         });
 
         holder.binding.txtTime.setText(DateTime.getTime(item.date));

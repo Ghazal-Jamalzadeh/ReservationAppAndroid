@@ -7,6 +7,7 @@ import ir.tamuk.reservation.models.ResponseCategoriesList;
 import ir.tamuk.reservation.models.ResponseGetMyReserve;
 import ir.tamuk.reservation.models.ResponseReservation;
 import ir.tamuk.reservation.models.ResponseGetMyProfile;
+import ir.tamuk.reservation.models.ResponseReserveDetail;
 import ir.tamuk.reservation.models.ResponseSearchServices;
 import ir.tamuk.reservation.models.ResponseSendActivationCode;
 import ir.tamuk.reservation.models.ResponseSubmitCustomer;
@@ -67,7 +68,8 @@ public interface ApiServices {
     //http://moeenkashisaz.ir/laser/api/v1/finde-free-time?service=631869b10bfaf719ef8b76cf&date=2022-09-12&line=1
     @GET("v1/finde-free-time?service?line=1")
     Call<ResponseReservation> getReservations(
-            @Query("date") String time, @Query("service") String service);
+            @Query("date") String time,
+            @Query("service") String service);
 
     //http://moeenkashisaz.ir/laser/api/v1/upload-file/
     @Multipart
@@ -77,9 +79,6 @@ public interface ApiServices {
             @Header("authorization") String token,
             @Part MultipartBody.Part file);
 
-    //http://moeenkashisaz.ir/laser/api/v1/get-status-reserve
-//    @GET("v1/get-status-reserve")
-//    Call
 
     //http://moeenkashisaz.ir/laser/api/v1/get-my-reserve?status=reserved
     @GET("v1/get-my-reserve?")
@@ -90,7 +89,7 @@ public interface ApiServices {
 
     //http://localhost:3001/laser/api/v1/get-reserve-user/631c47d9d0db77fb798849c3
     @GET("v1/get-reserve-user/{id}")
-    Call<?> getReserveDetail(
+    Call<ResponseReserveDetail> getReserveDetail(
             @Header("authorization") String token ,
             @Path("id") String id)  ;
 

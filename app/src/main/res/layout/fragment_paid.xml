@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,13 +19,13 @@
 
     <ImageView
         android:id="@+id/tike"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_group_46"
+        android:layout_width="@dimen/_50cdp"
+        android:layout_height="@dimen/_50cdp"
         android:layout_below="@id/closeButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_8cdp"
-        />
+        android:src="@drawable/ic_check_circle"
+        app:tint="@color/main" />
 
     <TextView
         android:id="@+id/txet_tike"
