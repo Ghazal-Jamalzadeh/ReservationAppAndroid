@@ -3,14 +3,14 @@
 buildscript {
 
     repositories {
-        jcenter()
-
-        google()
-
         maven { url 'https://maven.google.com' }
         maven { url 'https://jitpack.io' }
-
         mavenCentral()
+        google()
+        jcenter()
+
+
+
 
     }
     dependencies {

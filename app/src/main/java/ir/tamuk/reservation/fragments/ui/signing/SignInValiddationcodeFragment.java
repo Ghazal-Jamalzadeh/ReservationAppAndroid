@@ -78,20 +78,34 @@ public class SignInValiddationcodeFragment extends Fragment {
         //numberPhone
         binding.text.setText(getArguments().getString("number"));
 
+        ////////////////////----------~~ <onBackPress> ~~----------////////////////////
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button event
+                binding.editing.performClick() ;
+                Log.d("GHAZAL", "handleOnBackPressed: ");
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
+
+        ////////////////////----------~~ <onBackPress> ~~----------////////////////////
+
+        //editing Number Button
+        binding.editing.setOnClickListener(view -> {
+            timer.cancelTimer();
+            findNavController(view).popBackStack();
+            Log.d("GHAZAL", "Editing: ");
+
+        });
+
         VerferiEditText();
         allButtons();
-        backPress();
         timerDo();
 
         return root;}
 
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-
-    }
 
     //edittext ValidationCode
     public void VerferiEditText(){
@@ -250,19 +264,10 @@ public class SignInValiddationcodeFragment extends Fragment {
 
     }
 
+
     //Buttons /accept, image, editing/
     public void allButtons(){
 
-        //Action Keyboard Button
-        binding.acceptButtonSigning.setOnEditorActionListener((textView, i, keyEvent) -> {
-            if (i == EditorInfo.IME_ACTION_DONE) {
-                String all = binding.one.getText()+binding.two.getText().toString()
-                        +binding.three.getText().toString()+binding.four.getText().toString();
-                //do here your stuff f
-                return true;
-            }
-            return false;
-        });
         //Accept Button
         binding.acceptButtonSigning.setOnClickListener(view -> {
             String all = binding.one.getText()+binding.two.getText().toString()
@@ -277,6 +282,7 @@ public class SignInValiddationcodeFragment extends Fragment {
             signingViewModel.callReceiveActivationCode(body, getContext());
             binding.progressCircularSigning.setVisibility(View.VISIBLE);
             binding.acceptButtonSigning.setTextColor(Color.WHITE);
+            binding.acceptButtonSigning.setClickable(false);
 
             signingViewModel.isSuccessLiveData.observe(getViewLifecycleOwner(), aBoolean -> {
                 if (aBoolean){
@@ -285,16 +291,28 @@ public class SignInValiddationcodeFragment extends Fragment {
                     if (Tools.checkDestination(view, R.id.signInValiddationcodeFragment)) {
 
                         signingViewModel.isLogin.observe(getViewLifecycleOwner(), aBoolean1 -> {
-                            if (aBoolean){
+                            Bundle bundle = new Bundle();
+                            bundle.putString("number", getArguments().getString("number"));
+                            bundle.putString("serviceId", getArguments().getString("serviceId"));
+                            bundle.putString("serviceName", getArguments().getString("serviceName"));
+                            bundle.putString("reserveTime", getArguments().getString("reserveTime"));
+                            bundle.putString("reserveDate", getArguments().getString("reserveDate"));
+
+
+                            if (aBoolean1){
+                                Log.d(Constants.TAG_KIA, "if: "+aBoolean1);
+
                                 getViewModelStore().clear();
+                                Navigation.findNavController(getView()).popBackStack();
                                 Navigation.findNavController(getView())
-                                        .navigate(R.id.action_to_factorFragment);
+                                        .navigate(R.id.action_to_completeProfileInfoFragment, bundle);
 
                             }else{
-
+                                Log.d(Constants.TAG_KIA, "else: "+aBoolean1);
                                 getViewModelStore().clear();
+                                Navigation.findNavController(getView()).popBackStack();
                                 Navigation.findNavController(getView())
-                                        .navigate(R.id.action_signInValiddationcodeFragment_to_completeProfileInfoFragment);
+                                        .navigate(R.id.action_to_factorFragment, bundle);
                             }
                         });
                     }
@@ -308,6 +326,10 @@ public class SignInValiddationcodeFragment extends Fragment {
                 public void onChanged(String s) {
 //                    Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
                     Snackbar.make(getView(), s, Toast.LENGTH_SHORT).show();
+                    binding.acceptButtonSigning.setTextColor(getResources().getColor(R.color.backgroundSigning));
+                    binding.progressCircularSigning.setVisibility(View.GONE);
+                    binding.acceptButtonSigning.setClickable(true);
+
                 }
             });
 
@@ -325,28 +347,9 @@ public class SignInValiddationcodeFragment extends Fragment {
 
         });
 
-        binding.editing.setOnClickListener(view -> {
-            timer.cancelTimer();
-            findNavController(view).popBackStack();
-
-        });
-    }
-
-    //onBackPress
-    public void backPress(){
-        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
-            @Override
-            public void handleOnBackPressed() {
-                // Handle the back button event
-                Navigation.findNavController(getView()).popBackStack();
-                timer.cancelTimer();
-                timer.stopTimer(binding.textTimer);
-
-            }
-        };
-        requireActivity().getOnBackPressedDispatcher().addCallback(getActivity(), callback);
 
     }
+
 
     //Timer
     public void timerDo(){

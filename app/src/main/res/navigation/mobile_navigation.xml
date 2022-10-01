@@ -3,7 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="ir.tamuk.reservation.fragments.ui.Splash.SplashFragment"
+        android:label="SplashFragment"
+        tools:layout="@layout/fragment_splash"
+        />
 
     <fragment
         android:id="@+id/nav_home"
@@ -29,6 +36,7 @@
         android:id="@+id/action_to_signingFragment"
         app:destination="@id/signingFragment"
         app:enterAnim="@anim/slide_up"
+        app:exitAnim="@anim/slide_down"
         app:popEnterAnim="@anim/wait"
         app:popExitAnim="@anim/slide_down"
         />
@@ -39,7 +47,19 @@
         tools:layout="@layout/fragment_profile" >
         <action
             android:id="@+id/action_nav_profile_to_appointmentFragment"
-            app:destination="@id/appointmentFragment" />
+            app:destination="@id/appointmentFragment"
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait"
+            app:popEnterAnim="@anim/wait"
+            app:popExitAnim="@anim/slide_right"/>
+        <action
+            android:id="@+id/action_nav_profile_to_editProfileFragment"
+            app:destination="@id/editProfileFragment"
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait"
+            app:popEnterAnim="@anim/wait"
+            app:popExitAnim="@anim/slide_right"
+            />
     </fragment>
     <fragment
         android:id="@+id/nav_services"
@@ -79,14 +99,14 @@
         android:name="ir.tamuk.reservation.fragments.ui.signing.SignInValiddationcodeFragment"
         android:label="fragment_sign_in_validdationcode"
         tools:layout="@layout/fragment_sign_in_validdationcode" >
-        <action
-            android:id="@+id/action_signInValiddationcodeFragment_to_completeProfileInfoFragment"
-            app:destination="@id/completeProfileInfoFragment"
-            app:enterAnim="@anim/slide_left"
-            app:exitAnim="@anim/wait"
-            app:popEnterAnim="@anim/wait"
-            app:popExitAnim="@anim/slide_right" />
     </fragment>
+    <action
+        android:id="@+id/action_to_completeProfileInfoFragment"
+        app:destination="@id/completeProfileInfoFragment"
+        app:enterAnim="@anim/slide_left"
+        app:exitAnim="@anim/wait"
+        app:popEnterAnim="@anim/wait"
+        app:popExitAnim="@anim/slide_right" />
     <fragment
         android:id="@+id/paid"
         android:name="ir.tamuk.reservation.fragments.ui.paid.Paid"
@@ -95,9 +115,18 @@
 
     <fragment
         android:id="@+id/appointmentFragment"
-        android:name="ir.tamuk.reservation.fragments.ui.Appointments.AppointmentFragment"
+        android:name="ir.tamuk.reservation.fragments.ui.myReserves.MyReservesFragment"
         android:label="AppointmentFragment"
-        tools:layout="@layout/fragment_appointment"/>
+        tools:layout="@layout/fragment_my_reserves">
+        <action
+            android:id="@+id/action_appointmentFragment_to_paid"
+            app:destination="@id/paid"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/wait"
+            app:popEnterAnim="@anim/wait"
+            app:popExitAnim="@anim/slide_down"
+            />
+    </fragment>
     <fragment
         android:id="@+id/serviceInfoFragment"
         android:name="ir.tamuk.reservation.fragments.ui.services.ServiceInfoFragment"
@@ -116,5 +145,33 @@
         app:exitAnim="@anim/wait"
         app:popEnterAnim="@anim/wait"
         app:popExitAnim="@anim/slide_right" />
+
+    <action
+        android:id="@+id/action_to_navHome"
+        app:destination="@id/nav_home" />
+
+    <action
+        android:id="@+id/action_to_navProfile"
+        app:destination="@id/nav_profile"
+        app:popUpTo="@+id/nav_home"
+        app:popUpToInclusive="false"/>
+
+    <action
+        android:id="@+id/action_to_navServices"
+        app:destination="@id/nav_services"
+        app:popUpTo="@+id/nav_home"
+        app:popUpToInclusive="false"/>
+
+    <action
+        android:id="@+id/action_to_navReservation"
+        app:destination="@id/nav_reservation"
+        app:popUpTo="@+id/nav_home"
+        app:popUpToInclusive="false"/>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="ir.tamuk.reservation.fragments.ui.profile.EditProfileFragment"
+        android:label="EditProfileFragment"
+        tools:layout="@layout/fragment_edit_profile"/>
+
 
 </navigation>

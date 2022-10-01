@@ -1,343 +1,305 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical"
+    android:id="@+id/swipe_Refresh_Layout_reservation"
     tools:context=".fragments.ui.reservation.ReservationFragment">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/linear_back"
         >
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_50cdp"
-            android:layout_marginLeft="@dimen/_15cdp"
-            android:layout_marginTop="@dimen/_10cdp"
-            android:layout_marginRight="@dimen/_15cdp"
-            android:elevation="8dp"
-            app:cardCornerRadius="@dimen/_16cdp">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/days_card_reservation"
-                        style="@style/fontForMediumEditText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="25" />
+                android:orientation="vertical"
+                android:id="@+id/linear_back"
+                >
 
 
-                </RelativeLayout>
-
-                <!--                <RelativeLayout-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="match_parent"-->
-                <!--                    android:layout_weight="1"-->
-                <!--                    >-->
-
-                <!--                    <ImageView-->
-                <!--                        android:visibility="invisible"-->
-                <!--                        android:id="@+id/forward_calender_button"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_centerInParent="true"-->
-                <!--                        android:src="@drawable/ic_arrow_back_ios_fill0_wght400_grad0_opsz48__left_" />-->
-
-
-                <!--                </RelativeLayout>-->
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/month_card_reservation"
-                        style="@style/fontForMediumEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:text="اردیبهشت" />
-
-
-                </RelativeLayout>
-
-                <!--                <RelativeLayout-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="match_parent"-->
-                <!--                    android:layout_weight="1"-->
-                <!--                    >-->
-
-                <!--                    <ImageView-->
-                <!--                        android:visibility="invisible"-->
-                <!--                        android:id="@+id/backward_calender_button"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_centerInParent="true"-->
-                <!--                        android:src="@drawable/ic_arrow_back_ios_fill0_wght400_grad0_opsz48__right_" />-->
-
-
-                <!--                </RelativeLayout>-->
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/week_card_reservation"
-                        style="@style/fontForMediumEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:gravity="center"
-                        android:text="یکشنبه" />
-
-
-                </RelativeLayout>
-
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!--calender-->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_300cdp"
-            android:layout_marginLeft="@dimen/_15cdp"
-            android:layout_marginTop="@dimen/_10cdp"
-            android:layout_marginRight="@dimen/_15cdp"
-            android:elevation="6dp"
-            app:cardCornerRadius="@dimen/_16cdp"
-
-            >
-
-            <!--            <FrameLayout-->
-            <!--                android:id="@+id/persianCaldroid"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_gravity="center_vertical"-->
-            <!--                android:layout_marginTop="@dimen/_10cdp"-->
-
-            <!--                />-->
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ir.mirrajabi.persiancalendar.PersianCalendarView
-                    android:id="@+id/persian_calendar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/_12cdp"
-                    android:layout_marginTop="@dimen/_8cdp"
-                    android:layout_marginRight="@dimen/_12cdp"
-                    android:layout_marginBottom="@dimen/_8cdp"
-                    app:pcv_colorBackground="@color/white"
-                    app:pcv_colorDayName="#bab6b6"
-                    app:pcv_colorHoliday="@color/show_more_text"
-                    app:pcv_colorHolidaySelected="@color/show_more_text"
-                    app:pcv_colorNormalDay="@color/black"
-                    app:pcv_colorNormalDaySelected="@color/white"
-                    app:pcv_eventUnderlineColor="#0002F0F0"
-                    app:pcv_fontSize="@dimen/_16cdp"
-                    app:pcv_headersFontSize="@dimen/_16cdp"
-                    app:pcv_selectedDayBackground="@drawable/circle_selected_day"
-                    app:pcv_todayBackground="@drawable/circle_today" />
-
-
-                <LinearLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="@dimen/_25cdp"
-                    android:layout_marginRight="@dimen/_25cdp"
-                    android:layout_marginBottom="@dimen/_16cdp"
-                    android:orientation="horizontal">
+                    android:layout_marginLeft="@dimen/_15cdp"
+                    android:layout_marginTop="@dimen/_10cdp"
+                    android:layout_marginRight="@dimen/_15cdp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:elevation="8dp"
+                    app:cardCornerRadius="@dimen/_8cdp">
 
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_height="match_parent"
                         android:orientation="horizontal">
 
-                        <TextView
-                            style="@style/fontForSmallText"
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:drawableRight="@drawable/ic_group_13"
-                            android:drawablePadding="@dimen/_8cdp"
-                            android:text="دارای ظرفیت" />
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
 
-                    </RelativeLayout>
+                            <TextView
+                                android:id="@+id/days_card_reservation"
+                                style="@style/fontForMediumEditText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:paddingTop="@dimen/_8cdp"
+                                android:paddingBottom="@dimen/_8cdp"
+                                android:text="25" />
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_5cdp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
 
-                        <TextView
-                            style="@style/fontForSmallText"
+                        </RelativeLayout>
+
+                        <!--                <RelativeLayout-->
+                        <!--                    android:layout_width="match_parent"-->
+                        <!--                    android:layout_height="match_parent"-->
+                        <!--                    android:layout_weight="1"-->
+                        <!--                    >-->
+
+                        <!--                    <ImageView-->
+                        <!--                        android:visibility="invisible"-->
+                        <!--                        android:id="@+id/forward_calender_button"-->
+                        <!--                        android:layout_width="wrap_content"-->
+                        <!--                        android:layout_height="wrap_content"-->
+                        <!--                        android:layout_centerInParent="true"-->
+                        <!--                        android:src="@drawable/ic_arrow_back_ios_fill0_wght400_grad0_opsz48__left_" />-->
+
+
+                        <!--                </RelativeLayout>-->
+
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:drawableRight="@drawable/ic_ellipse_34"
-                            android:drawablePadding="@dimen/_8cdp"
-                            android:text="ساعت های آزاد" />
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
 
-                    </RelativeLayout>
+                            <TextView
+                                android:id="@+id/month_card_reservation"
+                                style="@style/fontForMediumEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
+                                android:gravity="center"
+                                android:paddingTop="@dimen/_8cdp"
+                                android:paddingBottom="@dimen/_8cdp"
+                                android:text="اردیبهشت" />
+
+
+                        </RelativeLayout>
+
+                        <!--                <RelativeLayout-->
+                        <!--                    android:layout_width="match_parent"-->
+                        <!--                    android:layout_height="match_parent"-->
+                        <!--                    android:layout_weight="1"-->
+                        <!--                    >-->
+
+                        <!--                    <ImageView-->
+                        <!--                        android:visibility="invisible"-->
+                        <!--                        android:id="@+id/backward_calender_button"-->
+                        <!--                        android:layout_width="wrap_content"-->
+                        <!--                        android:layout_height="wrap_content"-->
+                        <!--                        android:layout_centerInParent="true"-->
+                        <!--                        android:src="@drawable/ic_arrow_back_ios_fill0_wght400_grad0_opsz48__right_" />-->
+
+
+                        <!--                </RelativeLayout>-->
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/week_card_reservation"
+                                style="@style/fontForMediumEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="3"
+                                android:gravity="center"
+                                android:paddingTop="@dimen/_8cdp"
+                                android:paddingBottom="@dimen/_8cdp"
+                                android:text="یکشنبه" />
+
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!--calender-->
+                <androidx.cardview.widget.CardView
+                    android:layout_below="@id/card_time"
+                    android:id="@+id/card_calender"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="@dimen/_15cdp"
+                    android:layout_marginTop="@dimen/_10cdp"
+                    android:layout_marginRight="@dimen/_15cdp"
+                    app:layout_constraintTop_toBottomOf="@id/card_time"
+                    android:elevation="6dp"
+                    app:cardCornerRadius="@dimen/_8cdp"
+                    app:layout_constraintDimensionRatio="6:5.1"
+
+                    >
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_5cdp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_8cdp"
+                        >
 
-                        <TextView
-                            style="@style/fontForSmallText"
+
+                        <ir.mirrajabi.persiancalendar.PersianCalendarView
+                            android:id="@+id/persian_calendar"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:drawableRight="@drawable/ic_group_11"
-                            android:drawablePadding="@dimen/_8cdp"
-                            android:text="پر شده" />
+                            android:nestedScrollingEnabled="false"
+                            app:pcv_colorBackground="@color/white"
+                            app:pcv_colorDayName="#bab6b6"
+                            app:pcv_colorHoliday="@color/show_more_text"
+                            app:pcv_colorHolidaySelected="@color/show_more_text"
+                            app:pcv_colorNormalDay="@color/black"
+                            app:pcv_colorNormalDaySelected="@color/white"
+                            app:pcv_eventUnderlineColor="#0002F0F0"
+                            app:pcv_fontSize="@dimen/_16cdp"
+                            app:pcv_headersFontSize="@dimen/_16cdp"
+                            app:pcv_selectedDayBackground="@drawable/circle_selected_day"
+                            app:pcv_todayBackground="@drawable/circle_today"
 
+                            />
                     </RelativeLayout>
 
 
-                </LinearLayout>
 
 
-            </RelativeLayout>
+                </androidx.cardview.widget.CardView>
 
 
-        </androidx.cardview.widget.CardView>
+                <Spinner
+                    android:layout_below="@id/card_calender"
+                    app:layout_constraintTop_toBottomOf="@id/card_calender"
+                    android:id="@+id/spinner_services"
+                    style="@style/SpinnerTheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_20cdp"
+                    android:layout_marginTop="@dimen/_15cdp"
+                    android:layout_marginRight="@dimen/_20cdp"
+                    android:dropDownVerticalOffset="0dp"
+                    android:elevation="@dimen/_4cdp"
+                    android:overlapAnchor="false"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="0dp"
+                    android:dropDownWidth="match_parent"
+
+                    />
 
 
-<!--                <androidx.cardview.widget.CardView-->
-<!--                    android:id="@+id/card_spinner_reservation"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="@dimen/_50cdp"-->
-<!--                    android:layout_marginLeft="@dimen/_20cdp"-->
-<!--                    android:layout_marginTop="@dimen/_15cdp"-->
-<!--                    android:layout_marginRight="@dimen/_20cdp"-->
-<!--                    app:cardCornerRadius="@dimen/_18cdp"-->
-<!--                    >-->
+                <RelativeLayout
+                    android:layout_below="@id/spinner_services"
+                    app:layout_constraintTop_toBottomOf="@id/spinner_services"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+                    <TextView
+
+                        android:id="@+id/empty_text_reservation"
+                        style="@style/fontForMediumEditText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/_64cdp"
+                        android:text="رزروی موجود نیست"
+                        android:textColor="@color/main" />
+
+                    <LinearLayout
+                        android:id="@+id/show_all_reserves"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/fontForMediumBoldText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_marginTop="@dimen/_25cdp"
+                            android:layout_marginRight="@dimen/_15cdp"
+                            android:text="نوبت صبح" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_15cdp"
+                            android:layout_marginTop="@dimen/_5cdp"
+                            android:layout_marginRight="@dimen/_15cdp">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerView_morning_reserve"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:nestedScrollingEnabled="false"
+
+                                />
 
 
-        <Spinner
-            android:id="@+id/spinner_services"
-            style="@style/SpinnerTheme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_20cdp"
-            android:layout_marginTop="@dimen/_15cdp"
-            android:layout_marginRight="@dimen/_20cdp"
-            android:dropDownVerticalOffset="0dp"
-            android:elevation="@dimen/_4cdp"
-            android:overlapAnchor="false"
-            android:paddingLeft="0dp"
-            android:paddingRight="0dp"
-            android:dropDownWidth="match_parent"
-
-            />
-<!--            android:padding="@dimen/_24cdp"-->
+                        </RelativeLayout>
 
 
-<!--                </androidx.cardview.widget.CardView>-->
+                        <TextView
+                            style="@style/fontForMediumBoldText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_marginTop="@dimen/_25cdp"
+                            android:layout_marginRight="@dimen/_15cdp"
+                            android:text="نوبت بعدازظهر" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerView_evening_reserve"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_15cdp"
+                            android:layout_marginTop="@dimen/_5cdp"
+                            android:layout_marginRight="@dimen/_15cdp"
+                            android:nestedScrollingEnabled="false" />
 
 
-        <TextView
-            style="@style/fontForMediumBoldText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="@dimen/_25cdp"
-            android:layout_marginRight="@dimen/_15cdp"
-            android:text="نوبت صبح" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/signing_button_reservation"
+                            style="@style/fontForMediumEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_15cdp"
+                            android:layout_marginTop="@dimen/_10cdp"
+                            android:layout_marginRight="@dimen/_15cdp"
+                            android:layout_marginBottom="@dimen/_15cdp"
+                            android:paddingVertical="@dimen/_12cdp"
+                            android:text="رزرو نوبت"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_15cdp"
-            android:layout_marginTop="@dimen/_5cdp"
-            android:layout_marginRight="@dimen/_15cdp">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView_morning_reserve"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                />
-
-            <TextView
-
-                android:id="@+id/empty_text_reservation"
-                style="@style/fontForMediumEditText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="رزروی موجود نیست"
-                android:textColor="@color/main" />
-
-        </RelativeLayout>
+                    </LinearLayout>
 
 
-        <TextView
-            style="@style/fontForMediumEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="@dimen/_25cdp"
-            android:layout_marginRight="@dimen/_15cdp"
-            android:text="نوبت بعدازظهر"
-            android:textStyle="bold" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView_evening_reserve"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_15cdp"
-            android:layout_marginTop="@dimen/_5cdp"
-            android:layout_marginRight="@dimen/_15cdp" />
+                </RelativeLayout>
 
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/signing_button_reservation"
-            style="@style/fontForMediumEditText"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_60cdp"
-            android:layout_marginLeft="@dimen/_15cdp"
-            android:layout_marginTop="@dimen/_10cdp"
-            android:layout_marginRight="@dimen/_15cdp"
-            android:layout_marginBottom="@dimen/_15cdp"
-            android:text="رزرو نوبت"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
 
-    </LinearLayout>
 
 
-</androidx.core.widget.NestedScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

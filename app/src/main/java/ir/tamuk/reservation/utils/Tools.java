@@ -3,6 +3,9 @@ package ir.tamuk.reservation.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ScrollView;
@@ -14,6 +17,11 @@ import androidx.navigation.Navigation;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.api.ApiClient;
@@ -81,7 +89,6 @@ public class Tools {
       return  Navigation.findNavController(view).getCurrentDestination() == Navigation.findNavController(view).findDestination(fragmentId);
 
     }
-
 
 
 }

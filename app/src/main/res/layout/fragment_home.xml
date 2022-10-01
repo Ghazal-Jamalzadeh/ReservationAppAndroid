@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+
     tools:context=".fragments.ui.home.HomeFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -74,34 +75,34 @@
                     android:visibility="gone"
                     app:layout_constraintTop_toBottomOf="@id/tabLayout">
 
-                        <TextView
-                            android:id="@+id/txtShowAll"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="left|bottom"
-                            android:text="مشاهده همه"
-                            android:visibility="visible"
-                            android:textColor="@color/show_more_text"
-                            style="@style/fontForMediumEditText"
-                            android:padding="@dimen/_16cdp"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"/>
+                    <TextView
+                        android:id="@+id/txtShowAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="left|bottom"
+                        android:text="مشاهده همه"
+                        android:visibility="visible"
+                        android:textColor="@color/show_more_text"
+                        style="@style/fontForMediumEditText"
+                        android:padding="@dimen/_16cdp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"/>
 
-                        <TextView
-                            android:id="@+id/txtServiceName"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="right"
-                            style="@style/fontForMediumBoldText"
-                            android:textStyle="bold"
-                            android:textColor="@color/backgroundSigning"
-                            tools:text="لیزر صورت"
-                            android:padding="@dimen/_16cdp"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintLeft_toRightOf="@id/txtShowAll"/>
+                    <TextView
+                        android:id="@+id/txtServiceName"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        style="@style/fontForMediumBoldText"
+                        android:textStyle="bold"
+                        android:textColor="@color/backgroundSigning"
+                        tools:text="لیزر صورت"
+                        android:padding="@dimen/_16cdp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toRightOf="@id/txtShowAll"/>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/optionRecycler"
@@ -122,29 +123,29 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/emptyLay"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@id/tabLayout"
-                app:layout_constraintBottom_toBottomOf="parent">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/emptyLay"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/tabLayout"
+                    app:layout_constraintBottom_toBottomOf="parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/empty"
-                    style="@style/fontForMediumText"
-                    android:textColor="@color/show_more_text"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/empty"
+                        style="@style/fontForMediumText"
+                        android:textColor="@color/show_more_text"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
 
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

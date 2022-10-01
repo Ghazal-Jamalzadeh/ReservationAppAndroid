@@ -10,10 +10,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_15cdp"
-        android:layout_marginTop="@dimen/_10cdp"
-        android:layout_marginRight="@dimen/_15cdp"
-        android:layout_marginBottom="@dimen/_32cdp"
+        android:layout_marginLeft="@dimen/_16cdp"
+        android:layout_marginTop="@dimen/_16cdp"
+        android:layout_marginRight="@dimen/_16cdp"
         app:cardCornerRadius="@dimen/_16cdp"
         >
 
@@ -26,15 +25,15 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_20cdp"
+                android:padding="@dimen/_24cdp"
                 >
 
                 <TextView
                     style="@style/fontForLargeBoldOrangeText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
 
+                    android:layout_centerInParent="true"
                     android:text="اطلاعات رزرو نوبت" />
 
 
@@ -44,10 +43,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingBottom="@dimen/_32cdp"
-                android:paddingTop="@dimen/_24cdp"
-                android:layout_marginRight="@dimen/_32cdp"
-                android:layout_marginLeft="@dimen/_32cdp"
+                android:paddingVertical="@dimen/_24cdp"
+                android:layout_marginHorizontal="@dimen/_32cdp"
                 >
 
                 <LinearLayout
@@ -269,10 +266,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginRight="@dimen/_24cdp"
-                android:layout_marginLeft="@dimen/_24cdp"
-                android:paddingTop="@dimen/_32cdp"
-                android:paddingBottom="@dimen/_32cdp"
+                android:layout_marginHorizontal="@dimen/_24cdp"
+                android:paddingVertical="@dimen/_18cdp"
                 >
 
                 <RelativeLayout
@@ -285,13 +280,14 @@
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/edit_button_form"
                         style="@style/fontForMediumEditText"
-                        android:layout_width="@dimen/_120cdp"
-                        android:layout_height="@dimen/_48cdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:backgroundTint="@color/show_more_text"
+                        android:paddingHorizontal="@dimen/_32cdp"
+                        android:paddingVertical="@dimen/_8cdp"
                         android:text="تغییر نوبت"
-                        android:textColor="@color/white"
-                        app:cornerRadius="@dimen/_8cdp" />
+                        android:textColor="@color/white" />
 
 
                 </RelativeLayout>
@@ -305,14 +301,15 @@
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/cancel_button_form"
                         style="@style/fontForMediumEditText"
-                        android:layout_width="@dimen/_120cdp"
-                        android:layout_height="@dimen/_48cdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:backgroundTint="#0081A7"
-                        android:text="لغو"
+                        android:paddingHorizontal="@dimen/_32cdp"
+                        android:paddingVertical="@dimen/_8cdp"
+                        android:text="   لغـو   "
                         android:textColor="@color/white"
-                        android:textStyle="bold"
-                        app:cornerRadius="@dimen/_8cdp" />
+                        android:textStyle="bold" />
 
 
                 </RelativeLayout>
@@ -339,15 +336,41 @@
         android:id="@+id/pay_button_form"
         style="@style/fontForMediumEditText"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_60cdp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="@dimen/_15cdp"
-        android:layout_marginTop="@dimen/_10cdp"
-        android:layout_marginRight="@dimen/_15cdp"
-        android:layout_marginBottom="@dimen/_15cdp"
+        android:layout_marginLeft="@dimen/_16cdp"
+        android:layout_marginRight="@dimen/_16cdp"
+        android:layout_marginBottom="@dimen/_16cdp"
+        android:paddingVertical="@dimen/_12cdp"
         android:text="پرداخت"
         android:textColor="@color/white"
         android:textStyle="bold" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/_16cdp"
+        android:layout_marginRight="@dimen/_16cdp"
+        android:layout_marginBottom="@dimen/_18cdp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/_12cdp"
+            android:layout_marginBottom="@dimen/_8cdp"
+            style="@style/fontForMediumEditText"
+            />
+
+        <ProgressBar
+            android:id="@+id/progress_circular_signing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
 
 
 

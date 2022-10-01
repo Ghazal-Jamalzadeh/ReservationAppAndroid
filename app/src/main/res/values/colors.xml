@@ -18,6 +18,9 @@
     <color name="botton_in_appointment">#EFEFEF</color>
 
     <color name="gray">#A4A4A4</color>
+    <color name="gray_light">#BDDBDBDB</color>
+    <color name="gray_lighter">#EFEFEF</color>
+    <color name="gray_transparent">#4AA4A4A4</color>
 
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/show_more_text</color>
     <color name="blue">#21669E</color>

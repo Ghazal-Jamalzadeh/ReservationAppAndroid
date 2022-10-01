@@ -16,5 +16,16 @@ public class User {
     @SerializedName("status")
     public int userStatus;
 
+    @SerializedName("firstName")
+    public String firstName = "" ;
+
+    @SerializedName("lastName")
+    public String lastName = "" ;
+
+    @SerializedName("birthday")
+    public String birthday = "" ;
+
+    @SerializedName("photo")
+    public Photo photo =  new Photo() ;
 
 }

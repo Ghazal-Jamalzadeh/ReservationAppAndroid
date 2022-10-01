@@ -1,13 +1,5 @@
 package ir.tamuk.reservation.activities;
 
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Handler;
-import android.provider.Settings;
-import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -16,28 +8,48 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.provider.Settings;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import net.time4j.android.ApplicationStarter;
+
+import ir.tamuk.reservation.Interfaces.ApplicationCallBacks;
 import ir.tamuk.reservation.R;
+import ir.tamuk.reservation.api.AccessTokenAuthenticator;
+import ir.tamuk.reservation.api.ApiClient;
 import ir.tamuk.reservation.databinding.ActivityMainBinding;
 import ir.tamuk.reservation.fragments.ui.home.HomeViewModel;
-import ir.tamuk.reservation.utils.Constants;
-import ir.tamuk.reservation.utils.SharedPerferencesClass;
+import ir.tamuk.reservation.fragments.ui.profile.ProfileViewModel;
+import ir.tamuk.reservation.utils.TokenManager;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ApplicationCallBacks {
+
+    private static final String TAG = "MainActivity";
+
     private ActivityMainBinding binding;
-    private AppBarConfiguration mAppBarConfiguration;
     NavController navController;
     private boolean isDubblePress = false;
+    private int currentDestination = R.id.nav_home;
 
-    private String android_id ;
+    private String android_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,17 +57,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        ApplicationStarter.initialize(this, true); // with prefetch on background thread
+
+        AccessTokenAuthenticator.applicationCallBacks = this::restartApplication;
 
         //create homeViewModel
         new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(HomeViewModel.class);
+        //create profile viewModel
+        new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(ProfileViewModel.class);
 
-        ///navigatin bar
-        BottomNavigationView navView = findViewById(R.id.bottomNav);
+        //nav controller
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupWithNavController(binding.bottomNav, navController);
 
-        ///////drawer////////
-
+        //drawer
         binding.drawerButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
@@ -72,51 +87,42 @@ public class MainActivity extends AppCompatActivity {
                 binding.drawerLayout.closeDrawer(binding.drawerMenu);
             }
         });
-        //////////////////////
-        binding.textView5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                binding.drawerLayout.closeDrawer(binding.drawerMenu);
-                Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment_content_main)
-                        .navigate(R.id.action_nav_services);
-            }
-        });
 
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
             public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
                 Handler h = new Handler();
                 Runnable r = new Runnable() {
+                    @SuppressLint("NonConstantResourceId")
                     @Override
                     public void run() {
 
-                        //navController Hide When OpenSigning Fragment
-                        if (navDestination.getId() == R.id.signingFragment ||
-                                navDestination.getId() == R.id.signInValiddationcodeFragment ||
-                        navDestination.getId() == R.id.completeProfileInfoFragment) {
-                            binding.bottomNav.setVisibility(View.GONE);
-                        } else {
-                            binding.bottomNav.setVisibility(View.VISIBLE);
+                        currentDestination = navDestination.getId();
+
+                        switch (currentDestination) {
+                            case R.id.signingFragment:
+                            case R.id.signInValiddationcodeFragment:
+                            case R.id.completeProfileInfoFragment:
+                                binding.bottomNav.setVisibility(View.GONE);
+                                binding.toolbarconstraintLayout.setVisibility(View.VISIBLE);
+                                break;
+
+                            case R.id.splashFragment:
+                            case R.id.editProfileFragment:
+                            case R.id.appointmentFragment:
+                            case R.id.paid:
+                                binding.bottomNav.setVisibility(View.GONE);
+                                binding.toolbarconstraintLayout.setVisibility(View.GONE);
+                                break;
+
+
+
+                            default:
+                                binding.bottomNav.setVisibility(View.VISIBLE);
+                                binding.toolbarconstraintLayout.setVisibility(View.VISIBLE);
+                                break;
+
                         }
-
-                        //toolbar hide in profile fragment
-                        if (navDestination.getId() == R.id.nav_profile) {
-                            binding.toolbarconstraintLayout.setVisibility(View.GONE);
-                        } else {
-                            binding.toolbarconstraintLayout.setVisibility(View.VISIBLE);
-                        }
-                        //toolbar hide in profile fragment
-                        if (navDestination.getId() == R.id.nav_services) {
-                            binding.mainStatusBar.setVisibility(View.GONE);
-//                            binding.serviceStatusBar.setVisibility(View.VISIBLE);
-                        } else {
-                            binding.mainStatusBar.setVisibility(View.VISIBLE);
-//                            binding.serviceStatusBar.setVisibility(View.GONE);
-
-                        }
-
-
-
                     }
                 };
                 h.postDelayed(r, 100);
@@ -124,35 +130,65 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        ////////////////////////////////////////////////////////
 
-        /////////////get token from firebase and send it to serer//////////////
+        binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @SuppressLint("NonConstantResourceId")
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                if (id != currentDestination) {
+                    switch (id) {
+                        case R.id.nav_home:
+                            navController.navigate(R.id.action_to_navHome);
+                            return true;
+                        case R.id.nav_services:
+                            navController.navigate(R.id.action_to_navServices);
+                            return true;
+                        case R.id.nav_reservation:
+                            navController.navigate(R.id.action_to_navReservation);
+                            return true;
+                        case R.id.nav_profile:
+                            if (TokenManager.hasAccessToken(MainActivity.this)) {
+                                navController.navigate(R.id.action_to_navProfile);
+                            } else {
+                                navController.navigate(R.id.action_to_signingFragment);
+                            }
+                            return true;
+                    }
+                }
+                return false;
+            }
+
+        });
+
+        //get token from firebase and send it to server
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
                     @Override
                     public void onComplete(@NonNull Task<String> task) {
                         if (!task.isSuccessful()) {
-                            Log.d("ghazal", "Fetching FCM registration token failed", task.getException());
+                            Log.d("firebase", "Fetching FCM registration token failed", task.getException());
                             return;
                         }
                         // Get new FCM registration token
                         String token = task.getResult();
-                        Log.d("ghazal", "onComplete: " + token);
+                        Log.d("firebase", "onComplete: " + token);
                     }
                 });
 
-///////////////////getting device Id//////////////////////
+
+        //getting device Id
         try {
-            android_id = Settings.Secure.getString(this.getContentResolver(),
-                    Settings.Secure.ANDROID_ID);
-        }catch (Exception e){}
-        Log.d("ghazal", "android id: " + android_id);
+            android_id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Log.d("firebase", "android id: " + android_id);
     }
 
+    public void clickBottomNav(int fragmentId) {
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+        binding.bottomNav.setSelectedItemId(fragmentId);
     }
 
     @Override
@@ -161,11 +197,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onSupportNavigateUp();
     }
 
-    public void clickBottomNav(int id){
-        binding.bottomNav.setSelectedItemId(id);
-    }
-
-    //when in honme Fragment backPress dont work else doublePress
+    //handle double press to exit inside home fragment
     @Override
     public void onBackPressed() {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -173,7 +205,6 @@ public class MainActivity extends AppCompatActivity {
         if (navController.getCurrentDestination().getId() == R.id.nav_home) {
             if (isDubblePress) {
 
-                Log.d("isDubblePress", "onBackPressed: ");
                 finish();
 
             } else {
@@ -185,11 +216,19 @@ public class MainActivity extends AppCompatActivity {
                 };
                 h.postDelayed(r, 4000);
             }
-        } else {
-            super.onBackPressed();
         }
 
+        else {
+            super.onBackPressed();
+        }
+    }
 
+
+    @Override
+    public void restartApplication() {
+        finishAffinity();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
 

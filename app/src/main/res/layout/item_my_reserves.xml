@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="@dimen/_6cdp"
+        app:cardCornerRadius="@dimen/_8cdp"
+        android:layout_marginVertical="@dimen/_8cdp"
+        android:layout_marginHorizontal="@dimen/_16cdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_16cdp">
+
+           <ImageView
+               android:id="@+id/icCalender"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:src="@drawable/ic_calender"
+               app:tint="@color/black"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintRight_toRightOf="parent"/>
+
+            <TextView
+                android:id="@+id/txtDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="۱۴۰۰-۱۲-۲۴"
+                style="@style/fontForMediumText"
+                android:textColor="@color/login_blue"
+                android:paddingHorizontal="@dimen/_8cdp"
+                app:layout_constraintRight_toLeftOf="@id/icCalender"
+                app:layout_constraintTop_toTopOf="@id/icCalender"
+                app:layout_constraintBottom_toBottomOf="@id/icCalender"/>
+
+            <TextView
+                android:id="@+id/txtTimeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ساعت "
+                style="@style/fontForMediumText"
+                android:textColor="@color/login_blue"
+                android:paddingHorizontal="@dimen/_8cdp"
+                app:layout_constraintRight_toLeftOf="@id/txtDate"
+                app:layout_constraintTop_toTopOf="@id/icCalender"
+                app:layout_constraintBottom_toBottomOf="@id/icCalender"/>
+
+            <TextView
+                android:id="@+id/txtTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="۱۲:۳۰"
+                style="@style/fontForMediumText"
+                android:textColor="@color/login_blue"
+                android:paddingHorizontal="@dimen/_8cdp"
+                app:layout_constraintRight_toLeftOf="@id/txtTimeTitle"
+                app:layout_constraintTop_toTopOf="@id/icCalender"
+                app:layout_constraintBottom_toBottomOf="@id/icCalender"/>
+
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="لیزر موهای زاید"
+                style="@style/fontForMediumText"
+                android:textColor="@color/black"
+                android:paddingHorizontal="@dimen/_8cdp"
+                app:layout_constraintRight_toLeftOf="@id/icCalender"
+                app:layout_constraintTop_toBottomOf="@id/icCalender"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
