@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parent_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/gray"
+    android:gravity="center"
+    android:minHeight="45dp"
+    android:layoutDirection="rtl"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/_10cdp"
+    android:paddingLeft="@dimen/_18cdp"
+    android:paddingRight="@dimen/_18cdp"
+    android:paddingTop="@dimen/_10cdp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/_20cdp"
+            android:layout_height="@dimen/_20cdp"
+            app:srcCompat="@drawable/ic_close" />
+
+        <View
+            android:layout_width="@dimen/_16cdp"
+            android:layout_height="0dp" />
+
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="خطا - اسنکبار"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/white" />
+
+        <View
+            android:layout_width="@dimen/_16cdp"
+            android:layout_height="0dp" />
+
+    </LinearLayout>
+
+</LinearLayout>
