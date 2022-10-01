@@ -312,10 +312,21 @@ public class SignInValiddationcodeFragment extends Fragment {
 
                             }else{
                                 Log.d(Constants.TAG_KIA, "else: "+aBoolean1);
-                                getViewModelStore().clear();
-                                Navigation.findNavController(getView()).popBackStack();
-                                Navigation.findNavController(getView())
-                                        .navigate(R.id.action_to_factorFragment, bundle);
+                                boolean isFactor = getArguments().getBoolean("isFactor");
+                                if (isFactor){
+                                    getViewModelStore().clear();
+                                    Navigation.findNavController(getView()).popBackStack();
+                                    Navigation.findNavController(getView())
+                                            .navigate(R.id.action_to_factorFragment, bundle);
+
+
+                                }else{
+
+                                    getViewModelStore().clear();
+                                    Navigation.findNavController(getView()).popBackStack();
+                                    Navigation.findNavController(getView())
+                                            .navigate(R.id.action_to_navProfile, bundle);
+                                }
                             }
                         });
                     }

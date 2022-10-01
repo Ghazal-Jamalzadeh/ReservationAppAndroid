@@ -131,6 +131,12 @@ public class SigningFragment extends Fragment {
                             if (args.containsKey("reserveDate")) {
                                 bundle.putString("reserveDate", getArguments().getString("reserveDate"));
                             }
+
+                            if(args.containsKey("isFactor")) {
+                                bundle.putBoolean("isFactor", getArguments().getBoolean("isFactor"));
+                            }else{
+                                bundle.putBoolean("isFactor", false);
+                            }
                         }
 
 

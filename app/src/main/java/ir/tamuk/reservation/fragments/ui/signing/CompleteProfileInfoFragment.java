@@ -76,12 +76,18 @@ public class CompleteProfileInfoFragment extends Fragment {
                                  bundle.putString("serviceName", getArguments().getString("serviceName"));
                                  bundle.putString("reserveTime", getArguments().getString("reserveTime"));
                                  bundle.putString("reserveDate", getArguments().getString("reserveDate"));
-                                 bundle.putString("reserveDateMiladi", getArguments().getString("reserveDateMiladi"));
-                                 bundle.putBoolean("isFactor", getArguments().getBoolean("isFactor"));
+                                 boolean isFactor = getArguments().getBoolean("isFactor");
 
 
-                                 Navigation.findNavController(getView())
-                                         .navigate(R.id.action_to_factorFragment, bundle);
+                                 if (isFactor){
+
+                                     Navigation.findNavController(getView())
+                                             .navigate(R.id.action_to_factorFragment, bundle);
+                                 }else{
+
+                                     Navigation.findNavController(getView())
+                                             .navigate(R.id.action_to_navProfile, bundle);
+                                 }
                              }
                          }else{
                              binding.acceptButtonSigning.setTextColor(getResources().getColor(R.color.backgroundSigning));
@@ -92,7 +98,6 @@ public class CompleteProfileInfoFragment extends Fragment {
                      completeProfileInfoViewModel.errorMessageLiveData.observe(getViewLifecycleOwner(), new Observer<String>() {
                          @Override
                          public void onChanged(String s) {
-//                    Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
                              Snackbar.make(getView(), s, Toast.LENGTH_SHORT).show();
                              binding.acceptButtonSigning.setTextColor(getResources().getColor(R.color.backgroundSigning));
                              binding.progressCircularSigning.setVisibility(View.GONE);

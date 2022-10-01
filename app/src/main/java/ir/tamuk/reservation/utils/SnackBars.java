@@ -69,13 +69,14 @@ public class SnackBars {
 //        snackBarView.addView(custom_view, 0);
 //        snackbar.show();
 
-        final Snackbar snackbar = Snackbar.make(parent_view, "", Snackbar.LENGTH_SHORT);
         //inflate view
         View custom_view = inflater.inflate(R.layout.snackbar_icon_text, null);
+        final Snackbar snackbar = Snackbar.make(parent_view, "", Snackbar.LENGTH_SHORT);
 
         snackbar.getView().setBackgroundColor(Color.TRANSPARENT);
         Snackbar.SnackbarLayout snackBarView = (Snackbar.SnackbarLayout) snackbar.getView();
         snackBarView.setPadding(0, 0, 0, 0);
+        
 
         ((TextView) custom_view.findViewById(R.id.message)).setText("این یک پیغام خطاست");
         ((ImageView) custom_view.findViewById(R.id.icon)).setImageResource(R.drawable.ic_close);
