@@ -7,6 +7,7 @@ import ir.tamuk.reservation.models.ResponseCategoriesList;
 import ir.tamuk.reservation.models.ResponseFactor;
 import ir.tamuk.reservation.models.ResponseGetMyProfile;
 import ir.tamuk.reservation.models.ResponseGetMyReserve;
+import ir.tamuk.reservation.models.ResponseGetServices;
 import ir.tamuk.reservation.models.ResponseReservation;
 import ir.tamuk.reservation.models.ResponseReserveDetail;
 import ir.tamuk.reservation.models.ResponseSearchServices;
@@ -96,5 +97,9 @@ public interface ApiServices {
     //http://moeenkashisaz.ir/laser/api/v1/insert-reserve
     @POST("v1/insert-reserve")
     Call<ResponseFactor> getFactor(@Body BodyFactor bodyFactor, @Header("authorization") String token);
+
+    //    http://moeenkashisaz.ir/laser/api/v1/get-services/631869b10bfaf719ef8b76cf
+    @GET("v1/get-services/{services_id}")
+    Call<ResponseGetServices> getServicesByld(@Path("services_id") String id);
 
 }
