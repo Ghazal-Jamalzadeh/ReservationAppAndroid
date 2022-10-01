@@ -27,7 +27,7 @@ import retrofit2.Response;
 public class ReservationViewModel extends ViewModel {
 
     public MutableLiveData<ArrayList<Service>> servicesLiveData = new MutableLiveData<>();
-//    public MutableLiveData<Boolean> loading = new MutableLiveData<>();
+    public MutableLiveData<Boolean> loading = new MutableLiveData<>();
     public MutableLiveData<String> errorMessage = new MutableLiveData<>();
 
     public MutableLiveData<ArrayList<String>> freeAm = new MutableLiveData<>();
@@ -42,28 +42,32 @@ public class ReservationViewModel extends ViewModel {
 
     public void getServices (int page , int limit , String categories ) {
         Call<ResponseSearchServices> call = ReservationRepository.callSpinnerServices(page, limit, categories);
-//        loading.setValue(true);
+        loading.setValue(true);
         call.enqueue(new Callback<ResponseSearchServices>() {
             @Override
             public void onResponse(Call<ResponseSearchServices> call, Response<ResponseSearchServices> response) {
-//                loading.setValue(false);
                 if (response.isSuccessful()) {
                     if (response.body() != null)
                         if (response.body().status == 200) {
                             Log.d("ghazal", "onResponse: ");
                             servicesLiveData.setValue(response.body().data.services);
+                            loading.setValue(false);
                         } else {
                             errorMessage.setValue(response.body().message);
+                            loading.setValue(false);
                         }
                     else {
                         errorMessage.setValue("خطا در دریافت اطلاعات");
+                        loading.setValue(false);
                     }
                 } else {
 
                     try {
                         errorMessage.setValue(Tools.extractErrorBodyMessage(response.errorBody().string()));
+                        loading.setValue(false);
                     } catch (IOException e) {
                         e.printStackTrace();
+                        loading.setValue(false);
                     }
                 }
             }
