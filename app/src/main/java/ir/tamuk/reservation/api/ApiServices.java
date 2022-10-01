@@ -1,12 +1,13 @@
 package ir.tamuk.reservation.api;
 
+import ir.tamuk.reservation.models.BodyFactor;
 import ir.tamuk.reservation.models.BodySendActivationCode;
 import ir.tamuk.reservation.models.BodySubmitCustomer;
-import ir.tamuk.reservation.models.MoviesList;
 import ir.tamuk.reservation.models.ResponseCategoriesList;
+import ir.tamuk.reservation.models.ResponseFactor;
+import ir.tamuk.reservation.models.ResponseGetMyProfile;
 import ir.tamuk.reservation.models.ResponseGetMyReserve;
 import ir.tamuk.reservation.models.ResponseReservation;
-import ir.tamuk.reservation.models.ResponseGetMyProfile;
 import ir.tamuk.reservation.models.ResponseReserveDetail;
 import ir.tamuk.reservation.models.ResponseSearchServices;
 import ir.tamuk.reservation.models.ResponseSendActivationCode;
@@ -16,7 +17,6 @@ import ir.tamuk.reservation.models.ResponseValidateCode;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -92,5 +92,9 @@ public interface ApiServices {
     Call<ResponseReserveDetail> getReserveDetail(
             @Header("authorization") String token ,
             @Path("id") String id)  ;
+
+    //http://moeenkashisaz.ir/laser/api/v1/insert-reserve
+    @POST("v1/insert-reserve")
+    Call<ResponseFactor> getFactor(@Body BodyFactor bodyFactor, @Header("authorization") String token);
 
 }

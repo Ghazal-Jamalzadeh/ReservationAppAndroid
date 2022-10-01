@@ -7,14 +7,14 @@
     android:background="@color/text"
     android:gravity="center"
     android:minHeight="45dp"
-    android:layoutDirection="rtl"
     android:orientation="vertical"
     android:paddingBottom="@dimen/_8cdp"
     android:paddingLeft="@dimen/_12cdp"
     android:paddingRight="@dimen/_12cdp"
+    android:layoutDirection="rtl"
     android:paddingTop="@dimen/_8cdp">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
@@ -22,29 +22,28 @@
 
         <ImageView
             android:id="@+id/icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/_12cdp"
-            android:backgroundTint="@color/white"
-            app:srcCompat="@drawable/ic_baseline_perm_device_information_24" />
+            android:layout_width="@dimen/_20cdp"
+            android:layout_height="@dimen/_20cdp"
+            app:srcCompat="@drawable/ic_close"
+            />
 
+        <View
+            android:layout_width="@dimen/_16cdp"
+            android:layout_height="0dp" />
 
-        <androidx.appcompat.widget.AppCompatCheckedTextView
+        <TextView
             android:id="@+id/message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/icon"
             android:gravity="center"
             android:text="خطا - اسنکبار"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="@color/white"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/_12cdp"
-            />
+            android:textColor="@color/white" />
 
+        <View
+            android:layout_width="@dimen/_16cdp"
+            android:layout_height="0dp" />
 
-
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

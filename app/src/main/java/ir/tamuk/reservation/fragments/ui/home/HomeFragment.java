@@ -82,7 +82,8 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         //swipe layout attributes
-        binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.show_more_text), getResources().getColor(R.color.main));
+        binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.show_more_text)
+                , getResources().getColor(R.color.main));
         binding.refreshLayout.setRefreshing(true);
         binding.refreshLayout.setEnabled(true);
 

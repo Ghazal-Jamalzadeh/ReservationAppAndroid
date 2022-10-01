@@ -188,7 +188,8 @@
             android:background="@color/backgroundSigning"
             android:orientation="vertical"
             app:layout_constraintLeft_toRightOf="@id/guideline"
-            android:layout_gravity="right">
+            android:layout_gravity="right"
+            >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

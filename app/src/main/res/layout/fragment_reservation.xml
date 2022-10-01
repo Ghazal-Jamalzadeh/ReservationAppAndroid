@@ -183,29 +183,11 @@
                 </androidx.cardview.widget.CardView>
 
 
-                <Spinner
-                    android:layout_below="@id/card_calender"
-                    app:layout_constraintTop_toBottomOf="@id/card_calender"
-                    android:id="@+id/spinner_services"
-                    style="@style/SpinnerTheme"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_20cdp"
-                    android:layout_marginTop="@dimen/_15cdp"
-                    android:layout_marginRight="@dimen/_20cdp"
-                    android:dropDownVerticalOffset="0dp"
-                    android:elevation="@dimen/_4cdp"
-                    android:overlapAnchor="false"
-                    android:paddingLeft="0dp"
-                    android:paddingRight="0dp"
-                    android:dropDownWidth="match_parent"
-
-                    />
 
 
                 <RelativeLayout
-                    android:layout_below="@id/spinner_services"
-                    app:layout_constraintTop_toBottomOf="@id/spinner_services"
+                    android:layout_below="@id/card_calender"
+                    app:layout_constraintTop_toBottomOf="@id/card_calender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -227,6 +209,26 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
+                        <Spinner
+                            android:layout_below="@id/card_calender"
+                            app:layout_constraintTop_toBottomOf="@id/card_calender"
+                            android:id="@+id/spinner_services"
+                            style="@style/SpinnerTheme"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_20cdp"
+                            android:layout_marginTop="@dimen/_15cdp"
+                            android:layout_marginRight="@dimen/_20cdp"
+                            android:dropDownVerticalOffset="0dp"
+                            android:elevation="@dimen/_4cdp"
+                            android:overlapAnchor="false"
+                            android:paddingLeft="0dp"
+                            android:paddingRight="0dp"
+                            android:dropDownWidth="match_parent"
+
+                            />
+
 
                         <TextView
                             style="@style/fontForMediumBoldText"
