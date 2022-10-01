@@ -40,7 +40,7 @@ import retrofit2.Response;
 public class SigningFragment extends Fragment {
 
     private FragmentSigningBinding binding;
-    private SigningViewModel signingViewModel ;
+    private SigningViewModel signingViewModel;
     private BodySendActivationCode body = new BodySendActivationCode();
 
     @Override
@@ -53,7 +53,7 @@ public class SigningFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        signingViewModel =  new ViewModelProvider(this).get(SigningViewModel.class);
+        signingViewModel = new ViewModelProvider(this).get(SigningViewModel.class);
         binding = FragmentSigningBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -68,7 +68,7 @@ public class SigningFragment extends Fragment {
             @Override
             public void handleOnBackPressed() {
                 // Handle the back button event
-                binding.cancelButtonSigning.performClick() ;
+                binding.cancelButtonSigning.performClick();
                 Log.d("RHMN", "handleOnBackPressed: ");
             }
         };
@@ -109,13 +109,29 @@ public class SigningFragment extends Fragment {
 
                     if (aBoolean) {
                         //navigate to next frg
+                        Bundle args = getArguments();
+
                         Bundle bundle = new Bundle();
                         bundle.clear();
                         bundle.putString("number", binding.mobileEditTextSigning.getText().toString());
-                        bundle.putString("serviceId", getArguments().getString("serviceId"));
-                        bundle.putString("serviceName", getArguments().getString("serviceName"));
-                        bundle.putString("reserveTime", getArguments().getString("reserveTime"));
-                        bundle.putString("reserveDate", getArguments().getString("reserveDate"));
+
+                        if (args != null) {
+                            if (args.containsKey("serviceId")) {
+                                bundle.putString("serviceId", getArguments().getString("serviceId"));
+                            }
+
+                            if (args.containsKey("serviceName")) {
+                                bundle.putString("serviceName", getArguments().getString("serviceName"));
+                            }
+
+                            if (args.containsKey("reserveTime")) {
+                                bundle.putString("reserveTime", getArguments().getString("reserveTime"));
+                            }
+
+                            if (args.containsKey("reserveDate")) {
+                                bundle.putString("reserveDate", getArguments().getString("reserveDate"));
+                            }
+                        }
 
 
                         if (Tools.checkDestination(view, R.id.signingFragment)) {
@@ -129,15 +145,13 @@ public class SigningFragment extends Fragment {
                 signingViewModel.errorMessageLiveData.observe(getViewLifecycleOwner(), s -> {
 
 //                    Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
-                    Log.d(Constants.TAG_KIA, "onCreateView: "+"ERROR");
+                    Log.d(Constants.TAG_KIA, "onCreateView: " + "ERROR");
                     Snackbar.make(requireView(), s, Toast.LENGTH_SHORT).show();
                     binding.acceptButtonSigning.setTextColor(getResources().getColor(R.color.backgroundSigning));
                     binding.progressCircularSigning.setVisibility(View.GONE);
                     binding.acceptButtonSigning.setClickable(true);
 
                 });
-
-
 
 
             } else {
