@@ -33,50 +33,118 @@
                 android:elevation="@dimen/_2cdp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                >
 
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="@dimen/_40cdp"
-                    android:layout_height="@dimen/_40cdp"
-                    android:layout_marginTop="@dimen/_4cdp"
-                    android:layout_marginBottom="@dimen/_4cdp"
-                    android:src="@drawable/ic_logo"
-                    app:layout_constraintBottom_toBottomOf="parent"
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/service_status_bar"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@color/white"-->
+<!--                    android:elevation="@dimen/_2cdp"-->
+<!--                    app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                    app:layout_constraintRight_toRightOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+
+<!--                    >-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/image_view_null"-->
+<!--                        android:layout_width="@dimen/_40cdp"-->
+<!--                        android:layout_height="@dimen/_40cdp"-->
+<!--                        android:layout_marginTop="@dimen/_4cdp"-->
+<!--                        android:layout_marginBottom="@dimen/_4cdp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                        app:layout_constraintRight_toRightOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="@dimen/_4cdp"-->
+<!--                        android:layout_marginBottom="@dimen/_4cdp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                        app:layout_constraintRight_toRightOf="parent"-->
+<!--                        android:text="خدمات کلینیک"-->
+<!--                        style="@style/fontForMediumEditText"-->
+<!--                        android:textColor="@color/login_blue"-->
+<!--                        android:fontFamily="@font/iran_sans_mob"-->
+<!--                        android:textSize="@dimen/_18cdp"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                    <ImageView-->
+<!--                        android:layout_width="@dimen/_50cdp"-->
+<!--                        android:layout_height="@dimen/_40cdp"-->
+<!--                        android:src="@drawable/ic_arrow_back_ios_fill0_wght400_grad0_opsz48__left_"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                        />-->
+
+
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/main_status_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:elevation="@dimen/_2cdp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
 
-                <ImageView
-                    android:id="@+id/drawerButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="@dimen/_40cdp"
+                        android:layout_height="@dimen/_40cdp"
+                        android:layout_marginTop="@dimen/_4cdp"
+                        android:layout_marginBottom="@dimen/_4cdp"
+                        android:src="@drawable/ic_logo"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                    android:layout_marginRight="@dimen/_16cdp"
-                    android:src="@drawable/ic_menu_appbar"
-                    app:layout_constraintBottom_toBottomOf="@id/imageView4"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/imageView4" />
+                    <ImageView
+                        android:id="@+id/drawerButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
 
-                <ImageView
-                    android:id="@+id/imageView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_16cdp"
-                    android:src="@drawable/ic_notifications"
-                    app:layout_constraintBottom_toBottomOf="@id/imageView4"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/imageView4" />
+                        android:padding="@dimen/_17cdp"
+                        android:src="@drawable/ic_menu_appbar"
+                        app:layout_constraintBottom_toBottomOf="@id/imageView4"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/imageView4" />
 
-                <ImageView
-                    android:id="@+id/imageView7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_16cdp"
-                    android:src="@drawable/ic_search"
-                    app:layout_constraintBottom_toBottomOf="@id/imageView4"
-                    app:layout_constraintLeft_toRightOf="@+id/imageView6"
-                    app:layout_constraintTop_toTopOf="@id/imageView4" />
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_16cdp"
+                        android:src="@drawable/ic_notifications"
+                        app:layout_constraintBottom_toBottomOf="@id/imageView4"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/imageView4" />
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/imageView7"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginLeft="@dimen/_16cdp"-->
+<!--                        android:src="@drawable/ic_search"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@id/imageView4"-->
+<!--                        app:layout_constraintLeft_toRightOf="@+id/imageView6"-->
+<!--                        app:layout_constraintTop_toTopOf="@id/imageView4" />-->
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -156,7 +224,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/_20cdp"
-                    android:text="خدمات" />
+                    android:text="پروفایل" />
 
                 <View
                     android:id="@+id/view"
@@ -189,23 +257,41 @@
                     android:textColor="@color/white"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/_20cdp"
-                    android:text="خدمات" />
-
+                    android:text="درباره ما" />
                 <View
                     android:id="@+id/view3"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1cdp"
                     android:layout_marginBottom="@dimen/_20cdp"
                     android:background="@color/show_more_text" />
-
-                <TextView
-                    android:id="@+id/textView7"
-                    style="@style/fontForLargeText"
-                    android:layout_width="match_parent"
-                    android:textColor="@color/white"
+                <RelativeLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_40cdp"
-                    android:text="خدمات" />
+                    android:orientation="horizontal"
+
+                    >
+
+                        <ImageView
+                            android:id="@+id/image2"
+                            android:layout_alignRight="@id/textView7"
+                            android:layout_width="@dimen/_20cdp"
+                            android:layout_height="@dimen/_20cdp"
+                            android:src="@drawable/ic_logout"/>
+
+                        <TextView
+                            android:id="@+id/textView7"
+                            android:gravity="center"
+                            android:layout_marginLeft="@dimen/_100cdp"
+                            style="@style/fontForMediumEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_40cdp"
+                            android:text="خروج از حساب"
+                            android:textColor="@color/white" />
+
+
+                </RelativeLayout>
+
 
 
                 <LinearLayout

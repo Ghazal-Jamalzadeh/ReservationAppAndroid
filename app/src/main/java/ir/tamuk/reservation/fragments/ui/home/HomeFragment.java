@@ -100,7 +100,7 @@ public class HomeFragment extends Fragment {
         //Buttons
         binding.txtShowAll.setOnClickListener(view1 -> {
 
-                ((MainActivity)getActivity()).clickBottomNav(R.id.nav_services);
+            ((MainActivity)getActivity()).clickBottomNav(R.id.nav_services);
 
         });
 

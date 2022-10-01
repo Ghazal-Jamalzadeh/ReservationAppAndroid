@@ -18,6 +18,9 @@
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" >
     </fragment>
+        <action
+            android:id="@+id/action_nav_services"
+            app:destination="@id/nav_services" />
 
     <fragment
         android:id="@+id/nav_reservation"
@@ -25,6 +28,9 @@
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_reservation" >
     </fragment>
+    <action
+        android:id="@+id/action_to_nav_services"
+        app:destination="@id/nav_services" />
 
     <action
         android:id="@+id/action_to_signingFragment"
@@ -62,9 +68,6 @@
         tools:layout="@layout/fragment_services" >
 
     </fragment>
-    <action
-        android:id="@+id/action_to_serviceFragment"
-        app:destination="@id/serviceInfoFragment" />
     <fragment
         android:id="@+id/factorFragment"
         android:name="ir.tamuk.reservation.fragments.ui.factor.FactorFragment"

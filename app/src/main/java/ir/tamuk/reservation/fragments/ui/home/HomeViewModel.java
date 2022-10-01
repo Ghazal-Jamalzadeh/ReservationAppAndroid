@@ -47,13 +47,13 @@ public class HomeViewModel extends AndroidViewModel {
         this.context = application.getApplicationContext();    }
 
 
-        public MutableLiveData<ArrayList<Category>> getAllCategories(){
+    public MutableLiveData<ArrayList<Category>> getAllCategories(){
 
-            if(isFirst){
-                //callApi
-                callGetAllCategories();
-            }
-            return categoriesLiveData;
+        if(isFirst){
+            //callApi
+            callGetAllCategories();
+        }
+        return categoriesLiveData;
     }
 
     public void callGetAllCategories(){
@@ -97,7 +97,7 @@ public class HomeViewModel extends AndroidViewModel {
             });
 
         } else {
-           errorMessageLiveData.setValue(context.getString(R.string.internet_not_connected_error));
+            errorMessageLiveData.setValue(context.getString(R.string.internet_not_connected_error));
         }
 
     }
