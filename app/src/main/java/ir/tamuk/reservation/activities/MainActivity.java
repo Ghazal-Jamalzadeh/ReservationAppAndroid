@@ -107,13 +107,10 @@ public class MainActivity extends AppCompatActivity implements ApplicationCallBa
                                 binding.toolbarconstraintLayout.setVisibility(View.VISIBLE);
                                 break;
 
-                            case R.id.nav_profile:
-                                binding.bottomNav.setVisibility(View.VISIBLE);
-                                binding.toolbarconstraintLayout.setVisibility(View.GONE);
-                                break;
-
                             case R.id.splashFragment:
                             case R.id.editProfileFragment:
+                            case R.id.appointmentFragment:
+                            case R.id.paid:
                                 binding.bottomNav.setVisibility(View.GONE);
                                 binding.toolbarconstraintLayout.setVisibility(View.GONE);
                                 break;

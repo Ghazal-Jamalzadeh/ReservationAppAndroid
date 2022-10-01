@@ -41,7 +41,11 @@
         tools:layout="@layout/fragment_profile" >
         <action
             android:id="@+id/action_nav_profile_to_appointmentFragment"
-            app:destination="@id/appointmentFragment" />
+            app:destination="@id/appointmentFragment"
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait"
+            app:popEnterAnim="@anim/wait"
+            app:popExitAnim="@anim/slide_right"/>
         <action
             android:id="@+id/action_nav_profile_to_editProfileFragment"
             app:destination="@id/editProfileFragment"
@@ -108,9 +112,18 @@
 
     <fragment
         android:id="@+id/appointmentFragment"
-        android:name="ir.tamuk.reservation.fragments.ui.Appointments.AppointmentFragment"
+        android:name="ir.tamuk.reservation.fragments.ui.myReserves.MyReservesFragment"
         android:label="AppointmentFragment"
-        tools:layout="@layout/fragment_appointment"/>
+        tools:layout="@layout/fragment_my_reserves">
+        <action
+            android:id="@+id/action_appointmentFragment_to_paid"
+            app:destination="@id/paid"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/wait"
+            app:popEnterAnim="@anim/wait"
+            app:popExitAnim="@anim/slide_down"
+            />
+    </fragment>
     <fragment
         android:id="@+id/serviceInfoFragment"
         android:name="ir.tamuk.reservation.fragments.ui.services.ServiceInfoFragment"
@@ -153,7 +166,7 @@
         app:popUpToInclusive="false"/>
     <fragment
         android:id="@+id/editProfileFragment"
-        android:name="ir.tamuk.reservation.fragments.ui.editProfile.EditProfileFragment"
+        android:name="ir.tamuk.reservation.fragments.ui.profile.EditProfileFragment"
         android:label="EditProfileFragment"
         tools:layout="@layout/fragment_edit_profile"/>
 

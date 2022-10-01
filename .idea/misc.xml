@@ -20,15 +20,21 @@
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/drawable/ic_close_fill0_wght400_grad0_opsz48.xml" value="0.152" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/drawable/ic_group_40.xml" value="0.152" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/drawable/profile_image.xml" value="0.152" />
+        <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/drawable/profile_main_shape.xml" value="0.2505" />
+        <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/drawable/spinner_back_open.xml" value="0.2505" />
+        <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/drawable/tabs_state.xml" value="0.205" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/drawable/zabdar.xml" value="0.152" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/drawable/zabdare2.xml" value="0.152" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/activity_main.xml" value="0.19814814814814816" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/activity_splash.xml" value="0.2140625" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/app_bar_main.xml" value="0.2" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/content_main.xml" value="0.3104166666666667" />
+        <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_appointment.xml" value="0.33" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_edit_profile.xml" value="0.33" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_gallery.xml" value="0.290625" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_my_reserves.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_paid.xml" value="0.2604166666666667" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_profile.xml" value="0.67" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_reservation.xml" value="0.225" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_services.xml" value="0.290625" />
@@ -37,6 +43,8 @@
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_splash.xml" value="0.2786458333333333" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/fragment_test.xml" value="0.225" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/home_row.xml" value="0.18385416666666668" />
+        <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/item_my_reserves.xml" value="0.33" />
+        <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/layout_appointment_tabs.xml" value="0.33" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/layout_form_birthdate_field.xml" value="0.33" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/layout_form_input_field.xml" value="0.25" />
         <entry key="..\:/Users/Ghazal/Desktop/Reservation-Android/app/src/main/res/layout/nav_header_main.xml" value="0.290625" />

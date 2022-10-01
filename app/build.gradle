@@ -63,9 +63,15 @@ dependencies {
     implementation 'com.github.maks1990:CDP:1.0.1'
     //persian calender
     implementation 'com.github.roojin:persian-calendar-view:1.2.2'
+    implementation 'com.github.aliab:Persian-Date-Picker-Dialog:1.8.0'
+
     //glide
     implementation 'com.github.bumptech.glide:glide:4.13.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
+    //dexter permissions
+    implementation "com.karumi:dexter:5.0.0"
+    //image cropper
+//    implementation 'com.github.yalantis:ucrop:2.2.6'
 
     implementation 'com.github.arcadefire:nice-spinner:1.4.4'
 

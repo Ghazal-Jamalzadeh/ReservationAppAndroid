@@ -1,10 +1,14 @@
 package ir.tamuk.reservation.repository;
 
+import ir.tamuk.reservation.models.BodySubmitCustomer;
 import ir.tamuk.reservation.models.ResponseCategoriesList;
 import ir.tamuk.reservation.models.ResponseGetMyProfile;
 import ir.tamuk.reservation.models.ResponseSearchServices;
 import ir.tamuk.reservation.models.ResponseSendActivationCode;
+import ir.tamuk.reservation.models.ResponseSubmitCustomer;
+import ir.tamuk.reservation.models.ResponseUploadFile;
 import ir.tamuk.reservation.utils.Tools;
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 
 public class ProfileRepository {
@@ -21,6 +25,19 @@ public class ProfileRepository {
         Call<ResponseGetMyProfile> call = Tools.getApiServicesInstance().getMyProfile(token);
 
         return call;
+    }
+
+    public Call<ResponseSubmitCustomer> callEditProfile(BodySubmitCustomer body , String token ){
+
+        Call<ResponseSubmitCustomer> call =  Tools.getApiServicesInstance().sendCustomer(body , token) ;
+
+        return call ;
+
+    }
+
+    public Call<ResponseUploadFile> callUploadFile(String token , MultipartBody.Part image){
+        Call<ResponseUploadFile> call = Tools.getApiServicesInstance().uploadFile(token , image);
+        return call ;
     }
 
 
