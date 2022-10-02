@@ -92,14 +92,16 @@ public class FactorFragment extends Fragment {
         binding.cancelButtonForm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(getView()).popBackStack(R.id.nav_home, false);
+                Navigation.findNavController(view).popBackStack();
+                Navigation.findNavController(view).navigate(R.id.nav_home );
             }
         });
 
         binding.editButtonForm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(getView()).popBackStack(R.id.nav_reservation, false);
+                Navigation.findNavController(view).popBackStack();
+                Navigation.findNavController(view).navigate(R.id.nav_reservation);
             }
         });
 

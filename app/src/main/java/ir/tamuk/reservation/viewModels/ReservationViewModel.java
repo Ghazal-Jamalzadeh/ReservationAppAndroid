@@ -42,7 +42,7 @@ public class ReservationViewModel extends ViewModel {
 
     public void getServices (int page , int limit , String categories ) {
         Call<ResponseSearchServices> call = ReservationRepository.callSpinnerServices(page, limit, categories);
-        loading.setValue(true);
+
         call.enqueue(new Callback<ResponseSearchServices>() {
             @Override
             public void onResponse(Call<ResponseSearchServices> call, Response<ResponseSearchServices> response) {
@@ -51,23 +51,19 @@ public class ReservationViewModel extends ViewModel {
                         if (response.body().status == 200) {
                             Log.d("ghazal", "onResponse: ");
                             servicesLiveData.setValue(response.body().data.services);
-                            loading.setValue(false);
+
                         } else {
                             errorMessage.setValue(response.body().message);
-                            loading.setValue(false);
                         }
                     else {
                         errorMessage.setValue("خطا در دریافت اطلاعات");
-                        loading.setValue(false);
                     }
                 } else {
 
                     try {
                         errorMessage.setValue(Tools.extractErrorBodyMessage(response.errorBody().string()));
-                        loading.setValue(false);
                     } catch (IOException e) {
                         e.printStackTrace();
-                        loading.setValue(false);
                     }
                 }
             }
@@ -82,6 +78,7 @@ public class ReservationViewModel extends ViewModel {
     }
 
     public void getReservations (String time, String service ) {
+        loading.setValue(true);
         Call<ResponseReservation> call = ReservationRepository.getReservationsApi(time, service);
         call.enqueue(new Callback<ResponseReservation>() {
             @Override
@@ -96,14 +93,17 @@ public class ReservationViewModel extends ViewModel {
                             freeAm.setValue(response.body().data.freeTimeAms);
                             freePm.setValue(response.body().data.freeTimePms);
                             notRes.setValue(false);
+                            loading.setValue(false);
                         } else {
                             Log.d("rhmn", "!200: ");
                             errorMessage.setValue(response.body().message);
                             notRes.setValue(true);
+                            loading.setValue(false);
                         }
                     }else {
                         Log.d("rhmn", "null: ");
                         errorMessage.setValue("خطا در دریافت اطلاعات");
+                        loading.setValue(false);
                     }
                 } else {
                     Log.d("rhmn", "!isSuccessful: ");
@@ -112,9 +112,11 @@ public class ReservationViewModel extends ViewModel {
                         errorMessageRes.setValue(Tools.extractErrorBodyMessage(response.errorBody().string()));
                         Log.d("rhmn", "!isSuccessful Try: "+ response.errorBody());
                         notRes.setValue(true);
+                        loading.setValue(false);
                     } catch (IOException e) {
                         Log.d("rhmn", "!isSuccessful Catch: "+ e);
                         e.printStackTrace();
+                        loading.setValue(false);
                     }
                 }
             }
@@ -124,6 +126,7 @@ public class ReservationViewModel extends ViewModel {
 //                loading.setValue(false);
                 errorMessageRes.setValue(t.getMessage());
                 Log.d("rhmn", "onFail: "+t.getMessage());
+                loading.setValue(false);
 
             }
         });

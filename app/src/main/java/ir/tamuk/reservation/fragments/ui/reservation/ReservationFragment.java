@@ -109,7 +109,6 @@ public class ReservationFragment extends Fragment implements OnSelectedItem {
     private BodyFactor bodyFactor = new BodyFactor();
     private Bundle bundle = new Bundle();
     private SnackBars snackBars = new SnackBars();
-    private boolean refreshing = false;
 
 
 
@@ -177,8 +176,7 @@ public class ReservationFragment extends Fragment implements OnSelectedItem {
         galleryViewModel.loading.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-
-                refreshing = aBoolean;
+                binding.swipeRefreshLayoutReservation.setRefreshing(aBoolean);
 
             }
         });
@@ -504,7 +502,6 @@ public class ReservationFragment extends Fragment implements OnSelectedItem {
                 binding.emptyTextReservation.setText("اینترنت وصل نیست");
                 binding.emptyTextReservation.setVisibility(View.VISIBLE);
                 binding.showAllReserves.setVisibility(View.GONE);
-                binding.swipeRefreshLayoutReservation.setRefreshing(refreshing);
 
             }
     }
@@ -517,7 +514,6 @@ public class ReservationFragment extends Fragment implements OnSelectedItem {
         Log.d(Constants.TAG_KIA, "id?: ->" + idService);
         galleryViewModel.getReservations(time, "631869b10bfaf719ef8b76cf");
         Log.d(Constants.TAG_KIA, "sendtime?: ->" + time);
-        binding.swipeRefreshLayoutReservation.setEnabled(refreshing);
 
     }
 

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
@@ -202,7 +203,11 @@ public class MainActivity extends AppCompatActivity implements ApplicationCallBa
     public void onBackPressed() {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
 
-        if (navController.getCurrentDestination().getId() == R.id.nav_home) {
+        if (binding.drawerLayout.isDrawerOpen(binding.drawerMenu)) {
+            binding.drawerLayout.closeDrawer(binding.drawerMenu);
+
+
+        }else if (navController.getCurrentDestination().getId() == R.id.nav_home) {
             if (isDubblePress) {
 
                 finish();
@@ -217,6 +222,8 @@ public class MainActivity extends AppCompatActivity implements ApplicationCallBa
                 h.postDelayed(r, 4000);
             }
         }
+
+
 
         else {
             super.onBackPressed();
