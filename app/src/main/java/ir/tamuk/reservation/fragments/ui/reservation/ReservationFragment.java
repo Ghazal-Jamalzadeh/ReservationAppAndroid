@@ -510,6 +510,7 @@ public class ReservationFragment extends Fragment implements OnSelectedItem {
     //Api
     public void callApi() {
 
+
         Log.d(Constants.TAG_KIA, "time?: ->" + time);
         Log.d(Constants.TAG_KIA, "id?: ->" + idService);
         galleryViewModel.getReservations(time, "631869b10bfaf719ef8b76cf");
