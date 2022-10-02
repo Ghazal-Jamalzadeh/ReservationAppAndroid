@@ -1,5 +1,8 @@
 package ir.tamuk.reservation.repository;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import ir.tamuk.reservation.models.BodySubmitCustomer;
 import ir.tamuk.reservation.models.ResponseCategoriesList;
 import ir.tamuk.reservation.models.ResponseGetMyProfile;
@@ -36,7 +39,9 @@ public class ProfileRepository {
     }
 
     public Call<ResponseUploadFile> callUploadFile(String token , MultipartBody.Part image){
+
         Call<ResponseUploadFile> call = Tools.getApiServicesInstance().uploadFile(token , image);
+
         return call ;
     }
 

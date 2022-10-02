@@ -3,14 +3,11 @@
 buildscript {
 
     repositories {
-        maven { url 'https://maven.google.com' }
         maven { url 'https://jitpack.io' }
+        jcenter()
+        maven { url 'https://maven.google.com' }
         mavenCentral()
         google()
-        jcenter()
-
-
-
 
     }
     dependencies {
@@ -30,14 +27,14 @@ plugins {
 }
 
 //allprojects {
- //   repositories {
-   //     maven { url 'https://maven.google.com' }
- //       google()
- //       jcenter()
-//       maven { url 'https://jitpack.io' }
- //       mavenCentral()
-
-  //  }
+//    repositories {
+//        jcenter()
+////        maven { url 'https://maven.google.com' }
+////        google()
+////       maven { url 'https://jitpack.io' }
+////        mavenCentral()
+//
+//    }
 //}
 
 task clean(type: Delete) {

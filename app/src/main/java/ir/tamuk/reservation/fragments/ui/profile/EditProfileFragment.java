@@ -1,5 +1,7 @@
 package ir.tamuk.reservation.fragments.ui.profile;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -28,6 +30,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -49,9 +52,11 @@ import ir.hamsaa.persiandatepicker.PersianDatePickerDialog;
 import ir.hamsaa.persiandatepicker.api.PersianPickerDate;
 import ir.hamsaa.persiandatepicker.api.PersianPickerListener;
 import ir.tamuk.reservation.R;
+import ir.tamuk.reservation.activities.ImagePickerActivity;
 import ir.tamuk.reservation.databinding.FragmentEditProfileBinding;
 import ir.tamuk.reservation.fragments.ui.profile.ProfileViewModel;
 import ir.tamuk.reservation.models.BodySubmitCustomer;
+import ir.tamuk.reservation.models.Photo;
 import ir.tamuk.reservation.models.ResponseUploadFile;
 import ir.tamuk.reservation.models.User;
 import ir.tamuk.reservation.repository.ProfileRepository;
@@ -77,6 +82,9 @@ public class EditProfileFragment extends Fragment {
     private ProfileViewModel profileViewModel;
     private String path = "";
     private String birthdate = "";
+
+    private boolean isFromOut = false;
+    private  int REQUEST_IMAGE = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -163,18 +171,20 @@ public class EditProfileFragment extends Fragment {
         });
 
         binding.profileImageLay.setOnClickListener(view1 -> {
+            REQUEST_IMAGE = 100;
             Dexter.withActivity(getActivity())
                     .withPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     .withListener(new MultiplePermissionsListener() {
                         @Override
                         public void onPermissionsChecked(MultiplePermissionsReport report) {
                             if (report.areAllPermissionsGranted()) {
-//                                showImagePickerOptions();
-                                Log.d(TAG, "all permissions granted");
-                                Intent intent = new Intent();
-                                intent.setType("image/*");
-                                intent.setAction(Intent.ACTION_GET_CONTENT);
-                                startActivityForResult(intent, 10);
+                                Log.d(TAG, "onPermissionsChecked: ");
+                                showImagePickerOptions();
+//                                Log.d(TAG, "all permissions granted");
+//                                Intent intent = new Intent();
+//                                intent.setType("image/*");
+//                                intent.setAction(Intent.ACTION_GET_CONTENT);
+//                                startActivityForResult(intent, 10);
 
                             }
 
@@ -251,14 +261,33 @@ public class EditProfileFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 10 && resultCode == Activity.RESULT_OK) {
-            Uri uri = data.getData();
-            path = RealPathUtil.getRealPath(getContext(), uri);
-            Bitmap bitmap = BitmapFactory.decodeFile(path);
-            binding.imgProfile.setImageBitmap(bitmap);
-            Log.d(TAG, "onActivityResult: api called : " + path);
-            callUploadFile(path);
+
+        if (REQUEST_IMAGE == 100) {
+            if (requestCode == REQUEST_IMAGE) {
+                if (resultCode == RESULT_OK) {
+                    Uri uri = data.getParcelableExtra("path");
+
+                    path = RealPathUtil.getRealPath(getContext(), uri);
+                    Bitmap bitmap = BitmapFactory.decodeFile(path);
+                    binding.imgProfile.setImageBitmap(bitmap);
+
+//                    Photo uploadPhoto = new Photo();
+//                    uploadPhoto.setUri(uri);
+//                    lastPhoto = uploadPhoto;
+                    callUploadFile(uri);
+                }
+            }
+
         }
+
+//        if (requestCode == 10 && resultCode == Activity.RESULT_OK) {
+//            Uri uri = data.getData();
+//            path = RealPathUtil.getRealPath(getContext(), uri);
+//            Bitmap bitmap = BitmapFactory.decodeFile(path);
+//            binding.imgProfile.setImageBitmap(bitmap);
+//            Log.d(TAG, "onActivityResult: api called : " + path);
+//            callUploadFile(path);
+//        }
     }
 
     private void collectUserData() {
@@ -302,6 +331,51 @@ public class EditProfileFragment extends Fragment {
     }
 
 
+
+    //-------------------------Image Picker & Cropper---------------------------------------------->
+    private void showImagePickerOptions() {
+        ImagePickerActivity.showImagePickerOptions(getContext(), new ImagePickerActivity.PickerOptionListener() {
+            @Override
+            public void onTakeCameraSelected() {
+                launchCameraIntent();
+            }
+
+            @Override
+            public void onChooseGallerySelected() {
+                launchGalleryIntent();
+            }
+        });
+    }
+
+    private void launchCameraIntent() {
+        Intent intent = new Intent(getContext(), ImagePickerActivity.class);
+        intent.putExtra(ImagePickerActivity.INTENT_IMAGE_PICKER_OPTION, ImagePickerActivity.REQUEST_IMAGE_CAPTURE);
+
+        // setting aspect ratio
+        intent.putExtra(ImagePickerActivity.INTENT_LOCK_ASPECT_RATIO, true);
+        intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_X, 1); // 16x9, 1x1, 3:4, 3:2
+        intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_Y, 1);
+
+        // setting maximum bitmap width and height
+        intent.putExtra(ImagePickerActivity.INTENT_SET_BITMAP_MAX_WIDTH_HEIGHT, true);
+        intent.putExtra(ImagePickerActivity.INTENT_BITMAP_MAX_WIDTH, 1000);
+        intent.putExtra(ImagePickerActivity.INTENT_BITMAP_MAX_HEIGHT, 1000);
+
+        isFromOut = true;
+        startActivityForResult(intent, REQUEST_IMAGE);
+    }
+
+    private void launchGalleryIntent() {
+        Intent intent = new Intent(getContext(), ImagePickerActivity.class);
+        intent.putExtra(ImagePickerActivity.INTENT_IMAGE_PICKER_OPTION, ImagePickerActivity.REQUEST_GALLERY_IMAGE);
+
+        // setting aspect ratio
+        intent.putExtra(ImagePickerActivity.INTENT_LOCK_ASPECT_RATIO, true);
+        intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_X, 2); // 16x9, 1x1, 3:4, 3:2
+        intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_Y, 3);
+        isFromOut = true;
+        startActivityForResult(intent, REQUEST_IMAGE);
+    }
     private void showSettingsDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle(getString(R.string.dialog_permission_title));
@@ -319,44 +393,50 @@ public class EditProfileFragment extends Fragment {
         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         Uri uri = Uri.fromParts("package", getContext().getPackageName(), null);
         intent.setData(uri);
-//        isFromOut = true;
+        isFromOut = true;
         startActivityForResult(intent, 101);
     }
+    //-------------------------Image Picker & Cropper---------------------------------------------//
+
 
     //retrofit
-    private void callUploadFile(String path ) {
+    private void callUploadFile(Uri uri ) {
         /*create file */
-        File file = new File(path);
+//        File file = new File(path);
+        File file = new File(uri.getPath());
+        Log.d(TAG, "callUploadFile: uri ->" + uri.getPath());
 
         /*convert to form data */
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-//        MultipartBody.Part body =  MultipartBody.Part.createFormData("image" , file.getName() , requestFile) ;
+        MultipartBody.Part body =  MultipartBody.Part.createFormData("image" , file.getName() , requestFile) ;
 
         /* call okHttp from source */
-        new SendPhoto(getContext() , path).execute();
+//        new SendPhoto(getContext() , path).execute();
 
         /*call okhttp */
 //        uploadFileWithOkHttp(requestFile);
-//        MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
+        MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
 
 
         /* call api retrofit */
-//        ProfileRepository repository = new ProfileRepository() ;
-//        Call<ResponseUploadFile> call =  repository.callUploadFile(TokenManager.getAccessToken(getContext()) , filePart) ;
-//
-//        /* response */
-//        call.enqueue(new Callback<ResponseUploadFile>() {
-//            @Override
-//            public void onResponse(Call<ResponseUploadFile> call, Response<ResponseUploadFile> response) {
-//                Log.d(TAG, "onResponse: ");
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResponseUploadFile> call, Throwable t) {
-//                Log.d(TAG, "onFailure: ");
-//
-//            }
-//        });
+        ProfileRepository repository = new ProfileRepository() ;
+        Call<ResponseUploadFile> call =  repository.callUploadFile(TokenManager.getAccessToken(getContext()) , filePart) ;
+
+        /* response */
+        call.enqueue(new Callback<ResponseUploadFile>() {
+            @Override
+            public void onResponse(Call<ResponseUploadFile> call, retrofit2.Response<ResponseUploadFile> response) {
+
+                Log.d(TAG, "onResponse: " );
+            }
+
+            @Override
+            public void onFailure(Call<ResponseUploadFile> call, Throwable t) {
+
+                Log.d(TAG, "onFailure: " + t.getMessage());
+            }
+        });
+
     }
 
     //okhttp
@@ -479,5 +559,26 @@ public class EditProfileFragment extends Fragment {
 
         }
     }
+
+    //----------------------------"API Call Methods"----------------------------------------------->
+
+//    public void callUploadFile(Uri uri) {
+//
+//        binding.progressCircular.setVisibility(View.VISIBLE);
+//
+//        File file = new File(uri.getPath());
+//        Log.d(TAG, "callUploadFile: uri ->" + uri.getPath());
+//
+//
+////        if (Connectivity.isConnected(context)) {
+////            new ApiCall(context, this).uploadPhoto(file, "contract", true);
+////        } else {
+////            Toast.makeText(context, R.string.internet_not_connected_error, Toast.LENGTH_SHORT).show();
+////            binding.errorLayout.setVisibility(View.VISIBLE);
+////            binding.swipeLayout.setVisibility(View.GONE);
+////            binding.layoutInvoiceFooter.setVisibility(View.GONE);
+////        }
+//    }
+    //----------------------------"API Call Methods"----------------------------------------------//
 
 }
