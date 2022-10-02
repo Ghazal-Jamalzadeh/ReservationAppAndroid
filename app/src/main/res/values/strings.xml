@@ -15,9 +15,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="toast_image_intent_null">Image picker option is missing!</string>
     <string name="dialog_permission_title">Grant Permissions</string>
     <string name="dialog_permission_message">This app needs permission to use this feature. You can grant them in app settings.</string>
     <string name="go_to_settings">GOTO SETTINGS</string>
+
+    <string name="lbl_set_profile_photo">تنظیم عکس پروفایل</string>
+    <string name="lbl_take_camera_picture">گرفتن عکس</string>
+    <string name="lbl_choose_from_gallery">انتخاب از گالری تصاویر</string>
 
     <!-- errors   -->
     <string name="internet_not_connected_error">اتصال اینترنت خود را بررسی کنید</string>

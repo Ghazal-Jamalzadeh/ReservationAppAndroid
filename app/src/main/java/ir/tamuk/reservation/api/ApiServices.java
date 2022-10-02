@@ -1,5 +1,8 @@
 package ir.tamuk.reservation.api;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import ir.tamuk.reservation.models.BodyFactor;
 import ir.tamuk.reservation.models.BodySendActivationCode;
 import ir.tamuk.reservation.models.BodySubmitCustomer;
@@ -24,6 +27,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -74,7 +78,6 @@ public interface ApiServices {
 
     //http://moeenkashisaz.ir/laser/api/v1/upload-file/
     @Multipart
-    @Headers( "Content-Type: application/x-www-form-urlencoded")
     @POST("v1/upload-file/")
     Call<ResponseUploadFile> uploadFile(
             @Header("authorization") String token,
@@ -83,16 +86,16 @@ public interface ApiServices {
 
     //http://moeenkashisaz.ir/laser/api/v1/get-my-reserve?status=reserved
     @GET("v1/get-my-reserve?")
-    Call<ResponseGetMyReserve> getMyReserve (
-            @Header("authorization") String token ,
+    Call<ResponseGetMyReserve> getMyReserve(
+            @Header("authorization") String token,
             @Query("status") String status
     );
 
     //http://localhost:3001/laser/api/v1/get-reserve-user/631c47d9d0db77fb798849c3
     @GET("v1/get-reserve-user/{id}")
     Call<ResponseReserveDetail> getReserveDetail(
-            @Header("authorization") String token ,
-            @Path("id") String id)  ;
+            @Header("authorization") String token,
+            @Path("id") String id);
 
     //http://moeenkashisaz.ir/laser/api/v1/insert-reserve
     @POST("v1/insert-reserve")
