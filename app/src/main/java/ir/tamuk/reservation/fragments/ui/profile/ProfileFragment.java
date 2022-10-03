@@ -1,64 +1,66 @@
 package ir.tamuk.reservation.fragments.ui.profile;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.transition.Transition;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-
-import com.google.android.material.snackbar.Snackbar;
-
+import com.bumptech.glide.Glide;
+import ir.tamuk.reservation.Interfaces.DialogCommunicationInterface;
 import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.activities.MainActivity;
 import ir.tamuk.reservation.databinding.FragmentProfileBinding;
-import ir.tamuk.reservation.fragments.ui.home.HomeViewModel;
 import ir.tamuk.reservation.models.User;
+import ir.tamuk.reservation.utils.Constants;
+import ir.tamuk.reservation.utils.DialogManager;
 import ir.tamuk.reservation.utils.TokenManager;
 import ir.tamuk.reservation.utils.Tools;
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements DialogCommunicationInterface {
 
-    private static final String TAG = "ProfileFragment";
     private FragmentProfileBinding binding;
-    private ProfileViewModel profileViewModel ;
+    private ProfileViewModel profileViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         profileViewModel = new ViewModelProvider(getActivity()).get(ProfileViewModel.class);
 
         binding = FragmentProfileBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
 
-        return root;
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //Buttons :
+        //logout
         binding.btnLogout.setOnClickListener(view1 -> {
-            profileViewModel.logoutUser();
+            DialogManager.showExitDialog(getContext() , this);
         });
 
         binding.btnMyAppointments.setOnClickListener(view13 -> {
-            if (Tools.checkDestination(view13 , R.id.nav_profile)){
+            if (Tools.checkDestination(view13, R.id.nav_profile)) {
                 Navigation.findNavController(view13).navigate(R.id.action_nav_profile_to_appointmentFragment);
             }
         });
         binding.btnEditProfile.setOnClickListener(view12 -> {
-            if (Tools.checkDestination(view12 , R.id.nav_profile)){
-            Navigation.findNavController(view12).navigate(R.id.action_nav_profile_to_editProfileFragment);
+            if (binding.progressCircular.getVisibility() == View.VISIBLE) {
+                Tools.showToast(getContext(), "اطلاعات کاربری شما در حال بارگذاری است. کمی صبر کنید...");
+            } else {
+                if (Tools.checkDestination(view12, R.id.nav_profile)) {
+                    Navigation.findNavController(view12).navigate(R.id.action_nav_profile_to_editProfileFragment);
+                }
             }
         });
 
@@ -66,8 +68,16 @@ public class ProfileFragment extends Fragment {
             @SuppressLint("SetTextI18n")
             @Override
             public void onChanged(User user) {
+
+                binding.progressCircular.setVisibility(View.INVISIBLE);
+
                 binding.txtName.setText(user.firstName + " " + user.lastName);
                 binding.txtPhoneNumber.setText(user.mobile);
+
+                if (!user.photo.filename.equals("")) {
+                    Glide.with(getContext()).load(Constants.DOWNLOAD_PHOTO_URL + user.photo.filename)
+                            .into(binding.imgProfile);
+                }
             }
         });
 
@@ -92,9 +102,9 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onChanged(String errorMessage) {
                 //progress stop
-                if (profileViewModel.ignoreMessage){
-                    profileViewModel.ignoreMessage = false ;
-                }else {
+                if (profileViewModel.ignoreMessage) {
+                    profileViewModel.ignoreMessage = false;
+                } else {
                     Tools.showToast(getContext(), errorMessage);
                 }
             }
@@ -104,13 +114,22 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        profileViewModel.ignoreMessage =  false ;
+        profileViewModel.ignoreMessage = false;
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        profileViewModel.ignoreMessage =  true ;
+        profileViewModel.ignoreMessage = true;
     }
 
+    @Override
+    public void yesAction(Dialog dialog) {
+        profileViewModel.logoutUser();
+    }
+
+    @Override
+    public void noAction(Dialog dialog) {
+        dialog.dismiss();
+    }
 }

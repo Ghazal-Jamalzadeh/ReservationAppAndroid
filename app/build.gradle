@@ -72,8 +72,7 @@ dependencies {
     //Crop Image Lib
     implementation 'com.github.yalantis:ucrop:2.2.6'
     //FastNetworking Lib for MultipartRequest
-//    implementation 'com.amitshekhar.android:android-networking:1.0.2'
-
+    implementation 'com.amitshekhar.android:android-networking:1.0.2'
 
     implementation 'com.github.arcadefire:nice-spinner:1.4.4'
 

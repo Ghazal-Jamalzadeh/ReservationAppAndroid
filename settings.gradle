@@ -1,18 +1,24 @@
 pluginManagement {
     repositories {
+        jcenter()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
         google()
-        maven { url 'https://jitpack.io'}
-        gradlePluginPortal()
+        maven { url "https://maven.neshan.org/artifactory/public-maven" }
+        maven { url 'https://maven.google.com' }
 
     }
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
+        jcenter()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
         google()
-        maven { url 'https://jitpack.io'}
+        maven { url "https://maven.neshan.org/artifactory/public-maven" }
+        maven { url 'https://maven.google.com' }
+
 
     }
 }

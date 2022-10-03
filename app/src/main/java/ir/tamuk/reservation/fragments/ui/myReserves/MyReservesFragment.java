@@ -25,6 +25,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 import ir.tamuk.reservation.Interfaces.MyReservesAdapterInterface;
@@ -34,6 +36,7 @@ import ir.tamuk.reservation.enums.StatusReserve;
 import ir.tamuk.reservation.fragments.ui.profile.ProfileViewModel;
 import ir.tamuk.reservation.models.Reserve;
 import ir.tamuk.reservation.models.User;
+import ir.tamuk.reservation.utils.Constants;
 import ir.tamuk.reservation.utils.DateTime;
 import ir.tamuk.reservation.utils.PriceFormat;
 import ir.tamuk.reservation.utils.TokenManager;
@@ -155,6 +158,11 @@ public class MyReservesFragment extends Fragment implements MyReservesAdapterInt
             public void onChanged(User user) {
                 binding.details.nameTextForm.setText(user.firstName + " " + user.lastName);
                 binding.details.phoneTextForm.setText(user.mobile);
+
+                if (!user.photo.filename.equals("")) {
+                    Glide.with(getContext()).load(Constants.DOWNLOAD_PHOTO_URL + user.photo.filename)
+                            .into(binding.imgProfile);
+                }
             }
         });
 

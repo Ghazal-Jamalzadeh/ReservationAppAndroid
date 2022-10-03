@@ -1,5 +1,5 @@
 package ir.tamuk.reservation.Interfaces;
 
 public interface ApplicationCallBacks {
-    public void restartApplication() ;
+    void restartApplication() ;
 }

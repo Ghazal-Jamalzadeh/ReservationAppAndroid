@@ -4,17 +4,10 @@ import static android.app.Activity.RESULT_OK;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Typeface;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,67 +17,54 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-
+import android.os.Environment;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
+import com.bumptech.glide.Glide;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
-
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog;
 import ir.hamsaa.persiandatepicker.api.PersianPickerDate;
 import ir.hamsaa.persiandatepicker.api.PersianPickerListener;
+import ir.tamuk.reservation.Interfaces.ApiCommunicationInterface;
 import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.activities.ImagePickerActivity;
+import ir.tamuk.reservation.api.UploadHelper;
 import ir.tamuk.reservation.databinding.FragmentEditProfileBinding;
-import ir.tamuk.reservation.fragments.ui.profile.ProfileViewModel;
 import ir.tamuk.reservation.models.BodySubmitCustomer;
 import ir.tamuk.reservation.models.Photo;
-import ir.tamuk.reservation.models.ResponseUploadFile;
 import ir.tamuk.reservation.models.User;
-import ir.tamuk.reservation.repository.ProfileRepository;
+import ir.tamuk.reservation.utils.Connectivity;
+import ir.tamuk.reservation.utils.Constants;
 import ir.tamuk.reservation.utils.DateTime;
+import ir.tamuk.reservation.utils.JsonConverter;
 import ir.tamuk.reservation.utils.NullEmptyCheck;
-import ir.tamuk.reservation.utils.RealPathUtil;
-import ir.tamuk.reservation.utils.TokenManager;
 import ir.tamuk.reservation.utils.Tools;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-//import retrofit2.Response;
-import okhttp3.Response;
 
+public class EditProfileFragment extends Fragment implements ApiCommunicationInterface {
 
-public class EditProfileFragment extends Fragment {
     private static final String TAG = "EditProfileFragment";
+    //binding
     private FragmentEditProfileBinding binding;
+    //viewModel
     private ProfileViewModel profileViewModel;
-    private String path = "";
+    //other variables
+    private User user = new User();
     private String birthdate = "";
-
+    private int REQUEST_IMAGE = 0;
     private boolean isFromOut = false;
-    private  int REQUEST_IMAGE = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -100,13 +80,10 @@ public class EditProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Log.d(TAG, "access token : " + TokenManager.getAccessToken(getContext()));
-
-        // This callback will only be called when MyFragment is at least Started.
+        // Handle the back button event
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
-                // Handle the back button event
                 Navigation.findNavController(view).popBackStack();
             }
         };
@@ -117,20 +94,24 @@ public class EditProfileFragment extends Fragment {
         binding.lastNameField.title.setText("نام خانوادگی");
         binding.birthDateField.title.setText("تاریخ تولد");
 
+        //observers
         profileViewModel.getMyProfile().observe(getViewLifecycleOwner(), new Observer<User>() {
             @Override
-            public void onChanged(User user) {
+            public void onChanged(User userProfile) {
+
+                user = userProfile;
+
                 binding.firstNameField.edt.setText(user.firstName);
                 binding.lastNameField.edt.setText(user.lastName);
                 if (!NullEmptyCheck.isNullOrEmpty(user.birthday)) {
                     birthdate = user.birthday;
-                    binding.birthDateField.txt.setText(getPersianDate(birthdate));
+                    binding.birthDateField.txt.setText(DateTime.getPersianDate(birthdate));
                 }
-//        if (!user.photo.filename.equals("")){
-//            Glide.with(getContext()).load(Constants.DOWNLOAD_PHOTO_URL + user.photo.filename)
-//                    .into(binding.imgProfile);
-//        }
-//        binding.birthDateField.txt.setText(user);
+                if (!user.photo.filename.equals("")) {
+                    Glide.with(getContext()).load(Constants.DOWNLOAD_PHOTO_URL + user.photo.filename)
+                            .into(binding.imgProfile);
+                }
+
 
             }
         });
@@ -138,13 +119,13 @@ public class EditProfileFragment extends Fragment {
         profileViewModel.editIsSuccess.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-                if (aBoolean){
-                    profileViewModel.getMyProfile() ;
+                if (aBoolean) {
+                    profileViewModel.getMyProfile();
 
-                    if (profileViewModel.ignoreSuccessMessage){
-                        profileViewModel.ignoreSuccessMessage = false ;
-                    }else {
-                        Tools.showToast(getContext() , "تغییرات با موفقیت ذخیره شد");
+                    if (profileViewModel.ignoreSuccessMessage) {
+                        profileViewModel.ignoreSuccessMessage = false;
+                    } else {
+                        Tools.showToast(getContext(), "تغییرات با موفقیت ذخیره شد");
                     }
                 }
                 binding.progressCircular.setVisibility(View.INVISIBLE);
@@ -157,19 +138,22 @@ public class EditProfileFragment extends Fragment {
 
                 binding.progressCircular.setVisibility(View.INVISIBLE);
 
-                if (profileViewModel.ignoreMessage){
-                    profileViewModel.ignoreMessage = false ;
-                }else {
+                if (profileViewModel.ignoreMessage) {
+                    profileViewModel.ignoreMessage = false;
+                } else {
                     Tools.showToast(getContext(), errorMessage);
                 }
             }
         });
 
+        //buttons:
+        //save btn
         binding.btnSave.setOnClickListener(view1 -> {
             binding.progressCircular.setVisibility(View.VISIBLE);
             collectUserData();
         });
 
+        //gallery
         binding.profileImageLay.setOnClickListener(view1 -> {
             REQUEST_IMAGE = 100;
             Dexter.withActivity(getActivity())
@@ -178,16 +162,37 @@ public class EditProfileFragment extends Fragment {
                         @Override
                         public void onPermissionsChecked(MultiplePermissionsReport report) {
                             if (report.areAllPermissionsGranted()) {
+
                                 Log.d(TAG, "onPermissionsChecked: ");
-                                showImagePickerOptions();
-//                                Log.d(TAG, "all permissions granted");
-//                                Intent intent = new Intent();
-//                                intent.setType("image/*");
-//                                intent.setAction(Intent.ACTION_GET_CONTENT);
-//                                startActivityForResult(intent, 10);
+                                Log.d(TAG, "onPermissionsChecked: sdk : " + Build.VERSION.SDK_INT);
+                                Log.d(TAG, "onPermissionsChecked: code : " + Build.VERSION_CODES.R);
 
+                                try {
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                                        if (Environment.isExternalStorageManager()) {
+
+                                            Log.d(TAG, "we need extra permission and we have : ");
+                                            showImagePickerOptions();
+
+                                        } else {
+
+                                            Log.d(TAG, "we need extra permission but we don't have -> getting permission  ");
+                                            Intent intent = new Intent();
+                                            intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                                            Uri uri = Uri.fromParts("package", getActivity().getApplicationContext().getPackageName(), null);
+                                            intent.setData(uri);
+                                            startActivity(intent);
+                                        }
+                                    } else {
+                                        Log.d(TAG, "we don't need extra permission and we have all we want");
+                                        showImagePickerOptions();
+
+                                    }
+                                } catch (Exception e) {
+                                    Log.d(TAG, "error " + e.getMessage());
+                                    e.printStackTrace();
+                                }
                             }
-
 
                             if (report.isAnyPermissionPermanentlyDenied()) {
                                 Log.d(TAG, "denied ");
@@ -203,6 +208,7 @@ public class EditProfileFragment extends Fragment {
                     }).check();
         });
 
+        //date picker
         binding.birthDateField.getRoot().setOnClickListener(view1 -> {
 
             //https://github.com/aliab/Persian-Date-Picker-Dialog
@@ -239,22 +245,21 @@ public class EditProfileFragment extends Fragment {
                     });
 
             picker.show();
-            //--------------------------Date picker - start---------------------------------------//
         });
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        profileViewModel.ignoreMessage =  false ;
-        profileViewModel.ignoreSuccessMessage =  false ;
+        profileViewModel.ignoreMessage = false;
+        profileViewModel.ignoreSuccessMessage = false;
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        profileViewModel.ignoreMessage =  true ;
-        profileViewModel.ignoreSuccessMessage =  true ;
+        profileViewModel.ignoreMessage = true;
+        profileViewModel.ignoreSuccessMessage = true;
     }
 
 
@@ -265,32 +270,17 @@ public class EditProfileFragment extends Fragment {
         if (REQUEST_IMAGE == 100) {
             if (requestCode == REQUEST_IMAGE) {
                 if (resultCode == RESULT_OK) {
+
                     Uri uri = data.getParcelableExtra("path");
-
-                    path = RealPathUtil.getRealPath(getContext(), uri);
-                    Bitmap bitmap = BitmapFactory.decodeFile(path);
-                    binding.imgProfile.setImageBitmap(bitmap);
-
-//                    Photo uploadPhoto = new Photo();
-//                    uploadPhoto.setUri(uri);
-//                    lastPhoto = uploadPhoto;
                     callUploadFile(uri);
+
                 }
             }
-
         }
-
-//        if (requestCode == 10 && resultCode == Activity.RESULT_OK) {
-//            Uri uri = data.getData();
-//            path = RealPathUtil.getRealPath(getContext(), uri);
-//            Bitmap bitmap = BitmapFactory.decodeFile(path);
-//            binding.imgProfile.setImageBitmap(bitmap);
-//            Log.d(TAG, "onActivityResult: api called : " + path);
-//            callUploadFile(path);
-//        }
     }
 
     private void collectUserData() {
+
         BodySubmitCustomer body = new BodySubmitCustomer();
         String firstName = binding.firstNameField.edt.getText().toString().trim();
         String lastName = binding.lastNameField.edt.getText().toString().trim();
@@ -304,32 +294,25 @@ public class EditProfileFragment extends Fragment {
             Tools.showToast(getContext(), "نام خانوادگی نمی تواند خالی باشد.");
             binding.lastNameField.edt.requestFocus();
 
-        }else {
-            body.firstName = firstName ;
-            body.lastName = lastName ;
-            if (!NullEmptyCheck.isNullOrEmpty(birthdate)){
+        } else {
+            body.firstName = firstName;
+            body.lastName = lastName;
+
+            if (!NullEmptyCheck.isNullOrEmpty(birthdate)) {
                 body.birthday = birthdate;
             }
+
+            if (user.photo != null) {
+                if (!NullEmptyCheck.isEmpty(user.photo.filename)) {
+                    body.photo = user.photo.id;
+                }
+            }
+
             //call api
             profileViewModel.editProfile(body);
         }
 
     }
-
-
-    public String getPersianDate(String date) {
-        String persianDate = "";
-        try {
-
-            persianDate = DateTime.getDate(date, TimeZone.getTimeZone("Asia/Tehran"));
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-        }
-        return persianDate;
-    }
-
 
 
     //-------------------------Image Picker & Cropper---------------------------------------------->
@@ -371,11 +354,12 @@ public class EditProfileFragment extends Fragment {
 
         // setting aspect ratio
         intent.putExtra(ImagePickerActivity.INTENT_LOCK_ASPECT_RATIO, true);
-        intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_X, 2); // 16x9, 1x1, 3:4, 3:2
-        intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_Y, 3);
+        intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_X, 1); // 16x9, 1x1, 3:4, 3:2
+        intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_Y, 1);
         isFromOut = true;
         startActivityForResult(intent, REQUEST_IMAGE);
     }
+
     private void showSettingsDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle(getString(R.string.dialog_permission_title));
@@ -398,187 +382,74 @@ public class EditProfileFragment extends Fragment {
     }
     //-------------------------Image Picker & Cropper---------------------------------------------//
 
+    //-----------------------------Upload photo Api------------------------------------------------>
+    //error
+    public void handleApiErrors(JSONObject response) {
 
-    //retrofit
-    private void callUploadFile(Uri uri ) {
-        /*create file */
-//        File file = new File(path);
-        File file = new File(uri.getPath());
-        Log.d(TAG, "callUploadFile: uri ->" + uri.getPath());
+        binding.progressCircularUploadPhoto.setVisibility(View.INVISIBLE);
 
-        /*convert to form data */
-        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-        MultipartBody.Part body =  MultipartBody.Part.createFormData("image" , file.getName() , requestFile) ;
-
-        /* call okHttp from source */
-//        new SendPhoto(getContext() , path).execute();
-
-        /*call okhttp */
-//        uploadFileWithOkHttp(requestFile);
-        MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
-
-
-        /* call api retrofit */
-        ProfileRepository repository = new ProfileRepository() ;
-        Call<ResponseUploadFile> call =  repository.callUploadFile(TokenManager.getAccessToken(getContext()) , filePart) ;
-
-        /* response */
-        call.enqueue(new Callback<ResponseUploadFile>() {
-            @Override
-            public void onResponse(Call<ResponseUploadFile> call, retrofit2.Response<ResponseUploadFile> response) {
-
-                Log.d(TAG, "onResponse: " );
-            }
-
-            @Override
-            public void onFailure(Call<ResponseUploadFile> call, Throwable t) {
-
-                Log.d(TAG, "onFailure: " + t.getMessage());
-            }
-        });
-
-    }
-
-    //okhttp
-    public void uploadFileWithOkHttp(RequestBody requestBody) {
         try {
-            new Thread(new Runnable() {
-                public void run() {
-                    // call send message here
-                    OkHttpClient client = new OkHttpClient();
+            if (response.getInt("code") == 0 && response.getInt("code") >= 500) {
+                Tools.showToast(getContext(), getContext().getString(R.string.api_response_error));
 
-                    Request request = new Request.Builder()
-                            .url("http://moeenkashisaz.ir/laser/api/v1/upload-file/")
-                            .post(requestBody)
-                            .addHeader("content-type", "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW")
-                            .addHeader("authorization", TokenManager.getAccessToken(getContext()))
-                            .addHeader("cache-control", "no-cache")
-//                .addHeader("postman-token", "9b0da601-c5c1-6548-d285-db439bd3773c")
-                            .build();
-
-
-                    Response response = null;
-                    try {
-                        response = client.newCall(request).execute();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        String khoob = response.body().string();
-                        Log.d(TAG, "upload File With OkHttp : " + khoob);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
-
-        } catch (Exception e) {
+            } else {
+                Tools.showToast(getContext(), response.getString("result"));
+            }
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    //ok http from source
-    public class SendPhoto extends AsyncTask {
-        Response response;
-        OkHttpClient client;
-        Request request;
-        String path ;
-        private Context context ;
 
-        public SendPhoto(Context context , String path) {
-            this.path = path ;
-            this.context  = context ;
-            Log.d(TAG, "SendPhoto: ");
-        }
+    //response
+    @Override
+    public void onResponse(JSONObject response) {
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            Log.d(TAG, "onPreExecute: ");
-            client = new OkHttpClient.Builder()
-                    .connectTimeout(30, TimeUnit.SECONDS)
-                    .writeTimeout(30, TimeUnit.SECONDS)
-                    .readTimeout(30, TimeUnit.SECONDS)
-                    .build();
+        try {
+            switch (response.getString("request")) {
+
+                case Constants.UploadPhoto_URL:
+                    if (response.getBoolean("isSuccess")) {
+
+                        binding.progressCircularUploadPhoto.setVisibility(View.INVISIBLE);
+
+                        Photo photo = JsonConverter.convertPhotoJsonToObject(response.getJSONObject("result").getJSONObject("data"));
+
+                        user.photo = photo;
+
+                        if (!user.photo.filename.equals("")) {
+                            Glide.with(getContext()).load(Constants.DOWNLOAD_PHOTO_URL + user.photo.filename)
+                                    .into(binding.imgProfile);
+                        }
 
 
-            File file = new File(path);
-
-            RequestBody requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM)
-                    .addFormDataPart("file", file.getName(), RequestBody.create(MediaType.parse("text/csv"), file))
-//                    .addFormDataPart("file", file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), file))
-                    .build();
-
-//            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("prefs", MODE_PRIVATE);
-
-            request = new Request.Builder()
-                    .addHeader("Authorization", TokenManager.getAccessToken(context))
-                    .url("http://moeenkashisaz.ir/laser/api/v1/upload-file/")
-//                    .url(Operations.Domain + "api/v1/files/upload")
-                    .post(requestBody)
-                    .build();
-
-        }
-
-        @Override
-        protected Object doInBackground(Object[] objects) {
-            Log.d(TAG, "doInBackground: ");
-            try {
-                response = client.newCall(request).execute();
-                if (response.isSuccessful()) {
-                    Log.d(TAG, "doInBackground: " + response.body().string());
-                    return response.body().string();
-                } else {
-                    Log.d(TAG, "doInBackground: not success : " + response);
-                    return null;
-                }
-            } catch (Exception e) {
-                Log.d(TAG, "doInBackground: err " + e.getMessage());
-            }
-            return null;
-        }
-
-
-        @Override
-        protected void onPostExecute(Object o) {
-            super.onPostExecute(o);
-            try {
-                if (o != null && response.isSuccessful()) {
-//                    JSONObject jsonObject = new JSONObject(String.valueOf(o)).getJSONObject("data");
-//                    receiptImage.id = jsonObject.getString("_id");
-//                    receiptImage.fileName = jsonObject.getString("fileName");
-//                    Picasso.with(getActivity()).load(Operations.Domain + receiptImage.fileName).into(binding.receiptImageShow);
-//                    binding.receiptImageShow.setVisibility(View.VISIBLE);
-
-                }
-            } catch (Exception e) {
-
-                Log.d(TAG, "onPostExecute: err " + e.getMessage());
+                    } else {
+                        handleApiErrors(response);
+                    }
+                    break;
             }
 
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 
-    //----------------------------"API Call Methods"----------------------------------------------->
 
-//    public void callUploadFile(Uri uri) {
-//
-//        binding.progressCircular.setVisibility(View.VISIBLE);
-//
-//        File file = new File(uri.getPath());
-//        Log.d(TAG, "callUploadFile: uri ->" + uri.getPath());
-//
-//
-////        if (Connectivity.isConnected(context)) {
-////            new ApiCall(context, this).uploadPhoto(file, "contract", true);
-////        } else {
-////            Toast.makeText(context, R.string.internet_not_connected_error, Toast.LENGTH_SHORT).show();
-////            binding.errorLayout.setVisibility(View.VISIBLE);
-////            binding.swipeLayout.setVisibility(View.GONE);
-////            binding.layoutInvoiceFooter.setVisibility(View.GONE);
-////        }
-//    }
-    //----------------------------"API Call Methods"----------------------------------------------//
+    //call api
+    public void callUploadFile(Uri uri) {
+
+        binding.progressCircularUploadPhoto.setVisibility(View.VISIBLE);
+
+        File file = new File(uri.getPath());
+
+        if (Connectivity.isConnected(getContext())) {
+            new UploadHelper(getContext(), this).uploadPhoto(file);
+        } else {
+            Toast.makeText(getContext(), R.string.internet_not_connected_error, Toast.LENGTH_SHORT).show();
+            binding.progressCircularUploadPhoto.setVisibility(View.INVISIBLE);
+        }
+    }
+    //-----------------------------Upload photo Api------------------------------------------------>
 
 }

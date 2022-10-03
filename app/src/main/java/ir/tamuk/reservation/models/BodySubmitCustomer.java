@@ -11,7 +11,7 @@ public class BodySubmitCustomer {
     public String lastName = "";
 
     @SerializedName("photo")
-    public String Photo = null;
+    public String photo = null;
 
     @SerializedName("birthday")
     public String birthday = null;
