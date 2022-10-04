@@ -138,7 +138,7 @@ public class ServicesFragment extends Fragment implements ServiceDatailInterface
 //        });
 
 
-        binding.swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.show_more_text),getResources().getColor(R.color.main));
+        binding.swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorSecondary),getResources().getColor(R.color.colorPrimary));
         binding.swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

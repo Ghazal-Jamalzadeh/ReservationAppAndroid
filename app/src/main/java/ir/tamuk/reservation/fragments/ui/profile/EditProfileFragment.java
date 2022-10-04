@@ -222,8 +222,8 @@ public class EditProfileFragment extends Fragment implements ApiCommunicationInt
                     .setMaxYear(PersianDatePickerDialog.THIS_YEAR)
                     .setMaxMonth(12)
                     .setInitDate(PersianDatePickerDialog.THIS_YEAR, PersianDatePickerDialog.THIS_MONTH, PersianDatePickerDialog.THIS_DAY)
-                    .setActionTextColor(getResources().getColor(R.color.show_more_text))
-                    .setTitleColor(getResources().getColor(R.color.login_blue))
+                    .setActionTextColor(getResources().getColor(R.color.colorSecondary))
+                    .setTitleColor(getResources().getColor(R.color.colorPrimaryDark))
                     .setTitleType(PersianDatePickerDialog.WEEKDAY_DAY_MONTH_YEAR)
                     .setShowInBottomSheet(true)
                     .setListener(new PersianPickerListener() {

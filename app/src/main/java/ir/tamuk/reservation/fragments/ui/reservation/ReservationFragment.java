@@ -157,7 +157,7 @@ public class ReservationFragment extends Fragment implements OnSelectedItem {
         ////////////////////----------~~ <Swipe> ~~----------////////////////////
         binding.swipeRefreshLayoutReservation.setRefreshing(true);
         binding.swipeRefreshLayoutReservation.setEnabled(true);
-        binding.swipeRefreshLayoutReservation.setColorSchemeColors(getResources().getColor(R.color.show_more_text), getResources().getColor(R.color.main));
+        binding.swipeRefreshLayoutReservation.setColorSchemeColors(getResources().getColor(R.color.colorSecondary), getResources().getColor(R.color.colorPrimary));
         binding.swipeRefreshLayoutReservation.setOnRefreshListener(() -> {
 //            binding.swipeRefreshLayoutReservation.setRefreshing(false);
             callSearchServicesApi();
@@ -581,7 +581,7 @@ public class ReservationFragment extends Fragment implements OnSelectedItem {
 
         ((TextView) custom_view.findViewById(R.id.message)).setText(s);
         ((ImageView) custom_view.findViewById(R.id.icon)).setImageResource(R.drawable.ic_baseline_perm_device_information_24);
-        (custom_view.findViewById(R.id.parent_view)).setBackgroundColor(getResources().getColor(R.color.red));
+        (custom_view.findViewById(R.id.parent_view)).setBackgroundColor(getResources().getColor(R.color.colorSecondary));
         snackBarView.addView(custom_view, 0);
         snackbar.show();
     }

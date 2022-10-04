@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/login_blue">
+        android:background="@color/colorPrimaryDark">
 
         <ImageView
             android:id="@+id/image"
@@ -27,14 +27,14 @@
             android:text="تکمیل اطلاعات"
             android:fontFamily="@font/iran_sans_mob"
             android:gravity="center"
-            android:textColor="@color/red"
+            android:textColor="@color/colorSecondary"
             style="@style/fontForLargeBoldText"
             android:layout_marginTop="@dimen/_100cdp"/>
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/white"
-            app:boxStrokeColor="@color/show_more_text"
+            app:boxStrokeColor="@color/colorSecondary"
             android:layout_marginRight="@dimen/_60cdp"
             android:layout_marginLeft="@dimen/_60cdp"
 
@@ -45,7 +45,8 @@
                 android:layout_height="wrap_content"
                 android:hint="نام"
                 android:textColor="@color/white"
-                android:backgroundTint="#0081A7"                android:gravity="right"
+                android:backgroundTint="#0081A7"
+                android:gravity="right"
                 android:singleLine="true"
                 android:layout_marginTop="@dimen/_50cdp"
                 android:paddingRight="@dimen/_20cdp"
@@ -60,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/white"
-            app:boxStrokeColor="@color/show_more_text"
+            app:boxStrokeColor="@color/colorSecondary"
             android:layout_marginRight="@dimen/_60cdp"
             android:layout_marginLeft="@dimen/_60cdp"
 
@@ -102,7 +103,7 @@
                     android:text="ثبت"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:textColor="@color/login_blue"
+                    android:textColor="@color/colorPrimaryDark"
                     style="@style/fontForLargeBoldText"
                     android:fontFamily="@font/iran_sans_mob"/>
 

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/backgroundSigning"
+    android:background="@color/colorPrimaryDark"
     tools:context=".fragments.ui.signing.SigningFragment">
 
     <ImageView
@@ -55,13 +55,13 @@
                     android:layout_marginLeft="@dimen/_32cdp"
                     android:layout_marginRight="@dimen/_32cdp"
                     android:textColorHint="@color/white"
-                    app:boxStrokeColor="@color/show_more_text"
+                    app:boxStrokeColor="@color/colorSecondary"
                     app:boxStrokeErrorColor="#D50000"
                     app:endIconCheckable="true"
                     app:endIconMode="clear_text"
                     app:endIconTint="@color/white"
                     app:errorTextColor="#D50000"
-                    app:hintTextColor="@color/show_more_text">
+                    app:hintTextColor="@color/colorSecondary">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/mobile_editText_signing"
@@ -95,7 +95,7 @@
                 android:backgroundTint="@color/white"
                 android:paddingVertical="@dimen/_12cdp"
                 android:text="تایید"
-                android:textColor="@color/backgroundSigning"
+                android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold"
                 app:cornerRadius="@dimen/_8cdp"
 

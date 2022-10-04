@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.ui.signing.CompleteProfileInfoFragment"
-    android:background="@color/login_blue"
+    android:background="@color/colorPrimaryDark"
     >
 
     <ImageView
@@ -54,9 +54,9 @@
                     android:layout_marginLeft="@dimen/_32cdp"
                     android:layout_marginRight="@dimen/_32cdp"
                     android:textColorHint="@color/white"
-                    app:boxStrokeColor="@color/show_more_text"
+                    app:boxStrokeColor="@color/colorSecondary"
                     app:errorTextColor="#D50000"
-                    app:hintTextColor="@color/show_more_text"
+                    app:hintTextColor="@color/colorSecondary"
 
                     >
 
@@ -82,9 +82,9 @@
                     android:layout_marginTop="@dimen/_32cdp"
                     android:layout_marginRight="@dimen/_32cdp"
                     android:textColorHint="@color/white"
-                    app:boxStrokeColor="@color/show_more_text"
+                    app:boxStrokeColor="@color/colorSecondary"
                     app:errorTextColor="#D50000"
-                    app:hintTextColor="@color/show_more_text"
+                    app:hintTextColor="@color/colorSecondary"
 
                     >
 
@@ -118,7 +118,7 @@
                 android:backgroundTint="@color/white"
                 android:paddingVertical="@dimen/_12cdp"
                 android:text="تایید"
-                android:textColor="@color/backgroundSigning"
+                android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold"
                 app:cornerRadius="@dimen/_8cdp" />
 

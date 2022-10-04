@@ -46,7 +46,7 @@ public class SnackBars {
 
         ((TextView) custom_view.findViewById(R.id.message)).setText(R.string.internet_not_connected_error);
         ((ImageView) custom_view.findViewById(R.id.icon)).setImageResource(R.drawable.ic_baseline_perm_scan_wifi_24);
-        (custom_view.findViewById(R.id.parent_view)).setBackgroundResource(R.color.red);
+        (custom_view.findViewById(R.id.parent_view)).setBackgroundResource(R.color.colorSecondary);
         snackBarView.addView(custom_view, 0);
         snackbar.show();
     }
@@ -80,7 +80,7 @@ public class SnackBars {
 
         ((TextView) custom_view.findViewById(R.id.message)).setText("این یک پیغام خطاست");
         ((ImageView) custom_view.findViewById(R.id.icon)).setImageResource(R.drawable.ic_close);
-        (custom_view.findViewById(R.id.parent_view)).setBackgroundResource(R.color.red);
+        (custom_view.findViewById(R.id.parent_view)).setBackgroundResource(R.color.colorSecondary);
         snackBarView.addView(custom_view, 0);
         snackbar.show();
     }

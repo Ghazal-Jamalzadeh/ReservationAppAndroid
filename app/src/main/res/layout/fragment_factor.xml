@@ -80,7 +80,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="2px"
 
-                    android:background="@color/text"
+                    android:background="@color/gray_text"
                     android:layout_marginTop="@dimen/_4cdp"
                     android:layout_marginBottom="@dimen/_4cdp"
                     />
@@ -117,7 +117,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2px"
-                    android:background="@color/text"
+                    android:background="@color/gray_text"
                     android:layout_marginTop="@dimen/_4cdp"
                     android:layout_marginBottom="@dimen/_4cdp"
                     />
@@ -153,7 +153,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2px"
-                    android:background="@color/text"
+                    android:background="@color/gray_text"
                     android:layout_marginTop="@dimen/_4cdp"
                     android:layout_marginBottom="@dimen/_4cdp"
                     />
@@ -189,7 +189,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="2px"
 
-                    android:background="@color/text"
+                    android:background="@color/gray_text"
                     android:layout_marginTop="@dimen/_4cdp"
                     android:layout_marginBottom="@dimen/_4cdp"
                     />
@@ -225,7 +225,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2px"
-                    android:background="@color/text"
+                    android:background="@color/gray_text"
                     android:layout_marginTop="@dimen/_4cdp"
                     android:layout_marginBottom="@dimen/_4cdp"
                     />
@@ -283,7 +283,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:backgroundTint="@color/show_more_text"
+                        android:backgroundTint="@color/colorSecondary"
                         android:paddingHorizontal="@dimen/_32cdp"
                         android:paddingVertical="@dimen/_8cdp"
                         android:text="تغییر نوبت"

@@ -90,7 +90,7 @@ public class CompleteProfileInfoFragment extends Fragment {
                                  }
                              }
                          }else{
-                             binding.acceptButtonSigning.setTextColor(getResources().getColor(R.color.backgroundSigning));
+                             binding.acceptButtonSigning.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                              binding.progressCircularSigning.setVisibility(View.GONE);
                          }
                      });
@@ -99,7 +99,7 @@ public class CompleteProfileInfoFragment extends Fragment {
                          @Override
                          public void onChanged(String s) {
                              Snackbar.make(getView(), s, Toast.LENGTH_SHORT).show();
-                             binding.acceptButtonSigning.setTextColor(getResources().getColor(R.color.backgroundSigning));
+                             binding.acceptButtonSigning.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                              binding.progressCircularSigning.setVisibility(View.GONE);
                          }
                      });

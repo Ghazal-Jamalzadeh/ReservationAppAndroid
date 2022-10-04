@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModel;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -31,11 +32,14 @@ import retrofit2.Response;
 
 public class HomeViewModel extends AndroidViewModel {
 
+    private static final String TAG = "HomeViewModel";
+
     @SuppressLint("StaticFieldLeak")
     private final Context context ;
     public int tabLastPos =  -1 ; //keep tabLayout last position
     private boolean isFirst =  true ; //call get categories api just once
     public boolean ignoreMessage = false ; // handle duplicate toast messages
+    private ArrayList<ArrayList<Service>> group ; // hold services inside this list to prevent unnecessary api calls
     private final HomeRepository homeRepository =  new HomeRepository() ;
 
     public MutableLiveData<ArrayList<Category>> categoriesLiveData  = new MutableLiveData<>(); ;
@@ -70,8 +74,15 @@ public class HomeViewModel extends AndroidViewModel {
                         {
                             if(response.body().status == 200)
                             {
-                                isFirst = false ;
                                 categoriesLiveData.setValue(response.body().categories);
+                                isFirst = false ;
+
+                                group = new ArrayList<>(response.body().categories.size());
+                                for (int i = 0; i <response.body().categories.size() ; i++) {
+                                    group.add(i , new ArrayList<>());
+                                }
+
+
                             }else{
                                 errorMessageLiveData.setValue(response.body().message);
                             }
@@ -103,10 +114,10 @@ public class HomeViewModel extends AndroidViewModel {
     }
 
 
-    public void getAllServices (int page,int limit , String categories){
+    public void getAllServices (int index ,  String categories){
 
         if (Connectivity.isConnected(context)) {
-            Call<ResponseSearchServices> call1 = homeRepository.callGetAllServices(page,limit,categories);
+            Call<ResponseSearchServices> call1 = homeRepository.callGetAllServices(1,20,categories);
 
             call1.enqueue(new Callback<ResponseSearchServices>() {
                 @Override
@@ -118,6 +129,7 @@ public class HomeViewModel extends AndroidViewModel {
                         {
                             if(response.body().status == 200)
                             {
+                                group.add(index , response.body().data.services);
                                 servicesLiveData.setValue(response.body().data.services);
                             }else{
                                 errorMessageLiveData.setValue(response.body().message);
@@ -144,6 +156,19 @@ public class HomeViewModel extends AndroidViewModel {
         }else {
             errorMessageLiveData.setValue(context.getString(R.string.internet_not_connected_error));
         }
+
+
+    }
+
+    public void getServiceByIndex(int index , String category  ){
+
+            if (group.get(index).size() == 0 ){
+                //call api
+                getAllServices(index ,category );
+            }else {
+                //return value
+                servicesLiveData.setValue(group.get(index))  ;
+            }
 
 
     }

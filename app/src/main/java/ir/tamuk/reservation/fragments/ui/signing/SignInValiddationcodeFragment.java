@@ -340,7 +340,7 @@ public class SignInValiddationcodeFragment extends Fragment {
                 public void onChanged(String s) {
 //                    Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
                     Snackbar.make(getView(), s, Toast.LENGTH_SHORT).show();
-                    binding.acceptButtonSigning.setTextColor(getResources().getColor(R.color.backgroundSigning));
+                    binding.acceptButtonSigning.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                     binding.progressCircularSigning.setVisibility(View.GONE);
                     binding.acceptButtonSigning.setClickable(true);
 

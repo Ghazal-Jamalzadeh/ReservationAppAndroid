@@ -25,7 +25,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_8cdp"
         android:src="@drawable/ic_check_circle"
-        app:tint="@color/main" />
+        app:tint="@color/colorPrimary" />
 
     <TextView
         android:id="@+id/txet_tike"
@@ -81,7 +81,7 @@
             android:layout_height="2px"
             android:layout_marginTop="@dimen/_4cdp"
             android:layout_marginBottom="@dimen/_4cdp"
-            android:background="@color/text" />
+            android:background="@color/gray_text" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -113,7 +113,7 @@
             android:layout_height="2px"
             android:layout_marginTop="@dimen/_4cdp"
             android:layout_marginBottom="@dimen/_4cdp"
-            android:background="@color/text" />
+            android:background="@color/gray_text" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -146,7 +146,7 @@
             android:layout_height="2px"
             android:layout_marginTop="@dimen/_4cdp"
             android:layout_marginBottom="@dimen/_4cdp"
-            android:background="@color/text" />
+            android:background="@color/gray_text" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -178,7 +178,7 @@
 
             android:layout_marginTop="@dimen/_4cdp"
             android:layout_marginBottom="@dimen/_4cdp"
-            android:background="@color/text" />
+            android:background="@color/gray_text" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -211,7 +211,7 @@
             android:layout_height="2px"
             android:layout_marginTop="@dimen/_4cdp"
             android:layout_marginBottom="@dimen/_4cdp"
-            android:background="@color/text" />
+            android:background="@color/gray_text" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -244,7 +244,7 @@
             android:layout_height="2px"
             android:layout_marginTop="@dimen/_4cdp"
             android:layout_marginBottom="@dimen/_4cdp"
-            android:background="@color/text" />
+            android:background="@color/gray_text" />
 
         <LinearLayout
             android:layout_width="match_parent"

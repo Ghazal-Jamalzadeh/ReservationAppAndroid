@@ -17,13 +17,13 @@
     <style name="fontForMediumEditTextHint">
         <item name="android:textStyle">normal</item>
         <item name="android:fontFamily">@font/iran_sans_mob</item>
-        <item name="android:textColor">@color/show_more_text</item>
+        <item name="android:textColor">@color/colorSecondary</item>
         <item name="android:textSize">@dimen/bml_text_size</item>
     </style>
     <style name="fontForMediumEditText">
         <item name="android:textStyle">normal</item>
         <item name="android:fontFamily">@font/iran_sans_mob</item>
-        <item name="android:textColor">@color/text</item>
+        <item name="android:textColor">@color/gray_text</item>
         <item name="android:textSize">@dimen/medium_text_size</item>
     </style>
 
@@ -37,7 +37,7 @@
     <style name="fontForMediumFactorResponse">
         <item name="android:textStyle">normal</item>
         <item name="android:fontFamily">@font/iran_sans_mob</item>
-        <item name="android:textColor">@color/main</item>
+        <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">@dimen/medium_text_size</item>
     </style>
 
@@ -54,27 +54,27 @@
     <style name="fontForLargeBoldOrangeText">
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">@font/iran_sans_mob</item>
-        <item name="android:textColor">@color/show_more_text</item>
+        <item name="android:textColor">@color/colorSecondary</item>
         <item name="android:textSize">@dimen/large_text_size</item>
         <item name="android:padding">@dimen/_2cdp</item>
     </style>
 
     <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
-        <item name="boxStrokeColor">@color/show_more_text</item>
+        <item name="boxStrokeColor">@color/colorSecondary</item>
         <item name="boxStrokeWidth">2dp</item>
     </style>
 
     <style name="fontForSmallText">
         <item name="android:textStyle">normal</item>
         <item name="android:fontFamily">@font/iran_sans_mob</item>
-        <item name="android:textColor">@color/text</item>
+        <item name="android:textColor">@color/gray_text</item>
         <item name="android:textSize">@dimen/small_text_size</item>
     </style>
 
     <style name="fontForMediumBoldText">
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">@font/iran_sans_mob_bold</item>
-        <item name="android:textColor">@color/text</item>
+        <item name="android:textColor">@color/gray_text</item>
         <item name="android:textSize">@dimen/medium_text_size</item>
     </style>
 
@@ -98,17 +98,17 @@
     </style>
 
     <style name="Theme.verfi.code" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorControlNormal">@color/show_more_text</item>
+        <item name="colorControlNormal">@color/colorSecondary</item>
         <item name="colorControlActivated">#ff5722</item>
         <item name="colorControlHighlight">#f44336</item>
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">@font/iran_sans_mob</item>
-        <item name="android:textColor">@color/show_more_text</item>
+        <item name="android:textColor">@color/colorSecondary</item>
         <item name="android:textSize">@dimen/bml_text_size</item>
     </style>
 
     <style name="Theme.number.code" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorControlNormal">@color/show_more_text</item>
+        <item name="colorControlNormal">@color/colorSecondary</item>
         <item name="colorControlActivated">#ff5722</item>
         <item name="colorControlHighlight">#f44336</item>
         <item name="android:textStyle">normal</item>
@@ -178,7 +178,7 @@
     <style name="fontForMediumText">
         <item name="android:textStyle">normal</item>
         <item name="android:fontFamily">@font/iran_sans_mob</item>
-        <item name="android:textColor">@color/text</item>
+        <item name="android:textColor">@color/gray_text</item>
         <item name="android:textSize">@dimen/medium_text_size</item>
     </style>
    <style name="fontForBMLText">-->
@@ -203,13 +203,13 @@
     <style name="fontForLargeText">
         <item name="android:textStyle">normal</item>
         <item name="android:fontFamily">@font/iran_sans_mob</item>
-        <item name="android:textColor">@color/backgroundSigning</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:textSize">@dimen/large_text_size</item>
     </style>
     <style name="fontForLargeBoldText2">
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">@font/iran_sans_mob_bold</item>
-        <item name="android:textColor">@color/text</item>
+        <item name="android:textColor">@color/gray_text</item>
         <item name="android:textSize">@dimen/bml_text_size</item>
     </style>
 </resources>

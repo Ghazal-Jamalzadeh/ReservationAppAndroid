@@ -1,32 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+<!--    <color name="purple_200">#FFBB86FC</color>-->
+<!--    <color name="purple_500">#FF6200EE</color>-->
+<!--    <color name="purple_700">#FF3700B3</color>-->
+<!--    <color name="teal_200">#FF03DAC5</color>-->
+<!--    <color name="teal_700">#FF018786</color>-->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     
     <color name="colorPrimary">#00AFB9</color>
+    <color name="colorPrimaryDark">#0081A7</color>
+    <color name="colorSecondary">#F07167</color>
     
-    <color name="main">#00AFB9</color>
-    <color name="text">#747474</color>
-    <color name="show_more_text">#F07167</color>
-    <color name="background">#FBFBFB</color>
-    <color name="backgroundSigning">#0081A7</color>
-    <color name="transparent_20">#33000000</color>
+<!--    <color name="main">#00AFB9</color>-->
+<!--    <color name="show_more_text">#F07167</color>-->
+<!--    <color name="backgroundSigning">#0081A7</color>-->
+<!--    <color name="transparent_20">#33000000</color>-->
     <color name="nothing">#00FF0000</color>
-    <color name="error">#D50000</color>
-    <color name="botton_in_appointment">#EFEFEF</color>
+<!--    <color name="error">#D50000</color>-->
+<!--    <color name="botton_in_appointment">#EFEFEF</color>-->
 
+    <color name="background">#FBFBFB</color>
     <color name="gray">#A4A4A4</color>
     <color name="gray_light">#BDDBDBDB</color>
     <color name="gray_lighter">#EFEFEF</color>
+    <color name="gray_text">#747474</color>
     <color name="gray_transparent">#4AA4A4A4</color>
 
-    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/show_more_text</color>
-    <color name="blue">#21669E</color>
-    <color name="login_blue">#0081A7</color>
-    <color name="red">#F07167</color>
+<!--    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/colorSecondary</color>-->
+<!--    <color name="blue">#21669E</color>-->
+<!--    <color name="login_blue">#0081A7</color>-->
+<!--    <color name="red">#F07167</color>-->
 </resources>

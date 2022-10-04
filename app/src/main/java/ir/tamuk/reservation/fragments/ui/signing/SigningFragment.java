@@ -154,7 +154,7 @@ public class SigningFragment extends Fragment {
 //                    Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
                     Log.d(Constants.TAG_KIA, "onCreateView: " + "ERROR");
                     Snackbar.make(requireView(), s, Toast.LENGTH_SHORT).show();
-                    binding.acceptButtonSigning.setTextColor(getResources().getColor(R.color.backgroundSigning));
+                    binding.acceptButtonSigning.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                     binding.progressCircularSigning.setVisibility(View.GONE);
                     binding.acceptButtonSigning.setClickable(true);
 

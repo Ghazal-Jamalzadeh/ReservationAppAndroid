@@ -2,11 +2,11 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:state_focused="true"
-        android:drawable="@color/show_more_text" />
+        android:drawable="@color/colorSecondary" />
 
     <item
         android:state_focused="false"
-        android:drawable="@color/login_blue" />
+        android:drawable="@color/colorPrimaryDark" />
 
 
 </selector>

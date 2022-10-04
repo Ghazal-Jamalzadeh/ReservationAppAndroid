@@ -185,7 +185,7 @@
             android:id="@+id/drawerMenu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/backgroundSigning"
+            android:background="@color/colorPrimaryDark"
             android:orientation="vertical"
             app:layout_constraintLeft_toRightOf="@id/guideline"
             android:layout_gravity="right"
@@ -231,7 +231,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1cdp"
                     android:layout_marginBottom="@dimen/_20cdp"
-                    android:background="@color/show_more_text" />
+                    android:background="@color/colorSecondary" />
 
                 <TextView
                     android:id="@+id/textView5"
@@ -248,7 +248,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1cdp"
                     android:layout_marginBottom="@dimen/_20cdp"
-                    android:background="@color/show_more_text" />
+                    android:background="@color/colorSecondary" />
 
                 <TextView
                     android:id="@+id/textView6"
@@ -263,7 +263,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1cdp"
                     android:layout_marginBottom="@dimen/_20cdp"
-                    android:background="@color/show_more_text" />
+                    android:background="@color/colorSecondary" />
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

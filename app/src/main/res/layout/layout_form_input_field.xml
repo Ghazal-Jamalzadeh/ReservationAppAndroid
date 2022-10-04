@@ -37,7 +37,7 @@
                 android:padding="@dimen/_16cdp"
                 android:gravity="right"
                 android:background="@null"
-                android:textColor="@color/login_blue"
+                android:textColor="@color/colorPrimaryDark"
                 tools:text="امیر رضا"/>
 
         </androidx.cardview.widget.CardView>

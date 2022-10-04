@@ -9,7 +9,7 @@
                 android:radius="360dp"
                 />
             <stroke
-                android:color="@color/main"
+                android:color="@color/colorPrimary"
                 android:width="@dimen/_1cdp"
                 />
         </shape>

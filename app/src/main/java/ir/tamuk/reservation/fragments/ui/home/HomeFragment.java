@@ -49,7 +49,8 @@ public class HomeFragment extends Fragment {
     //adapter
     private ServicesByCategoryAdapter adapter;
     //other
-    int tabIndex = 0;
+    private int tabIndex = 0;
+    private boolean isFirstTabs = true ;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,8 +83,8 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         //swipe layout attributes
-        binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.show_more_text)
-                , getResources().getColor(R.color.main));
+        binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorSecondary)
+                , getResources().getColor(R.color.colorPrimary));
         binding.refreshLayout.setRefreshing(true);
         binding.refreshLayout.setEnabled(true);
 
@@ -96,6 +97,8 @@ public class HomeFragment extends Fragment {
                 homeViewModel.getAllCategories();
             }
         });
+
+        buildRecyclerView(services);
 
         //Buttons
         binding.txtShowAll.setOnClickListener(view1 -> {
@@ -125,9 +128,12 @@ public class HomeFragment extends Fragment {
                 services.clear();
                 services.addAll(serviceArrayList);
 
+                binding.refreshLayout.setRefreshing(false);
+                binding.refreshLayout.setEnabled(false);
                 if (services.size() > 0) {
 
-                    buildRecyclerView(services);
+//                    buildRecyclerView(services);
+                    adapter.notifyDataSetChanged();
                     binding.txtServiceName.setText(services.get(0).name);
                     binding.container.setVisibility(View.VISIBLE);
                     binding.contentLay.setVisibility(View.VISIBLE);
@@ -136,8 +142,6 @@ public class HomeFragment extends Fragment {
                     binding.contentLay.setVisibility(View.GONE);
                     binding.container.setVisibility(View.VISIBLE);
                     binding.emptyLay.setVisibility(View.VISIBLE);
-                    binding.refreshLayout.setRefreshing(false);
-                    binding.refreshLayout.setEnabled(false);
                 }
 
             }
@@ -179,6 +183,7 @@ public class HomeFragment extends Fragment {
         binding.optionRecycler.setLayoutManager(layoutManager);
         binding.optionRecycler.setHasFixedSize(true);
 
+        if (services.size() != 0 )
         binding.txtServiceName.setText(items.get(0).name);
 
         SnapHelper snapHelper = new LinearSnapHelper();
@@ -205,8 +210,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        binding.refreshLayout.setRefreshing(false);
-        binding.refreshLayout.setEnabled(false);
+
     }
     //--------------------------RecyclerView------------------------------------------------------->
 
@@ -222,11 +226,14 @@ public class HomeFragment extends Fragment {
                 tab.setText(category.name);
                 binding.tabLayout.addTab(tab, 0);
             }
+//            int lastIndex = categories.size()-1 ;
+//            selectTab(lastIndex);
 
             binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                 @Override
                 public void onTabSelected(TabLayout.Tab tab) {
                     selectTab(binding.tabLayout.getSelectedTabPosition());
+                    Log.d("HomeViewModel", "onTabSelected: " + tab.getPosition());
                 }
 
                 @Override
@@ -236,9 +243,14 @@ public class HomeFragment extends Fragment {
 
                 @Override
                 public void onTabReselected(TabLayout.Tab tab) {
+
+                    if (isFirstTabs){
                     selectTab(binding.tabLayout.getSelectedTabPosition());
+                    isFirstTabs = false ;
+                    }
                 }
             });
+
         }
 
 
@@ -266,8 +278,9 @@ public class HomeFragment extends Fragment {
         homeViewModel.tabLastPos = position;
         binding.refreshLayout.setRefreshing(true);
         binding.refreshLayout.setEnabled(true);
-        homeViewModel.getAllServices(1, 20, categories.get(categories.size() - position - 1).id);
-
+        int index =  categories.size() - position - 1 ;
+//        homeViewModel.getAllServices( categories.get(index).id );
+        homeViewModel.getServiceByIndex( index , categories.get(index).id );
 
     }
     //----------------------------TabLayout-------------------------------------------------------//

@@ -68,7 +68,7 @@ public class MyReservesFragment extends Fragment implements MyReservesAdapterInt
         super.onViewCreated(view, savedInstanceState);
 
         //swipe layout attributes
-        binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.show_more_text), getResources().getColor(R.color.main));
+        binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorSecondary), getResources().getColor(R.color.colorPrimary));
         binding.refreshLayout.setRefreshing(true);
         binding.refreshLayout.setEnabled(true);
 
@@ -109,7 +109,7 @@ public class MyReservesFragment extends Fragment implements MyReservesAdapterInt
 
                 myReservesViewModel.getDoneList(getContext(), TokenManager.getAccessToken(getContext()), StatusReserve.DONE.label);
 
-                binding.btnDone.card.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.show_more_text));
+                binding.btnDone.card.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorSecondary));
                 binding.btnReserved.card.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.gray_lighter));
                 binding.btnCanceled.card.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.gray_lighter));
 
@@ -125,7 +125,7 @@ public class MyReservesFragment extends Fragment implements MyReservesAdapterInt
                 myReservesViewModel.getReservedList(getContext(), TokenManager.getAccessToken(getContext()), StatusReserve.RESERVED.label);
 
                 binding.btnDone.card.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.gray_lighter));
-                binding.btnReserved.card.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.show_more_text));
+                binding.btnReserved.card.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorSecondary));
                 binding.btnCanceled.card.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.gray_lighter));
 
                 binding.btnDone.txt.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
@@ -143,7 +143,7 @@ public class MyReservesFragment extends Fragment implements MyReservesAdapterInt
 
             binding.btnDone.card.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.gray_lighter));
             binding.btnReserved.card.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.gray_lighter));
-            binding.btnCanceled.card.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.show_more_text));
+            binding.btnCanceled.card.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorSecondary));
 
             binding.btnDone.txt.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
             binding.btnReserved.txt.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
@@ -158,11 +158,6 @@ public class MyReservesFragment extends Fragment implements MyReservesAdapterInt
             public void onChanged(User user) {
                 binding.details.nameTextForm.setText(user.firstName + " " + user.lastName);
                 binding.details.phoneTextForm.setText(user.mobile);
-
-                if (!user.photo.filename.equals("")) {
-                    Glide.with(getContext()).load(Constants.DOWNLOAD_PHOTO_URL + user.photo.filename)
-                            .into(binding.imgProfile);
-                }
             }
         });
 
@@ -265,15 +260,15 @@ public class MyReservesFragment extends Fragment implements MyReservesAdapterInt
         //icon
         if(reserve.isPay){
 
-            binding.details.tike.setColorFilter(ContextCompat.getColor(getContext(), R.color.main));
-            binding.details.txetTike.setTextColor(ContextCompat.getColor(getContext() ,  R.color.main));
+            binding.details.tike.setColorFilter(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+            binding.details.txetTike.setTextColor(ContextCompat.getColor(getContext() ,  R.color.colorPrimary));
 
             binding.details.tike.setImageDrawable(ContextCompat.getDrawable(getContext() , R.drawable.ic_check_circle));
             binding.details.txetTike.setText("پرداخت شده");
 
         }else {
-            binding.details.tike.setColorFilter(ContextCompat.getColor(getContext(), R.color.show_more_text));
-            binding.details.txetTike.setTextColor(ContextCompat.getColor(getContext() ,  R.color.show_more_text));
+            binding.details.tike.setColorFilter(ContextCompat.getColor(getContext(), R.color.colorSecondary));
+            binding.details.txetTike.setTextColor(ContextCompat.getColor(getContext() ,  R.color.colorSecondary));
 
             binding.details.tike.setImageDrawable(ContextCompat.getDrawable(getContext() , R.drawable.ic_error_circle));
             binding.details.txetTike.setText("پرداخت نشده");

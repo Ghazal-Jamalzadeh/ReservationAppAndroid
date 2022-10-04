@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.ui.signing.SignInValiddationcodeFragment"
-    android:background="@color/login_blue">
+    android:background="@color/colorPrimaryDark">
 
     <ImageView
         android:id="@+id/cancel_button_signing_"
@@ -55,7 +55,7 @@
                         android:gravity="center"
                         android:layout_gravity="center"
                         android:text="0913"
-                        android:textColor="@color/login_blue"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/_20cdp" />
 
                     <TextView
@@ -287,7 +287,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_12cdp"
                 android:text="ارسال مجدد"
-                android:textColor="@color/red" />
+                android:textColor="@color/colorSecondary" />
 
 
             <com.google.android.material.button.MaterialButton
@@ -301,7 +301,7 @@
                 android:backgroundTint="@color/white"
                 android:paddingVertical="@dimen/_12cdp"
                 android:text="تایید"
-                android:textColor="@color/backgroundSigning"
+                android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold"
                 app:cornerRadius="@dimen/_8cdp" />
 

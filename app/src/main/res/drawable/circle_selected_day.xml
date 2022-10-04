@@ -9,7 +9,7 @@
                 android:radius="360dp"
                 />
             <solid
-                android:color="@color/main"
+                android:color="@color/colorPrimary"
                 />
         </shape>
     </item>

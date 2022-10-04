@@ -49,7 +49,7 @@
                 android:padding="@dimen/_16cdp"
                 android:gravity="right"
                 tools:text="۱۴۰۰-۱۲-۲۴"
-                android:textColor="@color/login_blue"
+                android:textColor="@color/colorPrimaryDark"
                 app:layout_constraintLeft_toRightOf="@id/icCalender"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

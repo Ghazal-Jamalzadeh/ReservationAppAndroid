@@ -54,7 +54,7 @@
                         android:fontFamily="@font/iran_sans_mob"
                         android:gravity="center"
                         android:text="خدمات کلینیک"
-                        android:textColor="@color/login_blue"
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/_20cdp" />
 
                 </LinearLayout>
@@ -180,7 +180,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/iran_sans_mob"
                         android:justificationMode="inter_word"
-                        android:textColor="@color/red"
+                        android:textColor="@color/colorSecondary"
                         android:textSize="@dimen/_18cdp" />
 
                     <TextView
@@ -205,14 +205,14 @@
                 android:layout_marginLeft="@dimen/_15cdp"
                 android:layout_marginRight="@dimen/_15cdp"
                 android:layout_marginBottom="@dimen/_15cdp"
-                android:background="@color/main"
+                android:background="@color/colorPrimary"
                 app:cardCornerRadius="@dimen/_5cdp">
 
                 <RelativeLayout
                     android:id="@+id/relative"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/main"
+                    android:background="@color/colorPrimary"
                     android:gravity="center">
 
                     <TextView
