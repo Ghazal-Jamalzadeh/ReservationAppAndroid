@@ -28,6 +28,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
+import ir.tamuk.reservation.Interfaces.HomeAdapterInterface;
 import ir.tamuk.reservation.R;
 import ir.tamuk.reservation.activities.MainActivity;
 import ir.tamuk.reservation.databinding.FragmentHomeBinding;
@@ -37,7 +38,8 @@ import ir.tamuk.reservation.models.Service;
 import ir.tamuk.reservation.utils.Connectivity;
 import ir.tamuk.reservation.utils.Tools;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements HomeAdapterInterface {
+    private static final String TAG = "HomeFragment";
     //binding
     private FragmentHomeBinding binding;
     private HomeViewModel homeViewModel;
@@ -177,7 +179,7 @@ public class HomeFragment extends Fragment {
 
     //--------------------------RecyclerView------------------------------------------------------->
     private void buildRecyclerView(ArrayList<Service> items) {
-        adapter = new ServicesByCategoryAdapter(getActivity(), items);
+        adapter = new ServicesByCategoryAdapter(getActivity(), items , this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(context, RecyclerView.HORIZONTAL, true);
         binding.optionRecycler.setAdapter(adapter);
         binding.optionRecycler.setLayoutManager(layoutManager);
@@ -281,6 +283,19 @@ public class HomeFragment extends Fragment {
         int index =  categories.size() - position - 1 ;
 //        homeViewModel.getAllServices( categories.get(index).id );
         homeViewModel.getServiceByIndex( index , categories.get(index).id );
+
+    }
+
+    @Override
+    public void showDetail(String id) {
+        Log.d(TAG, "showDetail: " + id );
+        Bundle bundle = new Bundle()  ;
+        bundle.putString("id" , id );
+
+        if (Tools.checkDestination(requireView(), R.id.nav_home)) {
+            Navigation.findNavController(requireView())
+                    .navigate(R.id.action_nav_home_to_detailsFragment, bundle);
+        }
 
     }
     //----------------------------TabLayout-------------------------------------------------------//

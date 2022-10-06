@@ -39,12 +39,17 @@ public class SplashFragment extends Fragment {
             Log.d(TAG, "pls login .... ");
         }
 
-        Handler h = new Handler();
-        Runnable r = () -> {
-            Navigation.findNavController(container).popBackStack() ;
-            Navigation.findNavController(container).navigate(R.id.action_to_navHome);
-        };h.postDelayed(r, 2000);
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Handler h = new Handler();
+        Runnable r = () -> {
+            Navigation.findNavController(requireView()).popBackStack() ;
+            Navigation.findNavController(requireView()).navigate(R.id.action_to_navHome);
+        };h.postDelayed(r, 2000);
     }
 }

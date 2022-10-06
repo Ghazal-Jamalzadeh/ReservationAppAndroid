@@ -43,7 +43,7 @@
                 android:id="@+id/tabsLay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="@dimen/_8cdp"
+                android:paddingHorizontal="@dimen/_4cdp"
                 app:layout_constraintTop_toBottomOf="@+id/toolbarLay">
 
                 <include
@@ -83,6 +83,15 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <View
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray_lighter"
+                android:elevation="@dimen/_2cdp"
+                android:layout_marginTop="@dimen/_8cdp"
+                app:layout_constraintTop_toBottomOf="@id/tabsLay"/>
+
             <!--Recycler-->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/myReservesRecycler"
@@ -90,7 +99,7 @@
                 android:layout_height="0dp"
                 android:clipToPadding="false"
                 android:paddingVertical="@dimen/_8cdp"
-                app:layout_constraintTop_toBottomOf="@+id/tabsLay"
+                app:layout_constraintTop_toBottomOf="@+id/line"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
             <!--empty layout-->

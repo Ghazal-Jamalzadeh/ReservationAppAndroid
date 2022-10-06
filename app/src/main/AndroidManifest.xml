@@ -18,12 +18,11 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/ic_logo"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/selector"
+        android:roundIcon="@drawable/ic_logo"
         android:supportsRtl="false"
         android:theme="@style/Theme.Reservation"
         android:usesCleartextTraffic="true"
         tools:replace="android:supportsRtl"
-
         tools:targetApi="31">
 
         <activity

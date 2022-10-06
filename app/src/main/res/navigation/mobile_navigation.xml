@@ -17,6 +17,13 @@
         android:name="ir.tamuk.reservation.fragments.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_detailsFragment"
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/wait"
+            app:popEnterAnim="@anim/wait"
+            app:popExitAnim="@anim/slide_right"/>
     </fragment>
         <action
             android:id="@+id/action_nav_services"
@@ -172,6 +179,11 @@
         android:name="ir.tamuk.reservation.fragments.ui.profile.EditProfileFragment"
         android:label="EditProfileFragment"
         tools:layout="@layout/fragment_edit_profile"/>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="ir.tamuk.reservation.fragments.ui.details.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" />
 
 
 </navigation>

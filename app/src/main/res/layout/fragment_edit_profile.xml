@@ -135,8 +135,8 @@
 
             <ImageView
                 android:id="@+id/img_camera"
-                android:layout_width="@dimen/_25cdp"
-                android:layout_height="@dimen/_25cdp"
+                android:layout_width="@dimen/_20cdp"
+                android:layout_height="@dimen/_20cdp"
                 android:background="@drawable/bg_gray_bottom_left_top_right_16cdp"
                 android:padding="@dimen/_4cdp"
                 android:src="@drawable/ic_camera"

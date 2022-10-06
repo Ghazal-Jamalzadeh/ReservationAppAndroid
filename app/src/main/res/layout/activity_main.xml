@@ -86,16 +86,16 @@
 
 <!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.constraintlayout.motion.widget.MotionLayout
                     android:id="@+id/main_status_bar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:elevation="@dimen/_2cdp"
+                    app:layoutDescription="@xml/activity_main_xml_main_status_bar_scene"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    >
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
                         android:id="@+id/imageView4"
@@ -124,23 +124,25 @@
                         android:id="@+id/imageView6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_16cdp"
+                        android:paddingVertical="@dimen/_8cdp"
+                        android:paddingLeft="@dimen/_16cdp"
+                        android:paddingRight="@dimen/_16cdp"
                         android:src="@drawable/ic_notifications"
                         app:layout_constraintBottom_toBottomOf="@id/imageView4"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toTopOf="@id/imageView4" />
 
-<!--                    <ImageView-->
-<!--                        android:id="@+id/imageView7"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginLeft="@dimen/_16cdp"-->
-<!--                        android:src="@drawable/ic_search"-->
-<!--                        app:layout_constraintBottom_toBottomOf="@id/imageView4"-->
-<!--                        app:layout_constraintLeft_toRightOf="@+id/imageView6"-->
-<!--                        app:layout_constraintTop_toTopOf="@id/imageView4" />-->
+                    <!--                    <ImageView-->
+                    <!--                        android:id="@+id/imageView7"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginLeft="@dimen/_16cdp"-->
+                    <!--                        android:src="@drawable/ic_search"-->
+                    <!--                        app:layout_constraintBottom_toBottomOf="@id/imageView4"-->
+                    <!--                        app:layout_constraintLeft_toRightOf="@+id/imageView6"-->
+                    <!--                        app:layout_constraintTop_toTopOf="@id/imageView4" />-->
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.motion.widget.MotionLayout>
 
 
 

@@ -21,11 +21,13 @@ public class ServicesByCategoryAdapter extends RecyclerView.Adapter<ServicesByCa
 
     private ArrayList<Service> services ;
     private Activity activity  ;
+    private HomeAdapterInterface homeAdapterInterface ;
 
-    public ServicesByCategoryAdapter(Activity activity, ArrayList<Service> services ) {
+    public ServicesByCategoryAdapter(Activity activity, ArrayList<Service> services , HomeAdapterInterface homeAdapterInterface) {
 
         this.activity = activity ;
         this.services = services ;
+        this.homeAdapterInterface = homeAdapterInterface ;
 
     }
 
@@ -50,6 +52,10 @@ public class ServicesByCategoryAdapter extends RecyclerView.Adapter<ServicesByCa
 
         Service item = services.get(position);
         Glide.with(activity).load(Constants.DOWNLOAD_PHOTO_URL + item.mainPhoto.filename).into(holder.binding.imageView3);
+
+        holder.itemView.setOnClickListener(view -> {
+            homeAdapterInterface.showDetail(item.id);
+        });
 
     }
 
