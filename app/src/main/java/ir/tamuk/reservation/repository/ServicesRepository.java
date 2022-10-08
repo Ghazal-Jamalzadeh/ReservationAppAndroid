@@ -12,7 +12,7 @@ public class ServicesRepository {
         return call ;
     }
     public static Call<ResponseGetServices> callGetServices1(String id){
-        Call<ResponseGetServices> call= Tools.getApiServicesInstance().getServicesByld(id);
+        Call<ResponseGetServices> call= Tools.getApiServicesInstance().getServicesById(id);
         return call;
 
     }

@@ -52,6 +52,7 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
     private ServicesByCategoryAdapter adapter;
     //other
     private int tabIndex = 0;
+    private int position = 0 ;
     private boolean isFirstTabs = true ;
 
     @Override
@@ -134,9 +135,8 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
                 binding.refreshLayout.setEnabled(false);
                 if (services.size() > 0) {
 
-//                    buildRecyclerView(services);
                     adapter.notifyDataSetChanged();
-                    binding.txtServiceName.setText(services.get(0).name);
+                    binding.txtServiceName.setText(services.get(position).name);
                     binding.container.setVisibility(View.VISIBLE);
                     binding.contentLay.setVisibility(View.VISIBLE);
                     binding.emptyLay.setVisibility(View.GONE);
@@ -201,8 +201,8 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
                     View centerView = snapHelper.findSnapView(layoutManager);
                     if (centerView != null) {
                         try {
-                            int pos = layoutManager.getPosition(centerView);
-                            binding.txtServiceName.setText(items.get(pos).name);
+                            position = layoutManager.getPosition(centerView);
+                            binding.txtServiceName.setText(items.get(position).name);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -211,8 +211,6 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
                 }
             }
         });
-
-
     }
     //--------------------------RecyclerView------------------------------------------------------->
 
@@ -234,6 +232,7 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
             binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                 @Override
                 public void onTabSelected(TabLayout.Tab tab) {
+                    position = 0  ;
                     selectTab(binding.tabLayout.getSelectedTabPosition());
                     Log.d("HomeViewModel", "onTabSelected: " + tab.getPosition());
                 }
@@ -288,10 +287,9 @@ public class HomeFragment extends Fragment implements HomeAdapterInterface {
 
     @Override
     public void showDetail(String id) {
-        Log.d(TAG, "showDetail: " + id );
+
         Bundle bundle = new Bundle()  ;
         bundle.putString("id" , id );
-
         if (Tools.checkDestination(requireView(), R.id.nav_home)) {
             Navigation.findNavController(requireView())
                     .navigate(R.id.action_nav_home_to_detailsFragment, bundle);

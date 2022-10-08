@@ -103,6 +103,6 @@ public interface ApiServices {
 
     //    http://moeenkashisaz.ir/laser/api/v1/get-services/631869b10bfaf719ef8b76cf
     @GET("v1/get-services/{services_id}")
-    Call<ResponseGetServices> getServicesByld(@Path("services_id") String id);
+    Call<ResponseGetServices> getServicesById(@Path("services_id") String id);
 
 }

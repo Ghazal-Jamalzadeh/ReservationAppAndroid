@@ -20,10 +20,10 @@
         <action
             android:id="@+id/action_nav_home_to_detailsFragment"
             app:destination="@id/detailsFragment"
-            app:enterAnim="@anim/slide_left"
+            app:enterAnim="@anim/slide_up"
             app:exitAnim="@anim/wait"
             app:popEnterAnim="@anim/wait"
-            app:popExitAnim="@anim/slide_right"/>
+            app:popExitAnim="@anim/slide_down"/>
     </fragment>
         <action
             android:id="@+id/action_nav_services"

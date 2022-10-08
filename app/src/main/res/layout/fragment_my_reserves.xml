@@ -122,12 +122,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="invisible"
+                android:elevation="@dimen/_10cdp"
                 android:background="@color/gray_transparent"/>
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/detailsLay"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:visibility="invisible"
+                android:elevation="@dimen/_12cdp"
                 android:background="@drawable/profile_main_shape"
                 app:layout_constraintTop_toBottomOf="@id/tabsLay"
                 app:layout_constraintBottom_toBottomOf="parent">
